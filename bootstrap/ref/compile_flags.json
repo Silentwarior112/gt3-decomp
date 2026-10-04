@@ -1,0 +1,25 @@
+{
+  "_comment": [
+    "Compiler flags of the retail build, per source file, for the matching compiler",
+    "(tools/cc/ee-gcc-2.9-991111b, SCE ee-gcc 2.9-ee-991111b). tools/mcc.py applies the",
+    "first rule whose glob matches. Evidence for each rule belongs in MATCHING.md.",
+    "Game code uses $gp-relative small data (default -G8); Sony's SDK libraries and the",
+    "GCC runtime never do (-G0). crtbegin.c is collect2-generated and unoptimised ($fp frames)."
+  ],
+  "not_matched": {
+    "_comment": "GCC-runtime reimplementations used only by the GCC 14 behaviour build. The retail code is the toolchain's own libgcc.a / libstdc++.a (ref/libmatch.json), which a matching build links as the original did.",
+    "files": ["runtime/eh.c", "runtime/exception.cc", "runtime/frame.c", "runtime/new.cc",
+              "runtime/tinfo.cc", "runtime/tinfo2.cc", "runtime/libgcc2.c", "runtime/libgcc_math.c"]
+  },
+  "rules": [
+    {"glob": "src/crtbegin.c",  "flags": ["-O0"]},
+    {"glob": "src/pdistd/pdistd_misc.cpp", "flags": ["-O2", "-fno-exceptions"]},
+    {"glob": "src/mcard_io.cpp", "flags": ["-O2", "-fno-exceptions"]},
+    {"glob": "src/gs_driver.cpp", "flags": ["-O2", "-fno-exceptions"]},
+    {"glob": "src/gs_texture.cpp", "flags": ["-O2", "-fno-exceptions"]},
+    {"glob": "src/gs_state.cpp", "flags": ["-O2", "-fno-exceptions"]},
+    {"glob": "src/*",           "flags": ["-O2"]},
+    {"glob": "sdk/*",           "flags": ["-O2", "-G0"], "asm_pass": "gas_swap"},
+    {"glob": "runtime/*",       "flags": ["-O2", "-G0"]}
+  ]
+}

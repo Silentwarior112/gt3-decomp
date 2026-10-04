@@ -1,0 +1,415 @@
+{
+  "main": {
+    "desc": "crt0 (_start, _exit, ExitThread root stub), crtbegin (frame_dummy / EH frame registration), and the bootstrap's main(): boot-source selection (DISK/MCARD 0/MCARD 1/HOST), IRX loading, IOP reboot, pad init, launching core.gt3 via ExecPS2 with argv {path, \"hot\"}",
+    "ranges": [
+      [
+        "0x01000000",
+        "0x010006B0"
+      ],
+      [
+        "0x01000790",
+        "0x01000A50"
+      ]
+    ],
+    "files": [
+      "src/crt0.S",
+      "src/crtbegin.c",
+      "src/main.cpp",
+      "src/main_iop.cpp",
+      "include/main.h"
+    ],
+    "deps": [
+      "imageloader",
+      "startup",
+      "io"
+    ]
+  },
+  "startup": {
+    "desc": "startup/warning screen: its display thread, frame drawing, CLUT fade animation, Tex1 image relocation/upload (the texture is the embedded gzip 'startupa.img' in .data at 0x01027F38..0x01033C98)",
+    "ranges": [
+      [
+        "0x01000A50",
+        "0x01000ED8"
+      ],
+      [
+        "0x0100B2E8",
+        "0x0100BE10"
+      ]
+    ],
+    "files": [
+      "src/startup_screen.cpp",
+      "src/tex1.cpp",
+      "include/startup_screen.h",
+      "tools/extract_startup_img.py"
+    ],
+    "deps": [
+      "gs",
+      "gzip"
+    ]
+  },
+  "sha512": {
+    "desc": "SHA-512 (init, 80-round compression function F_01001320, update/final, digest helpers); K table in .rodata at 0x0103DF18",
+    "ranges": [
+      [
+        "0x010010F0",
+        "0x01003570"
+      ]
+    ],
+    "files": [
+      "src/sha512.cpp",
+      "include/sha512.h"
+    ],
+    "deps": []
+  },
+  "filename": {
+    "desc": "FileName_Base and derived HostFileName / MCardFileName / DiskFileName classes (RTTI 13FileName_Base etc.), their vtables and static ctor/dtor, plus host_file_exists",
+    "ranges": [
+      [
+        "0x01003570",
+        "0x010041D0"
+      ],
+      [
+        "0x01005B68",
+        "0x01005BC0"
+      ]
+    ],
+    "files": [
+      "src/filename.cpp",
+      "src/imageloader.cpp",
+      "src/imageloader_source.cpp",
+      "include/filename.h"
+    ],
+    "deps": []
+  },
+  "imageloader": {
+    "desc": "ImageLoader: Source / HostSource / DiskSource / MCardSource / MCardSource_2<N,M> classes, the Buffer helper class, core.gt3 container parsing, DEFLATE decompression, and the RSA+SHA-512 signature verification (ImageLoader::verify F_010044A8, load F_010049C8). THE MOST IMPORTANT UNIT: verify must be decompiled exactly.",
+    "ranges": [
+      [
+        "0x010006B0",
+        "0x01000790"
+      ],
+      [
+        "0x01000ED8",
+        "0x010010F0"
+      ],
+      [
+        "0x010041D0",
+        "0x01005B68"
+      ]
+    ],
+    "files": [
+      "src/imageloader.cpp",
+      "src/imageloader_source.cpp",
+      "src/main.cpp",
+      "include/imageloader.h"
+    ],
+    "deps": [
+      "sha512",
+      "filename",
+      "bignum",
+      "montgomery",
+      "gzip",
+      "io"
+    ]
+  },
+  "bignum": {
+    "desc": "arbitrary-precision integer library, part 1 (refcounted copy-on-write sign-magnitude bignums): gcd, modInverse, big-endian byte import, add/sub/compare/resize, truncated multiply, multiply/divide/mod cores",
+    "ranges": [
+      [
+        "0x01005BC0",
+        "0x010085D0"
+      ]
+    ],
+    "files": [
+      "src/bignum.cpp",
+      "include/bignum.h"
+    ],
+    "deps": []
+  },
+  "montgomery": {
+    "desc": "arbitrary-precision integer library, part 2: divmod, shifts, Montgomery context (ctor F_01009128, dtor F_01008FC0), REDC MontMul F_01009F68, modular exponentiation F_0100A5D0",
+    "ranges": [
+      [
+        "0x010085D0",
+        "0x0100B238"
+      ]
+    ],
+    "files": [
+      "src/montgomery.cpp",
+      "include/montgomery.h"
+    ],
+    "deps": [
+      "bignum"
+    ]
+  },
+  "gzip": {
+    "desc": "GZIP::InflateBase (raw DEFLATE inflater: huffman table build, block decode, stored/fixed/dynamic blocks) and crc32",
+    "ranges": [
+      [
+        "0x0100B238",
+        "0x0100B2E8"
+      ],
+      [
+        "0x01011700",
+        "0x01012F38"
+      ]
+    ],
+    "files": [
+      "src/gzip_inflate.cpp",
+      "src/gzip_montgomery_tail.cpp",
+      "include/gzip.h"
+    ],
+    "deps": []
+  },
+  "gs": {
+    "desc": "the bootstrap's own GS/graphics driver: display/draw environment setup, VIF1/GIF DMA packet building, vsync, INTC handlers, sceGsResetGraph wrappers, texture upload",
+    "ranges": [
+      [
+        "0x0100BE10",
+        "0x0100F130"
+      ]
+    ],
+    "files": [
+      "src/gs_driver.cpp",
+      "src/gs_state.cpp",
+      "src/gs_texture.cpp",
+      "include/gs_driver.h",
+      "include/gs_internal.h"
+    ],
+    "deps": []
+  },
+  "io": {
+    "desc": "game-side I/O helpers: synchronous memory-card wrappers (mc_*_sync over libmc), host: file I/O wrappers (over sce fileio), thread/semaphore utilities, busy_wait_delay",
+    "ranges": [
+      [
+        "0x0100F130",
+        "0x0100F538"
+      ],
+      [
+        "0x0100F5D0",
+        "0x0100F918"
+      ]
+    ],
+    "files": [
+      "src/hostfs_io.cpp",
+      "src/mcard_io.cpp",
+      "src/thread_util.cpp",
+      "include/boot_io.h"
+    ],
+    "deps": []
+  },
+  "allocator": {
+    "desc": "pdistd::Allocator (heap allocator: rep blocks, alignment, debug dump using 'Allocator::debug' format strings), global heap init/stats, intr_suspend, global lock and break/abort stubs",
+    "ranges": [
+      [
+        "0x0100F918",
+        "0x01010318"
+      ],
+      [
+        "0x01011210",
+        "0x010114A8"
+      ],
+      [
+        "0x01012F38",
+        "0x01012FC8"
+      ]
+    ],
+    "files": [
+      "src/pdistd/allocator.cpp",
+      "src/pdistd/pdistd_misc.cpp",
+      "include/pdistd/allocator.h"
+    ],
+    "deps": []
+  },
+  "printf": {
+    "desc": "pdistd::PrintFormatTargetBase and the printf format engine (printf.cxx), anonymous-namespace PrintTarget, tty_puts backend",
+    "ranges": [
+      [
+        "0x01010318",
+        "0x01011210"
+      ],
+      [
+        "0x010114A8",
+        "0x01011700"
+      ],
+      [
+        "0x01012FC8",
+        "0x01012FD8"
+      ]
+    ],
+    "files": [
+      "src/pdistd/pdistd_misc.cpp",
+      "src/pdistd/printf.cpp",
+      "src/pdistd/printformat.cpp",
+      "include/pdistd/printf.h",
+      "src/pdistd/printf_tables.cpp"
+    ],
+    "deps": []
+  },
+  "libcdvd": {
+    "desc": "Sony libcdvd 2.2.x client (PsIIlibcdvd 2240): sceCdInit, N/S command RPC, sceCdRead, sceCdSearchFile, sceCdSync, sceCdDiskReady, callbacks, power-off handler",
+    "ranges": [
+      [
+        "0x01012FD8",
+        "0x01014410"
+      ]
+    ],
+    "files": [
+      "sdk/libcdvd/libcdvd.c"
+    ],
+    "deps": []
+  },
+  "libpad": {
+    "desc": "Sony libpad 2.2.x (PsIIlibpad 2200): scePadInit, scePadPortOpen/Close, scePadRead, scePadGetState, scePadInfo*, press-mode, act DMA",
+    "ranges": [
+      [
+        "0x01014410",
+        "0x010157B8"
+      ]
+    ],
+    "files": [
+      "sdk/libpad/libpad.c"
+    ],
+    "deps": []
+  },
+  "libmc": {
+    "desc": "Sony libmc 2.2.x (PsIIlibmc 2240): sceMcInit, sceMcGetInfo, sceMcOpen/Read/Close/GetDir, sceMcSync, RPC end-callbacks; plus exec_ps2_with_sbus_cleanup at 0x01016F70 (decide from evidence whether it is SDK or game code and place it accordingly)",
+    "ranges": [
+      [
+        "0x010157B8",
+        "0x01016FD8"
+      ]
+    ],
+    "files": [
+      "sdk/libmc/libmc.c",
+      "src/execps2.c"
+    ],
+    "deps": []
+  },
+  "libgcc_eh": {
+    "desc": "GCC 2.9x-ee runtime: __main/__do_global_ctors/__do_global_dtors, setjmp/longjmp-style EH (__sjthrow, __sjpopnthrow, __throw, __rethrow, eh context), std::terminate/unexpected, set_terminate/set_unexpected, exception.cc",
+    "ranges": [
+      [
+        "0x01016FD8",
+        "0x01018830"
+      ]
+    ],
+    "files": [
+      "runtime/eh.c",
+      "runtime/exception.cc",
+      "runtime/libgcc2.c"
+    ],
+    "deps": []
+  },
+  "frame": {
+    "desc": "GCC 2.9x frame.c: DWARF2 unwind info registration and lookup (__register_frame_info, __deregister_frame_info, find_fde, fde sorting, CIE/FDE parsing, CFA interpreter, uleb/sleb decoding)",
+    "ranges": [
+      [
+        "0x01018830",
+        "0x01019860"
+      ]
+    ],
+    "files": [
+      "runtime/frame.c"
+    ],
+    "deps": []
+  },
+  "cxxrt": {
+    "desc": "libstdc++ (egcs/2.9x) runtime: operator new/delete (+ placement, arrays, nothrow), set_new_handler, bad_alloc, and tinfo.cc/tinfo2.cc RTTI (type_info, __class_type_info, __si_type_info, __user_type_info, dynamic_cast helpers, __rtti_* functions)",
+    "ranges": [
+      [
+        "0x01019860",
+        "0x0101AFF0"
+      ]
+    ],
+    "files": [
+      "runtime/new.cc",
+      "runtime/tinfo.cc",
+      "runtime/tinfo2.cc"
+    ],
+    "deps": []
+  },
+  "libc": {
+    "desc": "C library pieces (abort, memcpy, memmove, memset, strcat, strcpy, strcmp, strlen at 0x0100F538, __errno, memcmp) and libgraph's sceGsGetGParam / sceGsResetGraph (own .text.* sections at the end of text)",
+    "ranges": [
+      [
+        "0x0100F538",
+        "0x0100F5D0"
+      ],
+      [
+        "0x0101AFF0",
+        "0x0101B800"
+      ],
+      [
+        "0x01026940",
+        "0x01026B88"
+      ]
+    ],
+    "files": [
+      "runtime/libc.c",
+      "runtime/libc_strlen.S",
+      "runtime/libc_syscall_stubs.S",
+      "sdk/libgraph/libgraph.c"
+    ],
+    "deps": []
+  },
+  "kernl_sys": {
+    "desc": "Sony libkernl 2.2.x (PsIIlibkernl2240) part 1: the EE kernel syscall stubs (0x0101B7C0.. 16-byte stubs, numbered), DI/EI, cache sync/invalidate, thread-server init, INTC/DMAC helpers, SIF DMA and SIF command layer (sceSifInitCmd, sceSifAddCmdHandler, sceSifSendCmd, system cmd handlers)",
+    "ranges": [
+      [
+        "0x0101B800",
+        "0x0101E0C0"
+      ]
+    ],
+    "files": [
+      "sdk/libkernl/kernel.c",
+      "sdk/libkernl/sifcmd.c",
+      "sdk/libkernl/syscalls.S"
+    ],
+    "deps": []
+  },
+  "kernl_rpc_fio": {
+    "desc": "Sony libkernl part 2: SIF RPC client (sceSifInitRpc, sceSifBindRpc, sceSifCallRpc, sceSifCheckStatRpc, sceSifGetOtherData, rdata/bind requests) and fileio client (sceOpen/sceClose/sceRead/sceWrite/sceLseek/sceIoctl/sceDopen/..., fd table, RPC server 0x80000001)",
+    "ranges": [
+      [
+        "0x0101E0C0",
+        "0x01020978"
+      ]
+    ],
+    "files": [
+      "sdk/libkernl/fileio.c",
+      "sdk/libkernl/sifrpc.c"
+    ],
+    "deps": []
+  },
+  "kernl_rest": {
+    "desc": "Sony libkernl part 3: device fileio (sceDelDrv, sceDopen...), loadfile (sceSifLoadModule, sceSifLoadElf), IOP reboot (sceSifRebootIop / rom0:UDNL), iopheap, Deci2 / TTY driver, _InitSys (F_01022C18), sbrk/getpid/isatty/fstat newlib stubs",
+    "ranges": [
+      [
+        "0x01020978",
+        "0x01023678"
+      ]
+    ],
+    "files": [
+      "sdk/libkernl/deci2_tty.c",
+      "sdk/libkernl/filedev.c",
+      "sdk/libkernl/initsys.c",
+      "sdk/libkernl/iopreboot.c",
+      "sdk/libkernl/loadfile.c"
+    ],
+    "deps": []
+  },
+  "libgcc_math": {
+    "desc": "libgcc arithmetic helpers: 64-bit integer division (__divdi3, __moddi3, __udivdi3, __umoddi3, __udivmoddi4), float/double conversions (__fixunsdfdi, __floatdidf, ...), and fp-bit.c software double-precision float emulation (the EE FPU is single-precision only)",
+    "ranges": [
+      [
+        "0x01023678",
+        "0x01026940"
+      ]
+    ],
+    "files": [
+      "runtime/libgcc_math.c"
+    ],
+    "deps": []
+  }
+}

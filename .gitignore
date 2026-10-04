@@ -1,0 +1,23 @@
+# What the builder downloads and writes (README.md, "What the builder writes")
+/sdk/
+/output/
+/backups/
+/toolchain/profiles.json
+/toolchain/settings.json
+/toolchain/*.bad*
+/GT3Builder-error.log
+/local_paths.json
+
+# Your game files and what is made from them
+/bootstrap/baserom/
+/bootstrap/data/
+/bootstrap/matching/
+/bootstrap/ref/full.txt
+/bootstrap/ref/datamap.txt
+/bootstrap/ref/chunks/
+/bootstrap/ref/units/
+
+# Build output
+/bootstrap/build/
+__pycache__/
+*.pyc

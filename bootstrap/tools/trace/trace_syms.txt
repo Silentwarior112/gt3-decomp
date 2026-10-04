@@ -1,0 +1,62 @@
+# Functions traced by `python tools/build.py --trace` (linker --wrap: only calls
+# that cross object files are intercepted). One symbol per line; C++ symbols
+# mangled. Never list anything that runs in interrupt context or is called
+# every frame. Output goes to the EE SIO port, which PCSX2 logs as EE console.
+
+# main.cpp -> other units
+__main
+gfx_init_default
+_Z20startup_screen_startv
+_Z28boot_iop_reboot_and_pad_initv
+_ZN11ImageLoader10DiskSource12getLoadFlagsEPKc
+_ZN11ImageLoader11MCardSource12getLoadFlagsEPKcii
+_ZN11ImageLoader11MCardSource4openEPKc
+_ZN11ImageLoader4loadEv
+_Z26startup_screen_wait_threadv
+_Z19startup_screen_stopv
+_Z21shutdown_iop_servicesv
+gfx_shutdown
+exec_ps2_with_sbus_cleanup
+sceCdDiskReady
+
+# main_iop.cpp -> SDK
+sceSifRebootIop
+sceSifSyncIop
+sceSifInitRpc
+sceSifLoadModule
+sceFsReset
+sceCdInit
+sceCdMmode
+scePadInit
+scePadPortOpen
+mc_init_once
+
+# image sources -> I/O
+sceOpen
+sceRead
+sceLseek
+sceClose
+mc_getinfo_sync
+mc_getdir_sync
+mc_open_sync
+mc_read_sync
+mc_close_sync
+_ZN12DiskFileName7GetPathEv
+_ZN6Buffer6resizeEj
+memalign
+
+# verification
+_Z6modpowRK6BigNumS1_S1_
+_ZN4GZIP11InflateBase12inflate_mainEb
+# _ZNK9BigNumRep3cmpERKS_   (too noisy: called in tight loops)
+
+# startup screen
+CreateThread
+
+# SIF RPC / fileio internals (cross-object calls from fileio.c, sifrpc.c)
+sceSifBindRpc
+sceSifCallRpc
+sceSifAddCmdHandler
+sceSifSendCmd
+WaitSema
+SignalSema

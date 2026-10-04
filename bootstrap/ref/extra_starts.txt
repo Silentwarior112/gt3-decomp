@@ -1,0 +1,121 @@
+0x010000C0  # already a start | missed function start: 2-instruction ExitThread stub (addiu $v1,0x23; syscall) currently appended to
+0x0100B808  # already a start | missed start: separate (unreferenced) function merged into F_0100B798 — clut_anim_step(Tex1Image *im
+0x0100BB28  # already a start | missed start: second unreferenced function inside the F_0100B798 block — clut_anim_ack(Tex1Image *im
+0x0100C890  # already a start | missed start inside F_0100C848's range: a real function tail-called by F_0100C7E0 via `j 0x100c890` 
+0x0100D410  # already a start | missed start inside F_0100D3A0's range: 3-instruction getter returning the current packet pointer (c
+0x0100D420  # already a start | missed start inside F_0100D3A0's range: getter returning remaining packet space (ctx+0x11C - ctx+0x1
+0x0100DB88  # already a start | probable missed start at the tail of F_0100DAD0: reached only via `j 0x100db88` that skips an alignm
+0x0100E228  # already a start | missed start: separate function (float pow by 8.4 fixed exponent, uses EE sqrt.s) between F_0100E198
+0x0100E548  # already a start | missed start: separate thunk (set full dirty mask 0x3FF1FFF1FFF then j F_0100E570) after F_0100E4E8'
+0x0100E770  # already a start | missed start: VIF1 INTC handler, installed by AddIntcHandler(5, &0x100E770) at 0x0100C5D8; currently
+0x0100ECD0  # already a start | missed start: gs_compute_display_period, tail-called via `j 0x100ecd0` from 0x0100D2DC and 0x0100D2F
+0x0100ED58  # already a start | missed start: gs_set_bg_color(u32), tail-called via `j 0x100ed58` from F_0100E478 (0x0100E4A0); curr
+0x0100F3A0  # already a start | missed start: mc_init_once's own unlock stub (j signal_sema_helper; lw a0,s_mc_sema), a separate sta
+0x01013220  # already a start | missed function start: sceCdInitEeCB(int priority, void *stackAddr, int stackSize) - GetThreadId->0x
+0x010132F8  # already a start | missed function start: libcdvd completion-notify data handler - ORs a0 with 0x20000000 (uncached), c
+0x01013520  # already a start | missed function start: _sceCdPOffCmdHandler - the SIF-command handler registered by F_01013560 for c
+0x01014984  # already a start | missed start: scePadPortClose begins here; detector merged it into F_010147A0 (scePadPortOpen ends a
+0x01014988  # already a start | missed start: scePadPortClose begins here; detector merged it into F_010147A0 (scePadPortOpen ends a
+0x01014AA0  # already a start | missed start: scePadGetFrameCount-like getter begins here inside F_01014A40's block
+0x01014BE8  # already a start | missed start: scePadStateIntToStr begins here inside F_01014B70's block
+0x01014C88  # already a start | missed start: scePadGetReqState; F_01014C20's detected size (1128) wrongly spans five functions
+0x01014CD8  # already a start | missed start: scePadReqIntToStr (inside F_01014C20 block)
+0x01014D10  # already a start | missed start: scePadInfoAct (inside F_01014C20 block)
+0x01014E30  # already a start | missed start: scePadInfoComb (inside F_01014C20 block)
+0x01014F50  # already a start | missed start: scePadInfoMode (inside F_01014C20 block)
+0x01015438  # already a start | missed start: scePadInfoPressMode (inside F_01015388 block)
+0x01015498  # already a start | missed start: scePadEnterPressMode (inside F_01015388 block)
+0x010154F0  # already a start | missed start: scePadExitPressMode (inside F_01015388 block)
+0x01015970  # already a start | missed start: libmc internal accessor mc_get_rpc_state (inside F_010157B8/sceMcInit block; unreferen
+0x01015E18  # already a start | missed start: sceMcRead RPC end-callback (inside F_01015D40 block; referenced only as function point
+0x01016298  # already a start | (outside chunk, observed) missed start: libmc RPC-done callback used by sceMcGetInfo (F_010162F0 reg
+0x01017030  # already a start | missed function start: __do_global_ctors. The listing shows this code (walks __CTOR_LIST__ @0x1026c9
+0x010193C8  # already a start | missed function start: __register_frame_info(void *begin, struct object *ob) — 10 instructions appen
+0x0101B7C0  # already a start | missed start (outside chunk, found via tail call): ExecPS2 syscall stub (addiu $v1,7; syscall). F_01
+0x0101B7D0  # already a start | missed start: syscall #1 stub = ResetEE, libkernl
+0x0101B7E0  # already a start | missed start: syscall #2 stub = SetGsCrt, libkernl
+0x0101B7F0  # already a start | missed start: syscall #3 stub = RFU003, libkernl (next detected function F_0101B800 is syscall #4 = 
+0x0101B810  # already a start | Block merges 7 syscall stubs; missed starts: 0x0101B810 (#0x05 ResumeIntrDispatch), 0x0101B820 (#0x0
+0x0101B820  # already a start | Block merges 7 syscall stubs; missed starts: 0x0101B810 (#0x05 ResumeIntrDispatch), 0x0101B820 (#0x0
+0x0101B830  # already a start | missed start (outside chunk, found via tail call): ExecPS2 syscall stub (addiu $v1,7; syscall). F_01
+0x0101B840  # already a start | Block merges 7 syscall stubs; missed starts: 0x0101B810 (#0x05 ResumeIntrDispatch), 0x0101B820 (#0x0
+0x0101B850  # already a start | Block merges 7 syscall stubs; missed starts: 0x0101B810 (#0x05 ResumeIntrDispatch), 0x0101B820 (#0x0
+0x0101B860  # already a start | Block merges 7 syscall stubs; missed starts: 0x0101B810 (#0x05 ResumeIntrDispatch), 0x0101B820 (#0x0
+0x0101B880  # already a start | Missed starts: 0x0101B880 (#0x0C Interrupt2Iop), 0x0101B890 (#0x0D SetVTLBRefillHandler), 0x0101B8A0
+0x0101B890  # already a start | Missed starts: 0x0101B880 (#0x0C Interrupt2Iop), 0x0101B890 (#0x0D SetVTLBRefillHandler), 0x0101B8A0
+0x0101B8A0  # already a start | Missed starts: 0x0101B880 (#0x0C Interrupt2Iop), 0x0101B890 (#0x0D SetVTLBRefillHandler), 0x0101B8A0
+0x0101B8B0  # already a start | Missed starts: 0x0101B880 (#0x0C Interrupt2Iop), 0x0101B890 (#0x0D SetVTLBRefillHandler), 0x0101B8A0
+0x0101B8C0  # already a start | Missed start 0x0101B8D0 (AddIntcHandler2, same #0x10)
+0x0101B8D0  # already a start | Missed start 0x0101B8D0 (AddIntcHandler2, same #0x10)
+0x0101B8F0  # already a start | Missed start 0x0101B900 (AddDmacHandler2, same #0x12)
+0x0101B900  # already a start | Missed start 0x0101B900 (AddDmacHandler2, same #0x12)
+0x0101B960  # already a start | Missed start 0x0101B970 (#0x0FD ReleaseAlarm — new-alarm service)
+0x0101B970  # already a start | Missed start 0x0101B970 (#0x0FD ReleaseAlarm — new-alarm service)
+0x0101B9C0  # already a start | Missed starts: 0x0101B9C0 (#-0xFE iSetAlarm), 0x0101B9D0 (#-0xFF iReleaseAlarm)
+0x0101B9D0  # already a start | Missed starts: 0x0101B9C0 (#-0xFE iSetAlarm), 0x0101B9D0 (#-0xFF iReleaseAlarm)
+0x0101B9E0  # already a start | Missed start 0x0101B9F0 (#0x21 DeleteThread)
+0x0101B9F0  # already a start | Missed start 0x0101B9F0 (#0x21 DeleteThread)
+0x0101BA00  # already a start | Missed start 0x0101BA10 (#0x23 ExitThread)
+0x0101BA10  # already a start | Missed start 0x0101BA10 (#0x23 ExitThread)
+0x0101BA30  # already a start | Missed starts: 0x0101BA30 (#0x25 TerminateThread), 0x0101BA40 (#-0x26 iTerminateThread), 0x0101BA50 
+0x0101BA40  # already a start | Missed starts: 0x0101BA30 (#0x25 TerminateThread), 0x0101BA40 (#-0x26 iTerminateThread), 0x0101BA50 
+0x0101BA50  # already a start | Missed starts: 0x0101BA30 (#0x25 TerminateThread), 0x0101BA40 (#-0x26 iTerminateThread), 0x0101BA50 
+0x0101BA60  # already a start | Missed starts: 0x0101BA30 (#0x25 TerminateThread), 0x0101BA40 (#-0x26 iTerminateThread), 0x0101BA50 
+0x0101BA70  # already a start | Missed start 0x0101BA80 (#-0x2A iChangeThreadPriority)
+0x0101BA80  # already a start | Missed start 0x0101BA80 (#-0x2A iChangeThreadPriority)
+0x0101BAA0  # already a start | Missed starts: 0x0101BAA0 (#-0x2C _iRotateThreadReadyQueue), 0x0101BAB0 (#0x2D ReleaseWaitThread), 0
+0x0101BAB0  # already a start | Missed starts: 0x0101BAA0 (#-0x2C _iRotateThreadReadyQueue), 0x0101BAB0 (#0x2D ReleaseWaitThread), 0
+0x0101BAC0  # already a start | Missed starts: 0x0101BAA0 (#-0x2C _iRotateThreadReadyQueue), 0x0101BAB0 (#0x2D ReleaseWaitThread), 0
+0x0101BAE0  # already a start | Missed start 0x0101BAF0 (#-0x31 iReferThreadStatus)
+0x0101BAF0  # already a start | Missed start 0x0101BAF0 (#-0x31 iReferThreadStatus)
+0x0101BB30  # already a start | Missed start 0x0101BB40 (#-0x36 iCancelWakeupThread)
+0x0101BB40  # already a start | Missed start 0x0101BB40 (#-0x36 iCancelWakeupThread)
+0x0101BB70  # already a start | Missed starts: 0x0101BB70 (#0x39 ResumeThread), 0x0101BB80 (#-0x3A iResumeThread), 0x0101BB90 (#0x3B
+0x0101BB80  # already a start | Missed starts: 0x0101BB70 (#0x39 ResumeThread), 0x0101BB80 (#-0x3A iResumeThread), 0x0101BB90 (#0x3B
+0x0101BB90  # already a start | Missed starts: 0x0101BB70 (#0x39 ResumeThread), 0x0101BB80 (#-0x3A iResumeThread), 0x0101BB90 (#0x3B
+0x0101BBA0  # already a start | Missed starts: 0x0101BB70 (#0x39 ResumeThread), 0x0101BB80 (#-0x3A iResumeThread), 0x0101BB90 (#0x3B
+0x0101BBB0  # already a start | Missed starts: 0x0101BB70 (#0x39 ResumeThread), 0x0101BB80 (#-0x3A iResumeThread), 0x0101BB90 (#0x3B
+0x0101BBC0  # already a start | Missed start 0x0101BBD0 (#0x3F RFU063)
+0x0101BBD0  # already a start | Missed start 0x0101BBD0 (#0x3F RFU063)
+0x0101BE70  # already a start | Missed starts: 0x0101BE70 (#0x66 CpuConfig), 0x0101BE80 (#-0x67 iGetCop0), 0x0101BE90 (#-0x68 iFlush
+0x0101BE80  # already a start | Missed starts: 0x0101BE70 (#0x66 CpuConfig), 0x0101BE80 (#-0x67 iGetCop0), 0x0101BE90 (#-0x68 iFlush
+0x0101BE90  # already a start | Missed starts: 0x0101BE70 (#0x66 CpuConfig), 0x0101BE80 (#-0x67 iGetCop0), 0x0101BE90 (#-0x68 iFlush
+0x0101BEA0  # already a start | Missed starts: 0x0101BE70 (#0x66 CpuConfig), 0x0101BE80 (#-0x67 iGetCop0), 0x0101BE90 (#-0x68 iFlush
+0x0101BEC0  # already a start | Missed starts: 0x0101BEC0 (#0x6C SetCPUTimerHandler), 0x0101BED0 (#0x6D SetCPUTimer), 0x0101BEE0 (#0
+0x0101BED0  # already a start | Missed starts: 0x0101BEC0 (#0x6C SetCPUTimerHandler), 0x0101BED0 (#0x6D SetCPUTimer), 0x0101BEE0 (#0
+0x0101BEE0  # already a start | Missed starts: 0x0101BEC0 (#0x6C SetCPUTimerHandler), 0x0101BED0 (#0x6D SetCPUTimer), 0x0101BEE0 (#0
+0x0101BEF0  # already a start | Missed starts: 0x0101BEC0 (#0x6C SetCPUTimerHandler), 0x0101BED0 (#0x6D SetCPUTimer), 0x0101BEE0 (#0
+0x0101BF00  # already a start | Missed starts: 0x0101BEC0 (#0x6C SetCPUTimerHandler), 0x0101BED0 (#0x6D SetCPUTimer), 0x0101BEE0 (#0
+0x0101BF10  # already a start | Missed starts: 0x0101BEC0 (#0x6C SetCPUTimerHandler), 0x0101BED0 (#0x6D SetCPUTimer), 0x0101BEE0 (#0
+0x0101BF30  # already a start | Missed starts: 0x0101BF30 (#-0x71 iGsPutIMR), 0x0101BF40 (#0x72 SetPgifHandler)
+0x0101BF40  # already a start | Missed starts: 0x0101BF30 (#-0x71 iGsPutIMR), 0x0101BF40 (#0x72 SetPgifHandler)
+0x0101BF60  # already a start | Missed starts: 0x0101BF60 (#0x74 SetSyscall), 0x0101BF70 (#0x75 _print)
+0x0101BF70  # already a start | Missed starts: 0x0101BF60 (#0x74 SetSyscall), 0x0101BF70 (#0x75 _print)
+0x0101BF80  # already a start | Missed start 0x0101BF90 (#-0x76 isceSifDmaStat)
+0x0101BF90  # already a start | Missed start 0x0101BF90 (#-0x76 isceSifDmaStat)
+0x0101BFF0  # already a start | Missed start 0x0101C000 (#0x7B _ExecOSD)
+0x0101C000  # already a start | Missed start 0x0101C000 (#0x7B _ExecOSD)
+0x0101C020  # already a start | Missed starts: 0x0101C020 (#0x7D PSMode), 0x0101C030 (#0x7E MachineType), 0x0101C040 (#0x7F GetMemor
+0x0101C030  # already a start | Missed starts: 0x0101C020 (#0x7D PSMode), 0x0101C030 (#0x7E MachineType), 0x0101C040 (#0x7F GetMemor
+0x0101C040  # already a start | Missed starts: 0x0101C020 (#0x7D PSMode), 0x0101C030 (#0x7E MachineType), 0x0101C040 (#0x7F GetMemor
+0x0101C178  # already a start | missed start: iSyncDCache — aligns args to 0x40 and jumps into _SyncDCache without the DI/EI guard; 
+0x0101C2B8  # already a start | missed start: iInvalidDCache — same pattern inside F_0101C238
+0x0101C708  # already a start | missed start: thread-server initializer (CreateSema max 0xFF, CreateThread{entry=F_0101C630, stack=0
+0x0101D308  # already a start | missed start: SIF cmd system handler set_sreg (cmd 0x80000001): harg->sreg[pkt->index(+0x10)] = pkt-
+0x0101D328  # already a start | missed start: SIF cmd system handler change_addr (cmd 0x80000000): harg->iopbuf-related field (+8) =
+0x0101D350  # already a start | missed start: sceSifSetSreg(int index, u32 value) — writes 0x104AA00[index]
+0x0101D370  # already a start | missed start: accessor returning &_sif_cmd_data (0x104A8D8)
+0x0101D638  # already a start | missed start: sceSifSetCmdBuffer(db,size) — swaps cmd_data +0x14/+0x18 (user handler table), returns
+0x0101D650  # already a start | missed start: sceSifSetSysCmdBuffer(db,size) — swaps cmd_data +0x0C/+0x10 (system handler table)
+0x0101D838  # already a start | missed start: isceSifSendCmd — identical arg shuffle to sceSifSendCmd but _sif_cmd_send mode=1 (isce
+0x0101E200  # already a start | missed function start: code at 0x0101E200-0x0101E288 was merged into F_0101E0C0 (whose real end is 0
+0x0101EB08  # already a start | missed function start: code at 0x0101EB08-0x0101EEBC was merged into F_0101EA98 (whose real end is 0
+0x010226C0  # already a start | missed function start at 0x010226C0: sceSifLoadElf (a2=a1; a1="all"@0x1040718; calls F_01022598 with
+0x01022C50  # already a start | missed function start at 0x01022C50 after F_01022C40's tail-jump: busy-wait for INTC VBON — writes 4
+0x01022E10  # already a start | missed function start: 2-instruction libc stub (jr ra; li v0,-1)
+0x01022E18  # already a start | missed function start: 2-instruction libc stub (jr ra; li v0,-1)
+0x01022E20  # already a start | missed function start: 2-instruction libc stub (jr ra; li v0,-1)
+0x01022ED8  # already a start | missed function start: getpid — jr ra; li v0,1 (after F_01022E28/sbrk)
+0x01022EE0  # already a start | missed function start: fstat stub — sets st_mode=0x2000 (S_IFCHR), zeroes u64 at st+0x48, returns 0
+0x01022EF8  # already a start | missed function start: isatty — jr ra; li v0,1
+0x010230B0  # already a start | missed function start: sceDeci2ExReqSend — Deci2Call(-7, {s, (s8)cmd}), same shape as F_01022FE8
