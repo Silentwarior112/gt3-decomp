@@ -13,6 +13,26 @@ wherever you want it, such as your extracted disc.
 | Executable | Source Code Folder | State |
 |---|---|---|
 | GT3 US bootstrap, `SCUS_971.02` | [bootstrap/](bootstrap/README.md) | All 881 functions in C/C++. 851 are byte-exact when built with Sony's compiler (99.4% of the code bytes). Builds and boots to the game. |
+| GT3 US core, `core.gt3` | [core/](core/README.md) | 10,959 of 11,415 functions exact, Builds and runs. |
+
+# Gran Turismo 3 core executable status
+| Group | What it is | Functions | How it differs from the original | Severity |
+|---|---|---|---|---|
+| Menus, game flow, save data 									              | Game | 61 (41 same size) | Register numbering and instruction order. In 20, a few extra or missing instructions (spills, a reload, branch layout) | None |
+| Car physics and dynamics 										                | Game | 42 (25 same size) | Registers and scheduling; 17 with spill or reload differences. Same float operations in the same order | Low: a few cycles; no known effect on results |
+| Rendering and effects (cars, smoke, flares, tyres, track) 	| Game | 36 (24 same size) | Registers and scheduling; some loops with different hoisting or spills | None to low |
+| Race HUD and displays 										                  | Game | 29 (22 same size) | Mostly registers; a few branch-layout differences | None |
+| Race logic, AI, organisation 									              | Game | 17 (11 same size) | Registers and spills; one sound function lacks the original's dead address code and larger stack frame | None to low |
+| Cameras 														                        | Game | 9 (6 same size) | Registers and scheduling | None |
+| Debug logger 													                      | Game | 8 | Registers and scheduling | None |
+| Utilities 													                        | Game support, not PS2-specific | 7 | SAFER's code has the original's shape but a different round schedule (36–41% of bytes) | None: same output |
+| Sound logic 													                      | Game | 4 | Registers and scheduling; one with different loads | Low |
+| Graphics library 												                    | PS2 | 57 (43 same size) | Registers and scheduling; some originals were hand-written assembly | None to low: same results, at most a few cycles |
+| PlayStation 2 I/O 											                    | PS2 | 14 | Registers, spills, block layout | Low: same calls, same order |
+| Media drivers: (MPEG/IPU player, SPU2 sound) 					      | PS2 | 14 | Registers; the stream parser's block layout | Low: the intro movie plays the same |
+| Sony SDK and i.LINK RPC 										                | PS2 | 5 | Registers and spills | Low |
+| C runtime: libm, libgcc, newlib, printf 						        | PS2 toolchain runtime | 12 (10 same size) | Registers. Several are exact with the other Sony compiler build (2.9-ee-991111-01) | None |
+| Hand-written assembly: crt0, syscall stubs, `strlen` 			  | PS2 | 141 | Not scored, because the scorer only compares C; the bytes are the original's | None |
 
 **No game data is included.** Building needs your own copy of Gran Turismo 3
 A-Spec (US, SCUS-97102). The builder asks once for its `SCUS_971.02`, or for
