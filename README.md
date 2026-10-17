@@ -1,7 +1,9 @@
 # Gran Turismo 3 Decompilation
 <p align="center">
-  <img src="https://github.com/Silentwarior112/GTTexEdit/blob/logo.png">
+  <img src="https://github.com/Silentwarior112/gt3-decomp/blob/main/logo.png">
 </p>
+
+
 
 Decompiled source code of the Gran Turismo 3 family of executables, and the **GT3
 Decomp Builder**, which streamlines the process of compiling the source code. Choose what to build and with which
