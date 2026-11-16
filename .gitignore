@@ -16,8 +16,24 @@
 /bootstrap/ref/datamap.txt
 /bootstrap/ref/chunks/
 /bootstrap/ref/units/
+/core/baserom/
+/core/ref/full.txt
+/core/ref/units/
+/core/ref/splat/
+/core/ref/classes.txt
+/core/ref/jumptab_targets.json
+/core/ref/progress.json
+/core_gt3enhanced/baserom/
+/core_gt3enhanced/ref/full.txt
+/core_gt3enhanced/ref/units/
+/core_gt3enhanced/ref/splat/
+/core_gt3enhanced/ref/classes.txt
+/core_gt3enhanced/ref/jumptab_targets.json
+/core_gt3enhanced/ref/progress.json
 
 # Build output
 /bootstrap/build/
+/core/build/
+/core_gt3enhanced/build/
 __pycache__/
 *.pyc

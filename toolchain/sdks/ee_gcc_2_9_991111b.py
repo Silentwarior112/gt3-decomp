@@ -1,6 +1,8 @@
 """SCE ee-gcc 2.9-ee-991111b, Sony's Windows package of the 2000 SDK compiler.
 The period-accurate bootstrap build takes its driver, preprocessor, assembler
-and libgcc.a; its C headers are gcc-2.95.2's own, from GNU."""
+and libgcc.a; its headers are gcc-2.95.2's own, from GNU: the C ones
+(gcc/ginclude) and the C++ runtime's <new>, <typeinfo> and <exception>
+(gcc/cp/inc), which the package lacks."""
 import os
 
 from builder import SDK_DIR
@@ -9,9 +11,11 @@ from builder.model import Download, Sdk, Status
 
 DECOMPME = "https://github.com/decompme/compilers/releases/download/compilers/"
 LIB = "lib/gcc-lib/ee/2.9-ee-991111/"
+HEADERS = ("stdarg.h", "stddef.h", "va-mips.h", "varargs.h")      # gcc-2.95.2/gcc/ginclude/
+CXX_HEADERS = ("new", "new.h", "typeinfo", "exception")            # gcc-2.95.2/gcc/cp/inc/
 FILES = ["bin/ee-gcc.exe", LIB + "cpp.exe", LIB + "cc1.exe", LIB + "cc1plus.exe", LIB + "libgcc.a",
-         "ee/bin/as.exe", "include/stdarg.h", "include/stddef.h", "include/va-mips.h"]
-HEADERS = ("stdarg.h", "stddef.h", "va-mips.h", "varargs.h")
+         "ee/bin/as.exe", "include/stdarg.h", "include/stddef.h", "include/va-mips.h"] + \
+        ["include/" + h for h in CXX_HEADERS]
 
 
 class SceEeGcc991111b(Sdk):
@@ -41,7 +45,9 @@ class SceEeGcc991111b(Sdk):
 
     def unpack(self, files, staging, ctx):
         unpack_tar(files[0], staging, ctx)
-        unpack_tar(files[1], staging, ctx, members={"gcc-2.95.2/gcc/ginclude/" + h: "include/" + h for h in HEADERS})
+        members = {"gcc-2.95.2/gcc/ginclude/" + h: "include/" + h for h in HEADERS}
+        members.update({"gcc-2.95.2/gcc/cp/inc/" + h: "include/" + h for h in CXX_HEADERS})
+        unpack_tar(files[1], staging, ctx, members=members)
         ctx.verify(os.path.join(staging, LIB, "cc1.exe"),
                    "124F7C6870B7FACBAECBC51F0B87C0AAD46DB5F6ED491C21638E1DA991E45BE5")
         ctx.verify(os.path.join(staging, LIB, "cc1plus.exe"),

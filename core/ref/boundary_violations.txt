@@ -1,0 +1,7 @@
+branch at 0x00257DAC in F_00257D94 targets 0x00257D7C
+branch at 0x00257E10 in F_00257D94 targets 0x00257D7C
+branch at 0x00257E48 in F_00257E30 targets 0x00257E18
+branch at 0x00257EAC in F_00257E30 targets 0x00257E18
+branch at 0x002580E4 in F_00258078 targets 0x002580FC
+branch at 0x002580F0 in F_002580EC targets 0x002580D0
+branch at 0x00258144 in F_00258138 targets 0x0025B03C

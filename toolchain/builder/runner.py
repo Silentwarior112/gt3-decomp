@@ -71,7 +71,7 @@ def existing_output(path, target):
     with open(path, "rb") as f:
         head = f.read(len(target.output_magic))
     if target.output_magic and head != target.output_magic:
-        return "other", "not an ELF"
+        return "other", ("not an ELF" if target.output_magic == b"\x7fELF" else "not a " + target.output_name)
     if os.path.getsize(path) <= MAX_ORIGINAL:
         what = target.originals.get(sha256_file(path))
         if what:

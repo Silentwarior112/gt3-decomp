@@ -1,0 +1,2317 @@
+l2,us,verdict,end,note
+0x001000D0,0x00100140,right,,main
+0x00100380,0x00100488,right,,main_championship
+0x001003C0,0x001004C8,right,,main_gtmode_race
+0x001003F0,0x00100500,right,,main_gtmode_race2
+0x00100420,0x00100538,right,,run_menu_demo_race
+0x00100598,0x001006C8,right,,main_license_test
+0x001005C8,0x00100700,right,,main_machine_test
+0x001005F8,0x00100738,right,,main_free_run
+0x00100930,0x00100838,right,,play_saved_replay (L2 splits the body into 0x00100708)
+0x00100998,,new,,attract dispatcher (demo kind 1000 = replay file)
+0x00100A28,0x00100A78,right,,run_attract_demo
+0x00100C48,,new,,linked attract demo: i.LINK demo choice
+0x00100EF8,,new,,"linked attract demo (RaceLinkDemo), main mode 33"
+0x00101240,,new,,replay attract demo from a file
+0x00101A30,0x00101290,right,,PacketBuffers::PacketBuffers
+0x00101A58,0x001012C0,right,,T001_static_init
+0x00102048,0x00241A68,wrong,,boot thread start (two mutexes CreateThread StartThread); not vol_init
+0x00102238,0x00101A08,right,,vtable 8RaceBase slot 2 (GT3 slot 2) [map agrees]
+0x00102268,0x00101A38,right,,vtable 8RaceBase slot 3 (GT3 slot 3) [map agrees]
+0x00102940,,new,,busy mark strip draw
+0x00102E58,0x00102E58,right,,F_00102E58 (called by cmdSetMediaMode twin)
+0x001034A8,,new,,DisplayAdvertiseImage: load advertise/startupiw.img
+0x001034F0,,new,,DisplayAdvertiseImage: free
+0x00103520,,new,,DisplayAdvertiseImage constructor
+0x00103550,,new,,DisplayAdvertiseImage destructor
+0x001035B8,,new,,DisplayAdvertiseImage init
+0x001035F8,,new,,DisplayAdvertiseImage update (fades)
+0x001036E8,,new,,DisplayAdvertiseImage draw
+0x00103800,,new,,boot splash sequence
+0x00103AC8,,new,,"ConceptControl menu run (heap, construct, run)"
+0x00103BF0,,new,,Concept menu request dispatcher (MOVIE0/MOVIE1/TRANSFER/PODRACE)
+0x00103D28,0x00116508,right,,run_arcade_menu (no callers in L2)
+0x00103DF0,0x001165D8,right,,arcade_menu (no callers in L2)
+0x00103F30,,new,,ConceptControl car-select-only run (no callers)
+0x001040C0,,new,,ConceptControl select_car_test run (no callers)
+0x001041E8,,new,,ConceptControl constructor
+0x00104230,,new,,ConceptControl::load (menu/concept.mbl)
+0x001042C0,,new,,Concept event code parser (sscanf C%02d%c)
+0x00104420,,new,,Smart*Index wrapping move with skip (vtable slot 4)
+0x001044C8,0x001033C0,right,,SmartCarIndex::isValid (vtable slot 2)
+0x001045C0,0x00103218,right,,SmartSkipIndex::move (vtable slot 3)
+0x001046C8,,new,,ArcadeControl virtual 5
+0x00104750,,new,,ConceptControl virtual 5
+0x00104868,,new,,class logo item (%s_logo)
+0x00104AA0,,new,,class select (mpeg classes)
+0x00104DC0,,new,,class select update
+0x001057B0,0x0010D1B8,right,,"MiniCursor::virtual_2 draw (vtable slot 2; changed, shared with MiniCourseCursor)"
+0x00106060,,new,,MiniCursor vtable slot 8
+0x00106068,0x0010FE58,right,,T029_static_init (arcade movie table)
+0x00106878,0x00114028,right,,ArcadeControl::unload
+0x001068E0,0x00114090,right,,ArcadeControl::setup (map paired US setup with L2 0x0022BD10)
+0x00106E18,0x00114500,right,,ArcadeControl::getSelection (mode -> selection; L2 adds Pod)
+0x00106EA0,,new,,ArcadeControl current game index table by mode
+0x00106F78,,new,,ArcadeControl isPodRace (podRace != 0)
+0x00107168,,new,,ArcadeControl virtual 8 prepareRace
+0x001074E8,,new,,ConceptControl virtual 8 prepareRace
+0x00107AE8,0x00114610,right,,ArcadeControl::finish (L2 moved the race-argument filling to virtual 8 prepareRace)
+0x00107DC0,0x00114AC0,right,,ArcadeControl::runILinkOnly
+0x00107EF8,0x00114BF8,right,,ArcadeControl::runSingleRace
+0x00108040,0x00114D28,right,,ArcadeControl::runCompulsory
+0x001080B0,,new,,licence select flow (ar/select_license)
+0x00108248,0x00114EE8,right,,ArcadeControl::runTwoPlayer
+0x00108350,0x00114FC0,right,,ArcadeControl::runILink
+0x00108580,,new,,Concept menu loop
+0x001086B8,0x00115348,right,,ArcadeControl::runMenu (map had L2 0x00116BA8)
+0x00108728,0x001153A0,right,,ArcadeControl::runAttract (L2: push start then the Concept loop instead of runDemo)
+0x001088B0,0x00115448,right,,ArcadeControl::runILinkMenu (map had L2 0x00116C18)
+0x00108910,0x00115498,right,,ArcadeControl::run
+0x00108AB8,0x001156F8,right,,ArcadeControl::runPushStartPage (ar/push_start_wagen)
+0x00108C60,0x001157D0,right,,ArcadeControl::runConnectPage
+0x00108EF8,0x00115A60,right,,ArcadeControl::runWaitOtherPage
+0x00109128,0x00115C80,right,,ArcadeControl::F_00115C80 (map had L2 0x00116C88)
+0x00109190,0x00115CE8,right,,ArcadeControl::setLinkMode (map had L2 0x00116DD8)
+0x001091F0,0x00115D48,right,,"link_view_mode (switch on x-2, 5 cases; its body runs to 0x00109270, past the listed end)"
+0x00109270,0x00115E10,right,,"ArcadeControl::runWaitSyncPage, stubbed in L2 (returns 0); call position in runILinkOnly / runILink"
+0x001092B0,,new,,ar/select_car_test debug page
+0x0010BC18,,new,,car select: assist (ESP) panel
+0x0010BEE0,,new,,car select: assist input
+0x0010BFF0,,new,,car select: assist panel close
+0x0010CA90,,new,,ArcadeControl virtual 2 (car code per class)
+0x0010CB98,,new,,ConceptControl virtual 2
+0x0010CC70,,new,,ArcadeControl virtual 3 (car count)
+0x0010CCB0,,new,,ConceptControl virtual 3
+0x0010CDE8,,new,,isCVT of the menu car (car select transmission lock)
+0x0010D630,,new,,"ArcadeControl virtual 4 (colour chips, SelectBox)"
+0x0010D700,,new,,"ConceptControl virtual 4 (colour chips, SelectBox2)"
+0x0010DE90,,new,,car change with tuner logo and BarGauges
+0x0010FDE8,0x00109108,right,,"ArcadeControl::classSelect, stubbed in L2 (returns 0); call position in runILink twin"
+0x0010FDF8,,new,,ArcadeControl virtual 6
+0x0010FE00,,new,,ConceptControl virtual 6 (status page)
+0x0010FE98,,new,,ar/status + ar/show_room pages
+0x00110028,,new,,status page helper
+0x001100A8,,new,,status page helper
+0x001100F8,,new,,status page helper
+0x00110170,,new,,licence select: car view
+0x00110250,,new,,licence select: car change
+0x001102D0,,new,,licence select helper (clears two fields)
+0x001102E0,,new,,ar/select_license page
+0x001119F0,0x00104EE8,right,0x001119F8,arcade_connect_focus (return 1) (not in the tool's function list)
+0x001119F8,0x00104EF0,right,,T019_static_init (page focus hooks; L2 ar/connect + ar/connect_ride)
+0x00111CB0,0x001054C0,right,,"ArcadeControl::showHistoryClass, stubbed in L2 (empty); first call of runCarSelect twin"
+0x00111CB8,0x001055F8,right,,"ArcadeControl::hideHistoryClass, stubbed in L2 (empty); last call of runCarSelect twin"
+0x00111E38,,new,,MiniCourseCursor creation
+0x00112160,,new,,SelectBox2 constructor
+0x001132B0,,new,,course image (ipic)
+0x00113D08,0x0010ED18,right,,"ArcadeControl::selectCourse, stubbed in L2 (returns 0); call position in 4 run* twins"
+0x00114368,,new,,menu_top factory (TopButtonList)
+0x001144A8,,new,,menu_game factory (GameButtonList)
+0x00114560,,new,,menu_map factory (StatusButtonList)
+0x001146A0,,new,,menu_difficulty factory (DifficultyButtonList)
+0x00114780,,new,,menu_category factory (CategoryButtonList)
+0x00114830,,new,,menu_license factory (LicenseButtonList)
+0x001148E0,0x0011B6B8,wrong,,"Concept top-menu factory table (menu_category/difficulty/game/license...), not GT3's T044 GT-mode table"
+0x00115348,0x00110008,right,,arcade_create_mpeg_course (registered as mpeg_course)
+0x00115370,0x00110030,right,,arcade_create_mpeg_class (registered as mpeg_class)
+0x00115B28,,new,,"licence list items (license_gold/silver/bronze, rank_%d)"
+0x00116310,,new,,car_render_from item
+0x00116538,,new,,car_color_box item
+0x00116588,,new,,car colour set
+0x001165E0,,new,,color_name_box item
+0x00116668,,new,,car_name item
+0x00116708,,new,,car_name_license item
+0x00116850,,new,,car_description item
+0x001168F0,,new,,car_logo item
+0x00116978,,new,,license_car item
+0x00116BA8,,new,,text item available_car_num_C (%d/%d); map had runMenu
+0x00116C18,,new,,text item available_car_num_B (%d/%d); map had runILinkMenu
+0x00116C88,,new,,text item available_car_num_A (%d/%d); map had F_00115C80
+0x00116CF8,,new,,text item available_car_num_S
+0x00116D68,,new,,text item available_car_num_D
+0x00116DD8,,new,,text item achievement_ratio (%d%%); map had setLinkMode
+0x00116E28,0x00111098,right,,T030_static_init (arcade item factories)
+0x00117B28,,new,,BarGauge draw
+0x00117E48,,new,,GameButtonList
+0x00117FB8,,new,,GameButtonList buttons
+0x001180E0,,new,,GameButton factory
+0x001181A0,,new,,GameButton constructor
+0x001184C8,,new,,DifficultyButtonList
+0x00118648,,new,,DifficultyButtonList buttons
+0x001188E0,,new,,LicenseButtonList
+0x00118A78,,new,,LicenseButtonList buttons
+0x00118BA0,,new,,LicenseButton factory
+0x00118C60,,new,,LicenseButton constructor (item_gold/silver/bronze)
+0x00118F00,,new,,CategoryButtonList
+0x00119068,,new,,CategoryButtonList buttons
+0x00119190,,new,,MiniCourseCursor allocation
+0x00119A50,,new,,"Concept event names (C%02d%c%d, MOVIE%d)"
+0x00119DF8,,new,,StatusButtonList (game_status)
+0x00119F48,,new,,StatusButtonList buttons
+0x0011A280,,new,,StatusButton factory
+0x0011A340,,new,,StatusButton constructor
+0x0011A4A0,,new,,StatusButton draw
+0x0011BDB8,0x0011CB18,right,,text_user_day
+0x0011BEB0,0x0011CC20,right,,text_user_money
+0x0011BEE0,0x0011CC50,right,,text_focused_carname
+0x0011BF28,0x0011CC98,right,,text_car_buy_price
+0x0011BFB8,0x0011CD28,right,,text_car_sell_price
+0x0011C058,0x0011CDD0,right,,text_car_kilometrage
+0x0011C0C0,0x0011CE48,right,,text_current_power
+0x0011C138,0x0011CEB8,right,,text_previous_power
+0x0011C188,0x0011CF08,right,,text_ps_after
+0x0011C408,0x0011D188,right,,text_car_drive_type
+0x0011C450,0x0011D1D0,right,,text_car_max_power
+0x0011C4C0,0x0011D240,right,,text_car_max_torque
+0x0011C560,,start,0x0011C584,"text_car_weight leaf (no FDE, no jal caller)"
+0x0011C560,0x0011D2D0,right,,text_car_weight (start missing from the list)
+0x0011C588,0x0011D2F8,right,,make_goods_car_price
+0x0011D2F0,0x0011E0A8,right,,make_time_gold
+0x0011D310,0x0011E0D0,right,,make_time_silver
+0x0011D878,0x0011E630,right,,make_car_render_current
+0x0011D960,0x0011E700,right,,make_car_render_wheel
+0x0011D9C8,0x0011E770,right,,make_car_render_focused
+0x0011DA30,0x0011E7E0,right,,make_car_render_buy
+0x0011DD70,0x0011EB30,right,,text_focused_partsname
+0x00120958,0x00121228,right,,make_event_status
+0x00120A18,0x001212E0,right,,make_event_status_button
+0x00120AE0,0x001213A0,right,,make_arrow
+0x00120B98,0x00121450,right,,make_event_course_doc
+0x00120CD8,0x00121598,right,,make_event_course_logo
+0x00121B68,0x001223A8,right,,text_spec_aspiration
+0x00121BB0,0x001223F0,right,,text_spec_displacement
+0x00121C00,0x00122450,right,,text_spec_drive_type (changed: DRIVETRAIN +0x22 gate)
+0x00121C90,0x00122498,right,,text_spec_engine_type
+0x00121D00,0x00122518,right,,text_spec_height (changed: CHASSIS +0x22)
+0x00121D70,0x00122578,right,,text_spec_length (changed: CHASSIS +0x20)
+0x00121DE0,0x001225D8,right,,text_spec_max_power (changed: ENGINE +0x58 gate)
+0x00121ED0,0x001226A0,right,,text_spec_max_power_real (map had text_spec_max_power)
+0x00122398,0x00122B38,right,,text_spec_weight (changed: CHASSIS +0x24)
+0x00122450,0x00122B70,right,,text_spec_wheel_base
+0x001224A0,0x00122BD0,right,,text_spec_width (changed: RACINGMODIFY +0x42)
+0x001257F0,0x00125D60,right,,action_set_garage_car
+0x00125888,0x00125DF0,right,,action_set_garage_car_trade
+0x00125908,0x00125E68,right,,action_buy_car
+0x001259A8,0x00125F08,right,,action_buy_guest_car
+0x00125A00,0x00125F60,right,,action_ride_car
+0x00125A40,0x00125FA8,right,,action_sell_car
+0x00125A80,0x00125FF0,right,,action_set_focus_wheel
+0x00125AE0,0x00126048,right,,action_change_wheel
+0x00125C80,0x001261F0,right,,action_go_arcade_menu
+0x00125E70,0x001263D0,right,,action_go_replay_theater (11)
+0x00125EA0,0x00126400,right,,action_go_demonstration (12)
+0x00125ED0,0x00126430,right,,action_go_logger (13)
+0x00125F00,0x00126460,right,,action_go_load_game_menu (26)
+0x00125F30,0x00126490,right,,action_go_save_game_menu (25)
+0x00125F60,0x001264C0,right,,action_go_file_operation (24)
+0x00125F90,0x001264F0,right,,action_go_option (9)
+0x00125FC0,0x00126520,right,,action_go_setting (10)
+0x00125FF0,0x00126550,right,,action_go_trade (29)
+0x00126020,0x00126580,right,,"action_go_save_in_home (L2 31, GT3 30)"
+0x00126050,0x001265B0,right,,action_set_focus_parts
+0x00126438,0x00126980,right,,action_sort_distance
+0x00126460,0x001269A8,right,,action_sort_maker
+0x00126498,0x001269E0,right,,action_sort_power
+0x001264C0,0x00126A08,right,,action_sort_price
+0x001264E8,0x00126A30,right,,action_sort_drive
+0x00126510,0x00126A58,right,,action_sort_aspiration
+0x00126640,0x00126B98,right,,action_oil_change
+0x001266D0,0x00126C30,right,,T037_static_init (same hook names)
+0x001293D0,,new,,set country + units from a language
+0x00129598,,new,,static init registering the set_lang hook (language select page)
+0x001295E8,0x001287A8,right,,play_movie
+0x0012C2E0,0x00132030,right,,run_license_test
+0x0012CDD8,0x00132BA0,right,,run_gtmode_race
+0x0012D5C0,0x00133388,right,,run_championship
+0x0012E018,,new,,run_pod_race (RacePOD)
+0x0012E6F8,,new,,run_concept_license
+0x0012F298,,new,,run_training (RaceTraining)
+0x00130CB8,,new,,run_pod_2p_race (RacePOD2P)
+0x00135120,,new,,PremiumGetControl::load's model-spec setter (premium car)
+0x00135E18,0x0013A100,right,,LicenseGetControl::unload (shared by LicenseGetControlBase)
+0x00135E48,0x0013A200,right,,LicenseGetControl::end (same five calls)
+0x001364F8,,new,,17PremiumGetControl vtable slot 2 (own entry)
+0x00136570,,new,,17PremiumGetControl vtable slot 3 (own entry)
+0x00136640,,new,,17PremiumGetControl vtable slot 4 (own entry)
+0x00136A58,0x0013A6E0,right,,"T059_static_init: registers render_model -> create_trophy_license (map v2 had LicenseGetControl::run, which L2 inlines)"
+0x001373E8,0x0013F508,right,,"F_0013F508, stubbed in L2 (returns 0)"
+0x001378D8,,new,,post-race rewards presentation
+0x00138350,,new,,option hook assist_0_on
+0x00138370,,new,,option hook assist_0_off
+0x00138390,,new,,option hook assist_1_on
+0x001383B8,,new,,option hook assist_1_off
+0x001383E0,,new,,option hook assist_2_on
+0x00138408,,new,,option hook assist_2_off
+0x00138650,0x00140420,right,0x0013866C,"option_range_race_laps (1..100, GameOptions+0x1C) (not in the tool's function list)"
+0x00138670,0x00140440,right,0x0013868C,"option_range_split_race_laps (1..100, +0x2C; map had L2 0x001386B0) (not in the tool's function list)"
+0x00138690,0x00140460,right,0x001386AC,"option_range_split_handicap (-150..151, +0x34; map had L2 0x001386D0) (not in the tool's function list)"
+0x001386B0,,start,0x001386CC,"slider_screen_adjust_h range (-16..16), no twin (not in the tool's function list)"
+0x001386B0,,new,,option hook range screen_adjust_h (-16..16); map had option_range_split_race_laps
+0x001386D0,,start,0x001386EC,"slider_screen_adjust_v range (-16..16), no twin (not in the tool's function list)"
+0x001386D0,,new,,option hook range screen_adjust_v (-16..16); map had option_range_split_handicap
+0x00138768,,start,0x00138790,"screen_adjust_h text (%2d), no twin (not in the tool's function list)"
+0x00138768,,new,,option hook text screen_adjust_h (%2d)
+0x00138790,,start,0x001387B8,"screen_adjust_v text (%2d), no twin (not in the tool's function list)"
+0x00138790,,new,,option hook text screen_adjust_v (%2d)
+0x00138AF8,0x00140838,right,,option_create_key_config_steer_1
+0x00138BE0,0x00140918,right,,option_create_key_config_steer_2
+0x00138D90,0x00140AC0,right,,option_create_handicap
+0x00138E28,0x00140B58,right,,option_create_calib_bar
+0x00138EF8,0x00140C20,right,,T064_static_init (option hook table)
+0x0013A2D0,,new,,option_slider_set_screen_adjust_h; map had option_multi_set_wide_mode
+0x0013A2F0,,start,0x0013A330,option_slider_screen_adjust_h (desc) (not in the tool's function list)
+0x0013A330,,new,,option_slider_set_screen_adjust_v
+0x0013A350,,start,0x0013A390,option_slider_screen_adjust_v (desc) (not in the tool's function list)
+0x0013A390,0x00141E18,right,0x0013A39C,option_slider_set_race_laps (not in the tool's function list)
+0x0013A3A0,0x00141E28,right,0x0013A3DC,option_slider_race_laps (not in the tool's function list)
+0x0013A3E0,0x00141E68,right,0x0013A3EC,option_slider_set_split_race_laps (not in the tool's function list)
+0x0013A3F0,0x00141E78,right,0x0013A42C,option_slider_split_race_laps (not in the tool's function list)
+0x0013A430,0x00141EB8,right,0x0013A43C,option_slider_set_split_handicap (not in the tool's function list)
+0x0013A440,0x00141EC8,right,0x0013A484,option_slider_split_handicap (not in the tool's function list)
+0x0013A488,0x00141F10,right,,T065_static_init (5 sliders: + screen_adjust_h/v)
+0x0013A550,0x00141F70,right,,option_multi_set_wide_mode (calls GameOptions::setWide; map had L2 0x0013A2D0)
+0x0013A950,,new,,multi_assist setter
+0x0013A970,,new,,multi_assist
+0x0013A9E8,0x001423A8,right,,T066_static_init (option multis)
+0x0013AEF8,0x00149A00,right,,MemorycardControl::begin (map had car_get_event_name; same calls and strings)
+0x0013B710,0x0014A108,right,,"MemorycardControl::fileOperation (page file_operation_lupo, loads the kanji font)"
+0x0013B710,0x00102C00,wrong,,"memory card control (file_operation_lupo), not game_init (= L2 0x001031A0)"
+0x0013C5C8,0x001018C8,wrong,,"memory card icon code (icon_slots_alloc), not render_thread_release"
+0x0013D190,0x0014B958,right,,memcard_text_title1
+0x0013D220,0x0014B9E0,right,,memcard_text_title2
+0x0013E3D8,,new,,static init registering input_text in a memory-card hook table (GT3 registers it only in T097)
+0x00140CC8,0x001513B0,right,,MemorycardLayerMenu::setPriority (same body)
+0x00141BC8,0x00152570,right,,memorycard_set_confirm_center (L2 rounds the centre to integers)
+0x001422E0,0x001570C8,right,,MemorycardAutoLoad::MemorycardAutoLoad (same body)
+0x00142C30,,new,,boot: language from a GT3 save on the card
+0x00143470,,new,,MemorycardAlreadyTransferedDialog set-up ('already')
+0x00145428,0x0015C360,right,,"25MemorycardDemoFileManager vtable slot 0 = GT3 slot 0 (L2 inserts slots 12, 13)"
+0x00145B68,0x0015CC28,right,,SettingControl::mainLoop (same calls and strings; now virtual slot 2)
+0x00145C48,,new,,SettingControlConcept::mainLoop (vtable slot 2: root/custom page by brake controller)
+0x00146228,0x0015D448,right,,T081 text hook; can_adjust_* callee and +0x10-shifted value field agree (map order pairs were shifted by two)
+0x001462C8,0x0015D4E0,right,,T081 text hook; can_adjust_* callee and +0x10-shifted value field agree (map order pairs were shifted by two)
+0x00146368,0x0015D578,right,,T081 text hook; can_adjust_* callee and +0x10-shifted value field agree (map order pairs were shifted by two)
+0x00146408,0x0015D610,right,,T081 text hook; can_adjust_* callee and +0x10-shifted value field agree (map order pairs were shifted by two)
+0x001464A8,0x0015D6A8,right,,T081 text hook; can_adjust_* callee and +0x10-shifted value field agree (map order pairs were shifted by two)
+0x00146548,0x0015D740,right,,T081 text hook; can_adjust_* callee and +0x10-shifted value field agree (map order pairs were shifted by two)
+0x001465E8,0x0015D7D8,right,,T081 text hook; can_adjust_* callee and +0x10-shifted value field agree (map order pairs were shifted by two)
+0x00146698,0x0015D880,right,,T081 text hook; can_adjust_* callee and +0x10-shifted value field agree (map order pairs were shifted by two)
+0x00146748,0x0015D928,right,,T081 text hook; can_adjust_* callee and +0x10-shifted value field agree (map order pairs were shifted by two)
+0x001467E8,0x0015D9C0,right,,T081 text hook; can_adjust_* callee and +0x10-shifted value field agree (map order pairs were shifted by two)
+0x00146888,0x0015DA58,right,,T081 text hook; can_adjust_* callee and +0x10-shifted value field agree (map order pairs were shifted by two)
+0x00146928,0x0015DAF0,right,,T081 text hook; can_adjust_* callee and +0x10-shifted value field agree (map order pairs were shifted by two)
+0x001469C8,0x0015DB88,right,,T081 text hook; can_adjust_* callee and +0x10-shifted value field agree (map order pairs were shifted by two)
+0x00146A68,0x0015DC20,right,,T081 text hook; can_adjust_* callee and +0x10-shifted value field agree (map order pairs were shifted by two)
+0x00146B48,0x0015DCE8,right,,T081 text hook; can_adjust_* callee and +0x10-shifted value field agree (map order pairs were shifted by two)
+0x00146BE8,0x0015DD80,right,,T081 text hook; can_adjust_* callee and +0x10-shifted value field agree (map order pairs were shifted by two)
+0x00146C88,0x0015DE18,right,,T081 text hook; can_adjust_* callee and +0x10-shifted value field agree (map order pairs were shifted by two)
+0x00146D28,0x0015DEB0,right,,T081 text hook; can_adjust_* callee and +0x10-shifted value field agree (map order pairs were shifted by two)
+0x00146DC8,0x0015DF48,right,,T081 text hook; can_adjust_* callee and +0x10-shifted value field agree (map order pairs were shifted by two)
+0x00146E68,0x0015DFE0,right,,T081 text hook; can_adjust_* callee and +0x10-shifted value field agree (map order pairs were shifted by two)
+0x00146F08,0x0015E078,right,,T081 text hook; can_adjust_* callee and +0x10-shifted value field agree (map order pairs were shifted by two)
+0x00146FA8,0x0015E110,right,,T081 text hook; can_adjust_* callee and +0x10-shifted value field agree (map order pairs were shifted by two)
+0x00147048,0x0015E1A8,right,,T081 text hook; can_adjust_* callee and +0x10-shifted value field agree (map order pairs were shifted by two)
+0x001470E8,0x0015E240,right,,T081 text hook; can_adjust_* callee and +0x10-shifted value field agree (map order pairs were shifted by two)
+0x00147188,0x0015E2D8,right,,T081 text hook; can_adjust_* callee and +0x10-shifted value field agree (map order pairs were shifted by two)
+0x00147240,0x0015E370,right,,T081 text hook; can_adjust_* callee and +0x10-shifted value field agree (map order pairs were shifted by two)
+0x001472F8,0x0015E408,right,,T081 text hook; can_adjust_* callee and +0x10-shifted value field agree (map order pairs were shifted by two)
+0x001473B8,0x0015E4A0,right,,T081 text hook; can_adjust_* callee and +0x10-shifted value field agree (map order pairs were shifted by two)
+0x00147478,0x0015E538,right,,T081 text hook; can_adjust_* callee and +0x10-shifted value field agree (map order pairs were shifted by two)
+0x00147538,0x0015E5D0,right,,T081 text hook; can_adjust_* callee and +0x10-shifted value field agree (map order pairs were shifted by two)
+0x001475F8,0x0015E668,right,,T081 text hook; can_adjust_* callee and +0x10-shifted value field agree (map order pairs were shifted by two)
+0x001476B8,0x0015E700,right,,T081 text hook; can_adjust_* callee and +0x10-shifted value field agree (map order pairs were shifted by two)
+0x00147778,0x0015E798,right,,T081 text hook; can_adjust_* callee and +0x10-shifted value field agree (map order pairs were shifted by two)
+0x00147830,0x0015E830,right,,T081 text hook; can_adjust_* callee and +0x10-shifted value field agree (map order pairs were shifted by two)
+0x001478E8,0x0015E8E0,right,,T081 text hook; can_adjust_* callee and +0x10-shifted value field agree (map order pairs were shifted by two)
+0x00147988,0x0015E978,right,,T081 text hook; can_adjust_* callee and +0x10-shifted value field agree (map order pairs were shifted by two)
+0x00147A28,0x0015EA10,right,,T081 text hook; can_adjust_* callee and +0x10-shifted value field agree (map order pairs were shifted by two)
+0x00147AC8,0x0015EAA8,right,,T081 text hook; can_adjust_* callee and +0x10-shifted value field agree (map order pairs were shifted by two)
+0x00147B70,0x0015EB48,right,,T081 text hook; can_adjust_* callee and +0x10-shifted value field agree (map order pairs were shifted by two)
+0x00147C48,0x0015EC10,right,,T081 text hook; can_adjust_* callee and +0x10-shifted value field agree (map order pairs were shifted by two)
+0x00147CE8,0x0015ECA8,right,,T081 text hook; can_adjust_* callee and +0x10-shifted value field agree (map order pairs were shifted by two)
+0x00147D28,0x0015ECE8,right,,T081 text_parts_*: same get*Name callee in the same order
+0x00147DB8,0x0015ED68,right,,T081 text_parts_*: same get*Name callee in the same order
+0x00147E48,0x0015EDE8,right,,T081 text_parts_*: same get*Name callee in the same order
+0x00147ED8,0x0015EE68,right,,T081 text_parts_*: same get*Name callee in the same order
+0x00147F68,0x0015EEE8,right,,T081 text_parts_*: same get*Name callee in the same order
+0x00147FF8,0x0015EF68,right,,T081 text_parts_*: same get*Name callee in the same order
+0x00148088,0x0015EFE8,right,,T081 text_parts_*: same get*Name callee in the same order
+0x00148118,0x0015F068,right,,T081 text_parts_*: same get*Name callee in the same order
+0x001481A8,0x0015F0E8,right,,T081 text_parts_*: same get*Name callee in the same order
+0x00148238,0x0015F168,right,,T081 text_parts_*: same get*Name callee in the same order
+0x001482C8,0x0015F1E8,right,,T081 text_parts_*: same get*Name callee in the same order
+0x00148358,0x0015F268,right,,T081 text_parts_*: same get*Name callee in the same order
+0x001483E8,0x0015F2E8,right,,T081 text_parts_*: same get*Name callee in the same order
+0x00148478,0x0015F368,right,,T081 text_parts_*: same get*Name callee in the same order
+0x00148508,0x0015F3E8,right,,T081 text_parts_*: same get*Name callee in the same order
+0x00148598,0x0015F468,right,,T081 text_parts_*: same get*Name callee in the same order
+0x00148628,0x0015F4E8,right,,T081 text_parts_*: same get*Name callee in the same order
+0x001486B8,0x0015F568,right,,T081 text_parts_*: same get*Name callee in the same order
+0x00148748,0x0015F5E8,right,,T081 text_parts_*: same get*Name callee in the same order
+0x001487D8,0x0015F668,right,,T081 text_parts_*: same get*Name callee in the same order
+0x00148868,0x0015F6E8,right,,text_parts_tir_f
+0x001489E0,0x0015F848,right,,text_parts_tir_r
+0x00148B58,,new,,parts_tir_f_concept text hook
+0x00148C70,,new,,parts_tir_r_concept text hook
+0x00148D88,0x0015F9A8,right,,text_parts_oth_ayc_s
+0x00148E50,0x0015FA40,right,,"attach hook: same get*Part callee and part-kind constant, in order"
+0x00148EA0,0x0015FA90,right,,"attach hook: same get*Part callee and part-kind constant, in order"
+0x00148EF0,0x0015FAE0,right,,"attach hook: same get*Part callee and part-kind constant, in order"
+0x00148F40,0x0015FB30,right,,"attach hook: same get*Part callee and part-kind constant, in order"
+0x00148F90,0x0015FB80,right,,"attach hook: same get*Part callee and part-kind constant, in order"
+0x00148FE0,0x0015FBD0,right,,"attach hook: same get*Part callee and part-kind constant, in order"
+0x00149030,0x0015FC20,right,,"attach hook: same get*Part callee and part-kind constant, in order"
+0x00149080,0x0015FC70,right,,"attach hook: same get*Part callee and part-kind constant, in order"
+0x001490D0,0x0015FCC0,right,,"attach hook: same get*Part callee and part-kind constant, in order"
+0x00149120,0x0015FD10,right,,"attach hook: same get*Part callee and part-kind constant, in order"
+0x00149170,0x0015FD60,right,,"attach hook: same get*Part callee and part-kind constant, in order"
+0x001491C0,0x0015FDB0,right,,"attach hook: same get*Part callee and part-kind constant, in order"
+0x00149210,0x0015FE00,right,,"attach hook: same get*Part callee and part-kind constant, in order"
+0x00149260,0x0015FE50,right,,"attach hook: same get*Part callee and part-kind constant, in order"
+0x001492B0,0x0015FEA0,right,,"attach hook: same get*Part callee and part-kind constant, in order"
+0x00149300,0x0015FEF0,right,,"attach hook: same get*Part callee and part-kind constant, in order"
+0x00149350,0x0015FF40,right,,"attach hook: same get*Part callee and part-kind constant, in order"
+0x001493A0,0x0015FF90,right,,"attach hook: same get*Part callee and part-kind constant, in order"
+0x001493F0,0x0015FFE0,right,,"attach hook: same get*Part callee and part-kind constant, in order"
+0x00149440,0x00160030,right,,"attach hook: same get*Part callee and part-kind constant, in order"
+0x00149490,0x00160080,right,,"attach hook: same get*Part callee and part-kind constant, in order"
+0x001494E0,0x001600D0,right,,"attach hook: same get*Part callee and part-kind constant, in order"
+0x00149530,0x00160120,right,,"attach hook: same get*Part callee and part-kind constant, in order"
+0x00149578,0x00160168,right,,"attach hook: same get*Part callee and part-kind constant, in order"
+0x001495C8,0x001601B8,right,,"attach hook: same get*Part callee and part-kind constant, in order"
+0x00149618,0x00160208,right,,"attach hook: same get*Part callee and part-kind constant, in order"
+0x00149668,0x00160258,right,,"attach hook: same get*Part callee and part-kind constant, in order"
+0x001496B8,0x001602A8,right,,"attach hook: same get*Part callee and part-kind constant, in order"
+0x00149708,0x001602F8,right,,"attach hook: same get*Part callee and part-kind constant, in order"
+0x00149758,0x00160348,right,,"attach hook: same get*Part callee and part-kind constant, in order"
+0x001497A8,0x00160398,right,,"attach hook: same get*Part callee and part-kind constant, in order"
+0x001497F8,0x001603E8,right,,"attach hook: same get*Part callee and part-kind constant, in order"
+0x00149848,0x00160438,right,,"attach hook: same get*Part callee and part-kind constant, in order"
+0x00149898,0x00160488,right,,"attach hook: same get*Part callee and part-kind constant, in order"
+0x001498E8,0x001604D8,right,,"attach hook: same get*Part callee and part-kind constant, in order"
+0x00149938,0x00160528,right,,"attach hook: same get*Part callee and part-kind constant, in order"
+0x00149988,0x00160578,right,,"attach hook: same get*Part callee and part-kind constant, in order"
+0x001499D8,0x001605C8,right,,"attach hook: same get*Part callee and part-kind constant, in order"
+0x00149A28,0x00160618,right,,"attach hook: same get*Part callee and part-kind constant, in order"
+0x00149A78,0x00160668,right,,"attach hook: same get*Part callee and part-kind constant, in order"
+0x00149AC8,0x001606B8,right,,"attach hook: same get*Part callee and part-kind constant, in order"
+0x00149B18,0x00160708,right,,"attach hook: same get*Part callee and part-kind constant, in order"
+0x00149B68,0x00160758,right,,"attach hook: same get*Part callee and part-kind constant, in order"
+0x00149BB8,0x001607A8,right,,"attach hook: same get*Part callee and part-kind constant, in order"
+0x00149C08,0x001607F8,right,,"attach hook: same get*Part callee and part-kind constant, in order"
+0x00149C58,0x00160848,right,,"attach hook: same get*Part callee and part-kind constant, in order"
+0x00149CA8,0x00160898,right,,"attach hook: same get*Part callee and part-kind constant, in order"
+0x00149CF8,0x001608E8,right,,"attach hook: same get*Part callee and part-kind constant, in order"
+0x00149D48,0x00160938,right,,"attach hook: same get*Part callee and part-kind constant, in order"
+0x00149D98,0x00160988,right,,"attach hook: same get*Part callee and part-kind constant, in order"
+0x00149DE8,0x001609D8,right,,"attach hook: same get*Part callee and part-kind constant, in order"
+0x00149E38,0x00160A28,right,,"attach hook: same get*Part callee and part-kind constant, in order"
+0x00149E88,0x00160A78,right,,"attach hook: same get*Part callee and part-kind constant, in order"
+0x00149ED8,0x00160AC8,right,,"attach hook: same get*Part callee and part-kind constant, in order"
+0x00149F28,0x00160B18,right,,"attach hook: same get*Part callee and part-kind constant, in order"
+0x00149F78,0x00160B68,right,,"attach hook: same get*Part callee and part-kind constant, in order"
+0x00149FC8,0x00160BB8,right,,"attach hook: same get*Part callee and part-kind constant, in order"
+0x0014A018,0x00160C08,right,,"attach hook: same get*Part callee and part-kind constant, in order"
+0x0014A068,0x00160C58,right,,"attach hook: same get*Part callee and part-kind constant, in order"
+0x0014A0B8,0x00160CA8,right,,"attach hook: same get*Part callee and part-kind constant, in order"
+0x0014A108,0x00160CF8,right,,"attach hook: same get*Part callee and part-kind constant, in order"
+0x0014A158,0x00160D48,right,,"attach hook: same get*Part callee and part-kind constant, in order"
+0x0014A1A8,0x00160D98,right,,"attach hook: same get*Part callee and part-kind constant, in order"
+0x0014A1F8,0x00160DE8,right,,"attach hook: same get*Part callee and part-kind constant, in order"
+0x0014A248,0x00160E38,right,,"attach hook: same get*Part callee and part-kind constant, in order"
+0x0014A298,0x00160E88,right,,"attach hook: same get*Part callee and part-kind constant, in order"
+0x0014A2E8,0x00160ED8,right,,"attach hook: same get*Part callee and part-kind constant, in order"
+0x0014A338,0x00160F28,right,,"attach hook: same get*Part callee and part-kind constant, in order"
+0x0014A388,0x00160F78,right,,"attach hook: same get*Part callee and part-kind constant, in order"
+0x0014A3D8,0x00160FC8,right,,"attach hook: same get*Part callee and part-kind constant, in order"
+0x0014A428,0x00161018,right,,"attach hook: same get*Part callee and part-kind constant, in order"
+0x0014A478,0x00161068,right,,"attach hook: same get*Part callee and part-kind constant, in order"
+0x0014A4C8,0x001610B8,right,,"attach hook: same get*Part callee and part-kind constant, in order"
+0x0014A518,0x00161108,right,,"attach hook: same get*Part callee and part-kind constant, in order"
+0x0014A8B8,,new,,top speed of the gearing (gear_chart_of_spec)
+0x0014A8F8,,new,,gear_max_speed text hook (---- for CVT)
+0x0014ACE0,0x00161840,right,,setting_text_user_carname
+0x0014AD40,0x00161898,right,,setting_text_car_current_power
+0x0014DE30,,new,,slider_tire_f set
+0x0014DE90,,new,,slider_tire_f
+0x0014DF50,,new,,slider_tire_r set
+0x0014DFB0,,new,,slider_tire_r
+0x0014E070,0x00164B18,right,,setting_slider_set_toe_f
+0x001503E0,,new,,SettingButtonList creator
+0x00150470,,new,,SettingButtonList creator
+0x00150500,,new,,static init registering menu_map_custom / menu_map_normal (SettingButtonList creators)
+0x00150578,0x00166F98,right,,setting_commit_slider (assign raceCar <- work)
+0x001505D0,0x00166FF0,right,,setting_retrieve_slider (assign work <- raceCar)
+0x00150620,,new,,retrieve_all action
+0x00150690,0x00167038,right,,setting_set_part (same calls and constants)
+0x00150750,,new,,set_concept_custom action
+0x001507A8,,new,,set_concept_normal action
+0x00150F80,0x00167840,right,,"setting_owns_*: same part id passed to hasPart, in order"
+0x00150FC8,0x00167888,right,,"setting_owns_*: same part id passed to hasPart, in order"
+0x00151010,0x001678D0,right,,"setting_owns_*: same part id passed to hasPart, in order"
+0x00151058,0x00167918,right,,"setting_owns_*: same part id passed to hasPart, in order"
+0x001510A0,0x00167960,right,,"setting_owns_*: same part id passed to hasPart, in order"
+0x001510E8,0x001679A8,right,,"setting_owns_*: same part id passed to hasPart, in order"
+0x00151130,0x001679F0,right,,"setting_owns_*: same part id passed to hasPart, in order"
+0x00151178,0x00167A38,right,,"setting_owns_*: same part id passed to hasPart, in order"
+0x001511C0,0x00167A80,right,,"setting_owns_*: same part id passed to hasPart, in order"
+0x00151208,0x00167AC8,right,,"setting_owns_*: same part id passed to hasPart, in order"
+0x00151250,0x00167B10,right,,"setting_owns_*: same part id passed to hasPart, in order"
+0x00151298,0x00167B58,right,,"setting_owns_*: same part id passed to hasPart, in order"
+0x001512E0,0x00167BA0,right,,"setting_owns_*: same part id passed to hasPart, in order"
+0x00151328,0x00167BE8,right,,"setting_owns_*: same part id passed to hasPart, in order"
+0x00151370,0x00167C30,right,,"setting_owns_*: same part id passed to hasPart, in order"
+0x001513B8,0x00167C78,right,,"setting_owns_*: same part id passed to hasPart, in order"
+0x00151400,0x00167CC0,right,,"setting_owns_*: same part id passed to hasPart, in order"
+0x00151448,0x00167D08,right,,"setting_owns_*: same part id passed to hasPart, in order"
+0x00151490,0x00167D50,right,,"setting_owns_*: same part id passed to hasPart, in order"
+0x001514D8,0x00167D98,right,,"setting_owns_*: same part id passed to hasPart, in order"
+0x00151520,0x00167DE0,right,,"setting_owns_*: same part id passed to hasPart, in order"
+0x00151568,0x00167E28,right,,"setting_owns_*: same part id passed to hasPart, in order"
+0x001515B0,0x00167E70,right,,"setting_owns_*: same part id passed to hasPart, in order"
+0x001515F8,0x00167EB8,right,,"setting_owns_*: same part id passed to hasPart, in order"
+0x00151640,0x00167F00,right,,"setting_owns_*: same part id passed to hasPart, in order"
+0x00151688,0x00167F48,right,,"setting_owns_*: same part id passed to hasPart, in order"
+0x001516D0,0x00167F90,right,,"setting_owns_*: same part id passed to hasPart, in order"
+0x00151718,0x00167FD8,right,,"setting_owns_*: same part id passed to hasPart, in order"
+0x00151760,0x00168020,right,,"setting_owns_*: same part id passed to hasPart, in order"
+0x001517A8,0x00168068,right,,"setting_owns_*: same part id passed to hasPart, in order"
+0x001517F0,0x001680B0,right,,"setting_owns_*: same part id passed to hasPart, in order"
+0x00151838,0x001680F8,right,,"setting_owns_*: same part id passed to hasPart, in order"
+0x00151880,0x00168140,right,,"setting_owns_*: same part id passed to hasPart, in order"
+0x001518C8,0x00168188,right,,"setting_owns_*: same part id passed to hasPart, in order"
+0x00151910,0x001681D0,right,,"setting_owns_*: same part id passed to hasPart, in order"
+0x00151958,0x00168218,right,,"setting_owns_*: same part id passed to hasPart, in order"
+0x001519A0,0x00168260,right,,"setting_owns_*: same part id passed to hasPart, in order"
+0x001519E8,0x001682A8,right,,"setting_owns_*: same part id passed to hasPart, in order"
+0x00151A30,0x001682F0,right,,"setting_owns_*: same part id passed to hasPart, in order"
+0x00151A78,0x00168338,right,,"setting_owns_*: same part id passed to hasPart, in order"
+0x00151AC0,0x00168380,right,,"setting_owns_*: same part id passed to hasPart, in order"
+0x00151B08,0x001683C8,right,,"setting_owns_*: same part id passed to hasPart, in order"
+0x00151B50,0x00168410,right,,"setting_owns_*: same part id passed to hasPart, in order"
+0x00151B98,0x00168458,right,,"setting_owns_*: same part id passed to hasPart, in order"
+0x00151BE0,0x001684A0,right,,"setting_owns_*: same part id passed to hasPart, in order"
+0x00151C28,0x001684E8,right,,"setting_owns_*: same part id passed to hasPart, in order"
+0x00151C70,0x00168530,right,,"setting_owns_*: same part id passed to hasPart, in order"
+0x00151CB8,0x00168578,right,,"setting_owns_*: same part id passed to hasPart, in order"
+0x00151D00,0x001685C0,right,,"setting_owns_*: same part id passed to hasPart, in order"
+0x00151D48,0x00168608,right,,"setting_owns_*: same part id passed to hasPart, in order"
+0x00151D90,0x00168650,right,,"setting_owns_*: same part id passed to hasPart, in order"
+0x00151DD8,0x00168698,right,,"setting_owns_*: same part id passed to hasPart, in order"
+0x00151E20,0x001686E0,right,,"setting_owns_*: same part id passed to hasPart, in order"
+0x00151E68,0x00168728,right,,"setting_owns_*: same part id passed to hasPart, in order"
+0x00151EB0,0x00168770,right,,"setting_owns_*: same part id passed to hasPart, in order"
+0x00151EF8,0x001687B8,right,,"setting_owns_*: same part id passed to hasPart, in order"
+0x00151F40,0x00168800,right,,"setting_owns_*: same part id passed to hasPart, in order"
+0x00151F88,0x00168848,right,,"setting_owns_*: same part id passed to hasPart, in order"
+0x00151FD0,0x00168890,right,,"setting_owns_*: same part id passed to hasPart, in order"
+0x00152018,0x001688D8,right,,"setting_owns_*: same part id passed to hasPart, in order"
+0x00152060,0x00168920,right,,"setting_owns_*: same part id passed to hasPart, in order"
+0x001520A8,0x00168968,right,,"setting_owns_*: same part id passed to hasPart, in order"
+0x001520F0,0x001689B0,right,,"setting_owns_*: same part id passed to hasPart, in order"
+0x00152138,0x001689F8,right,,"setting_owns_*: same part id passed to hasPart, in order"
+0x001528E8,0x00169208,right,,"setting_adjust_*: same can_adjust_* callee, in order"
+0x00152900,0x00169228,right,,"setting_adjust_*: same can_adjust_* callee, in order"
+0x00152918,0x00169248,right,,"setting_adjust_*: same can_adjust_* callee, in order"
+0x00152930,0x00169268,right,,"setting_adjust_*: same can_adjust_* callee, in order"
+0x00152948,0x00169288,right,,"setting_adjust_*: same can_adjust_* callee, in order"
+0x00152960,0x001692A8,right,,"setting_adjust_*: same can_adjust_* callee, in order"
+0x00152978,0x001692C8,right,,"setting_adjust_*: same can_adjust_* callee, in order"
+0x00152990,0x001692E8,right,,"setting_adjust_*: same can_adjust_* callee, in order"
+0x001529A8,0x00169308,right,,"setting_adjust_*: same can_adjust_* callee, in order"
+0x001529C0,0x00169328,right,,"setting_adjust_*: same can_adjust_* callee, in order"
+0x001529D8,0x00169348,right,,"setting_adjust_*: same can_adjust_* callee, in order"
+0x001529F0,0x00169368,right,,"setting_adjust_*: same can_adjust_* callee, in order"
+0x00152A08,0x00169388,right,,"setting_adjust_*: same can_adjust_* callee, in order"
+0x00152A20,0x001693A8,right,,"setting_adjust_*: same can_adjust_* callee, in order"
+0x00152A38,0x001693C8,right,,"setting_adjust_*: same can_adjust_* callee, in order"
+0x00152A50,0x001693E8,right,,"setting_adjust_*: same can_adjust_* callee, in order"
+0x00152A68,0x00169408,right,,"setting_adjust_*: same can_adjust_* callee, in order"
+0x00152A80,,new,,"isDirtTireOnly (arcade event on a dirt course, else race_dirt_tire_only)"
+0x00155F28,0x001D4220,wrong,,"memory card list override, not RawList::virtual_9"
+0x00156230,0x001D4450,wrong,,"memory card list override, not RawList::virtual_20"
+0x0015B958,,new,,28RecordsMenuArgLicenseConcept vtable slot 1 (own entry)
+0x0015B960,,new,,28RecordsMenuArgLicenseConcept vtable slot 2 (own entry)
+0x0015B9B8,,new,,28RecordsMenuArgLicenseConcept vtable slot 3 (own entry)
+0x0015BA18,,new,,28RecordsMenuArgLicenseConcept vtable slot 4 (own entry)
+0x0015BA60,,new,,28RecordsMenuArgLicenseConcept vtable slot 5 (own entry)
+0x0015BAA8,,new,,28RecordsMenuArgLicenseConcept vtable slot 6 (own entry)
+0x0015BAB8,,new,,28RecordsMenuArgLicenseConcept vtable slot 7 (own entry)
+0x0015BB00,,new,,28RecordsMenuArgLicenseConcept vtable slot 9 (own entry)
+0x0015D888,,new,,SettingButtonList item set-up (normal/custom)
+0x0015DB88,,new,,check_cvt -> your_car_is_CVT (map paired it with __tf Cell<GarageCar>)
+0x0015E230,,new,,NoticePresentControl load (menu/notice_present.mbl)
+0x0015E258,,new,,NoticePresentControl unload
+0x0015E278,,new,,NoticePresentControl setup
+0x0015E2D8,,new,,NoticePresentControl finish
+0x0015E318,,new,,NoticePresentControl loop
+0x0015E3A0,,new,,NoticePresentControl run
+0x0015E3E8,,new,,NoticePresentControl entry
+0x0015EFF8,0x001294B0,right,,PrizeCounter::start (same body)
+0x00161770,,new,,"assist level -> ASM / TCS for one player (2P battle, Pod 2P)"
+0x001619B0,0x0012E480,right,,run_short_menu_license
+0x00161B98,,new,,Concept licence short menu runner
+0x00162520,,new,,Concept licence result recording
+0x00163370,0x00134870,right,,ShortmenuLicenseControl::ShortmenuLicenseControl
+0x00163428,0x00134928,right,,ShortmenuLicenseControl::setHeap
+0x00163480,0x00134980,right,,ShortmenuLicenseControl::releaseHeap
+0x00163660,0x00134B50,right,,ShortmenuLicenseControl::mainLoop
+0x00163768,0x00134C30,right,,ShortmenuLicenseControl::updateRace
+0x00163818,0x00134CD8,right,,ShortmenuLicenseControl::run
+0x001638E8,,new,,ShortmenuConceptLicenseRender constructor
+0x00163928,,new,,ShortmenuConceptLicenseRender attach
+0x00163948,,new,,ShortmenuConceptLicenseRender detach
+0x00163968,,new,,ShortmenuConceptLicenseRender update
+0x00163988,,new,,ShortmenuConceptLicenseRender render (captured background)
+0x00163B28,,new,,ShortmenuConceptLicenseControl constructor
+0x00164448,0x0013A6E0,wrong,,registers rank_disp and render_model -> create_trophy_arcade; T059's table is 0x00136A58
+0x00165018,,new,,Concept cars item drawing helper
+0x00165160,,new,,CarsConceptItem helper
+0x00165AC0,,new,,Concept car-get helper
+0x00165C08,,new,,"Concept message-item helper (premium, congratulation)"
+0x00165FD0,0x0013ED68,right,,"CarGetControl::end (bgm_stop, finalize, vsync, detach x2; map v2 had CarGetControl::run)"
+0x00166018,0x0013EB10,right,,"car_get_event_name (23 reasons, names from a table)"
+0x00166468,,new,,Concept car-get helper
+0x001664E0,,new,,CarGetConceptControl load (menu/concept_car_get.mbl); map had option_multi_set_wide_mode
+0x00166508,,new,,CarGetConceptControl setup
+0x001665D0,,new,,Concept car-get helper
+0x001665E8,,new,,CarGetConceptControl helper
+0x00166620,,new,,CarGetConceptControl helper
+0x00166658,,new,,CarGetConceptControl loop
+0x001668B8,,new,,CarGetConceptControl run (concept_car_get)
+0x00166C28,,new,,SimplePageControl load; map had option_action_set_default
+0x00166C48,,new,,SimplePageControl unload; map had option_action_stop_music
+0x00166C68,,new,,SimplePageControl setup
+0x00166D20,,new,,SimplePageControl finish
+0x00166D78,,new,,SimplePageControl loop (delay page)
+0x00166EE0,,new,,SimplePageControl run
+0x00166F38,,new,,page concept_moviea
+0x001670F0,,new,,page concept_movieb
+0x001672A8,,new,,page concept_ace
+0x00167460,,new,,page concept_pod
+0x00167618,,new,,page concept_billion
+0x00168F50,0x00143C18,right,,MemorycardPS2File::writeIcons (the file I/O part; L2 splits the icon names out to 0x001690A8)
+0x001690A8,,new,,"icon file names (icon%d.ico), split out of writeIcons"
+0x0016AC30,0x001459A8,right,,MemorycardReplayFile::getIconFiles
+0x0016AFA0,0x00145CB8,right,,MemorycardBestlapReplayFile::getIconFiles (L2 picks one of two icon sets)
+0x0016B340,0x00145FF0,right,,MemorycardSettingFile::getIconFiles
+0x0016C158,0x00147A28,right,,"21MemorycardFileManager vtable slot 0 = GT3 slot 0 (L2 inserts slots 12, 13)"
+0x0016C248,0x00147AD8,right,,"21MemorycardFileManager vtable slot 8 = GT3 slot 8 (L2 inserts slots 12, 13)"
+0x0016C318,0x00147B70,right,,"21MemorycardFileManager vtable slot 3 = GT3 slot 3 (L2 inserts slots 12, 13)"
+0x0016C3A0,0x00147BE8,right,,"21MemorycardFileManager vtable slot 10 = GT3 slot 10 (L2 inserts slots 12, 13)"
+0x0016C590,0x00147D58,right,,"21MemorycardFileManager vtable slot 11 = GT3 slot 11 (L2 inserts slots 12, 13)"
+0x0016C5C8,,new,,MemorycardFileManager::removeFileCache override (slot 12)
+0x0016C610,0x00147EE0,right,,"21MemorycardFileManager vtable slot 15 = GT3 slot 13 (L2 inserts slots 12, 13)"
+0x0016C660,0x00147F20,right,,"21MemorycardFileManager vtable slot 28 = GT3 slot 26 (L2 inserts slots 12, 13)"
+0x0016C6E0,0x00147F98,right,,"21MemorycardFileManager vtable slot 23 = GT3 slot 21 (L2 inserts slots 12, 13)"
+0x0016C748,0x00147FF8,right,,"21MemorycardFileManager vtable slot 24 = GT3 slot 22 (L2 inserts slots 12, 13)"
+0x0016C8B8,0x00148138,right,,"21MemorycardFileManager vtable slot 4 = GT3 slot 4 (L2 inserts slots 12, 13)"
+0x0016C900,0x00148180,right,,"21MemorycardFileManager vtable slot 26 = GT3 slot 24 (L2 inserts slots 12, 13)"
+0x0016C950,0x001481C0,right,,"21MemorycardFileManager vtable slot 27 = GT3 slot 25 (L2 inserts slots 12, 13)"
+0x0016CF68,0x00148668,right,,"21MemorycardFileManager vtable slot 30 = GT3 slot 28 (L2 inserts slots 12, 13)"
+0x0016D050,0x00148738,right,,"21MemorycardFileManager vtable slot 31 = GT3 slot 29 (L2 inserts slots 12, 13)"
+0x0016D088,0x00148760,right,,"21MemorycardFileManager vtable slot 19 = GT3 slot 17 (L2 inserts slots 12, 13)"
+0x0016D098,0x00148770,right,,"21MemorycardFileManager vtable slot 20 = GT3 slot 18 (L2 inserts slots 12, 13)"
+0x0016D0A8,0x00148780,right,,"21MemorycardFileManager vtable slot 21 = GT3 slot 19 (L2 inserts slots 12, 13)"
+0x0016D0B8,0x00148790,right,,"21MemorycardFileManager vtable slot 22 = GT3 slot 20 (L2 inserts slots 12, 13)"
+0x0016D0C8,0x001487A0,right,,"21MemorycardFileManager vtable slot 29 = GT3 slot 27 (L2 inserts slots 12, 13)"
+0x0016D998,,new,,MemorycardFileManager::addDeletedEntry override (slot 13)
+0x0016EA00,0x0012C430,right,0x0016EBE4,shortmenu_root_check (map paired US with L2 0x001BC8B8) (not in the tool's function list)
+0x0016FE18,0x0012D8C0,right,,T113_static_init (short menu items)
+0x00170940,0x0013CA78,right,,TheCar::setLights
+0x00170AF8,0x0013CC20,right,,TheCar::resetLights
+0x00170B50,0x0013CC78,right,,TheCar::drawBody
+0x00170BD8,0x0013CCF8,right,,TheCar::drawTires
+0x00170D30,0x0013CA30,right,,TheCar::updateAlpha (0.05 fade step)
+0x00172850,,new,,15CarsConceptItem vtable slot 1 (own entry)
+0x00172B38,,new,,15CarsConceptItem vtable slot 2 (own entry)
+0x001734B8,,new,,15NextMessageItem vtable slot 1 (own entry)
+0x001736A8,,new,,15NextMessageItem vtable slot 2 (own entry)
+0x00173728,,new,,18PremiumMessageItem vtable slot 1 (own entry)
+0x00173730,,new,,18PremiumMessageItem vtable slot 2 (own entry)
+0x001737C0,,new,,25CongratulationMessageItem vtable slot 1 (own entry)
+0x001738B0,,new,,25CongratulationMessageItem vtable slot 2 (own entry)
+0x00175598,,new,,"RaceEntryCar vehicle-model copy helper (map: RaceCarModel::copyFrom, wrong; inline in GT3)"
+0x00175660,0x00177488,right,,RaceEntryCar::copyFrom (called by setupGhost)
+0x00175AA0,,new,,RaceEntryCar: VehicleModel set-up (ctor)
+0x00175AF8,,new,,RaceEntryCar: VehicleModel helper (loadModel)
+0x00175B50,,new,,RaceEntryCar: vehicle is a RaceBikeModel (dynamic_cast)
+0x00175BA8,0x001776A8,right,,RaceEntryCar::loadModel (with bike / rider selection)
+0x00175D38,0x001776F8,right,,RaceEntryCar::loadTires (tool: loadWheel) [map: 00177758]
+0x00175DA8,0x00177758,right,,RaceEntryCar::loadWheel
+0x00175E10,0x001777B0,right,,RaceEntryCar::loadSound (tool: file_req_run) [map: 00241D30]
+0x00175E90,0x00177830,right,,RaceEntryCar::setupTires
+0x00175EC0,0x00177850,right,,RaceEntryCar::setReflectionPlane (vslot 29)
+0x00175F00,0x00177878,right,,RaceEntryCar::F_00177878 (vslot 14)
+0x00175F30,,new,,RaceEntryCar wrapper vslot 15 computeDriverPosture
+0x00175F70,0x00177898,right,,RaceEntryCar::drawShadow (vslot 16)
+0x00175FB0,0x001778C0,right,,RaceEntryCar::F_001778C0 (vslot 17)
+0x00175FF0,0x001778E8,right,,RaceEntryCar::F_001778E8 (vslot 18)
+0x00176030,0x00177910,right,,RaceEntryCar::drawBody (vslot 19)
+0x00176070,,new,,RaceEntryCar wrapper vslot 20 renderDriver
+0x001760B0,0x00177938,right,,RaceEntryCar::drawTires (vslot 21)
+0x001760F0,0x00177960,right,,RaceEntryCar::drawTireCylinders (vslot 22)
+0x00176130,0x00177988,right,,RaceEntryCar::F_00177988 (vslot 27)
+0x00176170,0x001779B0,right,,RaceEntryCar::F_001779B0 (vslot 26)
+0x001761B0,0x001779D8,right,,RaceEntryCar::emitSparks (vslot 28)
+0x001761F0,0x00177A00,right,,RaceEntryCar::addLamps (vslot 30)
+0x00176230,0x00177A28,right,,RaceEntryCar::drawLampReflections (vslot 31)
+0x00176270,0x00177A50,right,0x00176DF4,RaceEntryCar::updateSound (+ Pod voice block and emotion one-shot)
+0x00176DF8,0x001786B0,right,,RaceEntryCar::recordSectionTime
+0x00177448,0x00179468,right,,RaceEventQueue::RaceEventQueue
+0x00177A70,,new,,race pool static init / destroy helper
+0x00177F18,,new,,T124 static init helper (Random seed 0x87654321)
+0x00177F40,0x00179FC8,right,0x00177F60,race_info_static_ctor (.ctors wrapper of helper 0x00177F18) (start missing from the function list)
+0x001784A8,0x0017A578,right,,RaceOrganization::initRaceState (+59 frames; tool: DynamicsConductor::attach) [map: 001F35B8]
+0x00178530,0x0017A5E8,right,,RaceOrganization::updateStartAndTimer (event codes +1)
+0x00178FD8,,new,,RaceOrganization wrapper of new RaceBase slot 35 (no callers)
+0x00179020,,new,,RaceOrganization wrapper of new RaceBase slot 36 (no callers)
+0x00179068,,new,,RaceOrganization wrapper of new RaceBase slot 37 (no callers)
+0x001790B0,,new,,RaceOrganization wrapper of new RaceBase slot 38 (no callers)
+0x00179108,0x0017B498,right,,RaceLapTime::RaceLapTime (RaceEntryCar ctor)
+0x001792B8,0x0017B6B8,right,,TimeRecord::TimeRecord (RaceEntryCar ctor)
+0x00179308,0x0017B708,right,,SpeedRecord::SpeedRecord (RaceOrganization ctor)
+0x00179368,0x0017B778,right,,LapRecord::LapRecord
+0x00179480,0x0017B8A8,right,,LapRecord::totalDiff (tool: updateTotal) [map: 0017B7E0]
+0x001795C8,0x0017B9E8,right,,race_class_register
+0x00179740,0x0017BB38,right,,vtable 8RaceBase slot 0 (GT3 slot 0) [map agrees]
+0x001797B8,0x0017BBA0,right,,vtable 10RaceArcade slot 4 (GT3 slot 4) [map agrees]
+0x001797C8,0x0017BBB0,right,,vtable 10RaceArcade slot 24 (GT3 slot 23)
+0x001797E8,0x0017BBD0,right,,vtable 10RaceArcade slot 6 (GT3 slot 6) [map agrees]
+0x001797F0,0x0017BBD8,right,,vtable 10RaceArcade slot 5 (GT3 slot 5) [map agrees]
+0x001797F8,0x0017BBE0,right,,vtable 8RaceBase slot 8 (GT3 slot 8) [map agrees]
+0x00179C28,0x0017BF98,right,,vtable 10RaceArcade slot 9 (GT3 slot 9) [map agrees]
+0x00179C98,,new,,RaceBase slot 10: course-record flag (CarDataBase table 0x1F byte 0x1F7) -> 3 [map: 0017C1F0]
+0x00179CC8,0x0017C000,right,,vtable 10RaceArcade slot 7 (GT3 slot 7) [map agrees]
+0x00179EC0,0x0017C1F0,right,,vtable 10RaceArcade slot 11 (GT3 slot 10) [map: 0017C220]
+0x00179EF8,0x0017C220,right,,vtable 10RaceArcade slot 12 (GT3 slot 11) [map: 0017C278]
+0x00179F58,0x0017C278,right,,vtable 10RaceArcade slot 13 (GT3 slot 12)
+0x00179FF8,0x0017C318,right,,vtable 11RacePS2Base slot 14 (GT3 slot 13)
+0x0017A000,0x0017C320,right,,vtable 11RacePS2Base slot 15 (GT3 slot 14)
+0x0017A008,0x0017C328,right,,vtable 11RacePS2Base slot 16 (GT3 slot 15)
+0x0017A010,0x0017C330,right,,vtable 10RaceArcade slot 17 (GT3 slot 16)
+0x0017A048,0x0017C360,right,,vtable 10RaceArcade slot 18 (GT3 slot 17) [map agrees]
+0x0017A0A8,0x0017C3B8,right,,vtable 10RaceArcade slot 19 (GT3 slot 18) [map agrees]
+0x0017A140,0x0017C448,right,,vtable 10RaceArcade slot 20 (GT3 slot 19) [map agrees]
+0x0017A1B8,0x0017C4B8,right,,vtable 10RaceArcade slot 21 (GT3 slot 20)
+0x0017A1C0,0x0017C4C0,right,,vtable 10RaceArcade slot 22 (GT3 slot 21)
+0x0017A1C8,0x0017C4C8,right,,vtable 10RaceArcade slot 23 (GT3 slot 22)
+0x0017A1D0,0x0017C4D0,right,,vtable 11RacePS2Base slot 25 (GT3 slot 24)
+0x0017A1E0,0x0017C508,right,,vtable 11RacePS2Base slot 26 (GT3 slot 25) [map agrees]
+0x0017A238,0x0017C560,right,,vtable 11RacePS2Base slot 27 (GT3 slot 26)
+0x0017A248,0x0017C570,right,,vtable 10RaceArcade slot 1 (GT3 slot 1) [map agrees]
+0x0017A328,0x0017C630,right,,vtable 8RaceBase slot 28 (GT3 slot 27) [map agrees]
+0x0017A4B0,0x0017C778,right,,vtable 8RaceBase slot 29 (GT3 slot 28) [map agrees]
+0x0017A4E0,0x0017C7A0,right,,vtable 8RaceBase slot 30 (GT3 slot 29)
+0x0017A650,,new,,"RaceBase paused setter: stores +0x9690, RaceInput::setMode in live races (tool: initRaceState) [map: 0017A578]"
+0x0017A6D0,0x0017C908,right,,vtable 11RacePS2Base slot 31 (GT3 slot 30)
+0x0017A6D8,0x0017C910,right,,vtable 8RaceBase slot 32 (GT3 slot 31)
+0x0017A6E0,0x0017C918,right,,vtable 10RaceArcade slot 33 (GT3 slot 32) [map agrees]
+0x0017A730,0x0017C968,right,,vtable 8RaceBase slot 34 (GT3 slot 33) [map agrees]
+0x0017A738,,new,,"RaceBase slot 35: empty hook, never overridden"
+0x0017A740,,new,,"RaceBase slot 36: empty hook, never overridden"
+0x0017A748,,new,,"RaceBase slot 37: empty hook, never overridden"
+0x0017A750,,new,,"RaceBase slot 38: empty hook, never overridden"
+0x0017A7E8,0x0017C9F0,right,,vtable 10RaceArcade slot 39 (GT3 slot 34) [map agrees]
+0x0017A820,0x0017CA28,right,,vtable 8RaceBase slot 40 (GT3 slot 35) [map agrees]
+0x0017A850,0x0017CA50,right,,vtable 8RaceBase slot 41 (GT3 slot 36) [map agrees]
+0x0017A8D0,0x0017CAE8,right,,vtable 8RaceBase slot 42 (GT3 slot 37) [map agrees]
+0x0017A950,0x0017CB80,right,,RaceBase::signal (WakeupThread; tool: virtual_38) [map: 0017CBF0]
+0x0017A980,0x0017CBA8,right,,RaceBase::takeField9798 (intr_suspend)
+0x0017A9D0,0x0017CBF0,right,,vtable 10RaceArcade slot 43 (GT3 slot 38)
+0x0017AA58,0x0017CC80,right,,vtable 10RaceArcade slot 44 (GT3 slot 39) [map agrees]
+0x0017AB80,0x0017CD98,right,,vtable 10RaceArcade slot 45 (GT3 slot 40)
+0x0017AB98,,new,,race mem pool static init / destroy helper
+0x0017ABF0,0x0017CDB0,wrong,,"calls ~RaceInput: probably race_input_static_dtor (__tcf_0, US 0x0017C4E0)"
+0x0017AC38,0x0017CDB0,right,,race_mem_pool_static_dtor ($D wrapper of helper 0x0017AB98)
+0x0017AFD0,0x0017D2B8,right,,vtable 11RacePS2Base slot 0 (GT3 slot 0) [map agrees]
+0x0017B110,0x0017D3D8,right,,vtable 10RaceArcade slot 46 (GT3 slot 41) [map agrees]
+0x0017B268,0x0017D4C8,right,,vtable 10RaceArcade slot 47 (GT3 slot 42) [map agrees]
+0x0017B340,0x0017D580,right,,vtable 11RacePS2Base slot 8 (GT3 slot 8) [map agrees]
+0x0017B5F0,0x0017D7D8,right,,vtable 11RaceFreeRun slot 48 (GT3 slot 43)
+0x0017B5F8,0x0017D7E0,right,,vtable 11RacePS2Base slot 40 (GT3 slot 35) [map agrees]
+0x0017B6A0,0x0017D888,right,,vtable 10RaceArcade slot 41 (GT3 slot 36) [map agrees]
+0x0017B6D0,0x0017D8B8,right,,vtable 10RaceArcade slot 42 (GT3 slot 37) [map agrees]
+0x0017B700,0x0017D8E8,right,,vtable 10RaceArcade slot 28 (GT3 slot 27) [map agrees]
+0x0017B798,0x0017D960,right,,vtable 11RacePS2Base slot 29 (GT3 slot 28) [map agrees]
+0x0017B8B0,0x0017DA58,right,,vtable 10RaceArcade slot 30 (GT3 slot 29)
+0x0017BA28,0x0017DBA8,right,,vtable 10RaceArcade slot 32 (GT3 slot 31)
+0x0017BA30,0x0017DBB0,right,,vtable 10RaceArcade slot 34 (GT3 slot 33) [map agrees]
+0x0017BA68,0x0017DBE8,right,,vtable 10RaceArcade slot 3 (GT3 slot 3) [map agrees]
+0x0017BC70,0x0017DD80,right,,RaceBGMPS2::isDemoWithoutPreview (stub: returns 0)
+0x0017BF88,,new,,RaceBGMPS2: music-on option test (split out of getVolume)
+0x0017BFF0,0x0017E0D8,right,,RaceBGMPS2::getVolume (option test split out)
+0x0017C348,,new,0x0017C36C,RaceBGMPS2 default BGM status function (pdibgm_get_status wrapper)
+0x0017C370,0x0017E6C0,right,,vtable 10RaceArcade slot 2 (GT3 slot 2) [map agrees]
+0x0017C400,0x0017E740,right,,vtable 10RaceArcade slot 49 (GT3 slot 44) [map agrees]
+0x0017CD40,0x0017EFC8,right,,vtable 11RacePS2Base slot 50 (GT3 slot 45) [map agrees]
+0x0017CD48,0x0017EFD0,right,,vtable 10RaceArcade slot 51 (GT3 slot 46) [map agrees]
+0x0017CDC0,0x0017F040,right,,vtable 10RaceArcade slot 52 (GT3 slot 47) [map agrees]
+0x0017D3A8,0x0017F610,right,,vtable 10RaceArcade slot 53 (GT3 slot 48) [map agrees]
+0x0017D4F8,0x001E0668,wrong,,"a render-side caller of car_display_level (calls L2 0x001DE818, a virtual, L2 0x0017D450), not car_display_level"
+0x0017D5B0,0x0017F730,right,,vtable 10RaceArcade slot 55 (GT3 slot 50)
+0x0017DA70,,new,,RacePS2Base: draw one car's projected shadow
+0x0017DBD0,,new,,RacePS2Base slot 62: course projected-shadow flag
+0x0017DBF8,0x0017FB68,right,,vtable 10RaceArcade slot 54 (GT3 slot 49) [map agrees]
+0x0017E070,0x0017FFE8,right,,vtable 10RaceArcade slot 56 (GT3 slot 51)
+0x0017E2C8,0x00180218,right,,vtable 10RaceArcade slot 57 (GT3 slot 52)
+0x0017E3F0,0x00180330,right,,vtable 10RaceArcade slot 59 (GT3 slot 53) [map agrees]
+0x0017E870,,new,,RacePS2Base slot 58: third course draw pass
+0x0017EA60,0x001808E8,right,,vtable 10RaceArcade slot 60 (GT3 slot 54)
+0x0017EB68,0x001809E8,right,,vtable 10RaceArcade slot 61 (GT3 slot 55)
+0x0017EC80,0x00180AE0,right,,RacePS2Base::captureAfterimage (stores the field mode) [map agrees]
+0x0017EDB0,0x00180BF8,right,,RacePS2Base::drawAfterimage (field parity shift; called from virtual_46) [map agrees]
+0x0017F118,0x00180F08,right,,vtable 24RaceBasicWithRaceDisplay slot 25 (GT3 slot 24)
+0x0017F128,0x00180F18,right,,RaceBasic create
+0x0017F160,0x00180F70,right,,RaceBasic construct [map agrees]
+0x0017F220,0x00181020,right,,vtable 9RaceBasic slot 0 (GT3 slot 0) [map agrees]
+0x0017F288,0x00181078,right,,vtable 24RaceBasicWithRaceDisplay slot 8 (GT3 slot 8) [map agrees]
+0x0017F378,0x00181140,right,,vtable 10RaceArcade slot 40 (GT3 slot 35) [map agrees]
+0x0017F3F8,0x001811B8,right,,vtable 24RaceBasicWithRaceDisplay slot 29 (GT3 slot 28) [map agrees]
+0x0017F648,0x001812D8,right,,vtable 10RaceArcade slot 31 (GT3 slot 30) [map agrees]
+0x0017F770,0x00181400,right,,vtable 10RaceArcade slot 50 (GT3 slot 45) [map agrees]
+0x0017F968,0x00181598,right,,RaceBasic::setRaceMode(const char *) (getModeId + store)
+0x0017F9A0,,new,,RaceBasic: SELECT while paused cycles RaceDisplay panel bits
+0x0017FB88,0x00181678,right,,vtable 24RaceBasicWithRaceDisplay slot 0 (GT3 slot 0) [map agrees]
+0x0017FC20,,new,,RaceBasic registration helper (__static_initialization; tool: race_class_register) [map: 0017B9E8]
+0x00180030,0x00181B90,right,,vtable 16RaceSinglePlayer slot 25 (GT3 slot 24)
+0x00180040,0x00181BA0,right,,RaceSinglePlayer create
+0x00180078,0x00181C00,right,,RaceSinglePlayer construct [map agrees]
+0x00180168,0x00181CF0,right,,vtable 16RaceSinglePlayer slot 0 (GT3 slot 0) [map agrees]
+0x00180208,0x00181D80,right,,vtable 10RaceArcade slot 26 (GT3 slot 25)
+0x00180218,0x00181D90,right,,vtable 10RaceArcade slot 27 (GT3 slot 26) [map agrees]
+0x00180258,0x00181DC8,right,,vtable 10RaceArcade slot 14 (GT3 slot 13) [map agrees]
+0x00180288,0x00181DF8,right,,vtable 10RaceArcade slot 15 (GT3 slot 14) [map agrees]
+0x001802B8,0x00181E28,right,,vtable 10RaceArcade slot 16 (GT3 slot 15) [map agrees]
+0x001802E0,0x00181E50,right,,vtable 16RaceSinglePlayer slot 8 (GT3 slot 8) [map agrees]
+0x00180320,0x00181E90,right,,vtable 10RaceArcade slot 29 (GT3 slot 28) [map agrees]
+0x001804D8,,new,,RaceSinglePlayer registration helper
+0x00180618,0x001821C8,right,,vtable 10RaceArcade slot 25 (GT3 slot 24)
+0x00180628,0x001821D8,right,,RaceArcade create
+0x00180660,0x00182238,right,,RaceArcade construct [map agrees]
+0x00180848,0x00182408,right,,vtable 10RaceArcade slot 0 (GT3 slot 0) [map agrees]
+0x00180920,0x001824B8,right,,vtable 10RaceArcade slot 8 (GT3 slot 8) [map agrees]
+0x001809D8,0x00182550,right,,vtable 10RaceArcade slot 48 (GT3 slot 43) [map agrees]
+0x00180A88,0x00182600,right,,vtable 16RaceArcadeSingle slot 25 (GT3 slot 24)
+0x00180A98,0x00182610,right,,RaceArcadeSingle create
+0x00180AD0,0x00182670,right,,RaceArcadeSingle construct [map agrees]
+0x00180B30,0x001826D0,right,,vtable 16RaceArcadeSingle slot 0 (GT3 slot 0) [map agrees]
+0x00180BA0,,new,,RaceArcade / RaceArcadeSingle registration helper (tool: race_arcade_static_ctor) [map: 00182728]
+0x00180C08,0x00182728,right,,race_arcade_static_ctor (.ctors wrapper)
+0x00180E38,0x00182A10,right,,vtable 14RaceArcadeDemo slot 25 (GT3 slot 24)
+0x00180E48,0x00182A20,right,,RaceArcadeDemo create
+0x00180E80,0x00182A80,right,,RaceArcadeDemo construct [map agrees]
+0x00180F98,0x00182B98,right,,vtable 14RaceArcadeDemo slot 0 (GT3 slot 0) [map agrees]
+0x00181030,0x00182C20,right,,vtable 14RaceArcadeDemo slot 8 (GT3 slot 8) [map agrees]
+0x00181078,0x00182C68,right,,vtable 14RaceArcadeDemo slot 28 (GT3 slot 27)
+0x00181090,0x00182CC8,right,,vtable 14RaceArcadeDemo slot 29 (GT3 slot 28) [map agrees]
+0x00181150,,new,,RaceArcadeDemo registration helper
+0x001811F8,0x00182EA8,right,,vtable 16RaceFreePractice slot 25 (GT3 slot 24)
+0x00181208,0x00182EB8,right,,RaceFreePractice create
+0x00181240,0x00182F18,right,,RaceFreePractice construct [map agrees]
+0x00181398,0x00183078,right,,vtable 16RaceFreePractice slot 0 (GT3 slot 0) [map agrees]
+0x00181430,0x00183100,right,,vtable 16RaceFreePractice slot 8 (GT3 slot 8) [map agrees]
+0x001814C0,0x00183178,right,,vtable 16RaceFreePractice slot 48 (GT3 slot 43) [map agrees]
+0x00181510,,new,,RaceFreePractice registration helper
+0x00181B88,0x00183948,right,,vtable 15RaceSplitBattle slot 8 (GT3 slot 8) [map agrees]
+0x00181CD0,0x00183A90,right,,vtable 15RaceSplitBattle slot 48 (GT3 slot 43) [map agrees]
+0x00181D28,0x00183AE8,right,,vtable 15RaceSplitBattle slot 26 (GT3 slot 25)
+0x00181D38,0x00183AF8,right,,vtable 15RaceSplitBattle slot 27 (GT3 slot 26)
+0x00181D88,0x00183B40,right,,vtable 15RaceSplitBattle slot 29 (GT3 slot 28)
+0x00181EC8,0x00183C70,right,,vtable 15RaceSplitBattle slot 31 (GT3 slot 30) [map agrees]
+0x00181EF8,0x00183CA0,right,,RaceSplitBattle::updateDisplay (through getDisplay)
+0x001820C8,0x00183DD0,right,,vtable 15RaceSplitBattle slot 34 (GT3 slot 33)
+0x00182100,0x00183E08,right,,vtable 15RaceSplitBattle slot 2 (GT3 slot 2) [map agrees]
+0x00182668,0x00184310,right,,vtable 15RaceSplitBattle slot 50 (GT3 slot 45)
+0x001826C0,0x00184338,right,,vtable 15RaceSplitBattle slot 51 (GT3 slot 46) [map: 00184310]
+0x001826E0,0x00184358,right,,vtable 15RaceSplitBattle slot 14 (GT3 slot 13)
+0x00182768,0x001843D8,right,,vtable 15RaceSplitBattle slot 15 (GT3 slot 14)
+0x001827F8,0x00184460,right,,vtable 15RaceSplitBattle slot 16 (GT3 slot 15)
+0x001828A0,,new,,an operator delete (Allocator::free; tool: RaceSplitBattle::virtual_46) [map: 00184338]
+0x001828C8,0x001833E8,right,,vtable 15RaceSplitBattle slot 25 (GT3 slot 24)
+0x001828D8,0x001833F8,right,,RaceSplitBattle create
+0x00182910,0x00183458,right,,RaceSplitBattle construct (tool: static ctor) [map: 00184718]
+0x00182940,,new,,RaceSplitBattle factory: battle + RaceSplitDisplay + setRaceDisplay
+0x00182A68,,new,,RaceSplitBattle registration helper
+0x00182AA0,0x00184718,right,,race_split_battle_static_ctor (tool: setEquipments) [map: 001847E0]
+0x00182AC0,0x00184CF8,right,,19MultilinkLocalInput slot 10 = 19RaceLinkBattleInput slot 10 (renamed class)
+0x00182AD0,0x00184D08,right,,14MultilinkInput slot 10 = 23RaceLinkBattleNodeInput slot 10 (renamed class)
+0x00182B00,,new,,MultilinkInput slot 11 override (network input)
+0x00183008,0x00184D68,right,,vtable 14RaceLinkBattle slot 25 (GT3 slot 24)
+0x00183018,0x00184D78,right,,RaceLinkBattle create
+0x00183050,0x00184DD8,right,,RaceLinkBattle construct [map agrees]
+0x001832A8,0x00185208,right,,vtable 14RaceLinkBattle slot 0 (GT3 slot 0) [map agrees]
+0x001833A8,0x001853A0,right,,vtable 14RaceLinkBattle slot 8 (GT3 slot 8) [map agrees]
+0x001835B8,0x001856F0,right,,vtable 14RaceLinkBattle slot 48 (GT3 slot 43) [map agrees]
+0x00183618,0x00185758,right,,vtable 14RaceLinkBattle slot 34 (GT3 slot 33) [map agrees]
+0x00183650,,new,,RaceLinkBattle override of slot 39 (GT3 inherits RaceBase::virtual_34; Multilink)
+0x00183698,0x00185788,right,,vtable 14RaceLinkBattle slot 40 (GT3 slot 35) [map agrees]
+0x001836C8,0x001857C8,right,,vtable 14RaceLinkBattle slot 26 (GT3 slot 25); body moved into the Multilink layer
+0x001836E8,0x001857E0,right,,vtable 14RaceLinkBattle slot 27 (GT3 slot 26); body moved into the Multilink layer
+0x00183708,0x00185848,right,,vtable 14RaceLinkBattle slot 28 (GT3 slot 27); body moved into the Multilink layer
+0x00183740,0x00185920,right,,vtable 14RaceLinkBattle slot 29 (GT3 slot 28); body moved into the Multilink layer
+0x00183780,0x00185F78,right,,vtable 14RaceLinkBattle slot 51 (GT3 slot 46) [map agrees]
+0x001837D8,,new,,RaceLinkBattle registration helper
+0x00183810,0x00186728,right,,race_link_battle_static_init
+0x00183830,,new,,RaceLinkDemo operator new
+0x00183858,,new,,an operator delete (Allocator::free; tool: race_link_battle_static_init) [map: 00186728]
+0x00183880,,new,,RaceLinkDemo name
+0x00183890,,new,,RaceLinkDemo create (tool: __tf23RaceLinkBattleNodeInput) [map: 00186800]
+0x001838C8,,new,,RaceLinkDemo construct (tool: ~RaceLinkBattleNodeInput) [map: 00186850]
+0x001838F8,,new,,RaceLinkDemo::RaceLinkDemo
+0x00183928,,new,,RaceLinkDemo::virtual_8 (tool: __tf19RaceLinkBattleInput) [map: 00186878]
+0x00183968,,new,,RaceLinkDemo update (slot 29)
+0x00183A30,,new,,RaceLinkDemo slot 51
+0x00183A78,,new,,RaceLinkDemo registration helper
+0x00183AB0,,new,,RaceLinkDemo static init
+0x00183EF8,0x00186D78,right,,vtable 13RaceSolitaire slot 25 (GT3 slot 24)
+0x00183F08,0x00186D88,right,,RaceSolitaire create
+0x00183F40,0x00186DE8,right,,RaceSolitaire construct [map agrees]
+0x001842E8,0x00187120,right,,vtable 13RaceSolitaire slot 0 (GT3 slot 0) [map agrees]
+0x00184470,0x001872A8,right,,vtable 11RaceFreeRun slot 4 (GT3 slot 4) [map agrees]
+0x00184480,0x001872B8,right,,vtable 11RaceFreeRun slot 64 (GT3 slot 57) [map agrees]
+0x001845D8,0x00187430,right,,vtable 11RaceLicense slot 24 (GT3 slot 23)
+0x00184768,,new,,RaceSolitaire: data logger car save (logger_run)
+0x001848B0,,new,,RaceSolitaire: data logger car restore (logger_run)
+0x00184B90,0x00187520,right,,vtable 11RaceFreeRun slot 26 (GT3 slot 25)
+0x00184BB8,0x00187548,right,,vtable 11RaceFreeRun slot 27 (GT3 slot 26) [map agrees]
+0x00184BF8,0x00187598,right,,vtable 13RaceSolitaire slot 8 (GT3 slot 8) [map agrees]
+0x00184CC0,0x00187660,right,,vtable 11RaceFreeRun slot 9 (GT3 slot 9) [map agrees]
+0x00184DD8,0x00187760,right,,vtable 11RaceLicense slot 63 (GT3 slot 56) [map agrees]
+0x00184E10,0x00187790,right,,vtable 11RaceFreeRun slot 40 (GT3 slot 35) [map agrees]
+0x00184E70,0x001877E8,right,,vtable 11RaceFreeRun slot 12 (GT3 slot 11) [map agrees]
+0x00184EA0,0x00187818,right,,vtable 11RaceFreeRun slot 65 (GT3 slot 58) [map agrees]
+0x00184EC8,0x00187840,right,,vtable 11RaceFreeRun slot 14 (GT3 slot 13) [map agrees]
+0x00184F28,0x00187898,right,,vtable 11RaceFreeRun slot 15 (GT3 slot 14) [map agrees]
+0x00184F58,0x001878C8,right,,vtable 11RaceFreeRun slot 16 (GT3 slot 15) [map agrees]
+0x00184F80,0x001878F0,right,,vtable 11RaceFreeRun slot 18 (GT3 slot 17) [map agrees]
+0x00184FB0,0x00187920,right,,vtable 11RaceLicense slot 21 (GT3 slot 20) [map agrees]
+0x00184FF8,0x00187968,right,,vtable 11RaceFreeRun slot 22 (GT3 slot 21)
+0x00185150,0x001879A8,right,,vtable 11RaceFreeRun slot 23 (GT3 slot 22) [map agrees]
+0x00185178,0x001879D0,right,,vtable 11RaceLicense slot 66 (GT3 slot 59)
+0x00185208,0x00187A50,right,,vtable 11RaceFreeRun slot 29 (GT3 slot 28)
+0x00185558,0x00187D30,right,,vtable 11RaceFreeRun slot 50 (GT3 slot 45)
+0x001855A0,,new,,RaceSolitaire registration helper
+0x00185648,0x00187FE8,right,,vtable 13RaceTimeTrial slot 25 (GT3 slot 24)
+0x00185658,0x00187FF8,right,,RaceTimeTrial create [map agrees]
+0x00185698,0x00188060,right,,RaceTimeTrial construct [map agrees]
+0x00185890,0x00188268,right,,vtable 13RaceTimeTrial slot 0 (GT3 slot 0) [map agrees]
+0x00185950,0x00188318,right,,vtable 13RaceTimeTrial slot 8 (GT3 slot 8) [map agrees]
+0x00185A30,0x001883D8,right,,vtable 13RaceTimeTrial slot 48 (GT3 slot 43) [map agrees]
+0x00185A58,,new,,RaceTimeTrial registration helper
+0x00185AB0,0x00188478,right,,SimpleExamMessages ctor = TimeTrialExaminationMessages ctor; map: unpaired
+0x00185B00,0x001884A8,right,,18SimpleExamMessages slot 5 = 28TimeTrialExaminationMessages slot 5 (renamed class) [map agrees]
+0x00185B38,,new,,"SimpleExamMessages reset (state, fades, held flag); GT3 inlines its part"
+0x00185B60,0x001884D8,right,,start; map: unpaired
+0x00185BB8,0x001884F8,right,,18SimpleExamMessages slot 1 = 28TimeTrialExaminationMessages slot 1 (renamed class)
+0x00185D10,0x00188620,right,,18SimpleExamMessages slot 2 = 28TimeTrialExaminationMessages slot 2 (renamed class)
+0x00185D30,0x00188630,right,,18SimpleExamMessages slot 4 = 28TimeTrialExaminationMessages slot 4 (renamed class) [map agrees]
+0x00185FC0,0x00188828,right,,SimpleExamDisplay ctor = RaceTimeTrialDisplay ctor
+0x00186068,0x001888D8,right,,17SimpleExamDisplay slot 21 = 20RaceTimeTrialDisplay slot 21 (renamed class) [map agrees]
+0x001860E0,0x00188930,right,,reset; map: unpaired
+0x00186178,0x00188960,right,,setPhase; map: unpaired
+0x00186190,0x00188978,right,,17SimpleExamDisplay slot 22 = 20RaceTimeTrialDisplay slot 22 (renamed class)
+0x001863E0,0x00188BB8,right,,17SimpleExamDisplay slot 23 = 20RaceTimeTrialDisplay slot 23 (renamed class) [map: 00188E70]
+0x00186438,0x00188C10,right,,17SimpleExamDisplay slot 2 = 20RaceTimeTrialDisplay slot 2 (renamed class)
+0x00186658,0x00188D40,right,,17SimpleExamDisplay slot 3 = 20RaceTimeTrialDisplay slot 3 (renamed class)
+0x00186710,0x00188DE0,right,,17SimpleExamDisplay slot 0 = 20RaceTimeTrialDisplay slot 0 (renamed class) [map: 00188EE0]
+0x00186830,0x00189098,right,,vtable 11RaceFreeRun slot 25 (GT3 slot 24)
+0x00186840,0x001890A8,right,,RaceFreeRun create [map agrees]
+0x00186880,0x00189110,right,,RaceFreeRun construct [map agrees]
+0x00186A80,0x00189318,right,,vtable 11RaceFreeRun slot 0 (GT3 slot 0) [map agrees]
+0x00186B50,0x001893D8,right,,vtable 11RaceFreeRun slot 8 (GT3 slot 8) [map agrees]
+0x00186C80,0x001894E8,right,,vtable 11RaceFreeRun slot 63 (GT3 slot 56) [map agrees]
+0x00186CD0,0x00189538,right,,vtable 11RaceFreeRun slot 24 (GT3 slot 23) [map agrees]
+0x00186E68,0x001895C0,right,,vtable 11RaceFreeRun slot 21 (GT3 slot 20) [map agrees]
+0x00186EB0,0x00189608,right,,vtable 11RaceFreeRun slot 66 (GT3 slot 59)
+0x00186F78,0x001896B8,right,,vtable 11RaceFreeRun slot 31 (GT3 slot 30)
+0x00187190,,new,,RaceFreeRun registration helper
+0x00187218,0x001899D0,right,,RaceFreeRunDisplay::put_start_display (live only)
+0x001872B0,,new,,RaceTrainingInformation ctor
+0x001872E0,,new,,RaceTrainingInformation dtor
+0x00187348,,new,,RaceTrainingInformation::createEntries (entry 2 car)
+0x00187478,,new,,RaceTrainingInformation::setupOrganization
+0x00187498,,new,,RaceTraining operator new
+0x001874C0,,new,,RaceTraining operator delete
+0x001874E8,,new,,RaceTraining name ('RaceTraining')
+0x001874F8,,new,,RaceTraining create
+0x00187530,,new,,RaceTraining construct
+0x00187560,,new,,RaceTraining::RaceTraining
+0x00187720,,new,,RaceTraining dtor
+0x001877F0,,new,,RaceTraining::virtual_8 (start)
+0x00187880,,new,,RaceTraining start (posts GO only)
+0x001878B8,,new,,RaceTraining registration helper
+0x001878F0,,new,,RaceTraining static init
+0x00187A48,0x00189C08,right,,vtable 11RaceLicense slot 25 (GT3 slot 24)
+0x00187A58,0x00189C18,right,,RaceLicense create
+0x00187A90,0x00189C78,right,,RaceLicense construct [map agrees]
+0x00187C68,0x00189E50,right,,vtable 11RaceLicense slot 0 (GT3 slot 0) [map agrees]
+0x00187D38,0x00189F00,right,,vtable 11RaceLicense slot 8 (GT3 slot 8) [map agrees]
+0x00187DC8,0x00189F78,right,,vtable 11RaceLicense slot 33 (GT3 slot 32) [map agrees]
+0x00187E00,,new,,RaceLicense registration helper
+0x00187E80,0x0018A110,right,,prize_rank_name; map: unpaired
+0x00188870,0x0018ABC8,right,,"F_0018ABC8 (takes w, h)"
+0x00188980,0x0018ACA8,right,,ExamMessageLine::init (map missed); map: unpaired
+0x001889D0,0x0018ACE0,right,,ExamMessageLine::update (map missed); map: unpaired
+0x00189C48,0x0018BF50,right,,RaceLicenseDisplay::reset
+0x00189C88,0x0018BF80,right,,RaceLicenseDisplay::setPhase; map: unpaired
+0x00189CA0,0x0018BF98,right,,updatePass (map missed); map: unpaired
+0x00189EF8,0x0018C1E0,right,,updateFail (map missed); map: unpaired
+0x0018A120,0x0018C400,right,,endExamination (map missed); map: unpaired
+0x0018A178,0x0018C458,right,,virtual_2
+0x0018A6F8,0x0018CA20,right,,vtable 15RaceMachineTest slot 25 (GT3 slot 24)
+0x0018A708,0x0018CA30,right,,RaceMachineTest create
+0x0018A748,0x0018CA98,right,,RaceMachineTest construct [map agrees]
+0x0018A920,0x0018CC80,right,,vtable 15RaceMachineTest slot 0 (GT3 slot 0) [map agrees]
+0x0018A9E0,0x0018CD30,right,,vtable 15RaceMachineTest slot 8 (GT3 slot 8) [map agrees]
+0x0018AB10,0x0018CE48,right,,vtable 15RaceMachineTest slot 40 (GT3 slot 35) [map agrees]
+0x0018AB30,0x0018CE68,right,,vtable 15RaceMachineTest slot 48 (GT3 slot 43) [map agrees]
+0x0018AB58,0x0018CE90,right,,vtable 15RaceMachineTest slot 31 (GT3 slot 30) [map agrees]
+0x0018ADD8,,new,,RaceMachineTest registration helper
+0x0018CD18,0x0018EEF0,right,,vtable 16RaceChampionship slot 25 (GT3 slot 24)
+0x0018CD28,0x0018EF00,right,,RaceChampionship create
+0x0018CD60,0x0018EF60,right,,RaceChampionship construct [map agrees]
+0x0018CF48,0x0018F130,right,,vtable 16RaceChampionship slot 0 (GT3 slot 0) [map agrees]
+0x0018D020,0x0018F1E0,right,,vtable 16RaceChampionship slot 8 (GT3 slot 8) [map agrees]
+0x0018D0D8,0x0018F278,right,,vtable 16RaceChampionship slot 48 (GT3 slot 43) [map agrees]
+0x0018D138,,new,,RaceChampionship registration helper
+0x0018D3D0,,new,,RacePOD operator new
+0x0018D3F8,,new,,RacePOD operator delete
+0x0018D420,,new,,RacePOD name getter (slot 25)
+0x0018D430,,new,,RacePOD create
+0x0018D468,,new,,RacePOD construct
+0x0018D498,,new,,RacePOD::RacePOD (RaceArcade + RacePODDisplay)
+0x0018D548,,new,,RacePOD dtor
+0x0018D5D8,,new,,RacePOD2P operator new
+0x0018D600,,new,,RacePOD2P operator delete
+0x0018D628,,new,,RacePOD2P name getter (slot 25)
+0x0018D638,,new,,RacePOD2P create
+0x0018D670,,new,,RacePOD2P construct
+0x0018D6A0,,new,,RacePOD2P::RacePOD2P (RaceSplitBattleBase + RacePOD2PDisplay)
+0x0018D740,,new,,RacePOD2P dtor
+0x0018D7C8,,new,,RacePOD / RacePOD2P registration helper
+0x0018D830,,new,,RacePOD / RacePOD2P static init
+0x0018DB00,0x0018F930,right,,RaceCourse::load (tool: RaceEntryCar::loadModel) [map: 001776A8]
+0x0018DFB8,0x0018FDE0,right,,RaceCourse::emitSmoke
+0x0018DFE0,0x0018FE08,right,,RaceCourse::emitDebris
+0x0018E0B8,0x001909E0,right,,RaceDisplay ctor
+0x0018F1B0,0x001918D8,right,,virtual_0
+0x0018FB18,0x00192120,right,,17SimpleExamDisplay slot 1 = 20RaceTimeTrialDisplay slot 1 (renamed class) [map agrees]
+0x0018FB20,0x00192128,right,,17SimpleExamDisplay slot 9 = 20RaceTimeTrialDisplay slot 9 (renamed class) [map agrees]
+0x001900B8,0x00192678,right,,drawTimeLimit
+0x00190228,0x001927E0,right,,showWarning (map missed); map: unpaired
+0x00190500,0x00192A58,right,,virtual_2 (takes dt)
+0x00190FE0,0x001934B8,right,,virtual_3
+0x00191980,0x00193DA8,right,,17SimpleExamDisplay slot 16 = 20RaceTimeTrialDisplay slot 16 (renamed class) [map agrees]
+0x00191E00,0x001941C0,right,,pollInformationEvents
+0x00192168,0x001944A0,right,,17SimpleExamDisplay slot 20 = 20RaceTimeTrialDisplay slot 20 (renamed class) [map agrees]
+0x001924C8,0x001947E0,right,,17SimpleExamDisplay slot 17 = 20RaceTimeTrialDisplay slot 17 (renamed class) [map agrees]
+0x001924D0,0x001947E8,right,,17SimpleExamDisplay slot 18 = 20RaceTimeTrialDisplay slot 18 (renamed class) [map agrees]
+0x00192520,0x00194838,right,,17SimpleExamDisplay slot 19 = 20RaceTimeTrialDisplay slot 19 (renamed class) [map agrees]
+0x00192570,0x00194888,right,,setLayout (map missed); map: unpaired
+0x00192A98,0x00194BF8,right,,disableAll (map missed); map: unpaired
+0x00193018,0x00194FF8,right,,layoutMeters (map missed); map: unpaired
+0x00193588,0x00195168,right,,race_display_apply_layout (map missed); map: unpaired
+0x00193648,0x00195208,right,,race_display_find_image
+0x00193668,,new,,RaceDisplay show-mask set/clear by mask
+0x001936B0,,new,,show-mask bit 0x40 set
+0x001936D0,,new,,show-mask bit 0x10 set
+0x001936F0,,new,,show-mask bit 0x40 test
+0x00193708,,new,,show-mask bit 0x10 test
+0x00193720,,new,,RaceSplitDisplayBase ctor
+0x00193738,,new,,RaceSplitDisplayBase dtor
+0x00193F58,0x00195B88,right,,RaceSplitDisplay ctor (map missed); map: unpaired
+0x00194400,0x00196938,right,,RaceDisplayFader::update (map missed); map: unpaired
+0x001944F8,0x00196A38,right,,RaceDisplayFader::draw
+0x00194928,0x00196E18,right,,RaceGearDisplay ctor
+0x00195520,0x00197A10,right,,RaceLapTimesDisplay::addLapTime
+0x00195590,0x00197A80,right,0x001955B0,RaceLapTimesDisplay::setCurrentLapTime (map missed); start missing from the function list; map: unpaired
+0x001956F8,0x00197BF0,right,,RaceMessageDisplay::draw
+0x00195A58,0x00197E90,right,,RaceMessageDisplay::setText (map: race_copy_string); map now: 0x0019AA38
+0x00195AD0,0x00197EE8,right,,RaceMessageDisplay::setFont (+ shadow arg)
+0x00195AF0,0x00199C90,right,,RaceMessageDisplay::clear (map: setText); L2 also sets duration -1; map now: 0x00197E90
+0x00195E08,0x001981E8,right,,RaceEventDisplay::addEvent
+0x00196018,0x001983D8,right,,RaceIndicators::draw
+0x00196560,,new,,RaceABMonitor reset of the last values
+0x00196570,,new,,RaceABMonitor::update (new override; map: base update)
+0x00196588,0x00198940,right,,RaceABMonitor::draw
+0x00196828,,new,,RaceABMonitor bar strip
+0x001969A8,,new,,RaceSteeringDisplay reset of the last angle
+0x001969B8,,new,,RaceSteeringDisplay::update (new override; map: base update)
+0x001969C8,0x00198B90,right,,RaceSteeringDisplay::draw
+0x00196C90,,new,,RaceSteeringDisplay tick / marker strip
+0x00197628,0x00199600,right,,RaceReplayModeDisplay::modeImageName
+0x001976D0,,new,,RaceCapacityMonitor ctor
+0x00197720,,new,,RaceCapacityMonitor::draw
+0x00197FE8,0x0019A7F0,right,,race_format_time (earlier map runs showed 16 instructions: bounds artefact)
+0x001982E0,0x0019AA38,right,,race_copy_string (map missed); map: unpaired
+0x001989A0,0x0019B358,right,,FlareClass::begin (fog off)
+0x00199050,0x0019B9B8,right,,FlareClass::flush
+0x00199540,0x0019BE98,right,,FlareClass::update
+0x00199DE8,0x0019C738,right,,RaceRoundMeterBase::draw_needle
+0x0019A7F0,0x0019D350,right,,RaceRoundTachometerBase::setScale
+0x0019AE18,0x0019DF08,right,,RaceOnboardSpeedmeter::setupScale
+0x0019B098,0x0019E230,right,,RaceMiniMapData::relocate; map: unpaired
+0x0019B1E8,0x0019E380,right,,RaceMiniMap::init
+0x0019B3D8,0x0019E560,right,,RaceMiniMap::drawCar (+ colour arg)
+0x0019B500,,new,,particle pool element size (max of class size table)
+0x0019B620,0x0019E7C8,right,,Particle::update = SparkParticle vslot 0
+0x0019B918,0x0019EAD0,right,,particle_draw_line
+0x0019BAE8,0x0019ECA8,right,,Particle::draw = SparkParticle vslot 1
+0x0019BBD8,0x0019EDA0,right,,Particle::getColor
+0x0019BD28,0x0019EEE8,right,,Particle::resetTrail = SparkParticle vslot 2
+0x0019BD38,0x0019EEF8,right,,ParticleManager::ParticleManager
+0x0019BFD8,0x0019F0D8,right,,ParticleManager::emitDebris (now leaves)
+0x0019C4D8,,new,,particle pool take helper
+0x0019C4F8,0x0019F640,right,,ParticleManager::alloc
+0x0019C540,,new,,LeafParticle alloc
+0x0019C758,0x0019F820,right,,ParticleManager::resetTrails
+0x0019C970,,new,,"leaf type init (mass, size, texture)"
+0x0019CAD0,,new,,LeafParticle maths
+0x0019CBE0,,new,,LeafParticle maths
+0x0019CC38,,new,,LeafParticle maths
+0x0019CC90,,new,,LeafParticle init
+0x0019CD60,,new,,LeafParticle::resetTrail (no-op)
+0x0019CD68,,new,,LeafParticle vtable slot 0
+0x0019D160,,new,,LeafParticle draw helper
+0x0019D248,,new,,LeafParticle vtable slot 1
+0x001A1560,0x001A40D8,right,0x001A15B0,CourseCamera::loopLength
+0x001A15B0,0x001A4128,right,0x001A1600,CourseCamera::loopCount
+0x001A1600,0x001A4178,right,0x001A1670,CourseCamera::wrap
+0x001A1670,0x001A41F0,right,0x001A16CC,CourseCamera::find
+0x001A16CC,0x001A4258,right,0x001A17E4,CourseCamera::collect
+0x001A17E4,0x001A4378,right,0x001A18A0,CourseCamera::findZone
+0x001A1B28,0x001A46C8,right,,RaceSmoke::emit
+0x001A3598,,new,,projected shadow: light view + bounds
+0x001A3828,,new,,projected shadow: render silhouette to 256x256
+0x001A3A68,,new,,projected shadow: state init
+0x001A3A90,,new,,projected shadow: texture matrix
+0x001A3AE0,,new,,projected shadow: ground quad
+0x001A4028,,new,0x001A4080,T175 static init/fini body (compiler helper)
+0x001A5318,,new,0x001A562C,Pod voice dispatcher (CarSound::update; jump table 0x00342DD0)
+0x001A5F20,0x001A80E0,right,,"F_001A80E0 env block relocation, empty"
+0x001A5F28,0x001A80E8,right,,F_001A80E8 (RaceBase::virtual_8 call order)
+0x001A5F30,0x001A80F0,right,,"course_env_lights_off, emptied in Lupo 2 (delta D2)"
+0x001A6168,0x001A8360,right,,F_001A8360
+0x001A6748,0x001A8958,right,,course_env_set_shadow_dir
+0x001A6778,,new,,CourseEnv shadow direction getter
+0x001A6848,0x001A8A10,right,,course_env_set_flare_types
+0x001A6980,0x001A8BD8,right,,course_env_host_dump
+0x001A6AD0,0x001AB630,right,,RaceCarModel::setArena (map: onTireLoaded)
+0x001A6B08,0x001AB610,right,,RaceCarModel::releaseArena
+0x001A6B28,0x001A9C58,right,,"RaceCarModel::operator new (allocate, align 16)"
+0x001A6B50,0x001A9C80,right,,RaceCarModel::operator delete (map: onWheelLoaded)
+0x001A6B78,0x001A9BF0,right,,RaceCarModel::initArena
+0x001A6BA8,0x001A9C30,right,,RaceCarModel::freeArena
+0x001A6BD0,0x001AB690,right,,RaceCarModel::allocBlock
+0x001A6BF0,0x001AB668,right,,RaceCarModel::freeBlock (map: operator new)
+0x001A6BF0,0x001A9C58,wrong,,"is a UnitArena release wrapper (arena 0x002DD9A0), not RaceCarModel::operator new (a heap alloc)"
+0x001A6C18,,new,,RaceCarModel block size 0xA8000 for copyFrom (GT3 inline)
+0x001A6C28,,new,,T180 static init/fini body (compiler form; GT3 has separate ctor/dtor)
+0x001A6C98,0x001AB538,right,,T180 static ctor wrapper (map: operator delete)
+0x001A6CB8,0x001AB508,right,,T180 static dtor wrapper
+0x001A6CD8,0x001A9B90,right,,RaceCarModel::onModelLoaded
+0x001A6CF8,0x001A9BB0,right,,RaceCarModel::onTireLoaded
+0x001A6D18,0x001A9BD0,right,,RaceCarModel::onWheelLoaded
+0x001A6D38,0x001A9CA8,right,,RaceCarModel::RaceCarModel
+0x001A6EE0,0x001A9E18,right,,RaceCarModel::~RaceCarModel
+0x001A6FB8,0x001A9ED8,right,,RaceCarModel::copyFrom
+0x001A7090,0x001A9F78,right,,RaceCarModel::release
+0x001A70D8,0x001A9FC8,right,,RaceCarModel::load (vslot 9)
+0x001A7150,0x001AA048,right,,RaceCarModel::setData
+0x001A71B0,0x001AA0A8,right,,RaceCarModel::loadTire (vslot 11 overrideTire)
+0x001A7240,0x001AA178,right,,RaceCarModel::setTireData
+0x001A7278,0x001AA1B0,right,,RaceCarModel::loadWheel (vslot 12 overrideWheel)
+0x001A72E0,0x001AA218,right,,RaceCarModel::setWheelData
+0x001A7318,0x001AA250,right,,RaceCarModel::setupTires (vslot 13 initTire)
+0x001A7478,,new,,RaceCarModel vslot 7 setLODBase: CarModel +0x0C (GT3 writes it inline)
+0x001A7480,0x001AB720,right,,RaceCarModel::setColorIndex = vslot 4 setBodyColor
+0x001A7488,0x001AB718,right,,RaceCarModel::getColorIndex = vslot 5 getBodyColor
+0x001A7490,0x001AB6E8,right,,RaceCarModel::setModelLod = vslot 6 setLOD
+0x001A7498,0x001AB6B8,right,,RaceCarModel::getInfo = vslot 8
+0x001A74A8,0x001AA3A0,right,,RaceCarModel::loadBodyMatrix (vslot 35)
+0x001A7568,0x001AA460,right,,RaceCarModel::setReflectionPlane (vslot 29)
+0x001A7670,,new,,"vslot 32: vehicle ground plane (projected shadow, sparks)"
+0x001A7780,0x001AA568,right,,RaceCarModel::F_001AA568 empty stub = vslot 14 (same place in T180)
+0x001A7788,0x001AA570,right,,RaceCarModel::loadGroundMatrix
+0x001A7848,0x001AA630,right,,RaceCarModel::drawShadow (vslot 16 renderShadow)
+0x001A78A8,0x001AA680,right,,RaceCarModel::F_001AA680 (vslot 17 renderLightEmission)
+0x001A78F8,0x001AA6D0,right,,RaceCarModel::F_001AA6D0 (vslot 18 renderFlatShadow)
+0x001A7948,0x001AA720,right,,RaceCarModel::drawBody (vslot 19)
+0x001A79F0,0x001AA7A0,right,,RaceCarModel::drawTires (vslot 21 renderTire)
+0x001A7CD8,0x001AAA90,right,,RaceCarModel::drawTireCylinders (vslot 22 renderCoarseTire)
+0x001A7E30,0x001AABE8,right,,RaceCarModel::drawMenuTires (vslot 23 renderTireForIcon)
+0x001A7FA8,,new,,vslot 33: body bbox MV via opcode-0x0A reader
+0x001A8010,,new,,vslot 34 computeTireBoundingBoxMV
+0x001A8130,,new,,vslot 24: body silhouette draw (projected shadow)
+0x001A8198,,new,,vslot 25 renderTireForProjectionShadow
+0x001A82B0,0x001AAD70,right,,RaceCarModel::F_001AAD70 empty stub = vslot 27 renderEffects (same place)
+0x001A82B8,0x001AAD78,right,,RaceCarModel::F_001AAD78 (vslot 26 renderReflectionEffects)
+0x001A8320,,new,,"debug line draw, no callers"
+0x001A85B0,0x001AADD0,right,,RaceCarModel::emitSparks (vslot 28 setCollisionParticle; changed)
+0x001A8938,0x001AB0F8,right,,RaceCarModel::updateBodyState (vslot 2 update; changed)
+0x001A8B00,,new,,vslot 3: CarModel::reset (apply CLUT anims)
+0x001A8B20,0x001AB1B8,right,,RaceCarModel::addLamps (vslot 30 setLampFlare; blink lamps)
+0x001A8DA0,0x001AB370,right,,RaceCarModel::drawLampReflections (vslot 31; blink lamps)
+0x001A8FB0,,new,,blink lamp curve
+0x001A9048,,new,,blink pattern table init
+0x001A9090,,new,,blink pattern table get
+0x001A90D8,,new,,RaceBikeModel
+0x001A9140,,new,,RaceBikeModel vslot 0 dtor
+0x001A91C0,,new,,RaceBikeModel copy
+0x001A9260,,new,,RaceBikeModel vslot 1
+0x001A92A8,,new,,RaceBikeModel vslot 9 load
+0x001A92F8,,new,,RaceBikeModel vslot 10
+0x001A9328,,new,,RaceBikeModel vslot 8
+0x001A9338,,new,,RaceBikeModel vslot 35 body matrix
+0x001A93F8,,new,,RaceBikeModel vslot 29
+0x001A9500,,new,,RaceBikeModel vslot 32
+0x001A9610,,new,,RaceBikeModel vslot 14
+0x001A9618,,new,,RaceBikeModel vslot 2
+0x001A9638,,new,,RaceBikeModel vslot 3
+0x001A9658,,new,,RaceBikeModel ground matrix
+0x001A9718,,new,,RaceBikeModel vslot 19 draw
+0x001A9AC8,,new,,RaceBikeModel vslot 15
+0x001A9AF0,,new,,RaceBikeModel vslot 20 renderDriver
+0x001A9B10,,new,,RaceBikeModel vslot 33 bbox
+0x001AA048,,new,,RaceBikeModel vslot 24
+0x001AA0F8,,new,,"bike rider posture helper, returns 0.0"
+0x001AA108,,new,,RaceBikeModel state accessor
+0x001AA128,,new,,RaceBikeModel state accessor
+0x001AA148,,new,,RaceBikeModel state accessor
+0x001AA180,,new,,RaceBikeModel state accessor
+0x001AA1A0,,new,,RaceBikeModel state accessor
+0x001AA1C0,,new,,RaceBikeModel state accessor
+0x001AA1F8,,new,,RaceBikeModel state accessor
+0x001AA218,,new,,RaceBikeModel state accessor
+0x001AA238,,new,,RaceBikeModel state accessor
+0x001AA270,,new,,RaceBikeModel state accessor
+0x001AA290,,new,,RaceBikeModel state accessor
+0x001AA2B0,,new,,RaceBikeModel state accessor
+0x001AA2D0,,new,,RaceBikeModel state accessor
+0x001AA2E0,,new,,RaceBikeModel state accessor
+0x001AA300,,new,,RaceBikeModel state accessor
+0x001AA320,,new,,RaceBikeModel state accessor
+0x001AA338,,new,,RaceBikeModel state accessor
+0x001AA348,,new,,RaceBikeModel state accessor
+0x001AA360,,new,,RaceBikeModel state accessor
+0x001AA398,,new,,RaceBikeModel state accessor
+0x001AA3B0,,new,,RaceBikeModel state accessor
+0x001AA3C8,0x001A8D18,right,,course_data_relocate (extended)
+0x001AACD8,0x001A94C8,right,,course_draw_reflection_a
+0x001AAE28,,new,,course third vision-culled pass (model +0x44)
+0x001AAF68,,new,,course shadow-receiver draw (package +0xAC)
+0x001AB030,0x001A9720,right,,course_reset_anims (5th slot)
+0x001AB098,0x001A9768,right,,course_step_anims (5th slot)
+0x001AB128,0x001A97E8,right,,course_apply_clut_anims (5th slot)
+0x001AB178,0x001A9830,right,,course_release_clut_anims (5th slot)
+0x001AB4E0,0x001AB7D0,right,,CarRenderCtx::setup
+0x001ABD90,0x001AC328,right,,CarRenderCtx::applyShadowPass
+0x001ABE40,0x001AC3D0,right,,CarRenderCtx::applyDefault
+0x001ABE90,,new,,CarRenderCtx shadow direction getter (projected shadow)
+0x001ABF18,,new,,CarRenderCtx shadow colour getter (projected shadow)
+0x001AE008,,new,,head tracker state singleton
+0x001AE050,,new,,head tracker state init
+0x001AE068,,new,,head tracker poll
+0x001AE0A8,,new,,head tracker read
+0x001AE128,,new,,head tracker angles
+0x001AE188,,new,,head tracker view matrix
+0x001AE390,,new,,head tracker rotate helper
+0x001AE490,0x001AE568,right,0x001AE4A0,ErrorEventView::setPosition; start missing from the function list; map: unpaired
+0x001AE4C0,0x001AE598,right,0x001AE538,ErrorEventView::tick; start missing from the function list; map: unpaired
+0x001AE818,,new,,HumanModel: skeleton setup (pdiRiderman)
+0x001AE860,,new,,HumanModel vslot 0 dtor
+0x001AE8C8,,new,,HumanModel copy
+0x001AE940,,new,,rider models load
+0x001AEA78,,new,,rider models load (host)
+0x001AEB88,,new,,rider posture
+0x001AED18,,new,,rider draw
+0x001AEED0,,new,,rider draw
+0x001AF148,,new,,rider draw wrapper
+0x001AF180,,new,,rider draw wrapper
+0x001AF1B8,,new,,rider bbox
+0x001AF690,,new,,HumanModel vslot 1
+0x001AF698,,new,,HumanModel vslot 2
+0x001AF6A0,,new,,HumanModel vslot 3
+0x001AF6A8,,new,,race_begin: new 0x640-byte buffer
+0x001AF6D0,,new,,bike rider: frees the rider data buffer (gp-0x5238) at race_end
+0x001AF700,,new,,RaceBikerModel ctor
+0x001AF7B8,,new,,RaceBikerModel vslot 0 dtor
+0x001AF820,,new,,RaceBikerModel vslot 1
+0x001AF828,,new,,RaceBikerModel vslot 2
+0x001AF830,,new,,RaceBikerModel vslot 3
+0x001AFF60,,new,,"bike rider: posture curve 0.375x+0.125 in [0.2, 0.5]"
+0x001AFFC0,,new,,"bike rider: posture curve 0.0625x+0.1875 in [0.2, 0.25]"
+0x001B31F0,,new,,link-battle screen-wall set-up (GT3 inline in RaceLinkBattle::virtual_8)
+0x001B40E8,,new,,RacePODDisplay ctor
+0x001B4118,,new,,RacePODDisplay::put_start_display (Pod rule messages)
+0x001B41D0,,new,,RacePOD2PDisplay ctor
+0x001B4318,,new,,RacePOD2PDisplay dtor
+0x001B43F8,,new,,RacePOD2PDisplay::virtual_2
+0x001B4498,,new,,RacePOD2PDisplay::virtual_0
+0x001B4D80,0x001AEAC0,right,,ReplayOption::rowItems1 (rows one lower: no target row)
+0x001B4D98,0x001AEAD8,right,,ReplayOption::rowItems2 (rows one lower: no target row)
+0x001B8218,,new,,ResultBoard: leader laps / time gap / laps row (laps-only races)
+0x001B83A0,,new,,ResultBoard: row -> ResultRankBar::setRunning (disqualified)
+0x001B8788,,new,,TopButtonList::createButtons override (aspec_demo / country 8); map had ButtonList::createButtons
+0x001B8B18,0x00119B60,wrong,,"static init of a movie table (opening, opening_GT3UK, ending, title, demoGT3A), not GtmodeControl::runRootPage"
+0x001B8CB8,,new,,9BlinkItem vtable slot 1 (own entry)
+0x001B8D08,,new,,9BlinkItem vtable slot 2 (own entry)
+0x001BA8A8,,new,,Button new empty virtual (slot 15)
+0x001BB0C8,,new,,MapButtonList smooth scroll (vtable slot 13)
+0x001BBB18,0x001BA780,wrong,,a derived draw calling Item::virtual_2 (Item::virtual_2 = L2 0x001BFE48)
+0x001BC8B8,0x001B6F78,right,,PageManager::back (map had shortmenu_root_check)
+0x001BD940,0x001B8468,right,,menu_car_clear_loading (call position in carSelect2P twin)
+0x001BE3B0,0x001B8EC8,right,,gt2k_menu::Car::virtual_1 (animates menu car)
+0x001C3858,0x001C0360,right,,CallbackItem::setItem (map had it swapped with findHiddenItem)
+0x001C4F20,0x001C2768,right,,PageLayout::findHiddenItem (map had it swapped with CallbackItem::setItem)
+0x001C7510,,new,,ColorBox2 constructor
+0x001C7E40,,new,,ColorBox2 factory
+0x001CCAE8,0x001CAEF8,right,,CarRender::draw
+0x001CE148,,new,,MpegImageAlpha draw
+0x001CE2B8,0x001CC5F8,right,,Ipic::Ipic (call position in ArcadeControl ctor twin)
+0x001CE6B8,,new,,SmartIndexT<int> wrapping move (vtable slot 4)
+0x001CEDB8,,new,,alpha movie upload
+0x001D0100,,new,,Cross strip draw
+0x001D6DB0,0x001B2AA8,right,,SmartIndexDoubleRange::move (link order after setInnerRange / set)
+0x001D9280,0x001D83A8,right,,envmapRender
+0x001D9558,0x001D8698,right,,envmapUpdate
+0x001D9640,0x001D8750,right,,DynamicEnvmapCamera::DynamicEnvmapCamera
+0x001D9908,0x001D93C0,right,,ShowRoomCar::SetupShowRoomCar
+0x001D9AB8,0x001D9530,right,,ShowRoomCar::strokeMin (per wheel)
+0x001D9B28,0x001D9558,right,,ShowRoomCar::strokeMax (per wheel)
+0x001D9D28,0x001D9680,right,,ShowRoomCar::power
+0x001D9DA8,0x001D9778,right,,ShowRoomCar::maxSpeed
+0x001D9DC8,,new,,"ShowRoomCar gauge value, returns 0 (CircleGauge::setKind)"
+0x001D9DD0,,new,,"ShowRoomCar gauge value, returns 0 (CircleGauge::setKind)"
+0x001D9DF0,0x001D97C0,right,,ShowRoomCar::getCamberGain (per wheel)
+0x001D9E70,0x001D97E0,right,,ShowRoomCar::getSwingArm (per wheel)
+0x001D9EE8,0x001D9800,right,,ShowRoomCar::getTrackOffset (per wheel)
+0x001D9F68,0x001D9820,right,,ShowRoomCar::getBumpTravel (per wheel)
+0x001D9FF0,0x001D9848,right,,ShowRoomCar::setCamberGain (per wheel)
+0x001DA058,0x001D9858,right,,ShowRoomCar::setSwingArm (per wheel)
+0x001DA0B8,0x001D9868,right,,ShowRoomCar::setTrackOffset (per wheel)
+0x001DA120,0x001D9878,right,,ShowRoomCar::setBumpTravel (per wheel)
+0x001DA338,0x001D9A10,right,,SelectMeterScale(RaceCarState*); map: unpaired
+0x001DA8A0,0x001D9FB8,right,,DynamicsConductor::virtual_34 (L2 slot 36)
+0x001DA8A8,0x001D9FC0,right,,DynamicsConductor::virtual_35 (L2 slot 37)
+0x001DA8B0,0x001D9FC8,right,,DynamicsConductor::virtual_36 (L2 slot 38)
+0x001DA8B8,0x001D9FD0,right,,DynamicsConductor::virtual_37 (L2 slot 39)
+0x001DA8C0,0x001D9FD8,right,,DynamicsConductor::isPitEnabled (L2 slot 40)
+0x001DA8C8,0x001D9FE0,right,,F_001D9FE0 (calls L2 slot 36 = GT3 virtual_34)
+0x001DA910,0x001DA020,right,,DynamicsConductor::chargePenaltyBySurface (L2 slot 41)
+0x001DAA28,0x001DA128,right,,DynamicsConductor::issueCrashEvent (L2 slot 42)
+0x001DB3C8,0x001DAD28,right,,ConditionModel::powerFactor (Lupo 2: stub returning 1.0)
+0x001DB6C8,0x001DB118,right,,car_slipstream_update
+0x001DB7D0,,new,,CarSpec kind -> vehicle layout
+0x001DB820,,new,,vehicle layout descriptor by index
+0x001DB848,,new,,"vehicle layout descriptor from params (map: CarDynamics_getTyre, wrong)"
+0x001DB870,,new,,vehicle layout descriptor from car
+0x001DB940,0x001DB2C8,right,,CarDynamics_calcTopSpeed
+0x001DBB70,0x001DB498,right,,CarDynamics_initTopSpeed
+0x001DBFE0,0x001DB890,right,,"SuspParam_initStroke (map v2, checked)"
+0x001DC168,0x001DB9B8,right,,CarDynamics_getTyre (map had L2 0x001DB848: wrong)
+0x001DD838,0x001DE050,right,0x001DD854,F_001DE050 sound gain lookup (T285; table L2 0x002DE7E0)
+0x001DD858,0x001DE318,right,,level_to_rgb (identical); map: unpaired
+0x001DD908,0x001DE3B8,right,0x001DD968,tyre_sound_squeal_0789 (leaf)
+0x001DDA10,0x001DE4A0,right,0x001DDA80,tyre_sound_squeal_6_12_14 (leaf)
+0x001DDA80,0x001DE508,right,0x001DDAD0,tyre_sound_squeal_5 (leaf)
+0x001DDAD0,0x001DE548,right,0x001DDAD8,tyre_sound_none (leaf)
+0x001DDAD8,0x001DE550,right,0x001DDB30,tyre_sound_squeal_1_13 (leaf)
+0x001DDB30,0x001DE598,right,0x001DDB88,tyre_sound_squeal_2_4 (leaf)
+0x001DDF28,0x001DF840,right,0x001DE018,car_sound_wind (leaf; map missed)
+0x001DE018,0x001DF910,right,0x001DE0D8,car_sound_road (leaf; map missed)
+0x001DE2C0,0x001DFB58,right,,drivetrain whine
+0x001DE458,0x001DFC60,right,,car_sound_engine_levels
+0x001DE610,0x001DFD90,right,0x001DE618,car_crash_sound_clear (leaf)
+0x001DE6E8,0x001DFE70,right,0x001DE730,car_crash_sound_get (leaf)
+0x001DE818,0x001E0668,right,,car_display_level (map v2 had L2 0x0017D4F8: wrong)
+0x001DE878,0x001E06D8,right,,car_silence_hidden
+0x001DED78,0x001E0C28,right,,engine_scale
+0x001DEE20,0x001E0CD8,right,,turbo_boost_stage
+0x001DF068,0x001E0F38,right,,turbo_setup
+0x001DF650,0x001E14E8,right,,engine_spec_sheet
+0x001DF8D8,,new,,gearbox type == 1
+0x001DF8E8,,new,,gearbox type == 2
+0x001DF8F8,,new,,gearbox type 1 || 2
+0x001DF910,,new,,CVT limiter
+0x001DF9C8,,new,,CVT rate init
+0x001DFA38,,new,,CVT controller / torque
+0x001DFC90,,new,,gearbox type == 3
+0x001DFCA0,,new,,type-3 motor law
+0x001DFED8,,new,,type-3 whine
+0x001DFFF0,,new,,hybrid parameter expansion
+0x001E0288,,new,,"isHybrid (prop-paired with engine_scale, wrong)"
+0x001E02A0,,new,,hybrid setCharge
+0x001E02A8,,new,,hybrid setChargeFraction
+0x001E02B8,,new,,hybrid getCharge
+0x001E02C0,,new,,hybrid getChargeFraction
+0x001E02E0,,new,,hybrid flowSign
+0x001E0300,,new,,hybrid race init
+0x001E0348,,new,,"hybrid motor-state reset (prop-paired with car_pre_step, wrong)"
+0x001E0378,,new,,hybrid energy-flow meter
+0x001E03B8,,new,,hybrid regen
+0x001E0438,,new,,hybrid assist
+0x001E04B0,,new,,hybrid free-rev generator
+0x001E0600,,new,,hybrid throttle map
+0x001E0670,,new,,hybrid socFactor
+0x001E06D0,,new,,hybrid motorDemand
+0x001E0900,,new,,hybrid front motors
+0x001E1018,,new,,hybrid crank motor
+0x001E11C8,,new,0x001E1238,Dualnote whine voice (Hybrid.c Hyb_Whine)
+0x001E1238,,new,,hybrid spec-sheet power (showroom)
+0x001E1288,,new,,isPod (kind 1)
+0x001E12A0,,new,,Pod emotion init
+0x001E12E8,,new,,Pod emotion: current state (car+0x5F1 & 15)
+0x001E12F8,,new,,Pod emotion: high nibble of car+0x5F1
+0x001E1308,,new,,Pod emotion: set state
+0x001E13F8,,new,,Pod emotion table query
+0x001E1440,,new,,Pod emotion table query (== 2)
+0x001E1470,,new,,Pod emotion index map
+0x001E14A0,,new,,Pod: all wheels off course (layout wheel count)
+0x001E1520,,new,,"Pod emotion state machine (prop-paired with car_input_update, wrong)"
+0x001E17D8,,new,,Pod model: emotion animation
+0x001E18A0,,new,,Pod model: flow / emotion offsets
+0x001E1950,,new,,Pod model: emotion state
+0x001E1990,,new,,Pod model: emotion state (2)
+0x001E19D0,,new,,Pod sound byte car+0x5F6
+0x001E1A00,,new,,Pod emotion on crash (9)
+0x001E1A48,,new,,Pod emotion on crash by kind
+0x001E1B80,,new,,Pod emotion on crash (5)
+0x001E1BC8,,new,,Pod parking counter init
+0x001E1C18,,new,,Pod parked test
+0x001E1C88,,new,,Pod parking counter step
+0x001E1CF0,,new,,Pod sat down (car+0x5F0 == 0x22)
+0x001E1D00,,new,,Pod parking squat (static stroke per wheel)
+0x001E1E00,,new,,concept-car moving part: mode by kind
+0x001E1E58,,new,,concept-car moving part: thresholds
+0x001E1EB0,,new,,concept-car moving part helper
+0x001E1EF8,,new,,concept-car moving part rate
+0x001E1F30,,new,,concept-car moving part init
+0x001E1FD0,,new,,concept-car moving part step
+0x001E2110,,new,,wing fraction for the model
+0x001E2140,,new,,flag 0x0035DFD0 == 0
+0x001E2150,,new,,kind-7 active suspension table from L2 0x0035DFD0
+0x001E2260,,new,,wrapper of L2 0x001E2140 (DynamicsConductor::initialize)
+0x001E2280,,new,,kind-7 active suspension force (susp_wheel_force)
+0x001E2378,,start,0x001E239C,kind 3 / 4 geometry row
+0x001E2378,,new,,kind 3 / 4 geometry row
+0x001E23A0,,new,,kind 3 / 4 geometry row from the spec (tyre_dimensions)
+0x001E23B8,,new,,kind 3 / 4 geometry table
+0x001E23D0,,new,,"bike / trike geometry helper (cos, sin)"
+0x001E2488,,new,,bike / trike geometry helper (cos)
+0x001E24D8,,new,,kind 3 / 4 test
+0x001E24F0,,new,,params kind 3 / 4 test
+0x001E28C0,,new,,model animation event byte get (car+0x808)
+0x001E2988,,new,,model animation channel get
+0x001E2A80,,new,,model animation event byte set (shift callbacks)
+0x001E2AA0,,new,,model animation channel set
+0x001E2AF8,0x001E1768,right,,engine_output
+0x001E2B88,0x001E17F0,right,,engine_update
+0x001E2EA0,0x001E1B28,right,,diff_code_to_index
+0x001E2EF0,,start,0x001E2F38,diff_codes_to_index (the list has a spurious start at L2 0x001E2F0C inside it)
+0x001E2EF0,0x001E1B80,right,,diff_codes_to_index (L2 0x001E2F0C is a loop label inside it)
+0x001E2F38,,start,0x001E2F7C,diff_codes_to_letters
+0x001E2F38,0x001E1BC8,right,,diff_codes_to_letters
+0x001E3000,,new,,driven axles per drive type (gear_calc)
+0x001E3060,0x001E1C98,right,,gear_calc
+0x001E4338,0x001E6878,right,,brake_heat_setup
+0x001E43E8,0x001E6928,right,,car_brake_heat (map paired it with car_tyre_wear)
+0x001E4518,0x001E6A08,right,,"car_brake_heat_sq (map v2, checked)"
+0x001E4550,0x001E6C28,right,,car_driven_axle_speed
+0x001E45D8,0x001E6CA8,right,,car_engine_speed_from_wheels
+0x001E4658,,new,,per-slot rpm export (init)
+0x001E4698,,new,,per-slot rpm export (per step)
+0x001E4728,,new,,per-slot rpm export get (HUD)
+0x001E4750,,start,0x001E4798,car_update_rpm (start missing from the function list)
+0x001E4750,0x001E6D00,right,,car_update_rpm
+0x001E4798,0x001E6D48,right,,car_clutch_state
+0x001E4948,,new,,type-3 engine state
+0x001E4970,0x001E6EC8,right,,car_brake_torques
+0x001E4B18,0x001E6FE0,right,,slip_grip_factor
+0x001E4BA8,0x001E7068,right,,tyre_slip_ratio
+0x001E4F00,0x001E7328,right,,car_tyre_slip_ratios
+0x001E4FE8,0x001E73C0,right,,car_tyre_force_limits
+0x001E5098,0x001E7450,right,,car_tyre_long_forces
+0x001E5170,0x001E7500,right,,car_engine_speed
+0x001E5558,0x001E77E0,right,,car_gear_select
+0x001E5648,,new,,type-3 rpm display
+0x001E5678,,new,,"R/D selector (gearbox types 1, 3)"
+0x001E5738,0x001E7848,right,,car_long_accel
+0x001E5B78,0x001E7C08,right,,car_tyre_lat_forces
+0x001E5F78,0x001E7D90,right,,car_yaw_lateral
+0x001E6308,0x001E8008,right,,car_integrate_velocity (tail call from car_drivetrain_step)
+0x001E64C0,0x001E8190,right,,car_tyre_wear (map had L2 0x001E43E8: wrong)
+0x001E6688,0x001E8340,right,,car_tyre_check
+0x001E6820,0x001E84D8,right,,car_rolling_resistance
+0x001E68E8,0x001E8598,right,,car_drivetrain_step
+0x001E6DC8,0x001E8978,right,,car_wheel_steer_angles
+0x001E6F00,0x001E8AC0,right,,"ground_is_off_course (map v2, checked)"
+0x001E70B0,0x001E8B68,right,,car_ground_contact
+0x001E7420,0x001E8E58,right,,susp_wheel_force
+0x001E75D0,0x001E8FD0,right,,susp_antiroll_force
+0x001E7880,0x001E9160,right,,"car_hold_lift (map v2, checked)"
+0x001E78C0,0x001E91A8,right,,car_susp_prepare
+0x001E7938,0x001E9218,right,,wheel_camber
+0x001E7A50,0x001E92A8,right,,wheel_lateral_pos
+0x001E7B18,0x001E9348,right,,car_suspension_forces
+0x001E7EF0,0x001E9528,right,,car_pit_jack
+0x001E7FF8,0x001E9640,right,,car_drive_pitch_heave
+0x001E8188,0x001E96F0,right,,car_body_motion
+0x001E89E8,0x001E9998,right,,car_ground_penetration
+0x001E8F50,0x001E9D48,right,,car_wheel_planar_offsets
+0x001E9440,0x001EA1C0,right,,tyre_load_per_width
+0x001E94B0,0x001EA1E8,right,,car_wheel_grip
+0x001E96F8,0x001EA3D8,right,,car_wheel_low_speed_factors (tail call from car_pre_step)
+0x001E9768,0x001EA428,right,,car_pre_step
+0x001E9820,0x001EA4D8,right,,car_ground_attitude
+0x001E9E18,0x001EA720,right,,"car_wheel_spin (map v2, checked)"
+0x001EA040,0x001EA870,right,,"car_speed_view (map v2, checked)"
+0x001EA090,0x001EA8C0,right,,"car_set_condition (map v2, checked)"
+0x001EA358,0x001EAB80,right,,car_race_done
+0x001EA4A8,0x001EAC90,right,,"car_set_brake (map v2, checked)"
+0x001EA768,0x001EAFC0,right,,car_view_update
+0x001EAB10,0x001EB218,right,,car_step
+0x001EAE40,0x001EB550,right,,"car_ground_view_x (map v2, checked)"
+0x001EAE70,0x001EB580,right,,"car_ground_view_y (map v2, checked)"
+0x001EAEA0,0x001EB5B0,right,,"car_ground_view_z (map v2, checked)"
+0x001EAED0,0x001EB5E0,right,,"car_ground_pitch (map v2, checked)"
+0x001EAF00,0x001EB610,right,,"car_ground_roll (map v2, checked)"
+0x001EAF30,0x001EB640,right,,"car_yaw2 (map v2, checked)"
+0x001EAFC8,0x001EB6D8,right,,car_dirt (Lupo 2: stub returning 0.0)
+0x001EB2C8,0x001EB7D0,right,,"car_wheel_steer (map v2, checked)"
+0x001EB310,0x001EB810,right,,"car_wheel_camber (map v2, checked)"
+0x001EB358,0x001EB850,right,,"car_wheel_rotation (map v2, checked)"
+0x001EB3A0,,new,,wheel index through the layout's display map (+0x4C)
+0x001EB3D0,0x001EB890,right,,"car_contact_u (map v2, checked)"
+0x001EB448,0x001EB8D0,right,,"car_contact_v (map v2, checked)"
+0x001EB4C8,0x001EB910,right,,"car_wheel_pos (map v2, checked)"
+0x001EB5B0,0x001EB9A0,right,,"car_wheel_shake_at (map v2, checked)"
+0x001EB608,0x001EB9F0,right,,"car_steer_view (map v2, checked)"
+0x001EB778,0x001EC4B0,right,,car_reset_best_lap
+0x001EC188,0x001ECFC8,right,,car_time_scale
+0x001EC1C0,0x001ED000,right,,"DynamicsConductor::getOrder (map v2, checked)"
+0x001ECBA0,0x001EE978,right,,DynamicsConductor::countLap
+0x001ED3E0,0x001EF060,right,,"DynamicsConductor::updateCar (map v2, checked)"
+0x001ED858,,start,0x001ED884,DynamicsConductor::lapTime (reached by j)
+0x001ED858,0x001EF8C8,right,,"DynamicsConductor::lapTime (map v2, checked)"
+0x001ED888,,start,0x001ED8B4,DynamicsConductor::lapTimeIfStarted (reached by j)
+0x001ED888,0x001EF8F8,right,,"DynamicsConductor::lapTimeIfStarted (map v2, checked)"
+0x001EDA90,0x001EFAE8,right,,"DynamicsConductor::virtual_15 (map v2, checked)"
+0x001EDB18,0x001EFB70,right,,"DynamicsConductor::virtual_17 (map v2, checked)"
+0x001EE0B8,0x001F0088,right,,DynamicsConductorBattle2P::virtual_29 (L2 slot 31)
+0x001EE360,0x001F03E8,right,,DynamicsConductorBattleMP::virtual_29 (L2 slot 31)
+0x001EE468,0x001F0640,right,,"DynamicsConductorMachineTest::CurrentLap (map v2, checked)"
+0x001EE8A8,0x001F0AD8,right,,DynamicsConductorLicense ctor (map: License::virtual_26)
+0x001EE8E0,0x001F0B18,right,,"DynamicsConductorLicense::initialize (map v2, checked)"
+0x001EE998,,new,,licence helper: byte != 0
+0x001EEFB0,0x001F10B8,right,,"DynamicsConductorLicense::virtual_34 (L2 slot 36; returns 0, GT3 3; map v2: virtual_36, wrong)"
+0x001EEFB8,0x001F10C0,right,,"DynamicsConductorLicense::virtual_35 (L2 slot 37; returns 0, GT3 2)"
+0x001EEFC0,0x001F10C8,right,,DynamicsConductorLicense::virtual_36 (L2 slot 38; returns 1 as GT3)
+0x001EEFC8,0x001F10D0,right,,"DynamicsConductorLicense::virtual_37 (L2 slot 39; returns 0, GT3 !isDirtCourse)"
+0x001EEFD8,0x001F1190,right,,DynamicsConductorFreeRun ctor (map: License::virtual_37)
+0x001EF128,,new,,DynamicsConductorFreeRun new slot 14 (get dc+0xF100[i])
+0x001EF140,,new,,DynamicsConductorFreeRun new slot 15 (set dc+0xF100[i])
+0x001EF398,0x001F14E8,right,,"DynamicsConductorFreeRun::recordOneLapGh (map v2, checked)"
+0x001EF900,0x001F1AD8,right,,DynamicsConductorTimeTrial ctor (map: TimeTrial::getEachEntrantInfo_)
+0x001EF988,0x001F1B80,right,,"DynamicsConductorTimeTrial::CurrentLapTi (map v2, checked)"
+0x001EF9B8,0x001F1BB8,right,,"DynamicsConductorTimeTrial::disqualify (map v2, checked)"
+0x001EFD88,0x001F2010,right,,DynamicsConductorFreePractice ctor (map: FreePractice::getEachEntrantInfo_)
+0x001EFEC8,0x001F2150,right,,"DynamicsConductorFreePractice::virtual_1 (map v2, checked)"
+0x001F03B0,0x001F2748,right,,"DynamicsConductorSinglePlayer::DynamicsC (map v2, checked)"
+0x001F0900,0x001F2C90,right,,DynamicsConductor::virtual_30 (L2 slot 32)
+0x001F0920,0x001F2CB0,right,,"DynamicsConductor::hasFinishLine (map v2, checked)"
+0x001F0B28,0x001F2E98,right,,"DynamicsConductor::hasPitLane (map v2, checked)"
+0x001F0C28,0x001F2F90,right,,DynamicsConductor::isDirtCourse (getCourseKind() == 2; map had L2 0x001F7BF0: wrong)
+0x001F0C78,0x001F2FE0,right,,DynamicsConductor::virtual_20 (L2 slot 22; adds the kind-7 table and Pod-mode set-up calls)
+0x001F1070,0x001F3378,right,,DynamicsConductor::getSpecialStart (L2 slot 26)
+0x001F12A8,0x001F35B8,right,,DynamicsConductor::attach
+0x001F1320,0x001F3628,right,,DynamicsConductor::initialize
+0x001F2C60,0x001F4D80,right,,AutomobileControlRecord::allocBuffers (call position in race_begin)
+0x001F3700,0x001F5638,right,,AutomobileControlRecord::Manager::hasSlots (call position in play_saved_replay twin)
+0x001F3710,,new,,car+0x828 animation object init wrapper
+0x001F3730,,new,,car+0x828 animation object step wrapper
+0x001F3750,0x001D8A80,right,,eulerToAxes
+0x001F3B18,0x001D8E50,right,,"curveLookup (86 insns now; the old leaf bounds stopped at an early jr; callers TyreData_initLoadCurve, engine_torque_at, ai_brake_factor)"
+0x001F3D28,,new,,inverse curve lookup (used by car_brake_aids; physics)
+0x001F43E8,0x001DD0C8,right,,DynCarState_setDriver
+0x001F43F8,0x001DD0D8,right,,DynCarState_setTransMode
+0x001F4430,0x001DD110,right,,DynCar_initTyreWear
+0x001F44F8,0x001DD1A8,right,,DynCarState_resetWheels
+0x001F4590,0x001DD210,right,,DynCar_place
+0x001F4988,0x001DD5C8,right,,"DynCar_setSpeed (map v2, checked)"
+0x001F49A8,0x001DD5F0,right,,DynCar_resetState
+0x001F4CA0,0x001DD8A8,right,,DynCar_setInitialSpeed
+0x001F4F20,0x001DDAD0,right,,DynCar_initialize
+0x001F5590,0x001DDFF0,right,,DynCar_tickMessage
+0x001F55B8,0x001DE018,right,,"DynCar_setMessage (map v2, checked)"
+0x001F55F0,0x001DE070,right,,"CourseEnv_initSurfaceSmoke (map v2, checked)"
+0x001F5CA0,0x001DEBB0,right,,tyre_sound_update
+0x001F6340,0x001DF148,right,,"F_001DF148 (8 bytes, same slot in car_step)"
+0x001F6348,,new,,per-wheel smoke + leaf trigger (inline in GT3)
+0x001F6480,0x001DF150,right,,tyre_smoke_emit (tail-called from car_step twin at 0x001EABE0)
+0x001F66B8,0x001DF2B0,right,,pad_vibration_update
+0x001F6990,0x001DFF40,right,,steer_force_init (tail call from input_tuning_init)
+0x001F6BF0,,new,,per-slot vibration / force-feedback record (dc+0xC0A8 + slot x 8)
+0x001F6C10,0x001E0068,right,,steer_force_update
+0x001F7458,0x001E0618,right,,pad_vibration_send
+0x001F7488,0x001E0740,right,,car_attitude_lag_reset
+0x001F74B0,0x001E0768,right,,car_attitude_lag_update
+0x001F75C8,,new,,"Pod: init (licenseType 5, stop area 608 m + 33 m)"
+0x001F7708,,new,,Pod: isPodMode (dc+0xF088 == 1)
+0x001F7720,,new,,Pod: stop area start / length
+0x001F7788,,new,,Pod: store a car's stop point
+0x001F7840,,new,,Pod: read a car's stop point
+0x001F7908,,new,0x001F7980,Pod: set stop state byte (no callers)
+0x001F7980,,new,0x001F79D0,Pod: get stop state byte (no callers)
+0x001F79D0,,new,,Pod: stops pending (laps - stops done)
+0x001F7A38,,new,,"Pod: stop done (display event 7, count++)"
+0x001F7B20,,new,,"Pod: lap check (lap not counted, emotion 7, race event 0x0B)"
+0x001F7BF0,,new,,Pod: per-frame rule (messages 0x10 / 0x11; tool: isDirtCourse) [map: 001F2F90]
+0x001F7BF0,0x001F2F90,wrong,,"race message / information-event routine (Battle2P, SinglePlayer), not isDirtCourse"
+0x001F7DC0,,new,,brake-aid modifier block init
+0x001F7E30,,new,,brake-aid modifier block apply
+0x001F7F60,,new,,tcs_brake_or_abs + brakeOn2 (flagged)
+0x001F7FA8,0x001E2D08,right,,tcs_brakes
+0x001F82C8,0x001E3068,right,,car_brake_aids
+0x001F8658,0x001E3708,right,,car_slip_estimate
+0x001F89F8,0x001E3A68,right,,car_assists_own
+0x001F8A60,0x001E3AD0,right,,car_assists_ai
+0x001F8AB0,0x001E3B18,right,,car_assists
+0x001F8C20,0x001E3C78,right,,car_mode_computer
+0x001F8CA8,0x001E3D08,right,,car_mode_pit_in
+0x001F8CF8,0x001E3D60,right,,car_mode_pit_box
+0x001F8D40,0x001E3DA8,right,,car_mode_pit_out
+0x001F8D88,0x001E3DF0,right,,"car_mode_stop_roll (map v2, checked)"
+0x001F8DD0,0x001E3E38,right,,"car_mode_stop_brake (map v2, checked)"
+0x001F8E18,,start,0x001F8E28,car_mode_stop (jump table)
+0x001F8E18,0x001E3E80,right,,"car_mode_stop (map v2, checked)"
+0x001F8E28,,start,0x001F8E38,car_mode_still (jump table)
+0x001F8E28,0x001E3E90,right,,"car_mode_still (map v2, checked)"
+0x001F8E38,0x001E3EA0,right,,input_tuning_init
+0x001F91B0,0x001E4180,right,,car_clutch_from_input
+0x001F9328,,new,,type-3 automatic clutch
+0x001F93C8,,start,0x001F9478,type-3 creep (start missing from the function list)
+0x001F93C8,,new,,type-3 creep
+0x001F9478,0x001E4290,right,,car_steering_display
+0x001F9530,0x001E4320,right,,approach
+0x001F9578,0x001E4368,right,,car_steer_toward
+0x001F96B0,0x001E4468,right,,"car_set_steer_assist (map v2, checked)"
+0x001F96B8,0x001E4470,right,,car_get_steer_assist
+0x001F96C0,,new,,steering display from steer angle (100 = 15 deg)
+0x001F9710,,new,,car steering (split out of car_process_input)
+0x001F9CC0,0x001E4478,right,,car_process_input (steering split out to L2 0x001F9710)
+0x001FA600,0x001E4CB0,right,,car_input_pad
+0x001FA648,0x001E4CF0,right,,car_input_ai_apply
+0x001FA690,0x001E4D38,right,,car_input_update
+0x001FA948,0x001E4E78,right,,car_set_gear
+0x001FA950,,new,,revLimit accessor (GT3 inlines it)
+0x001FA960,0x001E4E80,right,,car_gear_for_speed
+0x001FAA88,0x001E4F10,right,,car_update_gear_offset
+0x001FAB50,0x001E4FF8,right,,car_shift_auto
+0x001FB050,0x001E5458,right,,car_shift_semi_auto
+0x001FB140,,start,0x001FB20C,car_shift_manual (start missing from the function list)
+0x001FB140,0x001E5540,right,,car_shift_manual
+0x001FB210,,start,0x001FB2A8,car_shift_sequential (start missing from the function list)
+0x001FB210,0x001E5600,right,,car_shift_sequential
+0x001FB2A8,0x001E5690,right,,car_select_gear
+0x001FB3B8,0x001E5768,right,,car_wheel_torques
+0x001FB490,0x001E57F8,right,,car_active_yaw_control
+0x001FB6E8,0x001E5998,right,,car_centre_coupling
+0x001FB890,0x001E5B30,right,,clutch_slip_factor
+0x001FB8F0,,new,,any wheel braked
+0x001FB960,0x001E5B98,right,,car_drive_torque
+0x001FC558,0x001E6488,right,,car_axle_differentials
+0x001FCA28,0x001E6A38,right,,car_wheel_shake
+0x001FCD08,0x001E8828,right,,conductor_load_car_boxes (tail-called by collideAllCars / collideWalls)
+0x001FCDD0,0x001E9E18,right,,car_wheel_speed_factors
+0x001FCE60,0x001EBB60,right,,dc_set_near
+0x001FD0A0,0x001EBDA0,right,,car_pair_contact (closing test removed)
+0x001FD188,0x001EBE98,right,,"dc_set_slip (map v2: getGapDistance, wrong)"
+0x001FD1A8,0x001EBEB8,right,,"dc_get_slip (map v2: getGapLaps, wrong)"
+0x001FD1C8,0x001EBED8,right,,"dc_clear_slip (map v2: getRunState, wrong)"
+0x001FD1F0,0x001EBF00,right,,car_slipstream
+0x001FD260,0x001EBF68,right,,car_near_code
+0x001FD378,0x001EC098,right,,dc_car_pairs
+0x001FD8B0,0x001EDB40,right,,car_update_pit
+0x001FE468,0x001EF520,right,,DynamicsConductor::licenseFailed
+0x001FE518,0x001EF5C0,right,,"DynamicsConductor::licenseFinished (map v2, checked)"
+0x001FE738,0x001EF780,right,,"DynamicsConductor::licenseCheckStop (map v2, checked)"
+0x001FE8A0,,new,,AI corner lookup for every car on course 0xEF (from DynamicsConductor::update; GT3 has similar code inline in Battle2P only)
+0x001FE968,0x001D91D8,right,,responseInit (new curve mode 3)
+0x001FEB00,0x001D92E0,right,,responseEval (new curve mode 3)
+0x001FEE10,0x001E3338,right,,tcs_throttle_on
+0x001FEE30,0x001E3360,right,,car_traction_control
+0x001FF080,0x001E35D8,right,,car_input_ai
+0x001FF248,0x001EF488,right,,car_stopped_in_box
+0x001FFA08,0x001F5FB8,right,,ai_drive_param (tail call to getDriveParam twin 0x001FF990)
+0x001FFDE0,0x001F6380,right,,ai_apply_rules
+0x001FFF98,0x001F6518,right,,ai_reduce_pace
+0x001FFFF8,0x001F6540,right,,F_001F6540 (empty)
+0x00200008,0x001F6550,right,,ai_set_downforce
+0x00200640,0x001F6B48,right,,ai_brake_margin (50.0)
+0x00200650,0x001F6B58,right,,ai_clear_traffic
+0x00200688,0x001F6B90,right,,ai_note_car
+0x002007A8,0x001F6CC0,right,,ai_note_closing (new thresholds)
+0x00200C10,0x001F7078,right,,ai_corner_index
+0x00200C20,0x001F7088,right,,ai_brake_factor (Pod stop + torque-share throttle scale)
+0x002013E8,0x001F7520,right,,ai_speed_throttle
+0x00201450,0x001F7590,right,,ai_hold_speed
+0x00201668,,new,,AI: the line's heading at a lap distance (recovery test)
+0x002019E8,0x001F7948,right,,ai_look_distance
+0x00201A88,0x001F79F0,right,,ai_apply_outputs
+0x00201B50,0x001F7AE0,right,,ai_drive
+0x00202A68,0x001F8638,right,,ai_init (lines = dc+0xC4E8)
+0x00202A80,0x001F8650,right,0x00202A98,ai_construct (tail call to ai_init) (start missing from the function list)
+0x00202C58,0x001F8838,right,0x00202C68,ai_on_line4 (start missing from the function list)
+0x00202CA8,,new,,AI: this car's AIParams in the conductor (dc+0xECE8+idx*0x74)
+0x00202CD8,,new,,AI: AIParams+0x24 getter
+0x00202DA0,0x001F8A00,right,,ai_rev_engine
+0x00204048,0x001F9C80,right,0x00204074,lines_side_line_2 (lines_side_line's first tail call) (start missing from the function list)
+0x00204078,0x001F9CB0,right,0x002040A4,lines_side_line_1 (start missing from the function list)
+0x00204180,0x001F9DB8,right,0x002041B0,pit_node_dist_wrapped (start missing from the function list) [map agrees]
+0x00208D28,,new,,car+0x828 object: set parameter block
+0x00208D30,,new,,car+0x828 object: parameter accessor
+0x00208D40,,new,,car+0x828 object: parameter accessor
+0x00208D50,,new,,car+0x828 object: parameter accessor
+0x00208D60,,new,,car+0x828 object: parameter accessor
+0x00208D70,,new,,car+0x828 object: parameter accessor
+0x00208D80,,new,,car+0x828 object: parameter accessor
+0x00208D90,,new,,car+0x828 object: parameter accessor
+0x00208DA0,,new,,car+0x828 object: parameter accessor
+0x00208DB0,,new,,car+0x828 object: parameter accessor
+0x00208DC0,,new,,car+0x828 object: parameter accessor
+0x00208DD0,,new,,car+0x828 object: parameter accessor
+0x00208DE0,,new,,car+0x828 object: parameter accessor
+0x00208DF0,,new,,car+0x828 object: parameter accessor
+0x00208E00,,new,,car+0x828 object: parameter accessor
+0x00208E10,,new,,car+0x828 object: parameter accessor
+0x00208E20,,new,,car+0x828 object: parameter accessor
+0x00208E30,,new,,car+0x828 object: parameter accessor
+0x00208E40,,new,,car+0x828 object: parameter accessor
+0x00208E50,,new,,car+0x828 object: parameter accessor
+0x00208E60,,new,,car+0x828 object: parameter accessor
+0x00208E70,,new,,car+0x828 object: parameter accessor
+0x00208E80,,new,,car+0x828 object: parameter accessor
+0x00208E90,,new,,car+0x828 object: parameter accessor
+0x00208EA0,,new,,car+0x828 object: parameter accessor
+0x00208EB0,,new,,car+0x828 object: parameter accessor
+0x00208EC0,,new,,car+0x828 object: parameter accessor
+0x00208ED0,,new,,car+0x828 object: parameter accessor
+0x00208EE0,,new,,car+0x828 object: parameter accessor
+0x00208EF0,,new,,car+0x828 object: parameter accessor
+0x00208F00,,new,,car+0x828 object: parameter accessor
+0x00208F10,,new,,car+0x828 object: parameter accessor
+0x00208F20,,new,,car+0x828 object: parameter accessor
+0x00208F30,,new,,car+0x828 object: parameter accessor
+0x00208F40,,new,,car+0x828 object: parameter accessor
+0x00208F50,,new,,car+0x828 object: parameter accessor
+0x00208F60,,new,,car+0x828 object: parameter accessor
+0x00208F70,,new,,car+0x828 object: parameter accessor
+0x00208F80,,new,,car+0x828 object: parameter accessor
+0x00208F90,,new,,car+0x828 object: parameter accessor
+0x00208FA0,,new,,car+0x828 object: parameter accessor
+0x00208FB0,,new,,car+0x828 object: parameter accessor
+0x00208FC0,,new,,car+0x828 object: parameter accessor
+0x00208FD0,,new,,car+0x828 object: parameter accessor
+0x00208FE0,,new,,car+0x828 object: parameter accessor
+0x00208FF0,,new,,car+0x828 object: parameter accessor
+0x00209000,,new,,car+0x828 object: parameter accessor
+0x00209010,,new,,car+0x828 object: parameter accessor
+0x00209028,,new,,car+0x828 object: parameter accessor
+0x00209038,,new,,car+0x828 object: parameter accessor
+0x00209048,,new,,car+0x828 object: parameter accessor
+0x00209058,,new,,car+0x828 object: parameter accessor
+0x00209068,,new,,car+0x828 object: parameter accessor
+0x002090A0,,new,,car+0x828 object: constant 0.4
+0x002090A8,,new,,car+0x828 object: parameter defaults
+0x002090F0,,new,,car+0x828 object: parameter load
+0x002091B8,,new,,car+0x828 object: global parameter block
+0x002091C8,,new,,car+0x828 object: static init
+0x00209558,,new,,car+0x828 animation object init
+0x00209810,,new,,car+0x828 animation object step body
+0x0020A668,,new,,car+0x828 animation object step (calls L2 0x00209810)
+0x0020AC20,,new,,float lerp helper of the L2 car-box code (physics)
+0x0020AC40,,new,,"fill 32 floats (L2 car-box code, physics)"
+0x0020AC70,,new,,"copy 32 floats (L2 car-box code, physics)"
+0x0020ACA0,,new,,"lerp two 32-float arrays (L2 car-box code, physics)"
+0x0020C5F8,0x002004B0,right,0x0020C638,OnBoardCamera::applyView (+ head tracker)
+0x0020C688,0x00200520,right,0x0020C6C0,OnBoardCamera::getMountCount
+0x0020CBC8,0x002009F0,right,,OnBoardCamera::isViewBlocked (face height 1.0 -> 1.5)
+0x0020D010,0x00200E08,right,,OnBoardCamera::isInsideCar (face height 1.0 -> 1.5)
+0x0020DA88,0x00206710,right,0x0020DB7C,CameraRotDamper::start (changed: 0.4 -> 0.14)
+0x0020DB80,0x00206808,right,,CameraRotDamper::update (changed: 0.4 -> 0.14)
+0x0020E580,0x00207960,right,0x0020E994,CameraManager::CameraManager (CameraView::CameraView inlined)
+0x0020EFF0,0x002080E0,right,,CameraManager::isCenterTopLeft
+0x0020F028,0x00208110,right,,CameraManager::isCenterTopRight
+0x0020F060,0x00208140,right,,CameraManager::isCenterBottomLeft
+0x0020F098,0x00208170,right,,CameraManager::isCenterBottomRight
+0x0020F108,0x002081D0,right,,CameraManager::setScreenLayout
+0x0020F2B8,0x00208320,right,,CameraManager::init (stereo distance 0.2 -> 0.063; zoom spring reset)
+0x0020FAD0,0x00208B68,right,0x0020FB58,CameraManager::getColourCorrection (now virtual slot 15)
+0x0020FB58,0x00208BE8,right,,CameraManager::update
+0x00210170,0x002091E0,right,0x002101B8,CameraManager::isOwnCar
+0x002112E8,0x0020A9C0,right,0x002113CC,CameraManager::startDemoCameras (no callers in L2)
+0x002113D0,0x0020AA90,right,0x002114F0,CameraManager::updateDemoCameras (no callers in L2)
+0x00211D60,0x0020B8E8,right,,CameraManager::updateMode0 (changed: start sequence; zoom; demo timer)
+0x00212CC0,,new,0x00212D0C,avantgarde colour preset collector (CourseEnv +0xF50 presets)
+0x00212D10,0x0020C580,right,,CameraManager::updateMode1 (changed: course presets; no pair shots)
+0x00213FA0,0x0020D840,right,0x00214064,CameraTargetSelector::reset (6 slots in L2)
+0x002150B8,0x0020E930,right,0x002151F4,F_0020E930 demo replay view mode (changed)
+0x002152D0,0x0020EB38,right,0x0021533C,F_0020EB38 (apply options view mode)
+0x002154E8,,new,0x00215510,zoom spring (ZoomupDamper) reset
+0x00215510,,new,0x002155D0,zoom spring (ZoomupDamper) update
+0x002155D0,,new,0x002155D8,zoom spring (ZoomupDamper) set target
+0x002155D8,,new,0x002155E0,zoom spring (ZoomupDamper) get
+0x00215608,0x0020ED50,right,0x00215694,F_0020ED50 StepPair step (T395)
+0x002156B8,,new,,camera request flag word clear (GT3 inline)
+0x00215750,0x001FE768,right,,VariableCameraBase::VariableCameraBase (+ zoomMult = 1)
+0x00215A90,0x001FEAA8,right,0x00215ADC,VariableCameraBase::setLodBias (changed: -ln2 -> static 0.0)
+0x00215F50,0x00201830,right,,DesignerCamera::update (zoomMult)
+0x00217198,0x00202B58,right,0x002171E4,PasslineCamera::setup (also L2 StartingCamera slot 23)
+0x002175A0,0x00202FC8,right,0x0021763C,StartingCamera::setup (L2 adds a flag argument; vtable slot 24 where GT3's is slot 23)
+0x00217640,0x00203028,right,0x00217848,StartingCamera::update (changed)
+0x0021B2C8,,new,,CameraBase::CameraBase out of line (GT3 inlines it)
+0x0021B410,,new,0x0021B438,CameraBase::random (race-installed seed function)
+0x0021BA28,,new,,MenuCarCamera debug mode 12 set (C12)
+0x0021BFD0,,new,0x0021BFFC,MenuCarCamera debug mode 12: slot 8 wrapper
+0x0021C000,0x0020FB30,right,0x0021C03C,MenuCarCamera::applyView (+ debug mode 12)
+0x0021C040,,new,0x0021C0DC,MenuCarCamera debug mode 12: update
+0x0021C0E0,,new,0x0021C0FC,MenuCarCamera debug mode 12: view
+0x0021C388,,new,0x0021C3B4,MenuCarCamera debug camera file: init
+0x0021C3B8,,new,0x0021C638,MenuCarCamera debug camera file: loader (host0 camera.txt)
+0x0021C638,,new,,MenuCarCamera debug mode 12 helper (C12)
+0x0021C6A0,,new,,MenuCarCamera debug mode 12 view helper (C12)
+0x0021CB18,0x00210608,right,,9RaceInput slot 0 = 9RaceInput slot 0 [map agrees]
+0x0021CBC8,0x00210690,right,,RaceInput::isLapFinished
+0x0021CC70,0x00210740,right,,RaceInput::read (split into slots 11 / 12)
+0x0021CD00,,new,,RaceInput slot 11: play the record unless held (GT3 read's playback half)
+0x0021CD28,,new,,RaceInput slot 12: read pad + wheel and record (GT3 read's live half)
+0x0021CE60,,new,,"RaceInput::setMode: store +0x148, port slot 7"
+0x0021CEA8,,new,,RaceInput: port slot 8 call
+0x0021D068,0x00210A78,right,,9RaceInput slot 10 = 9RaceInput slot 10 [map agrees]
+0x0021D090,0x00210AA0,right,,9RaceInput slot 9 = 9RaceInput slot 9 [map agrees]
+0x0021DA90,0x00211430,right,,RaceInput::readPad
+0x0021DCA8,0x002115F8,right,,RaceInput::readWheel
+0x0021DE60,,new,,T413 static init / destroy helper
+0x0021DED8,0x00211750,right,,T413_static_destroy ($D wrapper of helper 0x0021DE60; map v2: RaceInput::reset) [map: 00211920]
+0x0021DEF8,,new,,menus/save: request record constructor (not race code)
+0x0021DF28,,new,,menus/save: request record reset (MenuStatus::reset)
+0x0021DF58,,new,,menus/save: request record clear
+0x0021DF68,,new,,menus/save: request record set kind
+0x0021DF80,,new,,menus/save: request record set kind + name
+0x0021DFB8,,new,,menus/save: request record set kind 6 + name (map v2: RaceInput::attachBuffer) [map: 00211940]
+0x0021DFD8,,new,,menus/save: request record state getter
+0x0021E0F0,,new,,T414 (RaceRandom) static init helper
+0x0021E148,,new,,save: initialiser called by GameStatus::GameStatus (unlock block)
+0x0021E150,,new,,save: helper of the unlock pass 0x0021E2D0
+0x0021ED00,0x00212360,right,,MachineTestTable::load (memcpy 768 inlined)
+0x0021EDC0,0x00212390,right,,MachineTestTable::save (memcpy 768 inlined)
+0x0021F808,0x00212DD8,right,,FreeRunTable::load (memcpy 768 inlined)
+0x0021F8C8,0x00212E08,right,,FreeRunTable::save (memcpy 768 inlined)
+0x0021FC80,0x00213140,right,,FreeRunRecords::size (calls FreeRunTable::size)
+0x0021FCB8,0x00213168,right,,FreeRunRecords::load (calls FreeRunTable::load 0x0021F808)
+0x0021FD00,0x002131C0,right,,FreeRunRecords::save (calls FreeRunTable::save 0x0021F8C8)
+0x00220B08,0x00213EC8,right,,BestPlace::save
+0x00220D88,,new,,rewards: mark given
+0x002211C0,,new,,present requirement parser (Concept presents)
+0x002223D0,,new,,present requirement helper
+0x00222440,,new,,reward list builder
+0x002236D0,0x00215A20,right,,LicenseRecords::insertCode
+0x00223C88,0x00215E90,wrong,,"calls a LicenseTest method: Lupo 2's second licence-records block (GameStatus+0x23510), not PrizeSetFlags::load"
+0x00223CB8,0x00215EC0,wrong,,"calls a LicenseTest method: second licence-records block, not PrizeSetFlags::save"
+0x00223CF0,0x002167C8,wrong,,"calls a LicenseTest method: second licence-records block, not ArcadeRecords::getPlace"
+0x00223D20,0x002167F0,wrong,,"calls a LicenseTest method: second licence-records block, not ArcadeRecords::addTime"
+0x00223D58,0x00216820,wrong,,"calls a LicenseTest method: second licence-records block, not ArcadeRecords::getTime"
+0x00223D88,0x00216AF0,wrong,,"calls a LicenseTest method: second licence-records block, not ArcadeRecords::getSize"
+0x00223E98,0x00216DB8,wrong,,"loads 340-byte licence tests (0x00223028), not CourseBestTimes::load"
+0x00223EF0,0x00216B70,wrong,,"saves the licence block at GameStatus+0x23510 (340-byte tests), not ArcadeRecords::save"
+0x00223FC0,,new,,"present set index by name (strcmp, F..I)"
+0x00224220,,new,,presents block size
+0x00224228,,new,,presents block load
+0x00224308,,new,,presents block save
+0x002243E8,,new,,presents block init
+0x00225330,0x00216AF0,right,,ArcadeRecords::getSize (calls ArcadeRecord::getSize; map v2 had FreeRunRecords::size)
+0x002253A0,0x00216B70,right,,ArcadeRecords::save (saves the arcade block GameStatus+0x24900)
+0x002261C8,0x00217BC8,right,,ControllerConfig::load (memcpy 0x250 inlined)
+0x002262A8,0x00217BF8,right,,ControllerConfig::save (memcpy 0x250 inlined)
+0x002267F0,0x00218078,right,,MenuStatus::setCar
+0x00226A80,0x00218460,right,,"GameOptions::reset (setDefaults, display offset, apply; map had L2 0x0022B838)"
+0x00226AC0,,new,,GameOptions assist level set (preset table 0x002DF5C8)
+0x00226AE8,,new,,GameOptions assist level get
+0x00226B58,,new,,"GameOptions::setScreenAdjustH (+0x64, gfx_set_display_fb(2h, 2v))"
+0x00226B88,,new,,"GameOptions::setScreenAdjustV (+0x68, gfx_set_display_fb(2h, 2v))"
+0x00227988,0x00218F40,right,,"GameStatus::getRunningCar, out-of-line copy (the linkonce copy is 0x002D1B18)"
+0x002292B0,0x0021AD38,right,0x00229304,MusicPlayList::orderStraight
+0x0022A808,,new,,returns the GT3-save descriptor 0x00349F50 (menus_b 13)
+0x0022A818,,new,,Concept GT3-save descriptor accessor (0x00349F50) tail-calling 0x0022A888 (menus_b 13); not bytes_equal
+0x0022A868,,new,,GT3-save descriptor +0x4C (menus_b 13)
+0x0022A888,,new,,GT3-save descriptor method (menus_b 13)
+0x0022B838,0x00218460,wrong,,"CourseBestTimes helper, not GameOptions::reset (= L2 0x00226A80)"
+0x0022BCD0,0x0021D2A0,right,,ProductConfig::idleSeconds (general+0)
+0x0022BCE0,0x0021D2B0,right,,"ProductConfig::F_0021D2B0 (general+4, demo time limit)"
+0x0022BD10,0x00114090,wrong,,"ProductConfig getter (GcfCarSection::find +4), not ArcadeControl::setup (= L2 0x001068E0)"
+0x0022C398,0x0021D6C8,right,,ProductConfig::demoCount
+0x0022C3C8,0x0021D6F8,right,,ProductConfig::F_0021D6F8 (demo record +4)
+0x0022C3E8,0x0021D718,right,,ProductConfig::F_0021D718 (demo record +8; map v2 had F_0021D6F8)
+0x0022D788,0x0021EA90,right,,CarModel::setModel
+0x0022D840,0x0021EB50,right,,CarModel::CarModel
+0x0022D900,0x0021EC08,right,,CarModel::Callback::Callback (new field defaults)
+0x0022D9E8,0x0021EC90,right,,CarModel::Callback::selectSwitch (ids 6..10 added)
+0x0022DAE8,,new,,CarModel::animate
+0x0022DB18,,new,,CarModel::reset (apply)
+0x0022DB70,0x0021ED80,right,,CarModelLamps::push
+0x0022DBF0,0x0021EDF8,right,,CarModel::pushLamps
+0x0022DC30,0x0021EE48,right,,CarModel::setWheelShake
+0x0022DC50,0x0021EE68,right,,CarModel::setSteer
+0x0022DC60,,new,,CarModel set +0x24 (wing)
+0x0022DC68,,new,,CarModel set +0x28/+0x2C (Pod tail)
+0x0022DC78,,new,,CarModel set +0x30/+0x34 (Pod colour)
+0x0022DC88,,new,,CarModel set +0x38 (Pod state)
+0x0022DC90,,new,,CarModel::setAnimSelect
+0x0022DFA8,0x0021F148,right,,CarModel::drawShadow
+0x0022E0B0,0x0021F258,right,,CarModel::F_0021F258
+0x0022E130,,new,,CarModel: draw program 1 without ground pass (shadow silhouette)
+0x0022E250,0x0021F430,right,,tire_file_load_texture
+0x0022E460,0x0021F660,right,,TireModelBase::TireModelBase
+0x0022E808,,new,,TireModelBase tyre bbox MV (projected shadow)
+0x0022E948,0x00221310,right,,TStripBuilder::TStripBuilder(void *)
+0x0022F888,0x002222B8,right,,RaceTireModel::draw
+0x0022FBB8,0x00222550,right,,RaceTireModel::drawCylinder
+0x0022FCD0,,new,,RaceTireModel silhouette draw (projected shadow)
+0x00231590,,new,,RaceTirePacket silhouette draw (projected shadow)
+0x002315F8,0x00223DB0,right,,RaceTirePacket::Callback::Callback
+0x00231688,,new,,T449 static init/fini body (compiler form)
+0x002317F8,0x00224150,right,,MenuTireModel::build
+0x00231C70,,new,,"bike model loader bike/%s.mdl, front/rear_tire.mdl"
+0x002321D8,0x002248D0,right,,modelset_reset_anims (select arg)
+0x00234B90,0x00227168,right,,carmodelinfo_relocate (not Lupo-2-only)
+0x00234C50,0x00227220,right,,"carmodelinfo_tire (delta D1, noise)"
+0x00234CF0,0x002272B0,right,,carmodelfile_relocate (not Lupo-2-only)
+0x00234E38,0x002273F0,right,,runway_find_interval
+0x002357F8,0x00227D78,right,,runway_query
+0x00236500,0x00228B00,right,,runway_marker_value
+0x002382F0,0x0021FB00,right,,tire_packet_pass_callback
+0x00238458,,new,,TirePacket silhouette draw (projected shadow)
+0x00238708,0x0021FEB8,right,,TirePacket::virtual_3
+0x00238870,0x00220020,right,,TirePacket::virtual_4 (inner shoulder added)
+0x00238E78,0x00220600,right,,TirePacket::buildSidewall
+0x00239280,0x00220A00,right,,TirePacket::buildShoulder
+0x0023A288,0x0022B678,right,0x0023A2E4,bgm_stop_unlocked (map had L2 0x0023A2E8 = new fade variant)
+0x0023A2E8,,new,0x0023A344,bgm stop with fade (unlocked; map paired it with bgm_stop_unlocked)
+0x0023A6C0,,new,0x0023A6F8,bgm_fade_stop (no callers)
+0x0023AC60,,new,0x0023AC7C,ads fade stop
+0x0023AE50,0x0022BCE0,right,0x0023AE60,GtSoundHandle::GtSoundHandle (map had L2 0x0023B0A0 = new channel ctor)
+0x0023B000,0x0022BEA0,right,0x0023B058,GtSoundHandle::stop (map had L2 0x0023B2B8 = new channel stop)
+0x0023B058,0x0022BEF8,right,0x0023B0A0,GtSoundHandle::operator= (map had L2 0x0023B310 = new channel operator=)
+0x0023B0A0,,new,0x0023B0B0,sound channel class: ctor (Pod voice; map paired it with GtSoundHandle ctor)
+0x0023B0B0,,new,0x0023B0C8,sound channel class: set
+0x0023B0C8,,new,0x0023B110,sound channel class: bind
+0x0023B110,,new,0x0023B2B4,sound channel class: position (volume pitch priority each frame)
+0x0023B2B8,,new,0x0023B30C,sound channel class: stop (map paired it with GtSoundHandle::stop)
+0x0023B310,,new,0x0023B358,sound channel class: operator= (map paired it with GtSoundHandle::operator=)
+0x0023BAF0,,new,0x0023BD1C,T469 static init/fini body (compiler helper; 4 SE banks)
+0x0023BD20,0x0022C7C8,right,0x0023BD40,T469 static init (_GLOBAL_$I; body in L2 0x0023BAF0)
+0x0023BD40,0x0022C718,right,0x0023BD60,T469 static fini (_GLOBAL_$D; body in L2 0x0023BAF0)
+0x0023D3A8,0x0022DE10,right,,9RaceInput slot 8 = 9RaceInput slot 8 [map agrees]
+0x0023D470,0x0022DED8,right,,9RaceInput slot 1 = 9RaceInput slot 1 [map agrees]
+0x0023D4E8,0x0022DF40,right,,9RaceInput slot 2 = 9RaceInput slot 2 [map agrees]
+0x0023D560,0x0022DFA8,right,,9RaceInput slot 4 = 9RaceInput slot 4 [map agrees]
+0x0023D568,0x0022DFB0,right,,9RaceInput slot 5 = 9RaceInput slot 5 [map agrees]
+0x0023D590,0x0022DFD8,right,,9RaceInput slot 6 = 9RaceInput slot 6 [map agrees]
+0x0023D5B8,0x0022E000,right,,9RaceInput slot 7 = 9RaceInput slot 7 [map agrees]
+0x0023D5C8,0x0022E010,right,,9RaceInput slot 3 = 9RaceInput slot 3 [map agrees]
+0x0023DFE8,,new,,PortBase virtual 6 default (returns 0); USB wheel: deflection level 0..8
+0x0023EBE8,0x0022FE60,right,,PSPort::setActuator (vtable slot 3)
+0x0023F490,,new,,USBSteeringPort::onConnect (dead zone 0x90 Logitech / 0xC0 0x6F8 and step = (0x200 - dz) / 7)
+0x0023F5B8,,new,,USBSteeringPort Logitech FF set-up (spring off / set default spring 3 3 30 / spring on slot 0x20)
+0x0023F680,,new,,USBSteeringPort::enableSpring: ff_default_spring(port 0x20 on)
+0x0023F7F8,,new,,USBSteeringPort::setDamper: damper force in slot 0x80 (no caller of the RaceInput wrapper)
+0x0023F848,,new,,USBSteeringPort 0x6F8 wheel centring sequence
+0x0023F948,,new,,USBSteeringPort timed constant force step (0x6F8 centring)
+0x0023FFD8,,new,,USBSteeringPort virtual 6: wheel deflection level 1..8 beyond the dead zone (0 for 0xC298)
+0x00240698,,new,,region == 8 test used by CarDataBase::isEurope
+0x00240CB8,,new,,reset all settings (GT3 inlines the reset* calls)
+0x002433B0,,new,,isCVT: getGearCount() == 2
+0x00244578,,new,,CHASSIS row +0x20 (catalogue length)
+0x00244598,,new,,CHASSIS row +0x22 (catalogue height)
+0x002445B8,,new,,CHASSIS row +0x24 (catalogue weight)
+0x002445D8,,new,,RACINGMODIFY row +0x42 (catalogue width)
+0x002445F8,,new,,DRIVETRAIN row +0x22 == 1
+0x00244620,,new,,ENGINE row +0x58 == 1
+0x00245D88,,new,,fit Concept normal part set
+0x00245DE8,,new,,fit Concept custom part set (where it exists)
+0x00245E68,,new,,brake controller part == 2
+0x00245E90,,new,,tyre slider min (0)
+0x00245E98,,new,,tyre slider max (2)
+0x00245EA0,,new,,front tyre part -> slider level
+0x00245ED0,,new,,rear tyre part -> slider level
+0x00245F00,,new,,slider level -> fit front tyre
+0x00245F60,,new,,slider level -> fit rear tyre
+0x00249B48,,new,,cut a string in place at its last underscore; map had path_insert_prefix
+0x0024A3B0,0x001C9CA8,wrong,,"pList sort (qsort), not ButtonList::virtual_1"
+0x0024F658,0x00241A68,right,,vol_init (vol_mount through FileDevice virtual 6)
+0x0024F980,0x00241D30,right,,file_req_run (RaceBase::virtual_8 call order)
+0x00261020,0x00245DC8,right,,lcg_rand_range (map: lcg_rand_chance)
+0x00262238,0x002470C0,right,0x00262358,flare_copy_visibility (the function list merged it with flare_reduce)
+0x00262358,,start,0x002624C0,flare_reduce
+0x00262358,0x002471D8,right,,flare_reduce
+0x00264720,0x00249518,right,,"clut_anim_reset_all (select arg, no apply)"
+0x002681A8,0x0024CEF8,right,,matsel_set_table2 (map: matsel_set_table)
+0x002681B8,0x0024CF08,right,,matsel_set_table
+0x002681D0,0x0024CF20,right,,texsel_set_table2 (map: texsel_set_table)
+0x002681E0,0x0024CF30,right,,texsel_set_table
+0x0026BBE0,,new,0x0026BC0C,default camera random function (clock)
+0x0026C128,0x00250808,right,,gfx_init_default (gfx_init(1 1 a0 1)) from game_init
+0x0026C628,0x00250CF8,right,,gfx_set_display_area (map: unpaired; the map shifted the four display setters by one)
+0x0026C658,0x00250D18,right,,gfx_set_screen_size (map: gfx_set_display_area)
+0x0026C680,,new,0x0026C6A8,gfx_set_display_offset(dx dy): GfxDriverState dispDX/dispDY +0x8C/+0x8E then gfx_update_display_regs; GameOptions screen adjust (map: gfx_set_display_fb)
+0x0026C6A8,,start,0x0026C74C,gfx_set_display_fb (the function list merged it into 0x0026C680)
+0x0026C6A8,0x00250D30,right,,gfx_set_display_fb
+0x00273DA8,0x00258150,right,,pgl_set_morph_weight
+0x00278258,,new,0x002782D4,pdibgm fade RPC 3 (backend)
+0x0027A858,,new,,mpeg player has a frame (gp flag): MenuBgMovie::start waits on it (menus_a 32)
+0x00281BD8,,new,,ff_send: pjoy_send_command(port cmd 0)
+0x00282500,,new,,ff_send_download_play (cmd b0 |= 1)
+0x00284CF8,,new,,scf lock wrapper of sceScfGetAspect (GameOptions::setDefaults RenderContext::init)
+0x0028BF30,0x0026EB90,right,,F_0026EB90 (call position in runConnectPage / runWaitOtherPage twins; backend)
+0x0028CBF8,0x0026F850,right,,pdi1394::setSlotGroup (call position in setLinkMode twin; backend)
+0x0028CEC0,0x0026FB28,right,,pdi1394::setGroup (call position in runConnectPage twin; backend)
+0x0029AF58,0x00279B48,right,,dptoul / __fixunsdfsi (map v1 had it; v2: fptoui)
+0x0029F4D8,0x0027D890,right,,atoi (calls strtol; map: atof)
+0x002A24A0,0x00282880,right,,__malloc_unlock (map v1 had it; v2: strtoul)
+0x002A4D48,0x00284000,right,,_write_r (calls write; map: _lseek_r)
+0x002A4F18,0x00284118,right,,_lseek_r (calls lseek; map: _mprec_log10)
+0x002B46A0,,new,,_$_Q29gt2k_menu21LicenseGetControlBase
+0x002B4760,,new,,__tfQ29gt2k_menu21LicenseGetControlBase
+0x002B49E0,,new,,_$_Q29gt2k_menu17PremiumGetControl
+0x002B4AA0,,new,,__tfQ29gt2k_menu17PremiumGetControl
+0x002B4AF0,,new,,__Q29gt2k_menu17PremiumGetControli
+0x002B4C08,,new,,getID__CQ29gt2k_menu17PremiumGetControl
+0x002B4D28,,new,,_$_Q29gt2k_menu17CarGetControlBase
+0x002B4DD0,,new,,__tfQ29gt2k_menu17CarGetControlBase
+0x002BDE08,,new,,_$_Q29gt2k_menu33MemorycardAlreadyTransferedDialog
+0x002BDE78,,new,,__tfQ29gt2k_menu33MemorycardAlreadyTransferedDialog
+0x002BE3F0,0x00149948,right,,"25MemorycardFileManagerBase vtable slot 0 = GT3 slot 0 (L2 inserts slots 12, 13)"
+0x002BE428,0x00149940,right,,"25MemorycardFileManagerBase vtable slot 1 = GT3 slot 1 (L2 inserts slots 12, 13)"
+0x002BE430,0x00149938,right,,"25MemorycardFileManagerBase vtable slot 4 = GT3 slot 4 (L2 inserts slots 12, 13)"
+0x002BE438,0x00149930,right,,"25MemorycardFileManagerBase vtable slot 5 = GT3 slot 5 (L2 inserts slots 12, 13)"
+0x002BE440,0x00149928,right,,"25MemorycardFileManagerBase vtable slot 6 = GT3 slot 6 (L2 inserts slots 12, 13)"
+0x002BE448,0x00149920,right,,"25MemorycardFileManagerBase vtable slot 7 = GT3 slot 7 (L2 inserts slots 12, 13)"
+0x002BE450,0x00149918,right,,"25MemorycardFileManagerBase vtable slot 8 = GT3 slot 8 (L2 inserts slots 12, 13)"
+0x002BE458,0x00149910,right,,"25MemorycardFileManagerBase vtable slot 9 = GT3 slot 9 (L2 inserts slots 12, 13)"
+0x002BE460,0x00149908,right,,"25MemorycardFileManagerBase vtable slot 10 = GT3 slot 10 (L2 inserts slots 12, 13)"
+0x002BE468,0x00149900,right,,"25MemorycardFileManagerBase vtable slot 11 = GT3 slot 11 (L2 inserts slots 12, 13)"
+0x002BE470,,new,,"MemorycardFileManagerBase::removeFileCache (new virtual, slot 12)"
+0x002BE478,,new,,"MemorycardFileManagerBase::addDeletedEntry (new virtual, slot 13)"
+0x002BE480,0x001498F8,right,,"25MemorycardFileManagerBase vtable slot 14 = GT3 slot 12 (L2 inserts slots 12, 13)"
+0x002BE488,0x001498F0,right,,"25MemorycardFileManagerBase vtable slot 15 = GT3 slot 13 (L2 inserts slots 12, 13)"
+0x002BE490,0x001498E8,right,,"25MemorycardFileManagerBase vtable slot 16 = GT3 slot 14 (L2 inserts slots 12, 13)"
+0x002BE498,0x001498E0,right,,"25MemorycardFileManagerBase vtable slot 17 = GT3 slot 15 (L2 inserts slots 12, 13)"
+0x002BE4A0,0x001498D8,right,,"25MemorycardFileManagerBase vtable slot 18 = GT3 slot 16 (L2 inserts slots 12, 13)"
+0x002BE4A8,0x001498D0,right,,"25MemorycardFileManagerBase vtable slot 19 = GT3 slot 17 (L2 inserts slots 12, 13)"
+0x002BE4B0,0x001498C8,right,,"25MemorycardFileManagerBase vtable slot 20 = GT3 slot 18 (L2 inserts slots 12, 13)"
+0x002BE4B8,0x001498C0,right,,"25MemorycardFileManagerBase vtable slot 21 = GT3 slot 19 (L2 inserts slots 12, 13)"
+0x002BE4C0,0x001498B8,right,,"25MemorycardFileManagerBase vtable slot 22 = GT3 slot 20 (L2 inserts slots 12, 13)"
+0x002BE4C8,0x001498B0,right,,"25MemorycardFileManagerBase vtable slot 23 = GT3 slot 21 (L2 inserts slots 12, 13)"
+0x002BE4D0,0x001498A8,right,,"25MemorycardFileManagerBase vtable slot 24 = GT3 slot 22 (L2 inserts slots 12, 13)"
+0x002BE4D8,0x001498A0,right,,"25MemorycardFileManagerBase vtable slot 25 = GT3 slot 23 (L2 inserts slots 12, 13)"
+0x002BE4E0,0x00149898,right,,"25MemorycardFileManagerBase vtable slot 26 = GT3 slot 24 (L2 inserts slots 12, 13)"
+0x002BE4E8,0x00149890,right,,"25MemorycardFileManagerBase vtable slot 27 = GT3 slot 25 (L2 inserts slots 12, 13)"
+0x002BE4F0,0x00149888,right,,"25MemorycardFileManagerBase vtable slot 28 = GT3 slot 26 (L2 inserts slots 12, 13)"
+0x002BE4F8,0x00149880,right,,"25MemorycardFileManagerBase vtable slot 29 = GT3 slot 27 (L2 inserts slots 12, 13)"
+0x002BE500,0x00149878,right,,"25MemorycardFileManagerBase vtable slot 30 = GT3 slot 28 (L2 inserts slots 12, 13)"
+0x002BE508,0x00149870,right,,"25MemorycardFileManagerBase vtable slot 31 = GT3 slot 29 (L2 inserts slots 12, 13)"
+0x002BE510,0x00149868,right,,"25MemorycardFileManagerBase vtable slot 32 = GT3 slot 30 (L2 inserts slots 12, 13)"
+0x002BE580,0x0015C7D0,right,,"25MemorycardDemoFileManager vtable slot 1 = GT3 slot 1 (L2 inserts slots 12, 13)"
+0x002BE588,0x0015C7C8,right,,"25MemorycardDemoFileManager vtable slot 2 = GT3 slot 2 (L2 inserts slots 12, 13)"
+0x002BE590,0x0015C7B0,right,,"25MemorycardDemoFileManager vtable slot 3 = GT3 slot 3 (L2 inserts slots 12, 13)"
+0x002BE758,,new,,_$_Q29gt2k_menu21SettingControlConcept
+0x002BE838,,new,,__tfQ29gt2k_menu21SettingControlConcept
+0x002BF150,,new,,__tfQ29gt2k_menu28RecordsMenuArgLicenseConcept
+0x002BF1A0,,new,,__Q29gt2k_menu28RecordsMenuArgLicenseConcepti
+0x002BF1B8,,new,,isDrawCarName__Q29gt2k_menu28RecordsMenuArgLicenseConcept
+0x002BF770,,new,,_$_Q29gt2k_menu17SettingButtonList
+0x002BF7E0,,new,,__tfQ29gt2k_menu17SettingButtonList
+0x002BF838,,new,,_$_Q29gt2k_menu20NoticePresentControl
+0x002BF8D0,,new,,__tfQ29gt2k_menu20NoticePresentControl
+0x002C0A88,,new,,_$_Q29gt2k_menu20CarGetConceptControl
+0x002C0B30,,new,,__tfQ29gt2k_menu20CarGetConceptControl
+0x002C0B80,,new,,__Q29gt2k_menu20CarGetConceptControlPQ39gt2k_menu17CarGetControlBase6S
+0x002C0D30,,new,,getCarID__CQ29gt2k_menu20CarGetConceptControl
+0x002C0D38,,new,,getPresentID__CQ29gt2k_menu20CarGetConceptControl
+0x002C0D40,,new,,setEnable__Q29gt2k_menu20CarGetConceptControlb
+0x002C0D60,,new,,setFinish__Q29gt2k_menu20CarGetConceptControlb
+0x002C0D88,,new,,isEnable__CQ29gt2k_menu20CarGetConceptControl
+0x002C0D90,,new,,hasFinished__CQ29gt2k_menu20CarGetConceptControl
+0x002C0D98,,new,,getMainStatus__CQ29gt2k_menu20CarGetConceptControl
+0x002C0DA0,,new,,setSyncStatus__Q29gt2k_menu20CarGetConceptControlic
+0x002C0DB0,,new,,setCarSyncStatus__Q29gt2k_menu20CarGetConceptControlc
+0x002C0DB8,,new,,setCongSyncStatus__Q29gt2k_menu20CarGetConceptControlc
+0x002C0DC0,,new,,ended__CQ29gt2k_menu20CarGetConceptControli
+0x002C0DD0,,new,,endCar__CQ29gt2k_menu20CarGetConceptControl
+0x002C0DE0,,new,,endCong__CQ29gt2k_menu20CarGetConceptControl
+0x002C0DF0,,new,,suspended__CQ29gt2k_menu20CarGetConceptControli
+0x002C0E00,,new,,suspendCar__CQ29gt2k_menu20CarGetConceptControl
+0x002C0E10,,new,,suspendCong__CQ29gt2k_menu20CarGetConceptControl
+0x002C0F68,,new,,_$_Q29gt2k_menu17SimplePageControl
+0x002C1010,,new,,__tfQ29gt2k_menu17SimplePageControl
+0x002C1F68,0x00149808,right,,"21MemorycardFileManager vtable slot 1 = GT3 slot 1 (L2 inserts slots 12, 13)"
+0x002C1F78,0x001497F0,right,,"21MemorycardFileManager vtable slot 9 = GT3 slot 9 (L2 inserts slots 12, 13)"
+0x002C1F98,0x001497E0,right,,"21MemorycardFileManager vtable slot 14 = GT3 slot 12 (L2 inserts slots 12, 13)"
+0x002C1FA8,0x001497D0,right,,"21MemorycardFileManager vtable slot 16 = GT3 slot 14 (L2 inserts slots 12, 13)"
+0x002C1FB8,0x001497C0,right,,"21MemorycardFileManager vtable slot 17 = GT3 slot 15 (L2 inserts slots 12, 13)"
+0x002C1FC8,0x001497B0,right,,"21MemorycardFileManager vtable slot 18 = GT3 slot 16 (L2 inserts slots 12, 13)"
+0x002C1FD8,0x001497A0,right,,"21MemorycardFileManager vtable slot 6 = GT3 slot 6 (L2 inserts slots 12, 13)"
+0x002C1FE8,0x00149790,right,,"21MemorycardFileManager vtable slot 7 = GT3 slot 7 (L2 inserts slots 12, 13)"
+0x002C1FF8,0x00149780,right,,"21MemorycardFileManager vtable slot 5 = GT3 slot 5 (L2 inserts slots 12, 13)"
+0x002C2008,0x00149770,right,,"21MemorycardFileManager vtable slot 25 = GT3 slot 23 (L2 inserts slots 12, 13)"
+0x002C2018,0x00149760,right,,"21MemorycardFileManager vtable slot 2 = GT3 slot 2 (L2 inserts slots 12, 13)"
+0x002C2028,0x00149758,right,,"21MemorycardFileManager vtable slot 32 = GT3 slot 30 (L2 inserts slots 12, 13)"
+0x002C24D0,,new,,__tfQ29gt2k_menu15CarsConceptItem
+0x002C2520,,new,,getLightRatio__CQ29gt2k_menu15CarsConceptItemi
+0x002C2530,,new,,isValidID__CQ29gt2k_menu15CarsConceptItemi
+0x002C2558,,new,,_$_Q29gt2k_menu15CarsConceptItem
+0x002C2638,,new,,newCar__Q29gt2k_menu15CarsConceptItemPvRCQ29gt2k_menu15FragmentManager
+0x002C28A8,,new,,_$_Q29gt2k_menu15NextMessageItem
+0x002C2910,,new,,__tfQ29gt2k_menu15NextMessageItem
+0x002C2960,,new,,newObj__Q29gt2k_menu15NextMessageItemPvRCQ29gt2k_menu15FragmentManager
+0x002C2A00,,new,,_$_Q29gt2k_menu18PremiumMessageItem
+0x002C2A68,,new,,__tfQ29gt2k_menu18PremiumMessageItem
+0x002C2AB8,,new,,newObj__Q29gt2k_menu18PremiumMessageItemPvRCQ29gt2k_menu15FragmentMana
+0x002C2B58,,new,,_$_Q29gt2k_menu25CongratulationMessageItem
+0x002C2BC0,,new,,__tfQ29gt2k_menu25CongratulationMessageItem
+0x002C2C10,,new,,newObj__Q29gt2k_menu25CongratulationMessageItemPvRCQ29gt2k_menu15Fragm
+0x002C30E0,,new,,__tf12VehicleModel (tool: RaceEntryCar::recordSectionTime) [map: 001786B0]
+0x002C3A58,0x0017B290,wrong,,"eventCheck__16RaceOrganizationiRi, not updateLapRecordTotal"
+0x002C4008,0x00181798,right,,setRaceMode__9RaceBasici = GT3 setRaceModeId(int) [map: 00181598]
+0x002C4308,0x00182DA0,right,,vtable 14RaceArcadeDemo slot 45 (GT3 slot 40) [map agrees]
+0x002C4540,0x001846C0,right,,vtable t11RaceBattleT1i2 slot 0 (GT3 slot 0) [map agrees]
+0x002C4640,0x001847E0,right,,RaceSplitBattleInformation::setEquipments (setPlayerCar linkonce)
+0x002C46B8,,new,,__tf19RaceSplitBattleBase
+0x002C4758,,new,,"RaceSplitBattle::getDisplay (slot 63, new pure virtual of RaceSplitBattleBase)"
+0x002C4768,,new,,RaceSplitBattle::getDisplay const (slot 64)
+0x002C4778,0x00186878,right,,__tf19MultilinkLocalInput = __tf19RaceLinkBattleInput (renamed)
+0x002C47F8,0x00184CC8,right,,19MultilinkLocalInput slot 0 = 19RaceLinkBattleInput slot 0 (renamed class) [map agrees]
+0x002C4860,0x00184CF0,right,,19MultilinkLocalInput slot 2 = 19RaceLinkBattleInput slot 2 (renamed class) [map agrees]
+0x002C4870,0x00186850,right,,14MultilinkInput slot 0 = 23RaceLinkBattleNodeInput slot 0 (renamed class)
+0x002C48D8,0x00186800,right,,__tf14MultilinkInput = __tf23RaceLinkBattleNodeInput (renamed)
+0x002C4B30,0x001866D0,right,,vtable t11RaceBattleT1i8 slot 0 (GT3 slot 0) [map agrees]
+0x002C4CD0,0x00185398,right,,vtable 14RaceLinkBattle slot 5 (GT3 slot 5) [map agrees]
+0x002C4CD8,0x00186750,right,,vtable 14RaceLinkBattle slot 31 (GT3 slot 30) [map agrees]
+0x002C4CE0,,new,,RaceLinkDemo dtor
+0x002C4D50,,new,,__tf12RaceLinkDemo
+0x002C4EA8,0x00187FE8,wrong,,"setFrameDeltaTime__13RaceSolitairef, not RaceTimeTrial::virtual_24"
+0x002C4F78,0x00188F98,right,,18SimpleExamMessages slot 0 = 28TimeTrialExaminationMessages slot 0 (renamed class) [map agrees]
+0x002C4F90,0x00188F80,right,,18SimpleExamMessages slot 3 = 28TimeTrialExaminationMessages slot 3 (renamed class) [map agrees]
+0x002C4FD8,0x00188F38,right,,18SimpleExamMessages slot 6 = 28TimeTrialExaminationMessages slot 6 (renamed class) [map agrees]
+0x002C5000,0x00188F30,right,,18SimpleExamMessages slot 7 = 28TimeTrialExaminationMessages slot 7 (renamed class) [map agrees]
+0x002C5018,0x00188EE0,right,,__tf18SimpleExamMessages = __tf28TimeTrialExaminationMessages (renamed)
+0x002C5068,0x00188ED8,right,,specifyPhase = setState; map: unpaired
+0x002C5070,0x00188EC8,right,,nextPhase = nextState; map: unpaired
+0x002C5080,0x00188EC0,right,,getPhase = getState; map: unpaired
+0x002C5088,,new,,SimpleExamMessages::setStopper
+0x002C50A0,,new,,SimpleExamMessages::canEnd (+0x1D held)
+0x002C50A8,,new,,SimpleExamMessages::mustStop (+0x1C stopper)
+0x002C50B0,0x00188E70,right,,__tf17SimpleExamDisplay = __tf20RaceTimeTrialDisplay (renamed)
+0x002C5100,0x00188E58,right,,getPhase; map: unpaired
+0x002C5118,0x00188E48,right,,specifySubPhase = setSubPhase (map: RaceFreeRun::virtual_24); map now: 0x00189098
+0x002C5118,0x00189098,wrong,,"specifySubPhase__17SimpleExamDisplayUc, not RaceFreeRun::virtual_24"
+0x002C5128,0x00188E30,right,,nextSubPhase; map: unpaired
+0x002C5148,0x00188E20,right,,getSubPhase; map: unpaired
+0x002C5158,0x00188E10,right,,setInput; map: unpaired
+0x002C5168,,new,,SimpleExamDisplay::setStopper
+0x002C5188,,new,,SimpleExamDisplay::canEnd
+0x002C53B0,,new,,__tf25DynamicsConductorTraining
+0x002C5400,,new,,DynamicsConductorTraining::isDataLoggerSupported
+0x002C5408,,new,,DynamicsConductorTraining::getEachEntrantInfo_
+0x002C5428,,new,,DynamicsConductorTraining::SetSlowCarBoostParameters
+0x002C5430,,new,,DynamicsConductorTraining::getSlowCarBoostType_
+0x002C5440,,new,,DynamicsConductorTraining::processCollision_
+0x002C5460,,new,,__tf23RaceTrainingInformation
+0x002C54B0,,new,,__tf12RaceTraining
+0x002C5650,0x0018BD18,wrong,,"is MiniPrize::getRankStr (linkonce), not ExaminationDisplayer::~"
+0x002C5770,0x0018BCA8,right,,LicenseExaminationMessages::specifyPhase = setState; map: unpaired
+0x002C5778,0x0018BC98,right,,nextPhase = nextState; map: unpaired
+0x002C5788,0x0018BC90,right,,getPhase = getState; map: unpaired
+0x002C57F8,0x0018C770,right,,specifySubPhase = setSubPhase; map: unpaired
+0x002C5C30,,new,,__tf7RacePOD (tool: RaceCourse::load) [map: 0018F930]
+0x002C5C80,,new,,__tf9RacePOD2P
+0x002C5CD0,,new,,RacePOD2P::getDisplay
+0x002C5CE0,,new,,RacePOD2P::getDisplay const
+0x002C63A8,,new,,RaceDisplay::get_race_display_flag
+0x002C63C0,0x00195970,right,,17SimpleExamDisplay slot 6 = 20RaceTimeTrialDisplay slot 6 (renamed class) [map agrees]
+0x002C63D0,0x00195958,right,,17SimpleExamDisplay slot 4 = 20RaceTimeTrialDisplay slot 4 (renamed class) [map agrees]
+0x002C6400,0x00195948,right,,17SimpleExamDisplay slot 5 = 20RaceTimeTrialDisplay slot 5 (renamed class) [map agrees]
+0x002C6410,0x00195920,right,,17SimpleExamDisplay slot 10 = 20RaceTimeTrialDisplay slot 10 (renamed class) [map agrees]
+0x002C6448,0x001958F8,right,,17SimpleExamDisplay slot 11 = 20RaceTimeTrialDisplay slot 11 (renamed class) [map agrees]
+0x002C6480,0x001958D0,right,,17SimpleExamDisplay slot 12 = 20RaceTimeTrialDisplay slot 12 (renamed class) [map agrees]
+0x002C64B8,0x001958A8,right,,17SimpleExamDisplay slot 13 = 20RaceTimeTrialDisplay slot 13 (renamed class) [map agrees]
+0x002C64F0,0x00195880,right,,17SimpleExamDisplay slot 14 = 20RaceTimeTrialDisplay slot 14 (renamed class) [map agrees]
+0x002C6528,0x00195870,right,,getPanelFlags = getPanels; map: unpaired
+0x002C6538,0x00195860,right,,17SimpleExamDisplay slot 7 = 20RaceTimeTrialDisplay slot 7 (renamed class) [map agrees]
+0x002C6548,,new,,RaceDisplay::getPlayerCarNumber
+0x002C6558,0x00195850,right,,17SimpleExamDisplay slot 8 = 20RaceTimeTrialDisplay slot 8 (renamed class) [map agrees]
+0x002C6568,,new,,RaceDisplay::getTargetCarNumber
+0x002C6578,0x00195840,right,,setLiveMode = setLive; map: unpaired
+0x002C65A8,0x00195830,right,,isLiveMode = isLive; map: unpaired
+0x002C65B8,0x00195820,right,,inhibitRecordEndDisplay = ackReplayRecorded; map: unpaired
+0x002C65C8,0x00195810,right,,enableFinishDisplay = setFinishDisplay; map: unpaired
+0x002C65F8,,new,,RaceDisplay::setMinilogo
+0x002C6630,,new,,RaceDisplay::getMinilogo
+0x002C6640,,new,,RaceDisplay::setCarNameDisplay
+0x002C6678,0x001957F0,right,,17SimpleExamDisplay slot 15 = 20RaceTimeTrialDisplay slot 15 (renamed class) [map agrees]
+0x002C6688,0x001957E8,right,,setCarIconHolder = setCarIcons; map: unpaired
+0x002C6690,,new,,RaceDisplay::getMiniLogo (returns the fader)
+0x002C6698,0x00195800,right,,setDisplayID = setDisplayNumber; map: unpaired
+0x002C66A8,,new,,RaceDisplay::getDisplayID
+0x002C66B8,0x001957E0,right,,getImagePack = getImages; map: unpaired
+0x002C67C8,,new,,__tf20RaceSplitDisplayBase
+0x002C6820,0x00196398,right,,RaceSplitDisplayBase::getCurrentDisplay = RaceSplitDisplay::getTargetDisplay (moved to the base); map: unpaired
+0x002C6850,0x001963B8,right,,getCurrentDisplay const = getTargetDisplay const; map: unpaired
+0x002C6940,0x00196890,right,,RaceDisplayObjectBase::render() = drawIfEnabled(); map: unpaired
+0x002C6980,0x00196840,right,,render(GSBuffer&) = drawIfEnabled(GSBuffer&); map: unpaired
+0x002C6A60,0x001967A0,right,,enable = setEnabled; map: unpaired
+0x002C6AD8,0x00196730,right,,"align(f,f,i) = race_display_alignf; map: unpaired"
+0x002C6AF0,0x00196710,right,,"align(i,i,i) = race_display_align; map: unpaired"
+0x002C6B08,0x001966D0,right,,wideOffset = race_align_shift_x; map: unpaired
+0x002C6E60,0x00199F48,right,,RaceOdometer::setDistance = setValue; map: unpaired
+0x002C6F30,0x00199EC0,right,,RaceGearDisplay::setTimingLamp = setShiftWarning; map: unpaired
+0x002C6F50,0x00199EB0,right,,setTimingLampOffset = setLampOffset; map: unpaired
+0x002C6F60,0x00199EA8,right,,setClutch = setBright; map: unpaired
+0x002C6F88,0x00199EA0,right,,setBrakingSign = setSuggestBlink; map: unpaired
+0x002C7130,0x00199D38,right,,RaceLapTimesDisplay::setDisplayLaps = setLines; map: unpaired
+0x002C7138,0x00199D30,right,,setLineHeightScale = setLineSpacing; map: unpaired
+0x002C7238,,new,,RaceMessageDisplay::setTexset (new image field +0x3C)
+0x002C76A8,0x00199928,right,,RaceSteeringDisplay::setAngle (x -90)
+0x002C7778,0x00199888,right,,RaceTireWearDisplay::setTireWearColor = setColor; map: unpaired
+0x002C77A0,0x00199868,right,,setWheelWarning = setWarning; map: unpaired
+0x002C7938,0x00199778,right,,RaceCarIconDisplay::setCarIcon = setIcon; map: unpaired
+0x002C7A48,,new,,__tf19RaceCapacityMonitor
+0x002C7A98,,new,,RaceCapacityMonitor dtor
+0x002C7B00,,new,,RaceCapacityMonitor::setCapacity
+0x002C7B08,,new,,RaceCapacityMonitor::setCharge (map: RaceLapTimesDisplay::setLines)
+0x002C7B10,,new,,RaceCapacityMonitor::setHybridCar
+0x002C7E40,0x0019DCB0,right,,RaceRoundTachometerBase::setTransmissionType = setTransmission; map: unpaired
+0x002C7F00,0x0019DBF8,right,,build = updateScale; map: unpaired
+0x002C7F28,0x0019DBE8,right,,setTexset = setImage(Tex1Image*); map: unpaired
+0x002C7F30,0x0019DBC8,right,,selectTexture = setImage(const char*); map: unpaired
+0x002C81E0,0x0019D990,right,,RaceBattleTachometer::setTransmissionType = setTransmission; map: unpaired
+0x002C82A8,0x0019D8D0,right,,RaceBattleTachometer::setTexset = setImage(Tex1Image*) (map: RaceRoundTachometerBase::setImage); map now: 0x0019DBC8
+0x002C82C8,0x0019D8B0,right,,RaceBattleTachometer::selectTexture = setImage(const char*) (map: RaceRoundTachometerBase::updateScale); map now: 0x0019DBF8
+0x002C8338,0x0019E1C8,right,,RaceBoostmeter::setBoost = setVisible; map: unpaired
+0x002C8358,,new,,__tf13SparkParticle
+0x002C8A30,0x001A6440,right,0x002C8A38,RaceBGMBase::setOrganization (GT3 F_001A6440)
+0x002C8A38,0x001A6438,right,0x002C8A40,RaceBGMBase::getOrganization (GT3 F_001A6438)
+0x002C8A98,,new,,VehicleModel::~VehicleModel
+0x002C8AD8,0x001A98C0,wrong,,delayLoadDriverModel__12VehicleModel no-op; course_set_region stores the region
+0x002C8AE0,,new,,"computeDriverPosture__12VehicleModel no-op (map: F_001AA568, wrong)"
+0x002C8AE8,,new,,"renderDriver__12VehicleModel no-op (map: F_001AAD70, wrong)"
+0x002C8B40,0x001AB6E0,right,,RaceCarModel::getCarModel = getModel__12RaceCarModel
+0x002C8B48,0x001AB6C8,right,,RaceCarModel::getTire
+0x002C8B68,,new,,__tf13RaceBikeModel
+0x002C8BB8,,new,,"setBodyColor__13RaceBikeModeli no-op (map: F_00179460, wrong)"
+0x002C8BC0,,new,,RaceBikeModel inline no-op (linkonce)
+0x002C8BC8,,new,,RaceBikeModel inline no-op (linkonce)
+0x002C8BD0,,new,,RaceBikeModel inline no-op (linkonce)
+0x002C8BD8,,new,,RaceBikeModel inline no-op (linkonce)
+0x002C8BE0,,new,,RaceBikeModel inline no-op (linkonce)
+0x002C8BE8,,new,,RaceBikeModel inline no-op (linkonce)
+0x002C8BF0,,new,,RaceBikeModel inline no-op (linkonce)
+0x002C8BF8,,new,,RaceBikeModel inline no-op (linkonce)
+0x002C8C00,,new,,RaceBikeModel inline no-op (linkonce)
+0x002C8C08,,new,,RaceBikeModel inline no-op (linkonce)
+0x002C8C10,,new,,RaceBikeModel inline no-op (linkonce)
+0x002C8C18,,new,,RaceBikeModel inline no-op (linkonce)
+0x002C8C20,,new,,RaceBikeModel inline no-op (linkonce)
+0x002C8C28,,new,,RaceBikeModel inline no-op (linkonce)
+0x002C8C30,,new,,RaceBikeModel inline no-op (linkonce)
+0x002C8C38,,new,,RaceBikeModel inline no-op (linkonce)
+0x002C8C40,,new,,RaceBikeModel inline no-op (linkonce)
+0x002C8C48,,new,,RaceBikeModel inline no-op (linkonce)
+0x002C8C50,,new,,RaceBikeModel inline no-op (linkonce)
+0x002C8C58,,new,,RaceBikeModel inline no-op (linkonce)
+0x002C97E8,,new,,RacePODDisplay dtor
+0x002C9850,,new,,__tf14RacePODDisplay
+0x002C98A0,,new,,__tf16RacePOD2PDisplay
+0x002C98F0,,new,,RacePOD2PDisplay::getDisplay
+0x002C9908,,new,,RacePOD2PDisplay::getDisplay const
+0x002C9B38,0x001907C0,right,,RaceDisplayInformationEvent::setType = setInformation; map: unpaired
+0x002C9B40,0x001907B8,right,,getType = getInformation; map: unpaired
+0x002CA398,,new,,_$_Q29gt2k_menu9BlinkItem
+0x002CA400,,new,,__tfQ29gt2k_menu9BlinkItem
+0x002CF368,0x001ED6D8,right,,DynamicsConductor::EveryTimePitStop (L2 slot 43)
+0x002CFE08,0x002013C0,right,0x002CFE10,OnBoardCamera::setBaseFovy = GT3 setFov
+0x002CFE10,0x002013B8,right,0x002CFE18,OnBoardCamera::getMountCar = GT3 getCar
+0x002CFE18,0x002013B0,right,0x002CFE20,OnBoardCamera::isEnableCtrl = GT3 isMountChangeable
+0x002CFE20,0x002013A8,right,0x002CFE44,OnBoardCamera::setCtrl = GT3 setMountChangeable
+0x002CFED0,0x00206A18,right,0x002CFEE8,CameraRotDamper::getNoiseRatio = GT3 getShake
+0x002CFEE8,0x00206A10,right,0x002CFEF0,CameraRotDamper::getPosition = GT3 getAngle
+0x002D0138,,new,0x002D0158,CameraManager::getZoomupDamper (linkonce)
+0x002D0178,0x0020A120,right,0x002D0198,CameraManager::getEventInfo = GT3 getSelector
+0x002D0198,0x0020A108,right,0x002D01B8,CameraManager::getRaceStatus = GT3 getSwitcher
+0x002D01B8,0x0020A0F0,right,0x002D01D8,CameraManager::getCameraInfo = GT3 getView
+0x002D0218,0x0020A0A8,right,0x002D0238,CameraManager::getCurrentCamera = GT3 getCamera
+0x002D0238,0x0020A090,right,0x002D0250,CameraManager::getReplayFollowMode = GT3 getViewKind
+0x002D0250,0x0020A078,right,0x002D0268,CameraManager::getFocusFollowMode = GT3 getViewVariant
+0x002D0268,0x0020A068,right,0x002D0274,CameraManager::setLoggerSectorChanged = GT3 F_0020A068
+0x002D0278,0x0020A060,right,0x002D0280,CameraManager::setLoggerNewTarget = GT3 F_0020A060
+0x002D0280,0x0020A038,right,0x002D02A4,CameraManager::isForciblyGamma = GT3 F_0020A038
+0x002D02A8,0x0020A030,right,0x002D02B0,CameraManager::isEnableBlur = GT3 F_0020A030 (frameEffect)
+0x002D02B0,0x0020A028,right,0x002D02B8,CameraManager::setBlurLevel = GT3 F_0020A028
+0x002D02B8,0x0020A020,right,0x002D02C0,CameraManager::isStartCrossFade = GT3 F_0020A020
+0x002D02C0,0x0020A018,right,0x002D02C8,CameraManager::getCrossFadeTime = GT3 F_0020A018
+0x002D02C8,0x0020A008,right,0x002D02D8,CameraManager::getMonitorMax = GT3 getViewCount
+0x002D02D8,0x00209FF8,right,0x002D02E8,CameraManager::getMonitorNumber = GT3 getCurrentView
+0x002D02E8,0x00209FE0,right,0x002D0308,CameraManager::setInputToMonitor = GT3 setInput
+0x002D0308,0x00209FD0,right,0x002D0318,CameraManager::getWideLinkLeftLevel = GT3 getTileFromRight
+0x002D0318,0x00209FC0,right,0x002D0328,CameraManager::getWideLinkRightLevel = GT3 getTileFromLeft
+0x002D0328,0x00209FB0,right,0x002D0338,CameraManager::getWideLinkTopLevel = GT3 getTileFromBottom
+0x002D0338,0x00209FA0,right,0x002D0348,CameraManager::getWideLinkBottomLevel = GT3 getTileFromTop
+0x002D0348,0x00209F88,right,0x002D035C,CameraManager::getWideLinkStereoLevel = GT3 F_00209F88
+0x002D0360,0x00209F78,right,0x002D0370,CameraManager::setStereoLRdistance = GT3 F_00209F78
+0x002D0370,0x00209F68,right,0x002D0380,CameraManager::getStereoLRdistance = GT3 F_00209F68
+0x002D03C8,0x00209F10,right,0x002D03F4,CameraManager::getTargetCarNumber = GT3 F_00209F10
+0x002D04D8,0x00209E30,right,0x002D0508,CameraManager::getDoppler = GT3 F_00209E30
+0x002D0560,0x00209DC0,right,0x002D0590,CameraManager::getGamma = GT3 F_00209DC0
+0x002D0590,0x00209DA0,right,0x002D05BC,CameraManager::getCar = GT3 F_00209DA0 (L2 vtable slot 16)
+0x002D06C8,0x00209C98,right,0x002D0700,CameraManager::getPreviousX = GT3 F_00209C98
+0x002D0700,0x00209C68,right,0x002D0738,CameraManager::getPreviousY = GT3 F_00209C68
+0x002D0738,0x00209C38,right,0x002D0770,CameraManager::getPreviousZ = GT3 F_00209C38
+0x002D0770,0x00209C10,right,0x002D07A0,CameraManager::getMatrix = GT3 F_00209C10
+0x002D07C0,0x00209BE0,right,0x002D07F0,CameraManager::getCameraInformation = GT3 F_00209BE0
+0x002D07F0,0x00209BC8,right,0x002D0810,CameraManager::getTargetCarNumberFromMonitor = GT3 F_00209BC8
+0x002D08F8,,new,0x002D0900,VariableCameraBase::getZoomMult (linkonce)
+0x002D0900,,new,0x002D0908,VariableCameraBase::setZoomMult (linkonce)
+0x002D0A50,0x001FEB38,right,0x002D0A5C,VariableCameraBase::setGiveupParam = GT3 setGiveup
+0x002D0A70,0x001FEB20,right,0x002D0A78,VariableCameraBase::setKeepParam = GT3 setGiveupTime
+0x002D0C20,0x00202EB8,right,0x002D0C28,PasslineCamera::getCameraCourse = GT3 getCourse
+0x002D0C28,0x00202EB0,right,0x002D0C30,PasslineCamera::getCameraNumber = GT3 F_00202EB0
+0x002D0C40,,new,0x002D0C48,PasslineCamera::setInverseX (linkonce)
+0x002D0CA0,,new,0x002D0CB8,StartingCamera::setStatic (linkonce)
+0x002D1030,,new,0x002D1038,CameraBase::setRandomFunction (linkonce)
+0x002D1038,,new,0x002D1040,CameraBase::setTextureLODBias (linkonce)
+0x002D1660,0x00211940,right,,attachRecorder__9RaceInputi = RaceInput::attachBuffer
+0x002D1680,0x00211920,right,,resetRecorder__9RaceInput = RaceInput::reset
+0x002D16A0,0x00211900,right,,readRecorder__9RaceInput = RaceInput::play
+0x002D16C0,0x002118E0,right,,seekRecorder__9RaceInput = RaceInput::skip
+0x002D16E0,0x002118C0,right,,writeRecorder__9RaceInput = RaceInput::record
+0x002D1A28,0x0021A760,right,,GameStatus::copyRunningCar2p = setRaceCar2Copy
+0x002D2520,0x0022A2E0,right,,PrizeBase::multCameraMatrix = applyRoot
+0x002D2540,0x0022A2C0,right,,PrizeBase::multModelMatrix = applyBody
+0x002D2698,0x0022C348,right,0x002D26A0,GTSOUNDINSTRUMENT::setSpuLimit = GT3 setSpuRoom
+0x002D2A90,,new,,PortBase::enableSpring(bool) (virtual 7 default)
+0x002D2A98,,new,,PortBase::setDamper(int int) (virtual 8 default)
+0x002D30C8,0x00237710,right,,cannotBuy = shop flags bit 0
+0x002D30E8,0x002376E8,right,,cannotSell = shop flags bit 1
+0x002D3110,0x002376C0,right,,cannotChangeWheel = shop flags bit 2
+0x002D31D8,0x002375D8,right,,setNatune = setNATune
+0x002D3260,0x00237550,right,,setTurbinekit = setTurbo
+0x002D36B8,0x00237120,right,,getSettingGearShiftMax = getGearNum (GEAR row +0x11)
+0x002D3D08,0x002376C0,wrong,,"getDefaultPartsSet(const char*), not the shop-flag test"
+0x002D3D50,0x002376E8,wrong,,"getArcadeDefaultPartsSet(const char*), not the shop-flag test"
+0x002D3E70,0x00238280,right,,CarInformation::setNewCar = resetEngine
+0x002D3EB0,0x00238238,right,,CarInformation::setOil = setOilMileage
+0x002D3ED0,0x00238218,right,,CarInformation::setReplaceOil = changeOil
+0x002D3F50,0x00238190,right,,CarInformation::setEngineLife = setEngineMileage
+0x002D3FD8,0x002380F0,right,,CarInformation::getPartsSellPrice = getPartSellPrice

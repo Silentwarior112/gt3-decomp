@@ -1,0 +1,526 @@
+/* T479 - USBSteeringPort: a USB steering wheel.  0x00230388..0x00231190.
+ *
+ * Devices: Logitech (vendor 0x46D) GT Force 0xC293 (0xC295 is taken as
+ * 0xC293) and 0xC294, and vendor 0x6F8 product 4.  A new Logitech wheel
+ * first runs an auto-centring sequence with its force feedback (autoCentre)
+ * before it counts as connected.  update reads the driver's report
+ * (pjoy_read_state) every frame, with the GT Force's calibration from the
+ * game options while the pedal map is on, sends the force values
+ * (ff_build_constant / ff_send_download_play) and resets them; translate
+ * maps the wheel's buttons, its hat and quick steering movements to GT3's
+ * buttons and gives channels 0-2 = wheel, pedal 1, pedal 2.  Control USB
+ * types: 1 GT Force, 3 0xC294, 2 0x6F8 wheel, 7 anything else. */
+#include "engine/input/control_internal.h"
+#include "engine/input/T479_usb_steering_port.h"
+#include "game/save/T426_controller_config.h"    /* ControllerConfig::getSteerMin .. getValid */
+#include "game/save/T429_game_status.h"          /* getGameStatus, GameStatus::options */
+
+/* (? name) The calibration of (port, wheel) applied to the report: the
+ * wheel to 0..0x3FF around the stored centre, the pedals to 0..0xFF.  No
+ * check of a zero range (the division traps, break 7).  One variable for
+ * the three values (retail's s0). */
+// FUNC 0x00230388 usbApplyCalibration
+/* (? name) 0..max.  An inline (u105 matching): its parameter copy and its
+ * result keep retail's registers, the limit already in a register when it
+ * is compared. */
+static inline int usbClamp(int v, int max)
+{
+    return (v < 0) ? 0 : ((v > max) ? max : v);
+}
+
+void usbApplyCalibration(ControllerConfig *cfg, int port, int wheel, PjoyState *report)
+{
+    if (cfg->getValid(port, wheel) == 0)
+        return;
+
+    int min    = cfg->getSteerMin(port, wheel);
+    int range  = (int)cfg->getSteerMax(port, wheel) - min;
+    int v      = report->x;
+    int offset = (int)cfg->getSteerCentre(port, wheel) - 0x200;    /* the centre's offset from 0x200 */
+    v = (((v - offset) - min) << 10) / range;
+    report->x = usbClamp(v, 0x3FF);
+
+    min    = cfg->getAxis1Min(port, wheel);
+    range  = (int)cfg->getAxis1Max(port, wheel) - min;
+    v = report->slider[0];
+    v = ((v - min) << 8) / range;
+    report->slider[0] = usbClamp(v, 0xFF);
+
+    min    = cfg->getAxis2Min(port, wheel);
+    range  = (int)cfg->getAxis2Max(port, wheel) - min;
+    v = report->slider[1];
+    v = ((v - min) << 8) / range;
+    report->slider[1] = usbClamp(v, 0xFF);
+}
+
+/* (? name) The GT Force's 6 buttons as raw bits (translate maps 1 / 8 to
+ * up / down, 4 start, 2 select, 0x20 decide, 0x10 cancel). */
+// FUNC 0x00230538 usbGTForceButtons
+u32 usbGTForceButtons(const u8 *buttons)
+{
+    u32 raw = 0;                            /* (`buttons[0] != 0' gives other registers) */
+    if (buttons[0]) raw |= 0x1;
+    if (buttons[2]) raw |= 0x2;
+    if (buttons[4]) raw |= 0x4;
+    if (buttons[1]) raw |= 0x8;
+    if (buttons[3]) raw |= 0x10;
+    if (buttons[5]) raw |= 0x20;
+    return raw;
+}
+
+/* The 0xC294 wheel's 12 buttons as raw bits (the first word of T479's
+ * .rodata, before the jump tables). */
+const u32 g_00341AB0[12] = {                /* 0x00341AB0 */
+    0x800, 0x1000, 0x2000, 0x400, 8, 1, 0x10, 2, 0x8000, 0x4000, 0x20, 4
+};
+
+/* (? name) The 0xC294 wheel: 12 buttons through the table g_00341AB0
+ * {0x800, 0x1000, 0x2000, 0x400, 8, 1, 0x10, 2, 0x8000, 0x4000, 0x20, 4},
+ * then the hat (0 = up, clockwise; other values: none). */
+// FUNC 0x00230580 usbC294Buttons
+u32 usbC294Buttons(const u8 *buttons, const int *pov)
+{
+    u32 raw = 0;
+    for (int i = 0; i < 12; i++) {
+        if (buttons[i] != 0)
+            raw |= g_00341AB0[i];
+    }
+    u32 hat = *pov;                         /* read here: its range check stays after the loop */
+    switch (hat) {                          /* table 0x00341AE0 */
+    case 0: raw |= WHEEL_HAT_UP;                    break;
+    case 1: raw |= WHEEL_HAT_UP | WHEEL_HAT_RIGHT;   break;
+    case 2: raw |= WHEEL_HAT_RIGHT;                 break;
+    case 3: raw |= WHEEL_HAT_DOWN | WHEEL_HAT_RIGHT; break;
+    case 4: raw |= WHEEL_HAT_DOWN;                  break;
+    case 5: raw |= WHEEL_HAT_DOWN | WHEEL_HAT_LEFT;  break;
+    case 6: raw |= WHEEL_HAT_LEFT;                  break;
+    case 7: raw |= WHEEL_HAT_UP | WHEEL_HAT_LEFT;    break;
+    }
+    return raw;
+}
+
+/* (? name) Logitech wheels as GT3 directions: left when the wheel is at
+ * 0x13F or less or swings left across 0x1D1 fast, right at 0x2C1 or more or
+ * swinging right across 0x230 fast (the speed, per second at 60 frames,
+ * beyond 0x1A5).  pov is not used. */
+// FUNC 0x00230628 usb46DSteerButtons
+u32 usb46DSteerButtons(const int *pov, int x, int prevX)
+{
+    int speed = (x - prevX) * 60;
+    u32 buttons = 0;
+    if (prevX >= 0x1D1 && x < 0x1D1) {     /* as the right turn below (`buttons = ... ? 0 : */
+        if (!(-0x1A5 < speed))              /* CONTROL_LEFT' gives movn instead of movz) */
+            buttons |= CONTROL_LEFT;
+    }
+    if (!(0x13F < x))
+        buttons |= CONTROL_LEFT;
+    if (prevX < 0x230 && x >= 0x230) {
+        if (!(speed < 0x1A5))
+            buttons |= CONTROL_RIGHT;
+    }
+    return (x < 0x2C1) ? buttons : (buttons | CONTROL_RIGHT);
+}
+
+/* (? name) The 0x6F8 wheel's 10 buttons as raw bits, then the hat (as
+ * usbC294Buttons). */
+// FUNC 0x00230698 usb6F8Buttons
+u32 usb6F8Buttons(const u8 *buttons, const int *pov)
+{
+    u32 raw = buttons[1] != 0;
+    u32 hat = *pov;
+    if (buttons[3]) raw |= 0x8000;
+    if (buttons[0]) raw |= 0x8;
+    if (buttons[2]) raw |= 0x4000;
+    if (buttons[4]) raw |= 0x4;
+    if (buttons[5]) raw |= 0x20;
+    if (buttons[6]) raw |= 0x400;
+    if (buttons[7]) raw |= 0x2000;
+    if (buttons[8]) raw |= 0x800;
+    if (buttons[9]) raw |= 0x1000;
+    switch (hat) {                          /* table 0x00341B00 */
+    case 0: raw |= WHEEL_HAT_UP;                    break;
+    case 1: raw |= WHEEL_HAT_UP | WHEEL_HAT_RIGHT;   break;
+    case 2: raw |= WHEEL_HAT_RIGHT;                 break;
+    case 3: raw |= WHEEL_HAT_DOWN | WHEEL_HAT_RIGHT; break;
+    case 4: raw |= WHEEL_HAT_DOWN;                  break;
+    case 5: raw |= WHEEL_HAT_DOWN | WHEEL_HAT_LEFT;  break;
+    case 6: raw |= WHEEL_HAT_LEFT;                  break;
+    case 7: raw |= WHEEL_HAT_UP | WHEEL_HAT_LEFT;    break;
+    }
+    return raw;
+}
+
+/* (? name) As usb46DSteerButtons with the 0x6F8 wheel's limits (0x11F /
+ * 0x2E1, crossings 0x1A1 / 0x260, speed 0x385). */
+// FUNC 0x00230778 usb6F8SteerButtons
+u32 usb6F8SteerButtons(int x, int prevX)
+{
+    int speed = (x - prevX) * 60;
+    u32 buttons = 0;
+    if (prevX >= 0x1A1 && x < 0x1A1) {
+        if (!(-0x385 < speed))
+            buttons |= CONTROL_LEFT;
+    }
+    if (!(0x11F < x))
+        buttons |= CONTROL_LEFT;
+    if (prevX < 0x260 && x >= 0x260) {
+        if (!(speed < 0x385))
+            buttons |= CONTROL_RIGHT;
+    }
+    return (x < 0x2E1) ? buttons : (buttons | CONTROL_RIGHT);
+}
+
+/* Callers: PadManager::init (device 0 / 1), IEEE1394Port::init (0). */
+// FUNC 0x002307F0 USBSteeringPort::init
+void USBSteeringPort::init(int usbPort)
+{
+    status = PORT_NONE;
+    this->usbPort = usbPort;
+    clearReport();
+    resetCentring();
+    actCount = 4;
+}
+
+/* 0xC295 is taken as the GT Force (if-converted: movn).  The stores in
+ * retail's order. */
+// FUNC 0x00230830 USBSteeringPort::onConnect
+void USBSteeringPort::onConnect(u16 vendor, u16 product)
+{
+    if (product == USB_PRODUCT_C295)
+        product = USB_PRODUCT_GTFORCE;
+    st.id.vendor  = vendor;
+    st.connected  = 1;
+    st.id.product = product;
+}
+
+// FUNC 0x00230858 USBSteeringPort::onDisconnect
+void USBSteeringPort::onDisconnect()
+{
+    st.connected = 0;
+    resetCentring();
+}
+
+/* Not st.connected.  One counter for the three loops (check_dbra_loop
+ * reverses them). */
+// FUNC 0x00230878 USBSteeringPort::clearReport
+void USBSteeringPort::clearReport()
+{
+    st.z  = 0;
+    st.y  = 0;
+    st.x  = 0;
+    st.rz = 0;
+    st.ry = 0;
+    st.rx = 0;
+    prevX = 0;
+    int i;
+    for (i = 0; i < 2; i++)
+        st.slider[i] = 0;
+    for (i = 0; i < 1; i++)
+        st.pov[i] = 0;
+    for (i = 0; i < 16; i++)
+        st.buttons[i] = 0;
+    st.id.vendor  = 0;
+    st.id.product = 0;
+    report        = 0;
+}
+
+/* centred first: egcs then stores centreState first, as retail. */
+// FUNC 0x00230928 USBSteeringPort::resetCentring
+void USBSteeringPort::resetCentring()
+{
+    centred     = 0;
+    centreState = 0;
+}
+
+/* (? name) The centring sequence of a Logitech wheel, one step a frame,
+ * with a constant force on all four values: 0 follow the position until the
+ * wheel is near the centre, 1 force 0 for 12 frames (centreLeft = x), 2
+ * back to the centre, 3 force 0xFF for 12 frames (centreRight = x), 4 back
+ * to the centre: done (centred).  An unknown state sends force 0.  abs()
+ * is the builtin (bltzl; negu).  The command's address in a pointer is an
+ * exact form, not the original: retail keeps &cmd in $t0 from the start
+ * (`&cmd' at the call: 95.6%). */
+// FUNC 0x00230938 USBSteeringPort::autoCentre
+void USBSteeringPort::autoCentre(const PjoyState *r)
+{
+    FfCmd cmd;
+    FfCmd *p = &cmd;                        /* (the exact form, see above) */
+    int force = 0;
+    int pos = r->x >> 2;                    /* the wheel's 10 bits as 8 */
+
+    switch ((u32)centreState) {
+    case 0:
+        force = pos;
+        if (__builtin_abs(force - FF_NONE) < 0x20) {
+            centreCount = 0;
+            centreState = 1;
+        }
+        break;
+    case 1:
+        force = FF_LEFT;
+        if (centreCount++ >= 0xB) {
+            centreCount = 0;
+            centreState = 2;
+        }
+        centreLeft = r->x;
+        break;
+    case 2:
+        force = pos;
+        if (__builtin_abs(force - FF_NONE) < 0x20)
+            centreState = 3;
+        break;
+    case 3:
+        force = FF_RIGHT;
+        if (centreCount++ >= 0xB) {
+            centreCount = 0;
+            centreState = 4;
+        }
+        centreRight = r->x;
+        break;
+    case 4:
+        force = pos;
+        if (__builtin_abs(force - FF_NONE) < 0x20) {
+            centreState = 0;
+            centred     = 1;
+        }
+        break;
+    }
+    ff_send_download_play(usbPort, ff_build_constant(p, force, force, force, force));
+}
+
+/* (? name) Once a frame (PadManager::update).  A removed device
+ * disconnects; a new one connects once its id is known (a Logitech wheel
+ * after its centring sequence; the 0x6F8 wheel needs none).  The driver's
+ * result in a switch: case PJOY_STATE_BUSY (5) gives retail's compare tree
+ * (`== 3', `> 3', `== 0').  One counter for the copy loops. */
+// FUNC 0x00230A90 USBSteeringPort::update
+void USBSteeringPort::update()
+{
+    PjoyState state;
+    PjoyInfo  info;
+
+    switch (pjoy_read_state(usbPort, &state)) {
+    case PJOY_STATE_REMOVED:
+        if (status == PORT_CONNECTED) {
+            status = PORT_NONE;
+            onDisconnect();
+        }
+        return;
+    case PJOY_STATE_OK:
+        break;
+    case PJOY_STATE_BUSY:
+        return;
+    default:
+        return;
+    }
+
+    if (status == PORT_NONE) {
+        pjoy_get_info(usbPort, &info);
+        if (info.vendor == USB_VENDOR_6F8) {
+            centred = 1;
+        } else if (info.vendor == USB_VENDOR_LOGITECH) {
+            if (centred == 0) {
+                autoCentre(&state);
+                return;
+            }
+        }
+        onConnect(info.vendor, info.product);
+    }
+    status = PORT_CONNECTED;
+
+    Control unused;                         /* (? constructed and destroyed, never used) */
+    if (g_00352CE0 != 0 && st.id.product == USB_PRODUCT_GTFORCE) {
+        usbApplyCalibration(&getGameStatus()->options.config,     /* GameStatus +0x30570 */
+                            usbPort != 0, CONFIG_WHEEL_GTFORCE, &state);
+    }
+    prevX = st.x;
+    st.x  = state.x;
+    st.y  = state.y;
+    st.z  = state.z;
+    st.rx = state.rx;
+    st.ry = state.ry;
+    st.rz = state.rz;
+    int i;
+    for (i = 0; i < 2; i++)
+        st.slider[i] = state.slider[i];
+    for (i = 0; i < 1; i++)
+        st.pov[i] = state.pov[i];
+    for (i = 0; i < 16; i++)
+        st.buttons[i] = state.buttons[i];
+    report = state.unk_34;
+    if (actCount > 0) {
+        FfCmd cmd;
+        ff_send_download_play(usbPort, ff_build_constant(&cmd, act[0], act[1], act[2], act[3]));
+        stopActuators();
+    }
+}
+
+/* Index: USBSteeringPort::virtual_1.  Disconnected: type, buttons and
+ * channels 0 (the mask is left as it is). */
+// FUNC 0x00230D10 USBSteeringPort::translate
+void USBSteeringPort::translate(Control &c)
+{
+    c.status = status;
+    if (status == PORT_NONE) {
+        c.type = 0;
+        c.curButtons.buttons = 0;
+        for (int ch = CHAN_COUNT - 1; ch >= 0; ch--)
+            c.channels[ch] = 0;
+        return;
+    }
+    if (status != PORT_CONNECTED)
+        return;
+
+    c.type = USB_WHEEL_OTHER << USB_TYPE_SHIFT;
+    u32 raw = 0;
+    u32 buttons = 0;
+    if (st.id.vendor == USB_VENDOR_LOGITECH
+        && (u16)(st.id.product - USB_PRODUCT_GTFORCE) < 2) {     /* 0xC293, 0xC294 */
+        if (st.id.product == USB_PRODUCT_GTFORCE) {
+            c.type = USB_WHEEL_GTFORCE << USB_TYPE_SHIFT;
+            raw = usbGTForceButtons(st.buttons);
+        } else {
+            c.type = USB_WHEEL_C294 << USB_TYPE_SHIFT;
+            raw = usbC294Buttons(st.buttons, st.pov);
+        }
+        buttons = usb46DSteerButtons(st.pov, st.x, prevX);
+#ifdef BOOT_OLD_GCC
+    } else if (*(u32 *)&st.id == USB_DEVICE_6F8_WHEEL) {      /* vendor and product in one compare */
+#else
+    } else if (st.id.vendor == USB_VENDOR_6F8 && st.id.product == USB_PRODUCT_6F8_WHEEL) {
+#endif
+        c.type = USB_WHEEL_6F8 << USB_TYPE_SHIFT;
+        raw = usb6F8Buttons(st.buttons, st.pov);
+        buttons = usb6F8SteerButtons(st.x, prevX);
+    }
+    if (g_00352CE0 != 0) {
+        /* the pedal map: a pedal pressed far enough is a button (the
+         * pedals rest at 0xFF) */
+        if (!(0x3F < st.slider[0])) buttons |= CONTROL_DECIDE;
+        if (!(0x3F < st.slider[1])) buttons |= CONTROL_CANCEL;
+    }
+    if (raw & (WHEEL_HAT_UP | 0x1))   buttons |= CONTROL_UP;
+    if (raw & (WHEEL_HAT_DOWN | 0x8)) buttons |= CONTROL_DOWN;
+    if (raw & WHEEL_HAT_LEFT)         buttons |= CONTROL_LEFT;
+    if (raw & WHEEL_HAT_RIGHT)        buttons |= CONTROL_RIGHT;
+    if (raw & 0x4000)                 buttons |= CONTROL_START;
+    if (raw & 0x8000)                 buttons |= CONTROL_SELECT;
+    if (raw & (0x2000 | 0x800))       buttons |= CONTROL_DECIDE;
+    if (raw & (0x1000 | 0x400))       buttons |= CONTROL_CANCEL;
+    if (st.id.product == USB_PRODUCT_GTFORCE) {
+        /* the GT Force's own bits */
+        if (raw & 0x4)  buttons |= CONTROL_START;
+        if (raw & 0x2)  buttons |= CONTROL_SELECT;
+        if (raw & 0x20) buttons |= CONTROL_DECIDE;
+        if (raw & 0x10) buttons |= CONTROL_CANCEL;
+    }
+    c.curButtons.raw[0]  = raw;
+    c.curButtons.buttons = buttons;
+    c.channels[CHAN_WHEEL]  = st.x;
+    c.channels[CHAN_PEDAL1] = st.slider[0];
+    c.channels[CHAN_PEDAL2] = st.slider[1];
+}
+
+/* Index: USBSteeringPort::virtual_2. */
+// FUNC 0x00230F50 USBSteeringPort::translateSync
+void USBSteeringPort::translateSync(Control &c)
+{
+}
+
+/* Index: USBSteeringPort::virtual_3.  Only channel 2 (the force) is kept. */
+// FUNC 0x00230F58 USBSteeringPort::setActuator
+void USBSteeringPort::setActuator(int ch, int value)
+{
+    if (ch == 2)
+        act[2] = value;
+}
+
+/* Index: USBSteeringPort::virtual_4.  FF_NONE (0x7F) = no force. */
+// FUNC 0x00230F70 USBSteeringPort::stopActuators
+void USBSteeringPort::stopActuators()
+{
+    for (int i = 0; i < actCount; i++)
+        act[i] = FF_NONE;
+}
+
+/* Index: USBSteeringPort::virtual_5. */
+// FUNC 0x00230FA8 USBSteeringPort::isReady
+int USBSteeringPort::isReady()
+{
+    return 1;
+}
+
+/* (? name) Into a link frame: +0x20..+0x5B (0x3C bytes).  memcpy: the
+ * frame is not aligned (retail's last word is lwl / lwr too). */
+// FUNC 0x00230FB0 USBSteeringPort::save
+u8 *USBSteeringPort::save(u8 *buf)
+{
+    memcpy(buf, &st, sizeof(USBPortState));
+    return buf + sizeof(USBPortState);
+}
+
+/* (? name) From a link frame (memcpy, as save); the status follows
+ * st.connected. */
+// FUNC 0x00231038 USBSteeringPort::load
+const u8 *USBSteeringPort::load(const u8 *buf)
+{
+    memcpy(&st, buf, sizeof(USBPortState));
+    status = (ControlStatus)(st.connected != 0);
+    return buf + sizeof(USBPortState);
+}
+
+/* The accessors are inline in engine/input/T479_usb_steering_port.h (no callers);
+ * egcs emits these copies with the vtable, the last-declared first.  They
+ * are Lupo 2's linkonce getX .. getReport (0x002D2CC0..0x002D2D08) in the
+ * reverse order.  index.txt's lupo2 / lupo2m names for 0x002310D8..
+ * 0x00231110 are shifted by one (it has getX at 0x00231110, which returns
+ * y): getX must return +0x24, the wheel the report's first word goes to
+ * (and getButtons / getPov / getSlider the three arrays). */
+// FUNC 0x002310D0 USBSteeringPort::getReport
+/* inline: report */
+
+// FUNC 0x002310D8 USBSteeringPort::getButtons
+/* inline: st.buttons (index.txt: USBSteeringPort::getPov, shifted) */
+
+// FUNC 0x002310E0 USBSteeringPort::getPov
+/* inline: st.pov */
+
+// FUNC 0x002310E8 USBSteeringPort::getSlider
+/* inline: st.slider */
+
+// FUNC 0x002310F0 USBSteeringPort::getRZ
+/* inline: st.rz (index.txt: getRY, shifted) */
+
+// FUNC 0x002310F8 USBSteeringPort::getRY
+/* inline: st.ry (index.txt: getRX, shifted) */
+
+// FUNC 0x00231100 USBSteeringPort::getRX
+/* inline: st.rx (index.txt: getZ, shifted) */
+
+// FUNC 0x00231108 USBSteeringPort::getZ
+/* inline: st.z (index.txt: getY, shifted) */
+
+// FUNC 0x00231110 USBSteeringPort::getY
+/* inline: st.y (index.txt: getX, shifted) */
+
+// FUNC 0x00231118 USBSteeringPort::getX
+/* inline: st.x */
+
+#ifndef BOOT_OLD_GCC
+/* __si_type_info __ti15USBSteeringPort (0x004B2A30), name
+ * "15USBSteeringPort" (0x00341C58), base PortBase.  Only in the vtable. */
+// FUNC 0x00231120 __tf15USBSteeringPort
+extern "C" void *__tf15USBSteeringPort(void)
+{
+    if (__ti15USBSteeringPort[0] == 0) {
+        __tf8PortBase();
+        __rtti_si(__ti15USBSteeringPort, "15USBSteeringPort", (const type_info *)__ti8PortBase);
+    }
+    return __ti15USBSteeringPort;
+}
+#endif
+
+// FUNC 0x00231170 USBSteeringPort::~USBSteeringPort
+/* implicit: ~PortBase; Index: USBSteeringPort::virtual_0.  Implicit
+ * (engine/input/T479_usb_steering_port.h declares none); egcs emits this copy for
+ * the vtable: only PortBase::~PortBase with the caller's flags. */

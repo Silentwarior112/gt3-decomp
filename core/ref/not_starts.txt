@@ -1,0 +1,8 @@
+# Addresses the heuristics take for function starts that are not (hex, one per line; # comments).
+# tools/ground.py drops them after all other rules (ref/followups.md "Function boundaries").
+0x00100000  # two padding nops before _start; a data word 0x00339688 equals the address (u000)
+0x00100014  # the rest of _start; data word 0x00340CEC (u000)
+0x00252030  # second half of gfx_select_list 0x00251FA8 (u116)
+0x00252520  # second half of gfx_set_draw_buffer 0x002524E8 (u116)
+0x00262AE0  # last loop of the chroma prediction 0x00262610 (u121/u122)
+0x00255B5C  # the last return path of pseudo_angle / pseudo_angle_q4, no callers (u117)

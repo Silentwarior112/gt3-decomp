@@ -77,9 +77,15 @@ class Profile:
 
 
 class Profiles:
-    def __init__(self, items=(), selected=""):
+    """The profile list.  targets: the target ids this list has already been
+    given default profiles for; added: names of the profiles load_profiles()
+    just made for executables that are new since the file was written."""
+
+    def __init__(self, items=(), selected="", targets=()):
         self.items = list(items)
         self.selected = selected
+        self.targets = set(targets)
+        self.added = []
 
     def names(self):
         return [p.name for p in self.items]
@@ -109,17 +115,22 @@ class Profiles:
         return [p for p in self.items if p.name.lower().startswith(q) or (qs and slug(p.name).startswith(qs))]
 
     def to_json(self):
-        return {"version": 2, "selected": self.selected, "profiles": [p.to_json() for p in self.items]}
+        return {"version": 2, "selected": self.selected, "profiles": [p.to_json() for p in self.items],
+                "targets": sorted(self.targets | {p.target for p in self.items})}
+
+
+def target_profiles(t):
+    """The default profiles of one target: one per option."""
+    return [Profile("%s (%s)" % (t.short_name or t.name, o.label.lower()), t.id, o.id, t.default_output(o.id))
+            for o in t.options]
 
 
 def default_profiles(registry):
     """One profile per target and option."""
     items = []
     for t in sorted(registry.targets.values(), key=lambda t: t.name):
-        for o in t.options:
-            items.append(Profile("%s (%s)" % (t.short_name or t.name, o.label.lower()), t.id, o.id,
-                                 t.default_output(o.id)))
-    return Profiles(items, items[0].name if items else "")
+        items += target_profiles(t)
+    return Profiles(items, items[0].name if items else "", registry.targets)
 
 
 def load_profiles(registry):
@@ -137,7 +148,20 @@ def load_profiles(registry):
                 if t and t.option(p.option) is None and t.options:
                     p.option = t.options[0].id
                 items.append(p)
-    return Profiles(items, str(data.get("selected", ""))), note
+    known = data.get("targets")
+    known = {str(x) for x in known} if isinstance(known, list) else {p.target for p in items}
+    profiles = Profiles(items, str(data.get("selected", "")), known)
+    # an executable whose plug-in is new since the file was written gets its
+    # default profiles once; deleting them later does not bring them back
+    for t in sorted(registry.targets.values(), key=lambda t: t.name):
+        if t.id in known or any(p.target == t.id for p in items):
+            continue
+        for p in target_profiles(t):
+            p.name = profiles.unique_name(p.name)
+            profiles.items.append(p)
+            profiles.added.append(p.name)
+    profiles.targets |= set(registry.targets)
+    return profiles, note
 
 
 def save_profiles(profiles):

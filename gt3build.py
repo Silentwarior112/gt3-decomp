@@ -149,7 +149,9 @@ def main():
     profiles, note = load_profiles(reg)
     if note:
         print(note)
-    if not os.path.exists(PROFILES_FILE):
+    if profiles.added:
+        print("New executable: added the profiles " + ", ".join(profiles.added))
+    if profiles.added or not os.path.exists(PROFILES_FILE):
         save_profiles(profiles)
 
     if a.sdks:

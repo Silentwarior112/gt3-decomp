@@ -373,6 +373,7 @@ python tools/build.py --toolchain D:/ps2sdk-main   # another EE toolchain
 python tools/boot_test.py                   # boot build/scus_971.02 in PCSX2
 python tools/boot_test.py --elf D:/gt3/SCUS_971.02
 python tools/boot_test.py --baseline        # the retail bootstrap, for comparison
+python tools/boot_test.py --baseline --card ../core/build/packtest/T1_resigned.ps2   # core.gt3 from a card
 ```
 
 The GT3 Decomp Builder runs the same script from a window with saved
@@ -473,7 +474,9 @@ source, and each fix keeps what the machine code does:
   Pillow for the window captures.
 - **Run.** It boots the ELF as a boot-ELF override against the retail US ISO,
   so the ELF reads `CORE.GT3`, `IOPRP224.IMG` and the IRX modules from the real
-  disc.
+  disc. With `--card`, a copy of that PCSX2 memory card is in slot 2 for the
+  run, and the bootstrap loads the `core.gt3` on it instead of the disc's
+  (`core/tools/packtest.py` makes such cards).
 - **Output.** It saves the emulator log and window captures to
   `build/boottest/<tag>/` and checks six stage markers taken from a retail
   run: ELF executing, IOP rebooted, bootstrap IRX loads, the `ExecPS2` kernel

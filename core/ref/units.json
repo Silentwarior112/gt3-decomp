@@ -1,0 +1,3575 @@
+{
+ "u000": {
+  "ranges": [
+   [
+    "0x00100000",
+    "0x00100140"
+   ]
+  ],
+  "tus": [
+   "G000"
+  ],
+  "split_tus": [],
+  "lang": "c",
+  "nfuncs": 6,
+  "instrs": 78,
+  "named": 2,
+  "boot": 2,
+  "classes": []
+ },
+ "u001": {
+  "ranges": [
+   [
+    "0x00100140",
+    "0x001036D0"
+   ]
+  ],
+  "tus": [
+   "T000",
+   "T001",
+   "T002",
+   "T003",
+   "T004",
+   "T005",
+   "T006",
+   "T009",
+   "T007",
+   "T008",
+   "T033",
+   "T016",
+   "T017"
+  ],
+  "split_tus": [],
+  "lang": "cpp",
+  "nfuncs": 115,
+  "instrs": 3376,
+  "named": 40,
+  "boot": 0,
+  "classes": [
+   "GameObjectController",
+   "GameObject",
+   "ComboutTransitionObject",
+   "gt2k_menu::SmartCarIndex",
+   "GameObjectList",
+   "FadeoutTransitionObject"
+  ]
+ },
+ "u002": {
+  "ranges": [
+   [
+    "0x001036D0",
+    "0x001060B8"
+   ]
+  ],
+  "tus": [
+   "T034",
+   "T018",
+   "T019",
+   "T020"
+  ],
+  "split_tus": [],
+  "lang": "cpp",
+  "nfuncs": 34,
+  "instrs": 2665,
+  "named": 3,
+  "boot": 0,
+  "classes": [
+   "gt2k_menu::ConnectStatus"
+  ]
+ },
+ "u003": {
+  "ranges": [
+   [
+    "0x001060B8",
+    "0x001095A8"
+   ]
+  ],
+  "tus": [
+   "T021",
+   "T022"
+  ],
+  "split_tus": [],
+  "lang": "cpp",
+  "nfuncs": 34,
+  "instrs": 3370,
+  "named": 0,
+  "boot": 0,
+  "classes": []
+ },
+ "u004": {
+  "ranges": [
+   [
+    "0x001095A8",
+    "0x0010C9E0"
+   ]
+  ],
+  "tus": [
+   "T035",
+   "T023"
+  ],
+  "split_tus": [],
+  "lang": "cpp",
+  "nfuncs": 51,
+  "instrs": 3314,
+  "named": 4,
+  "boot": 0,
+  "classes": [
+   "gt2k_menu::SelectBox",
+   "gt2k_menu::TransitiveEX"
+  ]
+ },
+ "u005": {
+  "ranges": [
+   [
+    "0x0010C9E0",
+    "0x0010FF90"
+   ]
+  ],
+  "tus": [
+   "T024",
+   "T025",
+   "T026",
+   "T027",
+   "T028",
+   "T029"
+  ],
+  "split_tus": [],
+  "lang": "cpp",
+  "nfuncs": 45,
+  "instrs": 3407,
+  "named": 8,
+  "boot": 0,
+  "classes": [
+   "gt2k_menu::MiniCursor",
+   "gt2k_menu::LevelButtonList",
+   "gt2k_menu::GoodiesButtonList"
+  ]
+ },
+ "u006": {
+  "ranges": [
+   [
+    "0x0010FF90",
+    "0x00113540"
+   ]
+  ],
+  "tus": [
+   "T030"
+  ],
+  "split_tus": [],
+  "lang": "cpp",
+  "nfuncs": 17,
+  "instrs": 3427,
+  "named": 0,
+  "boot": 0,
+  "classes": []
+ },
+ "u007": {
+  "ranges": [
+   [
+    "0x00113540",
+    "0x001168B8"
+   ]
+  ],
+  "tus": [
+   "T031",
+   "T010",
+   "T011",
+   "T012",
+   "T013",
+   "T014",
+   "T032",
+   "T015"
+  ],
+  "split_tus": [],
+  "lang": "cpp",
+  "nfuncs": 59,
+  "instrs": 3266,
+  "named": 8,
+  "boot": 0,
+  "classes": [
+   "gt2k_menu::CircleGauge",
+   "gt2k_menu::ArcadeControl",
+   "gt2k_menu::ArcadeRender"
+  ]
+ },
+ "u008": {
+  "ranges": [
+   [
+    "0x001168B8",
+    "0x00119778"
+   ]
+  ],
+  "tus": [
+   "T047",
+   "T040",
+   "T048",
+   "T041",
+   "T049",
+   "T042"
+  ],
+  "split_tus": [],
+  "lang": "cpp",
+  "nfuncs": 40,
+  "instrs": 2978,
+  "named": 16,
+  "boot": 0,
+  "classes": [
+   "gt2k_menu::TopButtonList",
+   "gt2k_menu::OilChangeCylinder",
+   "gt2k_menu::EventStatusObject",
+   "gt2k_menu::EventStatusButtonObject",
+   "gt2k_menu::TopButton",
+   "gt2k_menu::EventHider"
+  ]
+ },
+ "u009": {
+  "ranges": [
+   [
+    "0x00119778",
+    "0x0011C9C8"
+   ]
+  ],
+  "tus": [
+   "T043",
+   "T044",
+   "T045"
+  ],
+  "split_tus": [],
+  "lang": "cpp",
+  "nfuncs": 69,
+  "instrs": 3185,
+  "named": 7,
+  "boot": 0,
+  "classes": [
+   "gt2k_menu::GtmodeControl",
+   "gt2k_menu::CarGoodsButtonList",
+   "gt2k_menu::DealerButtonList",
+   "RegurationResult"
+  ]
+ },
+ "u010": {
+  "ranges": [
+   [
+    "0x0011C9C8",
+    "0x0011F0E0"
+   ]
+  ],
+  "tus": [
+   "T036"
+  ],
+  "split_tus": [
+   "T036"
+  ],
+  "lang": "cpp",
+  "nfuncs": 63,
+  "instrs": 2465,
+  "named": 0,
+  "boot": 0,
+  "classes": []
+ },
+ "u011": {
+  "ranges": [
+   [
+    "0x0011F0E0",
+    "0x001218F0"
+   ]
+  ],
+  "tus": [
+   "T036"
+  ],
+  "split_tus": [
+   "T036"
+  ],
+  "lang": "cpp",
+  "nfuncs": 58,
+  "instrs": 2516,
+  "named": 0,
+  "boot": 0,
+  "classes": []
+ },
+ "u012": {
+  "ranges": [
+   [
+    "0x001218F0",
+    "0x001258E8"
+   ]
+  ],
+  "tus": [
+   "T036"
+  ],
+  "split_tus": [
+   "T036"
+  ],
+  "lang": "cpp",
+  "nfuncs": 38,
+  "instrs": 4071,
+  "named": 0,
+  "boot": 0,
+  "classes": []
+ },
+ "u013": {
+  "ranges": [
+   [
+    "0x001258E8",
+    "0x00128D98"
+   ]
+  ],
+  "tus": [
+   "T036",
+   "T037",
+   "T046",
+   "T038",
+   "T039",
+   "T050",
+   "T096",
+   "T097",
+   "T051"
+  ],
+  "split_tus": [
+   "T036"
+  ],
+  "lang": "cpp",
+  "nfuncs": 107,
+  "instrs": 3326,
+  "named": 15,
+  "boot": 0,
+  "classes": [
+   "gt2k_menu::GtmodeRender",
+   "gt2k_menu::MovieRender",
+   "gt2k_menu::DecayItem",
+   "gt2k_menu::TumbleCar",
+   "GarageCar",
+   "gt2k_menu::Cell<GarageCar>"
+  ]
+ },
+ "u014": {
+  "ranges": [
+   [
+    "0x00128D98",
+    "0x0012C300"
+   ]
+  ],
+  "tus": [
+   "T098",
+   "T099",
+   "T100",
+   "T101"
+  ],
+  "split_tus": [],
+  "lang": "cpp",
+  "nfuncs": 58,
+  "instrs": 3394,
+  "named": 18,
+  "boot": 0,
+  "classes": [
+   "gt2k_menu::HandicapItem",
+   "gt2k_menu::PrizeCounterRemainItem",
+   "gt2k_menu::PrizeCounterControlItem",
+   "gt2k_menu::CalibrationItem",
+   "gt2k_menu::KeyConfigItem",
+   "gt2k_menu::PrizeCounterShadowItem"
+  ]
+ },
+ "u015": {
+  "ranges": [
+   [
+    "0x0012C300",
+    "0x0012F840"
+   ]
+  ],
+  "tus": [
+   "T111",
+   "T112",
+   "T113",
+   "T102"
+  ],
+  "split_tus": [],
+  "lang": "cpp",
+  "nfuncs": 78,
+  "instrs": 3380,
+  "named": 5,
+  "boot": 0,
+  "classes": [
+   "gt2k_menu::ShortmenuRender",
+   "gt2k_menu::ShortmenuControl",
+   "gt2k_menu::ShortMenuText"
+  ]
+ },
+ "u016": {
+  "ranges": [
+   [
+    "0x0012F840",
+    "0x00131410"
+   ]
+  ],
+  "tus": [
+   "T052"
+  ],
+  "split_tus": [],
+  "lang": "cpp",
+  "nfuncs": 5,
+  "instrs": 1776,
+  "named": 0,
+  "boot": 0,
+  "classes": []
+ },
+ "u017": {
+  "ranges": [
+   [
+    "0x00131410",
+    "0x00134630"
+   ]
+  ],
+  "tus": [
+   "T053",
+   "T054"
+  ],
+  "split_tus": [],
+  "lang": "cpp",
+  "nfuncs": 14,
+  "instrs": 3201,
+  "named": 0,
+  "boot": 0,
+  "classes": []
+ },
+ "u018": {
+  "ranges": [
+   [
+    "0x00134630",
+    "0x00137840"
+   ]
+  ],
+  "tus": [
+   "T103",
+   "T055",
+   "T104"
+  ],
+  "split_tus": [],
+  "lang": "cpp",
+  "nfuncs": 97,
+  "instrs": 3170,
+  "named": 10,
+  "boot": 0,
+  "classes": [
+   "gt2k_menu::ShortmenuLicenseRender",
+   "gt2k_menu::LoggerRender",
+   "gt2k_menu::LoggerPage",
+   "gt2k_menu::ShortmenuLicenseControl",
+   "gt2k_menu::LoggerInput",
+   "gt2k_menu::LoggerControl"
+  ]
+ },
+ "u019": {
+  "ranges": [
+   [
+    "0x00137840",
+    "0x0013A8D0"
+   ]
+  ],
+  "tus": [
+   "T056",
+   "T057",
+   "T058",
+   "T059"
+  ],
+  "split_tus": [],
+  "lang": "cpp",
+  "nfuncs": 68,
+  "instrs": 3074,
+  "named": 12,
+  "boot": 0,
+  "classes": [
+   "gt2k_menu::ChampionShipTrophyItem",
+   "gt2k_menu::TrophyItem",
+   "gt2k_menu::ConsolationControl",
+   "gt2k_menu::GTmodeTrophyControl",
+   "gt2k_menu::ArcadeTrophyControl",
+   "gt2k_menu::MiniPrizeControlBase"
+  ]
+ },
+ "u020": {
+  "ranges": [
+   [
+    "0x0013A8D0",
+    "0x0013C8F0"
+   ]
+  ],
+  "tus": [
+   "T060",
+   "T105",
+   "T106"
+  ],
+  "split_tus": [],
+  "lang": "cpp",
+  "nfuncs": 47,
+  "instrs": 2033,
+  "named": 4,
+  "boot": 0,
+  "classes": [
+   "gt2k_menu::CarGetMenuCamera",
+   "gt2k_menu::TrophyGetControl",
+   "gt2k_menu::NotCarGetControl"
+  ]
+ },
+ "u021": {
+  "ranges": [
+   [
+    "0x0013C8F0",
+    "0x0013FF98"
+   ]
+  ],
+  "tus": [
+   "T107",
+   "T061",
+   "T062"
+  ],
+  "split_tus": [],
+  "lang": "cpp",
+  "nfuncs": 67,
+  "instrs": 3463,
+  "named": 10,
+  "boot": 0,
+  "classes": [
+   "gt2k_menu::CarsItem",
+   "gt2k_menu::CarGetMessageItem",
+   "gt2k_menu::TheCar",
+   "gt2k_menu::CarGetControl",
+   "gt2k_menu::EventNameItem",
+   "gt2k_menu::OptionControl"
+  ]
+ },
+ "u022": {
+  "ranges": [
+   [
+    "0x0013FF98",
+    "0x00142790"
+   ]
+  ],
+  "tus": [
+   "T063",
+   "T064",
+   "T065",
+   "T066",
+   "T067"
+  ],
+  "split_tus": [],
+  "lang": "cpp",
+  "nfuncs": 137,
+  "instrs": 2509,
+  "named": 0,
+  "boot": 0,
+  "classes": []
+ },
+ "u023": {
+  "ranges": [
+   [
+    "0x00142790",
+    "0x001447D8"
+   ]
+  ],
+  "tus": [
+   "T108"
+  ],
+  "split_tus": [
+   "T108"
+  ],
+  "lang": "cpp",
+  "nfuncs": 56,
+  "instrs": 2033,
+  "named": 16,
+  "boot": 0,
+  "classes": [
+   "gt2k_menu::MemorycardOtherPS2File",
+   "gt2k_menu::MemorycardDeletedFile",
+   "gt2k_menu::MemorycardDamageFile",
+   "gt2k_menu::MemorycardPS1File",
+   "gt2k_menu::MemorycardDummyFile"
+  ]
+ },
+ "u024": {
+  "ranges": [
+   [
+    "0x001447D8",
+    "0x00147870"
+   ]
+  ],
+  "tus": [
+   "T108"
+  ],
+  "split_tus": [
+   "T108"
+  ],
+  "lang": "cpp",
+  "nfuncs": 145,
+  "instrs": 3040,
+  "named": 82,
+  "boot": 0,
+  "classes": [
+   "gt2k_menu::MemorycardDeletedFile",
+   "gt2k_menu::MemorycardFile",
+   "gt2k_menu::MemorycardSettingFile",
+   "gt2k_menu::MemorycardGameFile",
+   "gt2k_menu::MemorycardReplayFile",
+   "gt2k_menu::MemorycardBestlapReplayFile"
+  ]
+ },
+ "u025": {
+  "ranges": [
+   [
+    "0x00147870",
+    "0x001499B8"
+   ]
+  ],
+  "tus": [
+   "T109"
+  ],
+  "split_tus": [],
+  "lang": "cpp",
+  "nfuncs": 88,
+  "instrs": 2106,
+  "named": 60,
+  "boot": 0,
+  "classes": [
+   "gt2k_menu::MemorycardFileManager",
+   "gt2k_menu::MemorycardFileManagerBase"
+  ]
+ },
+ "u026": {
+  "ranges": [
+   [
+    "0x001499B8",
+    "0x0014B610"
+   ]
+  ],
+  "tus": [
+   "T068"
+  ],
+  "split_tus": [],
+  "lang": "cpp",
+  "nfuncs": 28,
+  "instrs": 1798,
+  "named": 1,
+  "boot": 0,
+  "classes": [
+   "gt2k_menu::MemorycardControl"
+  ]
+ },
+ "u027": {
+  "ranges": [
+   [
+    "0x0014B610",
+    "0x0014E880"
+   ]
+  ],
+  "tus": [
+   "T069"
+  ],
+  "split_tus": [],
+  "lang": "cpp",
+  "nfuncs": 62,
+  "instrs": 3204,
+  "named": 12,
+  "boot": 0,
+  "classes": [
+   "gt2k_menu::SingleIconView",
+   "gt2k_menu::IconView",
+   "gt2k_menu::SlotTitle",
+   "gt2k_menu::TitleView",
+   "gt2k_menu::ProgressBar"
+  ]
+ },
+ "u028": {
+  "ranges": [
+   [
+    "0x0014E880",
+    "0x00151AD0"
+   ]
+  ],
+  "tus": [
+   "T070",
+   "T110",
+   "T071",
+   "T072",
+   "T073"
+  ],
+  "split_tus": [],
+  "lang": "cpp",
+  "nfuncs": 94,
+  "instrs": 3181,
+  "named": 23,
+  "boot": 0,
+  "classes": [
+   "gt2k_menu::MemorycardLayerMenuItem",
+   "gt2k_menu::MemorycardLayerMenu",
+   "gt2k_menu::MemorycardMenuItemItem",
+   "gt2k_menu::MemorycardMenu",
+   "gt2k_menu::MemorycardMenuItem",
+   "gt2k_menu::List<gt2k_menu::MemorycardMenuItem>"
+  ]
+ },
+ "u029": {
+  "ranges": [
+   [
+    "0x00151AD0",
+    "0x00153B70"
+   ]
+  ],
+  "tus": [
+   "T074"
+  ],
+  "split_tus": [
+   "T074"
+  ],
+  "lang": "cpp",
+  "nfuncs": 25,
+  "instrs": 2083,
+  "named": 17,
+  "boot": 0,
+  "classes": [
+   "gt2k_menu::OverwriteMenu",
+   "gt2k_menu::SaveMenu",
+   "gt2k_menu::CommentChangeMenu",
+   "gt2k_menu::LoadMenu",
+   "gt2k_menu::MemorycardOperationMenu",
+   "gt2k_menu::DeleteMenu"
+  ]
+ },
+ "u030": {
+  "ranges": [
+   [
+    "0x00153B70",
+    "0x00156A80"
+   ]
+  ],
+  "tus": [
+   "T074"
+  ],
+  "split_tus": [
+   "T074"
+  ],
+  "lang": "cpp",
+  "nfuncs": 33,
+  "instrs": 3003,
+  "named": 20,
+  "boot": 0,
+  "classes": [
+   "gt2k_menu::CopyMenu",
+   "gt2k_menu::LoadWorkingMenu",
+   "gt2k_menu::DeleteMenu",
+   "gt2k_menu::SaveWorkingMenu",
+   "gt2k_menu::CommentChangeWorkingMenu",
+   "gt2k_menu::DeleteWorkingMenu"
+  ]
+ },
+ "u031": {
+  "ranges": [
+   [
+    "0x00156A80",
+    "0x00159EE8"
+   ]
+  ],
+  "tus": [
+   "T075",
+   "T076"
+  ],
+  "split_tus": [],
+  "lang": "cpp",
+  "nfuncs": 52,
+  "instrs": 3334,
+  "named": 19,
+  "boot": 0,
+  "classes": [
+   "gt2k_menu::MemorycardSlotMenu",
+   "gt2k_menu::WorkingMenu",
+   "gt2k_menu::MemorycardCancelItem",
+   "gt2k_menu::MemorycardFormatDialog",
+   "gt2k_menu::FormatWorkingMenu",
+   "gt2k_menu::MemorycardWriteProtectDialog"
+  ]
+ },
+ "u032": {
+  "ranges": [
+   [
+    "0x00159EE8",
+    "0x0015D448"
+   ]
+  ],
+  "tus": [
+   "T077",
+   "T078",
+   "T079",
+   "T080"
+  ],
+  "split_tus": [],
+  "lang": "cpp",
+  "nfuncs": 87,
+  "instrs": 3391,
+  "named": 7,
+  "boot": 0,
+  "classes": [
+   "gt2k_menu::MemorycardDemoFileManager",
+   "gt2k_menu::MemorycardWarningControl",
+   "gt2k_menu::MemorycardFileManagerBase",
+   "gt2k_menu::SettingControl"
+  ]
+ },
+ "u033": {
+  "ranges": [
+   [
+    "0x0015D448",
+    "0x0015FC70"
+   ]
+  ],
+  "tus": [
+   "T081"
+  ],
+  "split_tus": [
+   "T081"
+  ],
+  "lang": "cpp",
+  "nfuncs": 71,
+  "instrs": 2555,
+  "named": 0,
+  "boot": 0,
+  "classes": []
+ },
+ "u034": {
+  "ranges": [
+   [
+    "0x0015FC70",
+    "0x001638F8"
+   ]
+  ],
+  "tus": [
+   "T081"
+  ],
+  "split_tus": [
+   "T081"
+  ],
+  "lang": "cpp",
+  "nfuncs": 89,
+  "instrs": 3804,
+  "named": 0,
+  "boot": 0,
+  "classes": []
+ },
+ "u035": {
+  "ranges": [
+   [
+    "0x001638F8",
+    "0x00166F98"
+   ]
+  ],
+  "tus": [
+   "T082"
+  ],
+  "split_tus": [],
+  "lang": "cpp",
+  "nfuncs": 84,
+  "instrs": 3459,
+  "named": 0,
+  "boot": 0,
+  "classes": []
+ },
+ "u036": {
+  "ranges": [
+   [
+    "0x00166F98",
+    "0x00169780"
+   ]
+  ],
+  "tus": [
+   "T083",
+   "T084"
+  ],
+  "split_tus": [],
+  "lang": "cpp",
+  "nfuncs": 108,
+  "instrs": 2517,
+  "named": 0,
+  "boot": 0,
+  "classes": []
+ },
+ "u037": {
+  "ranges": [
+   [
+    "0x00169780",
+    "0x0016C260"
+   ]
+  ],
+  "tus": [
+   "T085",
+   "T086"
+  ],
+  "split_tus": [],
+  "lang": "cpp",
+  "nfuncs": 90,
+  "instrs": 2702,
+  "named": 33,
+  "boot": 0,
+  "classes": [
+   "gt2k_menu::PlayMusicBoxPop",
+   "gt2k_menu::PlayModeBox",
+   "gt2k_menu::PlayList",
+   "gt2k_menu::LoggerTop",
+   "gt2k_menu::PlayMusicBox",
+   "gt2k_menu::PlayListBox"
+  ]
+ },
+ "u038": {
+  "ranges": [
+   [
+    "0x0016C260",
+    "0x0016E640"
+   ]
+  ],
+  "tus": [
+   "T087"
+  ],
+  "split_tus": [
+   "T087"
+  ],
+  "lang": "cpp",
+  "nfuncs": 74,
+  "instrs": 2253,
+  "named": 15,
+  "boot": 0,
+  "classes": [
+   "gt2k_menu::LoggerSector",
+   "gt2k_menu::LoggerReplayRoot",
+   "gt2k_menu::LoggerMapCourse",
+   "gt2k_menu::LoggerReplayControl",
+   "gt2k_menu::LoggerRaceReplay",
+   "gt2k_menu::LoggerGraphMap"
+  ]
+ },
+ "u039": {
+  "ranges": [
+   [
+    "0x0016E640",
+    "0x00171CA8"
+   ]
+  ],
+  "tus": [
+   "T087",
+   "T088"
+  ],
+  "split_tus": [
+   "T087"
+  ],
+  "lang": "cpp",
+  "nfuncs": 91,
+  "instrs": 3454,
+  "named": 28,
+  "boot": 0,
+  "classes": [
+   "gt2k_menu::LoggerRaceGraph",
+   "gt2k_menu::LoggerGraphRoot",
+   "gt2k_menu::LoggerRoot",
+   "gt2k_menu::LoggerReplay",
+   "gt2k_menu::LoggerGraphMap",
+   "gt2k_menu::LoggerReplayRoot"
+  ]
+ },
+ "u040": {
+  "ranges": [
+   [
+    "0x00171CA8",
+    "0x001753C0"
+   ]
+  ],
+  "tus": [
+   "T089",
+   "T090",
+   "T091",
+   "T092",
+   "T093",
+   "T094",
+   "T114",
+   "T095",
+   "T188",
+   "T115",
+   "T116",
+   "T117"
+  ],
+  "split_tus": [],
+  "lang": "cpp",
+  "nfuncs": 160,
+  "instrs": 3451,
+  "named": 83,
+  "boot": 0,
+  "classes": [
+   "gt2k_menu::RecordsMenuArgCompulsory",
+   "gt2k_menu::RecordsMenuArgMaxSpeed",
+   "gt2k_menu::RecordsMenuArgFreeTT",
+   "gt2k_menu::RecordsMenuArgLicense",
+   "ResultArcade",
+   "gt2k_menu::RecordsMenuArg_0_400"
+  ]
+ },
+ "u041": {
+  "ranges": [
+   [
+    "0x001753C0",
+    "0x00177108"
+   ]
+  ],
+  "tus": [
+   "T118",
+   "T119",
+   "T120",
+   "T189",
+   "T190",
+   "T191",
+   "T192",
+   "T193"
+  ],
+  "split_tus": [],
+  "lang": "cpp",
+  "nfuncs": 54,
+  "instrs": 1857,
+  "named": 32,
+  "boot": 0,
+  "classes": [
+   "ResultImplementRecords",
+   "ResultLinkBattle",
+   "ResultMachineTest",
+   "ResultFreeRun",
+   "Result2PBattle",
+   "ResultChampionship"
+  ]
+ },
+ "u042": {
+  "ranges": [
+   [
+    "0x00177108",
+    "0x0017A038"
+   ]
+  ],
+  "tus": [
+   "T121",
+   "T122",
+   "T123",
+   "T124"
+  ],
+  "split_tus": [],
+  "lang": "cpp",
+  "nfuncs": 160,
+  "instrs": 2972,
+  "named": 43,
+  "boot": 0,
+  "classes": [
+   "RaceInformation",
+   "RaceEntryCar",
+   "RaceEntryBase",
+   "RaceResultBase",
+   "RaceEntryInformation",
+   "RaceEventQueue"
+  ]
+ },
+ "u043": {
+  "ranges": [
+   [
+    "0x0017A038",
+    "0x0017CF30"
+   ]
+  ],
+  "tus": [
+   "T125",
+   "T126",
+   "T127",
+   "T128",
+   "T129"
+  ],
+  "split_tus": [],
+  "lang": "cpp",
+  "nfuncs": 204,
+  "instrs": 2924,
+  "named": 87,
+  "boot": 0,
+  "classes": [
+   "RaceBase",
+   "RaceOrganization",
+   "RaceLapTime",
+   "RaceEntryBase"
+  ]
+ },
+ "u044": {
+  "ranges": [
+   [
+    "0x0017CF30",
+    "0x0017E6C0"
+   ]
+  ],
+  "tus": [
+   "T130"
+  ],
+  "split_tus": [],
+  "lang": "cpp",
+  "nfuncs": 50,
+  "instrs": 1484,
+  "named": 23,
+  "boot": 0,
+  "classes": [
+   "RacePS2Base",
+   "RaceBGMPS2",
+   "RaceEntryPS2"
+  ]
+ },
+ "u045": {
+  "ranges": [
+   [
+    "0x0017E6C0",
+    "0x001817F8"
+   ]
+  ],
+  "tus": [
+   "T131",
+   "T132"
+  ],
+  "split_tus": [],
+  "lang": "cpp",
+  "nfuncs": 43,
+  "instrs": 3129,
+  "named": 21,
+  "boot": 0,
+  "classes": [
+   "RacePS2Base",
+   "RaceBasicWithRaceDisplay",
+   "RaceBasic"
+  ]
+ },
+ "u046": {
+  "ranges": [
+   [
+    "0x001817F8",
+    "0x001848A8"
+   ]
+  ],
+  "tus": [
+   "T133",
+   "T134",
+   "T135",
+   "T136",
+   "T137"
+  ],
+  "split_tus": [],
+  "lang": "cpp",
+  "nfuncs": 121,
+  "instrs": 3056,
+  "named": 59,
+  "boot": 0,
+  "classes": [
+   "RaceSplitBattle",
+   "RaceSinglePlayer",
+   "RaceSinglePlayerInformation",
+   "RaceArcadeDemoInformation",
+   "RaceArcadeDemo",
+   "RaceArcadeSingle"
+  ]
+ },
+ "u047": {
+  "ranges": [
+   [
+    "0x001848A8",
+    "0x00187F98"
+   ]
+  ],
+  "tus": [
+   "T138",
+   "T139"
+  ],
+  "split_tus": [],
+  "lang": "cpp",
+  "nfuncs": 107,
+  "instrs": 3462,
+  "named": 56,
+  "boot": 0,
+  "classes": [
+   "RaceSolitaire",
+   "RaceLinkBattle",
+   "RaceLinkBattleInformation",
+   "RaceSolitaireInformation",
+   "RaceLinkBattleInput",
+   "RaceLinkBattleNodeInput"
+  ]
+ },
+ "u048": {
+  "ranges": [
+   [
+    "0x00187F98",
+    "0x0018A798"
+   ]
+  ],
+  "tus": [
+   "T140",
+   "T141",
+   "T142",
+   "T143",
+   "T144",
+   "T145"
+  ],
+  "split_tus": [],
+  "lang": "cpp",
+  "nfuncs": 108,
+  "instrs": 2519,
+  "named": 48,
+  "boot": 0,
+  "classes": [
+   "TimeTrialExaminationMessages",
+   "RaceFreeRun",
+   "RaceTimeTrialDisplay",
+   "ExaminationDisplayer",
+   "RaceTimeTrial",
+   "RaceFreeRunDisplay"
+  ]
+ },
+ "u049": {
+  "ranges": [
+   [
+    "0x0018A798",
+    "0x0018DD80"
+   ]
+  ],
+  "tus": [
+   "T146",
+   "T147",
+   "T148",
+   "T149",
+   "T150"
+  ],
+  "split_tus": [],
+  "lang": "cpp",
+  "nfuncs": 146,
+  "instrs": 3391,
+  "named": 60,
+  "boot": 0,
+  "classes": [
+   "RaceLicenseDisplay",
+   "LicenseExaminationMessages",
+   "Serialize::ReplayData",
+   "Serialize::MaxSpeed",
+   "RaceReplayInformation",
+   "RaceMachineTest"
+  ]
+ },
+ "u050": {
+  "ranges": [
+   [
+    "0x0018DD80",
+    "0x001909E0"
+   ]
+  ],
+  "tus": [
+   "T151",
+   "T152",
+   "T153",
+   "T194"
+  ],
+  "split_tus": [],
+  "lang": "cpp",
+  "nfuncs": 154,
+  "instrs": 2780,
+  "named": 57,
+  "boot": 0,
+  "classes": [
+   "RaceCourse",
+   "RaceChampionshipInformation",
+   "RaceGTmodeInformation",
+   "RaceDisplayCheckPointEvent",
+   "RaceDisplaySpeedEvent",
+   "RaceChampionship"
+  ]
+ },
+ "u051": {
+  "ranges": [
+   [
+    "0x001909E0",
+    "0x00193040"
+   ]
+  ],
+  "tus": [
+   "T154"
+  ],
+  "split_tus": [
+   "T154"
+  ],
+  "lang": "cpp",
+  "nfuncs": 23,
+  "instrs": 2447,
+  "named": 4,
+  "boot": 0,
+  "classes": [
+   "RaceDisplay"
+  ]
+ },
+ "u052": {
+  "ranges": [
+   [
+    "0x00193040",
+    "0x00196490"
+   ]
+  ],
+  "tus": [
+   "T154",
+   "T155"
+  ],
+  "split_tus": [
+   "T154"
+  ],
+  "lang": "cpp",
+  "nfuncs": 94,
+  "instrs": 3317,
+  "named": 45,
+  "boot": 0,
+  "classes": [
+   "RaceDisplay",
+   "RaceSplitDisplay",
+   "RaceMeterBase",
+   "RaceDisplayGeneralTimeEvent",
+   "RaceDisplayLapDiffEvent",
+   "RaceDisplayTimeDiffEvent"
+  ]
+ },
+ "u053": {
+  "ranges": [
+   [
+    "0x00196490",
+    "0x00196910"
+   ]
+  ],
+  "tus": [
+   "T156"
+  ],
+  "split_tus": [],
+  "lang": "cpp",
+  "nfuncs": 31,
+  "instrs": 277,
+  "named": 20,
+  "boot": 0,
+  "classes": [
+   "RaceDisplayObjectBase",
+   "RaceSplitDisplayBase"
+  ]
+ },
+ "u054": {
+  "ranges": [
+   [
+    "0x00196910",
+    "0x0019A148"
+   ]
+  ],
+  "tus": [
+   "T157"
+  ],
+  "split_tus": [],
+  "lang": "cpp",
+  "nfuncs": 141,
+  "instrs": 3524,
+  "named": 59,
+  "boot": 0,
+  "classes": [
+   "RaceIndicators",
+   "RaceMessageDisplay",
+   "RaceEventDisplay",
+   "RaceGearDisplay",
+   "RaceTimeDisplay",
+   "RaceABMonitor"
+  ]
+ },
+ "u055": {
+  "ranges": [
+   [
+    "0x0019A148",
+    "0x0019D278"
+   ]
+  ],
+  "tus": [
+   "T158",
+   "T195",
+   "T159",
+   "T160"
+  ],
+  "split_tus": [],
+  "lang": "cpp",
+  "nfuncs": 77,
+  "instrs": 3107,
+  "named": 20,
+  "boot": 0,
+  "classes": [
+   "RaceRoundMeter",
+   "RaceRoundMeterBase",
+   "RaceBarMeter",
+   "FlareClass",
+   "RaceCapacityMonitor"
+  ]
+ },
+ "u056": {
+  "ranges": [
+   [
+    "0x0019D278",
+    "0x0019F9F8"
+   ]
+  ],
+  "tus": [
+   "T161",
+   "T162",
+   "T163",
+   "T164",
+   "T165",
+   "T166"
+  ],
+  "split_tus": [],
+  "lang": "cpp",
+  "nfuncs": 88,
+  "instrs": 2500,
+  "named": 27,
+  "boot": 0,
+  "classes": [
+   "RaceBattleTachometer",
+   "RaceRemoteTachometer",
+   "RaceBoostmeter",
+   "RaceOnboardTachometer",
+   "EngineSound",
+   "RaceRoundTachometerBase"
+  ]
+ },
+ "u057": {
+  "ranges": [
+   [
+    "0x0019F9F8",
+    "0x001A2EC8"
+   ]
+  ],
+  "tus": [
+   "T167",
+   "T168",
+   "T169"
+  ],
+  "split_tus": [],
+  "lang": "cpp",
+  "nfuncs": 72,
+  "instrs": 3353,
+  "named": 14,
+  "boot": 0,
+  "classes": [
+   "RigidBodyManager",
+   "PauseBase",
+   "RacePause",
+   "PauseMenu",
+   "RaceMenuWindow"
+  ]
+ },
+ "u058": {
+  "ranges": [
+   [
+    "0x001A2EC8",
+    "0x001A6488"
+   ]
+  ],
+  "tus": [
+   "T170",
+   "T171",
+   "T172",
+   "T173",
+   "T174",
+   "T175"
+  ],
+  "split_tus": [],
+  "lang": "cpp",
+  "nfuncs": 80,
+  "instrs": 3406,
+  "named": 18,
+  "boot": 0,
+  "classes": [
+   "RaceBGMBase",
+   "ReplayPause",
+   "RacePauseWithRetry",
+   "ReplayPauseMenu",
+   "PauseMenuWithRetry"
+  ]
+ },
+ "u059": {
+  "ranges": [
+   [
+    "0x001A6488",
+    "0x001A9B90"
+   ]
+  ],
+  "tus": [
+   "T176",
+   "T177",
+   "T178",
+   "T179"
+  ],
+  "split_tus": [],
+  "lang": "cpp",
+  "nfuncs": 75,
+  "instrs": 3488,
+  "named": 2,
+  "boot": 0,
+  "classes": [
+   "EngineSound"
+  ]
+ },
+ "u060": {
+  "ranges": [
+   [
+    "0x001A9B90",
+    "0x001AC870"
+   ]
+  ],
+  "tus": [
+   "T180",
+   "T181"
+  ],
+  "split_tus": [],
+  "lang": "cpp",
+  "nfuncs": 60,
+  "instrs": 2844,
+  "named": 1,
+  "boot": 0,
+  "classes": [
+   "RaceCarModel"
+  ]
+ },
+ "u061": {
+  "ranges": [
+   [
+    "0x001AC870",
+    "0x001AFA60"
+   ]
+  ],
+  "tus": [
+   "T182",
+   "T183",
+   "T184",
+   "T185",
+   "T186",
+   "T187",
+   "T196"
+  ],
+  "split_tus": [],
+  "lang": "cpp",
+  "nfuncs": 69,
+  "instrs": 3154,
+  "named": 7,
+  "boot": 0,
+  "classes": [
+   "CarIconMaker",
+   "ErrorEventView",
+   "GT2KMSGRACEDISPLAY::Message",
+   "GT2KMSGRACEMSG::Message",
+   "ReplayOption"
+  ]
+ },
+ "u062": {
+  "ranges": [
+   [
+    "0x001AFA60",
+    "0x001B2C20"
+   ]
+  ],
+  "tus": [
+   "T197",
+   "T198",
+   "T199",
+   "T200",
+   "T201",
+   "T202",
+   "T266"
+  ],
+  "split_tus": [],
+  "lang": "cpp",
+  "nfuncs": 133,
+  "instrs": 3123,
+  "named": 20,
+  "boot": 0,
+  "classes": [
+   "ResultRankBar",
+   "ResultTermBar",
+   "RaceMenuImageChangeButton",
+   "RaceMenuImageBlinkButton",
+   "CarIconItem",
+   "gt2k_menu::SmartIndexDoubleRange"
+  ]
+ },
+ "u063": {
+  "ranges": [
+   [
+    "0x001B2C20",
+    "0x001B6250"
+   ]
+  ],
+  "tus": [
+   "T203",
+   "T204",
+   "T205",
+   "T206",
+   "T207",
+   "T208",
+   "T209",
+   "T210"
+  ],
+  "split_tus": [],
+  "lang": "cpp",
+  "nfuncs": 88,
+  "instrs": 3423,
+  "named": 42,
+  "boot": 0,
+  "classes": [
+   "gt2k_menu::Button",
+   "gt2k_menu::MapButtonList",
+   "gt2k_menu::WheelShopButtonList",
+   "gt2k_menu::WheelShopButton",
+   "gt2k_menu::MapButton",
+   "gt2k_menu::MagScrBegin"
+  ]
+ },
+ "u064": {
+  "ranges": [
+   [
+    "0x001B6250",
+    "0x001B9318"
+   ]
+  ],
+  "tus": [
+   "T211",
+   "T212"
+  ],
+  "split_tus": [],
+  "lang": "cpp",
+  "nfuncs": 89,
+  "instrs": 3089,
+  "named": 22,
+  "boot": 0,
+  "classes": [
+   "gt2k_menu::PageManager",
+   "gt2k_menu::Car"
+  ]
+ },
+ "u065": {
+  "ranges": [
+   [
+    "0x001B9318",
+    "0x001BBC58"
+   ]
+  ],
+  "tus": [
+   "T213",
+   "T214",
+   "T215",
+   "T216"
+  ],
+  "split_tus": [],
+  "lang": "cpp",
+  "nfuncs": 99,
+  "instrs": 2613,
+  "named": 45,
+  "boot": 0,
+  "classes": [
+   "gt2k_menu::MenuControl",
+   "gt2k_menu::Item",
+   "gt2k_menu::Transitive",
+   "gt2k_menu::List<gt2k_menu::OperatorHolder>",
+   "gt2k_menu::Cell<gt2k_menu::OperatorHolder>"
+  ]
+ },
+ "u066": {
+  "ranges": [
+   [
+    "0x001BBC58",
+    "0x001BF390"
+   ]
+  ],
+  "tus": [
+   "T217",
+   "T218",
+   "T219"
+  ],
+  "split_tus": [],
+  "lang": "cpp",
+  "nfuncs": 73,
+  "instrs": 3490,
+  "named": 8,
+  "boot": 0,
+  "classes": [
+   "gt2k_menu::GarageButtonList",
+   "gt2k_menu::GarageButton"
+  ]
+ },
+ "u067": {
+  "ranges": [
+   [
+    "0x001BF390",
+    "0x001C2318"
+   ]
+  ],
+  "tus": [
+   "T220",
+   "T221",
+   "T222",
+   "T223",
+   "T224",
+   "T225",
+   "T226",
+   "T227",
+   "T267",
+   "T228"
+  ],
+  "split_tus": [],
+  "lang": "cpp",
+  "nfuncs": 106,
+  "instrs": 2994,
+  "named": 45,
+  "boot": 0,
+  "classes": [
+   "gt2k_menu::Object",
+   "gt2k_menu::RootObject",
+   "gt2k_menu::Pointer",
+   "gt2k_menu::ConcurrentButton",
+   "gt2k_menu::DecideEffect",
+   "gt2k_menu::WheelButtonList"
+  ]
+ },
+ "u068": {
+  "ranges": [
+   [
+    "0x001C2318",
+    "0x001C5228"
+   ]
+  ],
+  "tus": [
+   "T229",
+   "T230",
+   "T231",
+   "T232",
+   "T268",
+   "T269",
+   "T233",
+   "T234"
+  ],
+  "split_tus": [],
+  "lang": "cpp",
+  "nfuncs": 104,
+  "instrs": 2956,
+  "named": 21,
+  "boot": 0,
+  "classes": [
+   "gt2k_menu::FreeButton",
+   "gt2k_menu::MultiButton",
+   "gt2k_menu::TextBox",
+   "gt2k_menu::ScrollBar",
+   "gt2k_menu::BoolItem"
+  ]
+ },
+ "u069": {
+  "ranges": [
+   [
+    "0x001C5228",
+    "0x001C7FE0"
+   ]
+  ],
+  "tus": [
+   "T235",
+   "T236",
+   "T237",
+   "T238",
+   "T239",
+   "T240",
+   "T241",
+   "T242",
+   "T243"
+  ],
+  "split_tus": [],
+  "lang": "cpp",
+  "nfuncs": 76,
+  "instrs": 2891,
+  "named": 14,
+  "boot": 0,
+  "classes": [
+   "gt2k_menu::Slider",
+   "gt2k_menu::ColorBox",
+   "gt2k_menu::GearChart",
+   "gt2k_menu::CallbackText",
+   "gt2k_menu::FreeAgent"
+  ]
+ },
+ "u070": {
+  "ranges": [
+   [
+    "0x001C7FE0",
+    "0x001CB3F0"
+   ]
+  ],
+  "tus": [
+   "T244",
+   "T245"
+  ],
+  "split_tus": [],
+  "lang": "cpp",
+  "nfuncs": 68,
+  "instrs": 3303,
+  "named": 22,
+  "boot": 0,
+  "classes": [
+   "gt2k_menu::ButtonList",
+   "gt2k_menu::List<gt2k_menu::Button>"
+  ]
+ },
+ "u071": {
+  "ranges": [
+   [
+    "0x001CB3F0",
+    "0x001CE5D8"
+   ]
+  ],
+  "tus": [
+   "T246",
+   "T247",
+   "T248",
+   "T249",
+   "T250",
+   "T251",
+   "T252",
+   "T253",
+   "T254",
+   "T255"
+  ],
+  "split_tus": [],
+  "lang": "cpp",
+  "nfuncs": 120,
+  "instrs": 3148,
+  "named": 35,
+  "boot": 0,
+  "classes": [
+   "gt2k_menu::RenderBase",
+   "gt2k_menu::Cross",
+   "gt2k_menu::MpegImage",
+   "gt2k_menu::ControlBase",
+   "gt2k_menu::SmartIndexT<int>",
+   "gt2k_menu::Timer"
+  ]
+ },
+ "u072": {
+  "ranges": [
+   [
+    "0x001CE5D8",
+    "0x001D1AE0"
+   ]
+  ],
+  "tus": [
+   "T256",
+   "T257",
+   "T258",
+   "T259",
+   "T260"
+  ],
+  "split_tus": [],
+  "lang": "cpp",
+  "nfuncs": 133,
+  "instrs": 3349,
+  "named": 47,
+  "boot": 0,
+  "classes": [
+   "gt2k_menu::Drawable",
+   "gt2k_menu::Image",
+   "gt2k_menu::ImageGZ",
+   "gt2k_menu::Rectangle",
+   "gt2k_menu::String"
+  ]
+ },
+ "u073": {
+  "ranges": [
+   [
+    "0x001D1AE0",
+    "0x001D3F70"
+   ]
+  ],
+  "tus": [
+   "T261",
+   "T262",
+   "T270",
+   "T271",
+   "T275",
+   "T272",
+   "T273"
+  ],
+  "split_tus": [],
+  "lang": "cpp",
+  "nfuncs": 112,
+  "instrs": 2281,
+  "named": 29,
+  "boot": 0,
+  "classes": [
+   "gt2k_menu::RawCheckBox",
+   "gt2k_menu::RawAnimation",
+   "gt2k_menu::RawAnimScroll",
+   "gt2k_menu::RawLabel",
+   "gt2k_menu::RawList",
+   "gt2k_menu::RawListFixed"
+  ]
+ },
+ "u074": {
+  "ranges": [
+   [
+    "0x001D3F70",
+    "0x001D5D60"
+   ]
+  ],
+  "tus": [
+   "T263",
+   "T274"
+  ],
+  "split_tus": [],
+  "lang": "cpp",
+  "nfuncs": 87,
+  "instrs": 1879,
+  "named": 37,
+  "boot": 0,
+  "classes": [
+   "gt2k_menu::RawListVSize",
+   "gt2k_menu::RawList",
+   "gt2k_menu::RawListItem",
+   "gt2k_menu::RawListItemFixed",
+   "gt2k_menu::RawListVPos",
+   "gt2k_menu::RawListVFixed"
+  ]
+ },
+ "u075": {
+  "ranges": [
+   [
+    "0x001D5D60",
+    "0x001D93C0"
+   ]
+  ],
+  "tus": [
+   "T264",
+   "T265",
+   "T276",
+   "T277",
+   "T319",
+   "T320",
+   "T321",
+   "T322",
+   "T323",
+   "T354"
+  ],
+  "split_tus": [],
+  "lang": "cpp",
+  "nfuncs": 116,
+  "instrs": 3434,
+  "named": 41,
+  "boot": 0,
+  "classes": [
+   "gt2k_menu::RawWindow",
+   "DynamicEnvmapCamera",
+   "DynamicsConductor",
+   "DynamicsConductorBattle2P"
+  ]
+ },
+ "u076": {
+  "ranges": [
+   [
+    "0x001D93C0",
+    "0x001DB220"
+   ]
+  ],
+  "tus": [
+   "T278",
+   "T279",
+   "T280",
+   "T324",
+   "T281",
+   "T282",
+   "T326",
+   "T327",
+   "T283",
+   "T328",
+   "T329"
+  ],
+  "split_tus": [],
+  "lang": "cpp",
+  "nfuncs": 73,
+  "instrs": 1919,
+  "named": 7,
+  "boot": 0,
+  "classes": [
+   "DynamicsConductor"
+  ]
+ },
+ "u077": {
+  "ranges": [
+   [
+    "0x001DB220",
+    "0x001DE5E0"
+   ]
+  ],
+  "tus": [
+   "T284",
+   "T330",
+   "T331",
+   "T285",
+   "T332",
+   "T355",
+   "T286",
+   "T287"
+  ],
+  "split_tus": [],
+  "lang": "cpp",
+  "nfuncs": 38,
+  "instrs": 3293,
+  "named": 0,
+  "boot": 0,
+  "classes": []
+ },
+ "u078": {
+  "ranges": [
+   [
+    "0x001DE5E0",
+    "0x001E1B28"
+   ]
+  ],
+  "tus": [
+   "T333",
+   "T334",
+   "T335",
+   "T288",
+   "T336",
+   "T289",
+   "T337",
+   "T290",
+   "T291",
+   "T338"
+  ],
+  "split_tus": [],
+  "lang": "cpp",
+  "nfuncs": 45,
+  "instrs": 3389,
+  "named": 1,
+  "boot": 0,
+  "classes": [
+   "DynamicsConductor"
+  ]
+ },
+ "u079": {
+  "ranges": [
+   [
+    "0x001E1B28",
+    "0x001E4E78"
+   ]
+  ],
+  "tus": [
+   "T292",
+   "T293",
+   "T294",
+   "T356",
+   "T357",
+   "T358",
+   "T340",
+   "T341",
+   "T342"
+  ],
+  "split_tus": [],
+  "lang": "cpp",
+  "nfuncs": 45,
+  "instrs": 3265,
+  "named": 0,
+  "boot": 0,
+  "classes": []
+ },
+ "u080": {
+  "ranges": [
+   [
+    "0x001E4E78",
+    "0x001E6C28"
+   ]
+  ],
+  "tus": [
+   "T343",
+   "T344",
+   "T295",
+   "T345"
+  ],
+  "split_tus": [],
+  "lang": "cpp",
+  "nfuncs": 18,
+  "instrs": 1891,
+  "named": 0,
+  "boot": 0,
+  "classes": []
+ },
+ "u081": {
+  "ranges": [
+   [
+    "0x001E6C28",
+    "0x001E9E80"
+   ]
+  ],
+  "tus": [
+   "T296",
+   "T346",
+   "T297",
+   "T347",
+   "T298",
+   "T299",
+   "T348"
+  ],
+  "split_tus": [],
+  "lang": "cpp",
+  "nfuncs": 50,
+  "instrs": 3191,
+  "named": 0,
+  "boot": 0,
+  "classes": []
+ },
+ "u082": {
+  "ranges": [
+   [
+    "0x001E9E80",
+    "0x001ED000"
+   ]
+  ],
+  "tus": [
+   "T300",
+   "T301",
+   "T302",
+   "T349",
+   "T303",
+   "T304"
+  ],
+  "split_tus": [],
+  "lang": "cpp",
+  "nfuncs": 103,
+  "instrs": 3123,
+  "named": 1,
+  "boot": 0,
+  "classes": [
+   "DynamicsConductor"
+  ]
+ },
+ "u083": {
+  "ranges": [
+   [
+    "0x001ED000",
+    "0x001F05F8"
+   ]
+  ],
+  "tus": [
+   "T305",
+   "T350",
+   "T351",
+   "T306",
+   "T307",
+   "T359",
+   "T352",
+   "T308",
+   "T309",
+   "T310"
+  ],
+  "split_tus": [],
+  "lang": "cpp",
+  "nfuncs": 112,
+  "instrs": 3398,
+  "named": 44,
+  "boot": 0,
+  "classes": [
+   "DynamicsConductor",
+   "DynamicsConductorBattle2P",
+   "DynamicsConductorBattleMP"
+  ]
+ },
+ "u084": {
+  "ranges": [
+   [
+    "0x001F05F8",
+    "0x001F2A10"
+   ]
+  ],
+  "tus": [
+   "T311",
+   "T312",
+   "T313",
+   "T314",
+   "T315",
+   "T316"
+  ],
+  "split_tus": [],
+  "lang": "cpp",
+  "nfuncs": 122,
+  "instrs": 2253,
+  "named": 108,
+  "boot": 0,
+  "classes": [
+   "DynamicsConductorLicense",
+   "DynamicsConductorTimeTrial",
+   "DynamicsConductorFreeRun",
+   "DynamicsConductorFreePractice",
+   "DynamicsConductorMachineTest",
+   "DynamicsConductorSinglePlayer"
+  ]
+ },
+ "u085": {
+  "ranges": [
+   [
+    "0x001F2A10",
+    "0x001F5FD8"
+   ]
+  ],
+  "tus": [
+   "T317",
+   "T353",
+   "T318",
+   "T360",
+   "T361"
+  ],
+  "split_tus": [],
+  "lang": "cpp",
+  "nfuncs": 118,
+  "instrs": 3380,
+  "named": 14,
+  "boot": 0,
+  "classes": [
+   "DynamicsConductor",
+   "AutomobileControlRecord::Manager",
+   "AutomobileControlRecord::Recorder"
+  ]
+ },
+ "u086": {
+  "ranges": [
+   [
+    "0x001F5FD8",
+    "0x001F8BA0"
+   ]
+  ],
+  "tus": [
+   "T362",
+   "T363",
+   "T364",
+   "T365",
+   "T366",
+   "T367"
+  ],
+  "split_tus": [],
+  "lang": "cpp",
+  "nfuncs": 41,
+  "instrs": 2781,
+  "named": 0,
+  "boot": 0,
+  "classes": []
+ },
+ "u087": {
+  "ranges": [
+   [
+    "0x001F8BA0",
+    "0x001FBCE8"
+   ]
+  ],
+  "tus": [
+   "T368",
+   "T369",
+   "T370",
+   "T371",
+   "T372",
+   "T373",
+   "T374"
+  ],
+  "split_tus": [],
+  "lang": "cpp",
+  "nfuncs": 59,
+  "instrs": 3118,
+  "named": 0,
+  "boot": 0,
+  "classes": []
+ },
+ "u088": {
+  "ranges": [
+   [
+    "0x001FBCE8",
+    "0x001FED38"
+   ]
+  ],
+  "tus": [
+   "T375",
+   "T376",
+   "T397"
+  ],
+  "split_tus": [],
+  "lang": "cpp",
+  "nfuncs": 77,
+  "instrs": 3072,
+  "named": 42,
+  "boot": 0,
+  "classes": [
+   "VariableCameraBase"
+  ]
+ },
+ "u089": {
+  "ranges": [
+   [
+    "0x001FED38",
+    "0x00201418"
+   ]
+  ],
+  "tus": [
+   "T377",
+   "T378"
+  ],
+  "split_tus": [],
+  "lang": "cpp",
+  "nfuncs": 56,
+  "instrs": 2464,
+  "named": 16,
+  "boot": 0,
+  "classes": [
+   "OnBoardCamera"
+  ]
+ },
+ "u090": {
+  "ranges": [
+   [
+    "0x00201418",
+    "0x00204B10"
+   ]
+  ],
+  "tus": [
+   "T398",
+   "T399",
+   "T400",
+   "T401",
+   "T402",
+   "T403"
+  ],
+  "split_tus": [],
+  "lang": "cpp",
+  "nfuncs": 123,
+  "instrs": 3478,
+  "named": 96,
+  "boot": 0,
+  "classes": [
+   "DesignerCamera",
+   "PasslineCamera",
+   "AutomaticCamera",
+   "AutomountCamera",
+   "LoggerCamera",
+   "StartingCamera"
+  ]
+ },
+ "u091": {
+  "ranges": [
+   [
+    "0x00204B10",
+    "0x00207768"
+   ]
+  ],
+  "tus": [
+   "T404",
+   "T405",
+   "T406",
+   "T379",
+   "T380",
+   "T407",
+   "T381",
+   "T408",
+   "T382"
+  ],
+  "split_tus": [],
+  "lang": "cpp",
+  "nfuncs": 86,
+  "instrs": 2805,
+  "named": 42,
+  "boot": 0,
+  "classes": [
+   "MatrixCamera",
+   "ZoomupCamera",
+   "HeliCamera",
+   "CameraRotDamper"
+  ]
+ },
+ "u092": {
+  "ranges": [
+   [
+    "0x00207768",
+    "0x0020AB80"
+   ]
+  ],
+  "tus": [
+   "T383",
+   "T384",
+   "T385"
+  ],
+  "split_tus": [],
+  "lang": "cpp",
+  "nfuncs": 107,
+  "instrs": 3278,
+  "named": 14,
+  "boot": 0,
+  "classes": [
+   "CameraManager",
+   "CameraGrooveMeter"
+  ]
+ },
+ "u093": {
+  "ranges": [
+   [
+    "0x0020AB80",
+    "0x0020E020"
+   ]
+  ],
+  "tus": [
+   "T409",
+   "T386",
+   "T387",
+   "T388",
+   "T389",
+   "T390",
+   "T391",
+   "T392"
+  ],
+  "split_tus": [],
+  "lang": "cpp",
+  "nfuncs": 25,
+  "instrs": 3356,
+  "named": 0,
+  "boot": 0,
+  "classes": []
+ },
+ "u094": {
+  "ranges": [
+   [
+    "0x0020E020",
+    "0x002104E8"
+   ]
+  ],
+  "tus": [
+   "T393",
+   "T394",
+   "T395",
+   "T396",
+   "T410",
+   "T411",
+   "T412"
+  ],
+  "split_tus": [],
+  "lang": "cpp",
+  "nfuncs": 92,
+  "instrs": 2307,
+  "named": 33,
+  "boot": 0,
+  "classes": [
+   "SimpleCameraBase",
+   "MenuCarCamera",
+   "CameraBase"
+  ]
+ },
+ "u095": {
+  "ranges": [
+   [
+    "0x002104E8",
+    "0x00213210"
+   ]
+  ],
+  "tus": [
+   "T413",
+   "T414",
+   "T415",
+   "T416"
+  ],
+  "split_tus": [],
+  "lang": "cpp",
+  "nfuncs": 145,
+  "instrs": 2842,
+  "named": 3,
+  "boot": 0,
+  "classes": [
+   "RaceInput"
+  ]
+ },
+ "u096": {
+  "ranges": [
+   [
+    "0x00213210",
+    "0x00216308"
+   ]
+  ],
+  "tus": [
+   "T417",
+   "T418",
+   "T419",
+   "T420",
+   "T421",
+   "T422",
+   "T423"
+  ],
+  "split_tus": [],
+  "lang": "cpp",
+  "nfuncs": 123,
+  "instrs": 3082,
+  "named": 0,
+  "boot": 0,
+  "classes": []
+ },
+ "u097": {
+  "ranges": [
+   [
+    "0x00216308",
+    "0x002185D8"
+   ]
+  ],
+  "tus": [
+   "T424",
+   "T434",
+   "T425",
+   "T426",
+   "T427",
+   "T428"
+  ],
+  "split_tus": [],
+  "lang": "cpp",
+  "nfuncs": 121,
+  "instrs": 2165,
+  "named": 0,
+  "boot": 0,
+  "classes": []
+ },
+ "u098": {
+  "ranges": [
+   [
+    "0x002185D8",
+    "0x0021B790"
+   ]
+  ],
+  "tus": [
+   "T429",
+   "T430",
+   "T431"
+  ],
+  "split_tus": [],
+  "lang": "cpp",
+  "nfuncs": 136,
+  "instrs": 3142,
+  "named": 43,
+  "boot": 0,
+  "classes": [
+   "gt2k_game::GameStatus",
+   "GarageWheelList",
+   "gt2k_menu::List<GarageWheel>",
+   "GarageCarList",
+   "gt2k_menu::List<GarageCar>"
+  ]
+ },
+ "u099": {
+  "ranges": [
+   [
+    "0x0021B790",
+    "0x0021E7D8"
+   ]
+  ],
+  "tus": [
+   "T432",
+   "T433",
+   "T435",
+   "T436",
+   "T437",
+   "T438",
+   "T439",
+   "T440",
+   "T441",
+   "T442",
+   "T443",
+   "T444",
+   "T445"
+  ],
+  "split_tus": [],
+  "lang": "cpp",
+  "nfuncs": 111,
+  "instrs": 3030,
+  "named": 1,
+  "boot": 1,
+  "classes": [
+   "ImageLoader::Source"
+  ]
+ },
+ "u100": {
+  "ranges": [
+   [
+    "0x0021E7D8",
+    "0x00221E08"
+   ]
+  ],
+  "tus": [
+   "T446",
+   "T447",
+   "T462",
+   "T448"
+  ],
+  "split_tus": [],
+  "lang": "cpp",
+  "nfuncs": 101,
+  "instrs": 3419,
+  "named": 17,
+  "boot": 0,
+  "classes": [
+   "TireModelBase",
+   "TirePacket",
+   "CarModel::Callback",
+   "TStripBuilder"
+  ]
+ },
+ "u101": {
+  "ranges": [
+   [
+    "0x00221E08",
+    "0x00224600"
+   ]
+  ],
+  "tus": [
+   "T449",
+   "T450"
+  ],
+  "split_tus": [],
+  "lang": "cpp",
+  "nfuncs": 57,
+  "instrs": 2530,
+  "named": 16,
+  "boot": 0,
+  "classes": [
+   "RaceTirePacket",
+   "RaceTireModel",
+   "RaceTirePacket::Callback",
+   "MenuTireModel",
+   "TStripBuilder"
+  ]
+ },
+ "u102": {
+  "ranges": [
+   [
+    "0x00224600",
+    "0x00227378"
+   ]
+  ],
+  "tus": [
+   "T451",
+   "T452",
+   "T453",
+   "T454",
+   "T455",
+   "T456"
+  ],
+  "split_tus": [],
+  "lang": "cpp",
+  "nfuncs": 65,
+  "instrs": 2872,
+  "named": 3,
+  "boot": 0,
+  "classes": [
+   "ModelSet::Callback"
+  ]
+ },
+ "u103": {
+  "ranges": [
+   [
+    "0x00227378",
+    "0x0022AA78"
+   ]
+  ],
+  "tus": [
+   "T457",
+   "T458",
+   "T459",
+   "T460",
+   "T461"
+  ],
+  "split_tus": [],
+  "lang": "cpp",
+  "nfuncs": 75,
+  "instrs": 3479,
+  "named": 10,
+  "boot": 0,
+  "classes": [
+   "PrizeBase",
+   "PrizeModelSetContext"
+  ]
+ },
+ "u104": {
+  "ranges": [
+   [
+    "0x0022AA78",
+    "0x0022DA98"
+   ]
+  ],
+  "tus": [
+   "T466",
+   "T467",
+   "T463",
+   "T464",
+   "T465",
+   "T468",
+   "T469",
+   "T470",
+   "T471",
+   "T473"
+  ],
+  "split_tus": [],
+  "lang": "cpp",
+  "nfuncs": 130,
+  "instrs": 3019,
+  "named": 3,
+  "boot": 0,
+  "classes": [
+   "GTSOUNDINSTRUMENT",
+   "_UnitArenaBase"
+  ]
+ },
+ "u105": {
+  "ranges": [
+   [
+    "0x0022DA98",
+    "0x00231190"
+   ]
+  ],
+  "tus": [
+   "T474",
+   "T480",
+   "T475",
+   "T476",
+   "T477",
+   "T478",
+   "T479"
+  ],
+  "split_tus": [],
+  "lang": "cpp",
+  "nfuncs": 146,
+  "instrs": 3452,
+  "named": 55,
+  "boot": 0,
+  "classes": [
+   "Control",
+   "USBSteeringPort",
+   "PSPort",
+   "SteeringPSPort",
+   "IEEE1394Port",
+   "GTSOUNDINSTRUMENT"
+  ]
+ },
+ "u106": {
+  "ranges": [
+   [
+    "0x00231190",
+    "0x00234020"
+   ]
+  ],
+  "tus": [
+   "T481",
+   "T482"
+  ],
+  "split_tus": [
+   "T482"
+  ],
+  "lang": "cpp",
+  "nfuncs": 101,
+  "instrs": 2926,
+  "named": 9,
+  "boot": 0,
+  "classes": [
+   "DataBlock",
+   "CarDataBase",
+   "StringsDataBase"
+  ]
+ },
+ "u107": {
+  "ranges": [
+   [
+    "0x00234020",
+    "0x00236600"
+   ]
+  ],
+  "tus": [
+   "T482"
+  ],
+  "split_tus": [
+   "T482"
+  ],
+  "lang": "cpp",
+  "nfuncs": 131,
+  "instrs": 2379,
+  "named": 0,
+  "boot": 0,
+  "classes": []
+ },
+ "u108": {
+  "ranges": [
+   [
+    "0x00236600",
+    "0x00239ED0"
+   ]
+  ],
+  "tus": [
+   "T482",
+   "T483",
+   "T484",
+   "T485",
+   "T487",
+   "T488"
+  ],
+  "split_tus": [
+   "T482"
+  ],
+  "lang": "cpp",
+  "nfuncs": 385,
+  "instrs": 3484,
+  "named": 234,
+  "boot": 0,
+  "classes": [
+   "CarEquipments",
+   "RaceDataBase",
+   "RaceModeDatabase",
+   "SettingSerialize",
+   "gt2k_menu::RawWindow"
+  ]
+ },
+ "u109": {
+  "ranges": [
+   [
+    "0x00239ED0",
+    "0x0023D690"
+   ]
+  ],
+  "tus": [
+   "T489",
+   "T490",
+   "T491",
+   "T492",
+   "T493",
+   "T494",
+   "T495",
+   "T496",
+   "T497",
+   "T498"
+  ],
+  "split_tus": [],
+  "lang": "cpp",
+  "nfuncs": 155,
+  "instrs": 3485,
+  "named": 9,
+  "boot": 0,
+  "classes": [
+   "gt2k_menu::pCell",
+   "gt2k_menu::pList",
+   "GarageWheel",
+   "gt2k_menu::Cell<GarageWheel>",
+   "GT2KMSGDATABASEPARTS::Message",
+   "GT2KMSGDATABASERACECATEGORY::Message"
+  ]
+ },
+ "u110": {
+  "ranges": [
+   [
+    "0x0023D690",
+    "0x00240AF0"
+   ]
+  ],
+  "tus": [
+   "T499",
+   "T500",
+   "T510",
+   "T511",
+   "T501"
+  ],
+  "split_tus": [],
+  "lang": "cpp",
+  "nfuncs": 84,
+  "instrs": 3306,
+  "named": 4,
+  "boot": 0,
+  "classes": [
+   "GZIP::InflateLoader"
+  ]
+ },
+ "u111": {
+  "ranges": [
+   [
+    "0x00240AF0",
+    "0x00243850"
+   ]
+  ],
+  "tus": [
+   "T502",
+   "T503",
+   "T504",
+   "T505",
+   "T506",
+   "T507",
+   "T508",
+   "T509",
+   "T512"
+  ],
+  "split_tus": [],
+  "lang": "cpp",
+  "nfuncs": 88,
+  "instrs": 2861,
+  "named": 14,
+  "boot": 4,
+  "classes": [
+   "Serialize::Base"
+  ]
+ },
+ "u112": {
+  "ranges": [
+   [
+    "0x00243850",
+    "0x00245C10"
+   ]
+  ],
+  "tus": [
+   "T513",
+   "T514",
+   "T515",
+   "T516",
+   "T517",
+   "T518"
+  ],
+  "split_tus": [],
+  "lang": "cpp",
+  "nfuncs": 78,
+  "instrs": 2250,
+  "named": 1,
+  "boot": 0,
+  "classes": [
+   "GT2KRealTimeText"
+  ]
+ },
+ "u113": {
+  "ranges": [
+   [
+    "0x00245C10",
+    "0x00249B28"
+   ]
+  ],
+  "tus": [
+   "G001"
+  ],
+  "split_tus": [
+   "G001"
+  ],
+  "lang": "c",
+  "nfuncs": 64,
+  "instrs": 4005,
+  "named": 10,
+  "boot": 10,
+  "classes": []
+ },
+ "u114": {
+  "ranges": [
+   [
+    "0x00249B28",
+    "0x0024D8C0"
+   ]
+  ],
+  "tus": [
+   "G001"
+  ],
+  "split_tus": [
+   "G001"
+  ],
+  "lang": "c",
+  "nfuncs": 66,
+  "instrs": 3912,
+  "named": 0,
+  "boot": 0,
+  "classes": []
+ },
+ "u115": {
+  "ranges": [
+   [
+    "0x0024D8C0",
+    "0x00250A58"
+   ]
+  ],
+  "tus": [
+   "G001"
+  ],
+  "split_tus": [
+   "G001"
+  ],
+  "lang": "c",
+  "nfuncs": 53,
+  "instrs": 3148,
+  "named": 11,
+  "boot": 11,
+  "classes": []
+ },
+ "u116": {
+  "ranges": [
+   [
+    "0x00250A58",
+    "0x00254828"
+   ]
+  ],
+  "tus": [
+   "G001"
+  ],
+  "split_tus": [
+   "G001"
+  ],
+  "lang": "c",
+  "nfuncs": 82,
+  "instrs": 3916,
+  "named": 32,
+  "boot": 32,
+  "classes": []
+ },
+ "u117": {
+  "ranges": [
+   [
+    "0x00254828",
+    "0x00257EF4"
+   ]
+  ],
+  "tus": [
+   "G001"
+  ],
+  "split_tus": [
+   "G001"
+  ],
+  "lang": "c",
+  "nfuncs": 59,
+  "instrs": 3482,
+  "named": 5,
+  "boot": 5,
+  "classes": []
+ },
+ "u118": {
+  "ranges": [
+   [
+    "0x00257EF4",
+    "0x0025B0C8"
+   ]
+  ],
+  "tus": [
+   "G001"
+  ],
+  "split_tus": [
+   "G001"
+  ],
+  "lang": "c",
+  "nfuncs": 58,
+  "instrs": 3167,
+  "named": 19,
+  "boot": 19,
+  "classes": []
+ },
+ "u119": {
+  "ranges": [
+   [
+    "0x0025B0C8",
+    "0x0025E548"
+   ]
+  ],
+  "tus": [
+   "T528",
+   "T527",
+   "T519",
+   "T520",
+   "T521",
+   "T522",
+   "T523",
+   "T524",
+   "T525",
+   "T526"
+  ],
+  "split_tus": [],
+  "lang": "cpp",
+  "nfuncs": 142,
+  "instrs": 3291,
+  "named": 11,
+  "boot": 0,
+  "classes": [
+   "PDIClientRpc",
+   "_GLOBAL_$N$.._.._pdicdvd.cxxs1Kop7::RPC",
+   "_GLOBAL_$N$.._.._pdicdvd.cxxs1Kop7::RPC2",
+   "_GLOBAL_$N$.._.._pdispu2.cxx9KEP7e::RPC",
+   "_GLOBAL_$N$.._.._pdibgm.cxxpLWmzt::RPC",
+   "_GLOBAL_$N$.._.._pdimpeg.cxxIPKYuE::RPC"
+  ]
+ },
+ "u120": {
+  "ranges": [
+   [
+    "0x0025E548",
+    "0x0025F390"
+   ]
+  ],
+  "tus": [
+   "T529"
+  ],
+  "split_tus": [],
+  "lang": "cpp",
+  "nfuncs": 24,
+  "instrs": 903,
+  "named": 1,
+  "boot": 0,
+  "classes": [
+   "mpegif"
+  ]
+ },
+ "u121": {
+  "ranges": [
+   [
+    "0x0025F390",
+    "0x00262AE0"
+   ]
+  ],
+  "tus": [
+   "G002"
+  ],
+  "split_tus": [
+   "G002"
+  ],
+  "lang": "c",
+  "nfuncs": 64,
+  "instrs": 3507,
+  "named": 0,
+  "boot": 0,
+  "classes": []
+ },
+ "u122": {
+  "ranges": [
+   [
+    "0x00262AE0",
+    "0x00265468"
+   ]
+  ],
+  "tus": [
+   "G002"
+  ],
+  "split_tus": [
+   "G002"
+  ],
+  "lang": "c",
+  "nfuncs": 45,
+  "instrs": 2635,
+  "named": 0,
+  "boot": 0,
+  "classes": []
+ },
+ "u123": {
+  "ranges": [
+   [
+    "0x00265468",
+    "0x00268ED8"
+   ]
+  ],
+  "tus": [
+   "G002"
+  ],
+  "split_tus": [
+   "G002"
+  ],
+  "lang": "c",
+  "nfuncs": 118,
+  "instrs": 3693,
+  "named": 9,
+  "boot": 9,
+  "classes": []
+ },
+ "u124": {
+  "ranges": [
+   [
+    "0x00268ED8",
+    "0x0026A7C8"
+   ]
+  ],
+  "tus": [
+   "G002"
+  ],
+  "split_tus": [
+   "G002"
+  ],
+  "lang": "c",
+  "nfuncs": 40,
+  "instrs": 1572,
+  "named": 11,
+  "boot": 12,
+  "classes": []
+ },
+ "u125": {
+  "ranges": [
+   [
+    "0x0026A7C8",
+    "0x0026CA90"
+   ]
+  ],
+  "tus": [
+   "T530",
+   "T539",
+   "T531",
+   "T532",
+   "T533",
+   "T534",
+   "T535",
+   "T536"
+  ],
+  "split_tus": [],
+  "lang": "cpp",
+  "nfuncs": 68,
+  "instrs": 2197,
+  "named": 52,
+  "boot": 45,
+  "classes": [
+   "pdistd::Allocator",
+   "pdistd::PrintFormatTargetBase",
+   "repValid__Q26pdistd9AllocatorPQ36pdistd9Allocator3Rep pdistd::Allocator",
+   "reset__Q26pdistd9Allocator pdistd::Allocator",
+   "",
+   "_GLOBAL_$N$.._.._vsprintf.cxxUhxD9r::PrintTarget"
+  ]
+ },
+ "u126": {
+  "ranges": [
+   [
+    "0x0026CA90",
+    "0x0026E310"
+   ]
+  ],
+  "tus": [
+   "T537",
+   "T538"
+  ],
+  "split_tus": [],
+  "lang": "cpp",
+  "nfuncs": 14,
+  "instrs": 1560,
+  "named": 13,
+  "boot": 13,
+  "classes": [
+   "GZIP::InflateBase",
+   "GZIP"
+  ]
+ },
+ "u127": {
+  "ranges": [
+   [
+    "0x0026E310",
+    "0x0026F538"
+   ]
+  ],
+  "tus": [
+   "G003"
+  ],
+  "split_tus": [],
+  "lang": "c",
+  "nfuncs": 33,
+  "instrs": 1145,
+  "named": 5,
+  "boot": 5,
+  "classes": []
+ },
+ "u128": {
+  "ranges": [
+   [
+    "0x0026F538",
+    "0x00270628"
+   ]
+  ],
+  "tus": [
+   "T541"
+  ],
+  "split_tus": [],
+  "lang": "cpp",
+  "nfuncs": 42,
+  "instrs": 1059,
+  "named": 1,
+  "boot": 0,
+  "classes": [
+   "pdi1394"
+  ]
+ },
+ "u129": {
+  "ranges": [
+   [
+    "0x00270628",
+    "0x00272B40"
+   ]
+  ],
+  "tus": [
+   "G004"
+  ],
+  "split_tus": [
+   "G004"
+  ],
+  "lang": "c",
+  "nfuncs": 40,
+  "instrs": 2354,
+  "named": 35,
+  "boot": 35,
+  "classes": []
+ },
+ "u130": {
+  "ranges": [
+   [
+    "0x00272B40",
+    "0x00274AD0"
+   ]
+  ],
+  "tus": [
+   "G004"
+  ],
+  "split_tus": [
+   "G004"
+  ],
+  "lang": "c",
+  "nfuncs": 43,
+  "instrs": 1995,
+  "named": 29,
+  "boot": 29,
+  "classes": []
+ },
+ "u131": {
+  "ranges": [
+   [
+    "0x00274AD0",
+    "0x002776C0"
+   ]
+  ],
+  "tus": [
+   "G004"
+  ],
+  "split_tus": [
+   "G004"
+  ],
+  "lang": "c",
+  "nfuncs": 26,
+  "instrs": 2794,
+  "named": 3,
+  "boot": 3,
+  "classes": []
+ },
+ "u132": {
+  "ranges": [
+   [
+    "0x002776C0",
+    "0x00278630"
+   ]
+  ],
+  "tus": [
+   "T542"
+  ],
+  "split_tus": [],
+  "lang": "cpp",
+  "nfuncs": 24,
+  "instrs": 979,
+  "named": 24,
+  "boot": 24,
+  "classes": []
+ },
+ "u133": {
+  "ranges": [
+   [
+    "0x00278630",
+    "0x00279CA8"
+   ]
+  ],
+  "tus": [
+   "G005"
+  ],
+  "split_tus": [],
+  "lang": "c",
+  "nfuncs": 22,
+  "instrs": 1428,
+  "named": 19,
+  "boot": 19,
+  "classes": []
+ },
+ "u134": {
+  "ranges": [
+   [
+    "0x00279CA8",
+    "0x0027A400"
+   ]
+  ],
+  "tus": [
+   "T543"
+  ],
+  "split_tus": [],
+  "lang": "cpp",
+  "nfuncs": 25,
+  "instrs": 462,
+  "named": 25,
+  "boot": 25,
+  "classes": [
+   "std",
+   "exception",
+   "bad_exception"
+  ]
+ },
+ "u135": {
+  "ranges": [
+   [
+    "0x0027A400",
+    "0x0027C010"
+   ]
+  ],
+  "tus": [
+   "G006"
+  ],
+  "split_tus": [],
+  "lang": "c",
+  "nfuncs": 33,
+  "instrs": 1781,
+  "named": 33,
+  "boot": 33,
+  "classes": []
+ },
+ "u136": {
+  "ranges": [
+   [
+    "0x0027C010",
+    "0x0027D7A0"
+   ]
+  ],
+  "tus": [
+   "T550",
+   "T544",
+   "T545",
+   "T546",
+   "T547",
+   "T548",
+   "T549"
+  ],
+  "split_tus": [],
+  "lang": "cpp",
+  "nfuncs": 78,
+  "instrs": 1465,
+  "named": 78,
+  "boot": 78,
+  "classes": [
+   "type_info",
+   "__user_type_info",
+   "__si_type_info",
+   "__class_type_info",
+   "bad_alloc",
+   "bad_typeid"
+  ]
+ },
+ "u137": {
+  "ranges": [
+   [
+    "0x0027D7A0",
+    "0x00281088"
+   ]
+  ],
+  "tus": [
+   "G007"
+  ],
+  "split_tus": [
+   "G007"
+  ],
+  "lang": "c",
+  "nfuncs": 38,
+  "instrs": 3624,
+  "named": 12,
+  "boot": 9,
+  "classes": []
+ },
+ "u138": {
+  "ranges": [
+   [
+    "0x00281088",
+    "0x00283D50"
+   ]
+  ],
+  "tus": [
+   "G007"
+  ],
+  "split_tus": [
+   "G007"
+  ],
+  "lang": "c",
+  "nfuncs": 29,
+  "instrs": 2847,
+  "named": 1,
+  "boot": 0,
+  "classes": []
+ },
+ "u139": {
+  "ranges": [
+   [
+    "0x00283D50",
+    "0x002869E8"
+   ]
+  ],
+  "tus": [
+   "G007"
+  ],
+  "split_tus": [
+   "G007"
+  ],
+  "lang": "c",
+  "nfuncs": 198,
+  "instrs": 2826,
+  "named": 131,
+  "boot": 135,
+  "classes": []
+ },
+ "u140": {
+  "ranges": [
+   [
+    "0x002869E8",
+    "0x0028A950"
+   ]
+  ],
+  "tus": [
+   "G007"
+  ],
+  "split_tus": [
+   "G007"
+  ],
+  "lang": "c",
+  "nfuncs": 71,
+  "instrs": 4017,
+  "named": 65,
+  "boot": 64,
+  "classes": []
+ },
+ "u141": {
+  "ranges": [
+   [
+    "0x0028A950",
+    "0x0028D7C0"
+   ]
+  ],
+  "tus": [
+   "G007"
+  ],
+  "split_tus": [
+   "G007"
+  ],
+  "lang": "c",
+  "nfuncs": 47,
+  "instrs": 2949,
+  "named": 45,
+  "boot": 45,
+  "classes": []
+ },
+ "u142": {
+  "ranges": [
+   [
+    "0x0028D7C0",
+    "0x0028E760"
+   ]
+  ],
+  "tus": [
+   "G007"
+  ],
+  "split_tus": [
+   "G007"
+  ],
+  "lang": "c",
+  "nfuncs": 15,
+  "instrs": 988,
+  "named": 14,
+  "boot": 14,
+  "classes": []
+ }
+}

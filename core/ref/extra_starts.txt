@@ -1,0 +1,37 @@
+# Function starts no heuristic finds (hex, one per line; # comments)
+0x00286AC0  # libkernl: tail-jumped from 0x0028D76C; creates the SIF RPC thread (docs/memory_map.md)
+# Missed splits found by the first and second pass (ref/followups.md "Function boundaries")
+0x001000C0  # _root, after _exit (u000)
+0x002519C8  # gfx_get_packet_space, inside 0x002519B8 (u116)
+0x002501E0  # inside gs_flush_all_regs 0x002501A8 (u115)
+0x002502F8  # inside gfx_perf_counter1 0x002502C8 (u115)
+0x0024CED0  # dead texture/material reset, inside 0x0024CD48 (u114)
+0x0025F568  # MPEG size callback, inside 0x0025F510 (u121)
+0x00270870  # sceCdInitEeCB (u129)
+0x002720F0  # scePadGetFrameCount (u129)
+0x00272238  # scePadStateIntToStr (u129)
+0x00272328  # scePadReqIntToStr (u129)
+0x00272480  # scePadInfoComb (u129)
+0x002738E8  # mc_getinfo_end_callback, inside sceMcSync (u130)
+0x00274700  # sceScfSetT10kConfig, inside sceScfGetLanguage (u130)
+0x00265880  # USB/PJOY/sound helpers inside other entries (u123)
+0x002688D8
+0x00266A48
+0x00266A78
+0x00266AA8
+0x00266AD8
+0x00266B00
+0x00266B48
+0x00287BE0  # set_sreg, inside 0x00287B80 (u140)
+0x00287C28  # sceSifSetSreg, inside sceSifGetSreg 0x00287C10 (u140)
+0x00287F28  # sceSifSetSysCmdBuffer, inside 0x00287F10 (u140)
+0x00288AD8  # _request_call, inside sceSifBindRpc 0x00288998 (u140)
+0x0028C880  # sceSifAllocIopHeap (u141)
+0x0028C8F0  # sceSifFreeIopHeap (u141)
+0x0028C968  # sceSifLoadIopHeap (u141)
+# Found by the matching pass (ref/matching/followups.md, 2026-10-16)
+0x00259218  # pkt_position, inside pkt_qword (u118)
+0x0025AFE8  # mat44_copy (hand-written), counted into gs_set_light_param_v (u118)
+0x0026F530  # an empty function (jr ra; nop) after pdi1394_msg_remove_if (u127)
+0x0027E650  # sscanf.o's static eofread, counted into rand (u137)
+0x002862A8  # F_002862A8, the second return -1 stub after close (u139)

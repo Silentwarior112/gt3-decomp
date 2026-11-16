@@ -189,7 +189,8 @@ def secondary_asm(rel, src, out_s, flags):
     cmd = [CC] + flags
     for inc in INCLUDES:
         cmd += ["-I", inc]
-    r = subprocess.run(cmd + ["-E", src, "-o", pre], capture_output=True, text=True, cwd=ROOT)
+    r = subprocess.run(cmd + ["-E", src, "-o", _from_root(os.path.abspath(pre))], capture_output=True, text=True,
+                       cwd=ROOT, env=paths.egcs_env(CC))
     err = (r.stderr or "") + (r.stdout or "")
     if r.returncode != 0:
         return False, err
@@ -244,8 +245,8 @@ def compile(rel, out, asm=False, debug=False, extra=()):
     if rel.endswith((".S", ".s")):
         cmd[0] = CC                                 # assembly: the default toolchain
     if rel.endswith((".S", ".s")) or asm:
-        cmd += (["-S"] if asm and not rel.endswith((".S", ".s")) else ["-c"]) + [src, "-o", out]
-        r = subprocess.run(cmd, capture_output=True, text=True, cwd=ROOT)
+        cmd += (["-S"] if asm and not rel.endswith((".S", ".s")) else ["-c"]) + [src, "-o", _from_root(os.path.abspath(out))]
+        r = subprocess.run(cmd, capture_output=True, text=True, cwd=ROOT, env=paths.egcs_env(cmd[0]))
         ok = r.returncode == 0 and os.path.exists(out)
         if ok and asm and not rel.endswith((".S", ".s")):
             asm_passes(rel, out)
@@ -258,7 +259,8 @@ def compile(rel, out, asm=False, debug=False, extra=()):
         if not ok:
             return False, err
     else:
-        r = subprocess.run(cmd + ["-S", src, "-o", tmp], capture_output=True, text=True, cwd=ROOT)
+        r = subprocess.run(cmd + ["-S", src, "-o", _from_root(os.path.abspath(tmp))], capture_output=True, text=True,
+                           cwd=ROOT, env=paths.egcs_env(cmd[0]))
         err = (r.stderr or "") + (r.stdout or "")
         if r.returncode != 0 or not os.path.exists(tmp):
             return False, err
@@ -267,8 +269,9 @@ def compile(rel, out, asm=False, debug=False, extra=()):
         r2 = subprocess.run([SN_AS, "-G%d" % gvalue(rel), "-o", out, tmp],
                             capture_output=True, text=True, cwd=ROOT)
     else:
-        r2 = subprocess.run([CC] + flags_for(rel) + list(extra) + ["-c", tmp, "-o", out],
-                            capture_output=True, text=True, cwd=ROOT)
+        r2 = subprocess.run([CC] + flags_for(rel) + list(extra) + ["-c", _from_root(os.path.abspath(tmp)),
+                             "-o", _from_root(os.path.abspath(out))],
+                            capture_output=True, text=True, cwd=ROOT, env=paths.egcs_env(CC))
     err += (r2.stderr or "") + (r2.stdout or "")
     ok = r2.returncode == 0 and os.path.exists(out)
     try:

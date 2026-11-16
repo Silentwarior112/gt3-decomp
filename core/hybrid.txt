@@ -1,0 +1,9 @@
+# What the period-accurate build links from the compiled C (tools/hybrid.py).
+# The rest stays the original code, at its own addresses.
+#
+#   all | none          every work unit, or none
+#   u042                one unit; u000-u050 a range
+#   not u121            leave a unit (or range) out again
+#   keep 0x00XXXXXX     one function stays the original code although its unit is from C
+#
+all

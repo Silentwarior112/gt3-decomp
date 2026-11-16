@@ -1,7 +1,13 @@
 """Boot-test a bootstrap ELF in an isolated PCSX2 against the retail GT3 US disc.
 
-    python tools/boot_test.py [--elf PATH] [--iso PATH] [--seconds N] [--tag NAME]
+    python tools/boot_test.py [--elf PATH] [--iso PATH] [--seconds N] [--tag NAME] [--card DIR]
     python tools/boot_test.py --baseline          # the retail bootstrap, same run
+
+--card puts a copy of a PCSX2 memory card (a folder card or a .ps2 file) in
+slot 2 for the run; the bootstrap prefers a /BASCUS-97102GAMEDATA/core.gt3 on
+it to the disc's (core/tools/gt3image.py makes such cards). Without --card,
+slot 2 holds the private blank card. --copy NAME runs a second private copy
+(build/pcsx2-test-NAME), so two boot tests can run at once.
 
 PCSX2 is started with the ELF as a boot-ELF override and the ISO as the disc
 (`pcsx2-qt -batch -nogui -elf ELF -- ISO`), so the ELF runs exactly where
@@ -184,8 +190,31 @@ MARKERS = [
     ("! crash signs",     r"(?i)(TLB Miss|Unhandled|undefined \(|R5900 exception|Address Error)", 0),
 ]
 
-def run(elf, iso, seconds, tag):
+CARD_NAME = "boottest-card.ps2"
+
+def use_card(card):
+    """Slot 2 of the private PCSX2: a fresh copy of `card`, or the blank Mcd002.ps2."""
+    dst = os.path.join(TEST_PCSX2, "memcards", CARD_NAME)
+    if os.path.isdir(dst):
+        shutil.rmtree(dst)
+    elif os.path.exists(dst):
+        os.remove(dst)
+    if card:
+        (shutil.copytree if os.path.isdir(card) else shutil.copy2)(card, dst)
+    ini = os.path.join(TEST_PCSX2, "inis", "PCSX2.ini")
+    with open(ini, encoding="utf-8", newline="") as fh:
+        text = fh.read()
+    text = re.sub(r"(?m)^Slot2_Filename[ \t]*=[^\r\n]*", "Slot2_Filename = " + (CARD_NAME if card else "Mcd002.ps2"), text)
+    if card:
+        # A boot-ELF override leaves PCSX2 without a game serial, and folder-card
+        # auto-management would then hide every save folder (BASCUS-97102GAMEDATA too).
+        text = re.sub(r"(?m)^McdFolderAutoManage[ \t]*=[^\r\n]*", "McdFolderAutoManage = false", text)
+    with open(ini, "w", encoding="utf-8", newline="") as fh:
+        fh.write(text)
+
+def run(elf, iso, seconds, tag, card=None):
     setup()
+    use_card(card)
     out = os.path.join(ROOT, "build", "boottest", tag)
     shutil.rmtree(out, ignore_errors=True)
     os.makedirs(out)
@@ -217,7 +246,8 @@ def run(elf, iso, seconds, tag):
 
     text = open(log, encoding="utf-8", errors="replace").read() if os.path.exists(log) else ""
     lines = text.splitlines()
-    summ = ["elf %s" % elf, "iso %s" % iso, "seconds %d" % seconds, "log lines %d" % len(lines), ""]
+    summ = ["elf %s" % elf, "iso %s" % iso] + (["card %s (slot 2)" % card] if card else []) + \
+           ["seconds %d" % seconds, "log lines %d" % len(lines), ""]
     reached = True
     for name, pat, need in MARKERS:
         hits = [L for L in lines if re.search(pat, L)]
@@ -236,7 +266,7 @@ def run(elf, iso, seconds, tag):
     return reached
 
 def main():
-    global USER_PCSX2
+    global USER_PCSX2, TEST_PCSX2
     ap = argparse.ArgumentParser()
     ap.add_argument("--elf", default=DEFAULT_ELF)
     ap.add_argument("--iso", default=ISO, help="the GT3 A-Spec US disc image (default: local_paths.json)")
@@ -244,16 +274,23 @@ def main():
     ap.add_argument("--seconds", type=int, default=60)
     ap.add_argument("--tag", default=None)
     ap.add_argument("--baseline", action="store_true", help="run the retail bootstrap instead")
+    ap.add_argument("--card", help="a PCSX2 memory card (folder or file) to put in slot 2 for the run")
+    ap.add_argument("--copy", metavar="NAME", help="use its own private PCSX2 copy, build/pcsx2-test-NAME "
+                    "(for boot tests that run at the same time)")
     ap.add_argument("--setup-only", action="store_true")
     a = ap.parse_args()
     USER_PCSX2 = a.pcsx2
+    if a.copy:
+        TEST_PCSX2 = os.path.join(ROOT, "build", "pcsx2-test-" + a.copy)
     if a.setup_only:
         setup(); return 0
     if not a.iso or not os.path.isfile(a.iso):
         sys.exit('no disc image: set "iso" in %s or pass --iso' % os.path.join(paths.REPO, "local_paths.json"))
     elf = paths.retail_elf() if a.baseline else a.elf
     tag = a.tag or ("retail" if a.baseline else "rebuilt")
-    return 0 if run(elf, a.iso, a.seconds, tag) else 1
+    if a.card and not os.path.exists(a.card):
+        sys.exit("no memory card at %s" % a.card)
+    return 0 if run(elf, a.iso, a.seconds, tag, os.path.abspath(a.card) if a.card else None) else 1
 
 if __name__ == "__main__":
     sys.exit(main())

@@ -1,0 +1,4675 @@
+{
+ "_comment": [
+  "Compiler flags of the retail build, per source file, for the matching compiler",
+  "(tools/mcc.py: SCE ee-gcc 2.9-ee-991111b, the -divs copy). The first rule whose",
+  "glob matches applies. -ffast-math: the original has max.s / min.s in clamps and",
+  "sqrt.s without sqrtf's errno call. Per-file rules come from tools/tuneflags.py",
+  "(measured: the flags under which the file scores best) or from evidence in",
+  "ref/MATCHING.md."
+ ],
+ "rules": [
+  {
+   "glob": "src/runtime/startup/collect2_ctors.c",
+   "flags": [
+    "-O0"
+   ],
+   "evidence": "collect2's generated constructor-table file, compiled by collect2 itself without the link's -O/-G options: reg_frame / dereg_frame have unoptimised $fp frames (sd $fp; daddu $fp,$sp; ...; daddu $sp,$fp), as the bootstrap's src/crtbegin.c (its rule: -O0). -O2 scores 0/2 (15.8%), -O0 2/2 exact with data (ref/matching/u000/notes.md)"
+  },
+  {
+   "glob": "src/game/menu/arcade/T021_car_select_2p.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "evidence": "T021/T022 keep their strings of 8 bytes or less ('class_x', '%s_logo', 'car', 'speed', 'car_x') and their pointer-to-member constants in .sdata 0x00350C40..0x00350CF8, where only -G8 puts them (lui/addiu, no $gp use); -G0 gives the same code (34/34 exact) but 82 data-refs differences, -G8 none (ref/matching/u003/notes.md)"
+  },
+  {
+   "glob": "src/game/menu/arcade/T022_class_select.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "evidence": "T021/T022 keep their strings of 8 bytes or less ('class_x', '%s_logo', 'car', 'speed', 'car_x') and their pointer-to-member constants in .sdata 0x00350C40..0x00350CF8, where only -G8 puts them (lui/addiu, no $gp use); -G0 gives the same code (34/34 exact) but 82 data-refs differences, -G8 none (ref/matching/u003/notes.md)"
+  },
+  {
+   "glob": "src/engine/pdistd/fastmath.c",
+   "flags": [
+    "-O2",
+    "-G8"
+   ],
+   "asm_pass": "div_nops",
+   "evidence": "atan2f 0x00269FC8 loads pi/2 and pi from the object's .lit4 through $gp (lwc1 -0x6F40($gp)): -G8 (it scored best under -G0 only while its constants sank into the branches; -ffast-math changes neither compiled function). div_nops: retail pads every compiled div.s with two nops (970 of 976 div.s in the image; the 6 without are hand-written asm), see tools/mcc.py div_nops; ref/matching/u124/notes.md"
+  },
+  {
+   "glob": "src/game/app/T000_main.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/app/T002_render_thread.cpp",
+   "flags": [
+    "-O2",
+    "-G8"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/app/T003_game_object_list.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/app/T004_game_status_holder.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/app/T005_transition.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/app/T007_game_init.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/app/T009_race_iop_load_modules.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/menu/framework/T016_ending_menu.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "evidence": "T016_static_init (0x001031D8) addresses the 8-byte check array g_00350B78 through $gp (addiu t0,$gp,-0x6E78): only -G8 makes it small data; under the default -G0 it is lui/addiu and the function is 16/17 instructions (63%), under -G8 exact; the other three functions are exact either way (ref/matching/u001/notes.md)"
+  },
+  {
+   "glob": "src/game/common/T017_smart_index.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/menu/arcade/T018_select_compulsory.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/menu/arcade/T020_arcade_helpers.cpp",
+   "flags": [
+    "-O2",
+    "-G8"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/menu/arcade/T034_connect_status.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/menu/arcade/T019_page_hooks.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "evidence": "T019_static_init 0x00104EF0 stores \"ar/top\" (7 bytes), which retail keeps in .sdata 0x00350C10 behind the count g_00350C08 (lui/addiu, no $gp use): only -G8 puts it there. Same code under -G0, but its data reference differs (ref/matching/u002/notes.md)"
+  },
+  {
+   "glob": "src/game/menu/arcade/T021_car_select_2p.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/menu/arcade/T022_class_select.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/menu/arcade/T023_arcade_car_select.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/menu/arcade/T035_select_box.cpp",
+   "flags": [
+    "-O2",
+    "-G8"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/menu/framework/T024_mini_cursor.cpp",
+   "flags": [
+    "-O2",
+    "-G8"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/menu/arcade/T025_arcade_course_select.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/menu/arcade/T026_arcade_race_code.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "evidence": "raceCode's \"A2P0001\" (8 bytes) is in .sdata (0x00350E60, lui/addiu), where only -G8 puts it; the code is the same under -G0 (exact) but 3 data references differ, none under -G8 (ref/matching/u005/notes.md)"
+  },
+  {
+   "glob": "src/game/menu/arcade/T027_level_button_list.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/menu/arcade/T028_arcade_menu_hooks.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/menu/arcade/T030_arcade_item_factories.cpp",
+   "flags": [
+    "-O2",
+    "-G8"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/menu/arcade/T010_arcade_control.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/menu/arcade/T013_arcade_ilink.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/menu/arcade/T014_arcade_ilink_sync.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "evidence": "runWaitSyncPage 0x00115E10 reads g_00352CB0 through $gp (lw -0x4D40($gp)): -G8 (under the default -G0 it is lui / lw, one instruction more); -ffast-math as the unit's other files (no float code). ref/matching/u007/notes.md"
+  },
+  {
+   "glob": "src/game/menu/arcade/T031_arcade_pages.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/menu/framework/T032_circle_gauge.cpp",
+   "flags": [
+    "-O2",
+    "-G8"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/menu/gtmode/T040_oil_change_cylinder.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/menu/gtmode/T041_event_status.cpp",
+   "flags": [
+    "-O2",
+    "-G8"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/menu/gtmode/T042_event_hider.cpp",
+   "flags": [
+    "-O2",
+    "-G8"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/menu/gtmode/T047_top_button_list.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/menu/gtmode/T048_page_cursor_hooks.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/menu/gtmode/T049_page_button_checks.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "evidence": "T049's table count g_00351040 (a const int the file defines, as T048 its g_00350FF4) is in .sdata (0x00351040, gp-0x69B0, right after T041's short strings): only -G8 puts it there (-G0: .rodata). The code is the same under both (6/6 exact with data); -ffast-math as the default and T048 (ref/matching/u008/notes.md)"
+  },
+  {
+   "glob": "src/game/menu/gtmode/T043_gtmode_control.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/menu/gtmode/T044_gtmode_menu_factories.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/menu/gtmode/T045_gtmode_page_checks.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/menu/gtmode/T036_garage.cpp",
+   "flags": [
+    "-O2",
+    "-G8"
+   ],
+   "asm_pass": "div_nops",
+   "evidence": "T036, its four parts (u010..u013) in one file since the merge (ref/matching/u010/notes.md, \"Merge (T036)\"). Measured on the merged file (168 functions): -O2 -G8 168 exact, 165 with data; -O2 -G8 -ffast-math 166 / 162 (text_spec_t_w_ratio / _real 0x00122998 / 0x00122A30: -ffast-math reassociates weight / tenths * 0.1f * 1000.0f, 86.2%; the old u010 / u011 rules had it, their functions compile the same without it); -O2 -G0 110 / 62 (the .sdata strings, g_00351278 and the $gp load of g_003512C8); -fno-exceptions 28 / 23 (retail has the landing pads)"
+  },
+  {
+   "glob": "src/game/menu/gtmode/T037_gtmode_actions.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/menu/gtmode/T038_gtmode_main.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "evidence": "u013's data pass: retail has T038's \"hm/hm\" in .sdata (0x003512B0, between T037's and T039's .sdata), addressed with lui / addiu as -G8 files address their small strings (T037's \"buy_car\" 0x00351298); the code is the same under -G0 and -G8 (gtmode_main EXACT with data either way)"
+  },
+  {
+   "glob": "src/game/menu/gtmode/T039_gtmode_messages.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/data/T050_country.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/menu/framework/T051_movie_player.cpp",
+   "flags": [
+    "-O2",
+    "-G8"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/menu/car_settings/T096_setting_checks.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/menu/framework/T097_name_entry.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/menu/arcade/T098_handicap_item.cpp",
+   "flags": [
+    "-O2",
+    "-G8"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/menu/gtmode/T099_prize_counter.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/menu/options/T100_calibration_item.cpp",
+   "flags": [
+    "-O2",
+    "-G8"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/menu/options/T101_key_config_item.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/menu/race_menu/T111_shortmenu_control.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/menu/race_menu/T112_shortmenu_render.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/menu/race_menu/T113_shortmenu_items.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/menu/race_menu/T102_race_menu_helpers.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "evidence": "run_short_menu / run_short_menu_license store the session pointer g_003514F0 through $gp (sw -0x6500($gp)), and load_demo_setting's 'demo/%s' (8 bytes) is in .sdata (0x003514E8): -G8. The default -G0 gave lui/sw and the string in .rodata; -ffast-math changes nothing (ref/matching/u015/notes.md)"
+  },
+  {
+   "glob": "src/game/app/T053_gtmode_races.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/app/T054_split_battle.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "evidence": "retail T054's .sdata holds its own 'root' (0x00351530, the page of splitResultMenu's initialiser) after the 8-aligned \"\" of a header's inline function, as T053's (0x00351510) and T052's (0x00351500); under the default -G0 both strings went to .rodata in front of 'menu/qm_arc_2p_result.mbl', which retail has first in T054's .rodata (0x003164A0). Code unchanged (run_split_battle scores the same under both); -ffast-math as the other T05x race-mode files (ref/matching/u017/notes.md)"
+  },
+  {
+   "glob": "src/game/debug/T055_logger.cpp",
+   "flags": [
+    "-O2",
+    "-G8"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/menu/race_menu/T103_shortmenu_license.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/menu/gtmode/T104_mini_prize_control.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/menu/gtmode/T056_gtmode_trophy_control.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/menu/gtmode/T057_consolation_control.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "evidence": "ConsolationControl::begin stores g_00352750 / g_0035274C through $gp (sw -0x52A0($gp)) and T057's 'count' (6 bytes) is in .sdata (0x00351608, after T056's 'count'): -G8. Under the default -G0 begin was lui/sw (93.5%) and T057_static_init's references went to .rodata; with -G8 all 7 functions exact with data. -ffast-math as T056 (no float code) (ref/matching/u019/notes.md)"
+  },
+  {
+   "glob": "src/game/menu/gtmode/T058_trophy_item.cpp",
+   "flags": [
+    "-O2",
+    "-G8"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/menu/gtmode/T059_license_get_control.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/menu/gtmode/T060_trophy_get.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/menu/gtmode/T105_not_car_get.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/menu/gtmode/T106_car_get_camera.cpp",
+   "flags": [
+    "-O2",
+    "-G8"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/menu/gtmode/T061_car_get_control.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/menu/options/T062_option_control.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/menu/gtmode/T107_cars_item.cpp",
+   "flags": [
+    "-O2",
+    "-G8"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/menu/options/T063_option_calib_checks.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "evidence": "T063..T067 each define their table's entry count, a word in .sdata (0x003516F0, 0x00351708, 0x00351718, 0x0035171C, 0x00351720), and T064 / T067 keep their strings of 8 bytes or less there ('%d laps' 0x003516F8, '%d m', 'blink' 0x00351710, 'commit' 0x00351728): only -G8 puts them in .sdata. Under the default -G0 the code is the same but T064 has 109 and T067 7 data-reference differences, under -G8 none; -ffast-math changes nothing (no float code) (ref/matching/u022/notes.md)"
+  },
+  {
+   "glob": "src/game/menu/options/T064_option_hooks.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "evidence": "T063..T067 each define their table's entry count, a word in .sdata (0x003516F0, 0x00351708, 0x00351718, 0x0035171C, 0x00351720), and T064 / T067 keep their strings of 8 bytes or less there ('%d laps' 0x003516F8, '%d m', 'blink' 0x00351710, 'commit' 0x00351728): only -G8 puts them in .sdata. Under the default -G0 the code is the same but T064 has 109 and T067 7 data-reference differences, under -G8 none; -ffast-math changes nothing (no float code) (ref/matching/u022/notes.md)"
+  },
+  {
+   "glob": "src/game/menu/options/T065_option_sliders.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "evidence": "T063..T067 each define their table's entry count, a word in .sdata (0x003516F0, 0x00351708, 0x00351718, 0x0035171C, 0x00351720), and T064 / T067 keep their strings of 8 bytes or less there ('%d laps' 0x003516F8, '%d m', 'blink' 0x00351710, 'commit' 0x00351728): only -G8 puts them in .sdata. Under the default -G0 the code is the same but T064 has 109 and T067 7 data-reference differences, under -G8 none; -ffast-math changes nothing (no float code) (ref/matching/u022/notes.md)"
+  },
+  {
+   "glob": "src/game/menu/options/T066_option_multis.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "evidence": "T063..T067 each define their table's entry count, a word in .sdata (0x003516F0, 0x00351708, 0x00351718, 0x0035171C, 0x00351720), and T064 / T067 keep their strings of 8 bytes or less there ('%d laps' 0x003516F8, '%d m', 'blink' 0x00351710, 'commit' 0x00351728): only -G8 puts them in .sdata. Under the default -G0 the code is the same but T064 has 109 and T067 7 data-reference differences, under -G8 none; -ffast-math changes nothing (no float code) (ref/matching/u022/notes.md)"
+  },
+  {
+   "glob": "src/game/menu/options/T067_option_actions.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "evidence": "T063..T067 each define their table's entry count, a word in .sdata (0x003516F0, 0x00351708, 0x00351718, 0x0035171C, 0x00351720), and T064 / T067 keep their strings of 8 bytes or less there ('%d laps' 0x003516F8, '%d m', 'blink' 0x00351710, 'commit' 0x00351728): only -G8 puts them in .sdata. Under the default -G0 the code is the same but T064 has 109 and T067 7 data-reference differences, under -G8 none; -ffast-math changes nothing (no float code) (ref/matching/u022/notes.md)"
+  },
+  {
+   "glob": "src/game/menu/memorycard/T108_memorycard_file.cpp",
+   "flags": [
+    "-O2",
+    "-G8"
+   ],
+   "asm_pass": "div_nops",
+   "evidence": "T108, both parts (u023, u024) in one file since the merge (ref/matching/u023/notes.md, \"Merge (T108)\"). Measured on the merged file (201 functions): -O2 -G8 198 exact, 198 with data; -O2 -G8 -ffast-math 197 / 197 (MemorycardPS1File::render 0x001434C8 divides by the .lit4 literal 0.17 with div.s, which -ffast-math turns into a mul.s by its reciprocal); -O2 -G0 184 / 153 and 38 data references off (the empty string, the digits pointer g_00351754, the icon lists and the strings '%s\\n' / '\\n' are retail .sdata 0x00351750..); -fno-exceptions 158 / 143 at best (retail has T108's frame block, 0x002A2170)"
+  },
+  {
+   "glob": "src/game/menu/memorycard/T109_memorycard_file_manager.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/menu/memorycard/T068_memorycard_control.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/menu/memorycard/T069_memorycard_items.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/menu/memorycard/T070_memorycard_actions.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "evidence": "u028's data pass: T070's ExecuteFuncData table g_00351810 (8 bytes, zero, filled by T070's static initialiser) and its count g_00351818 (= 1) are retail .sdata (0x00351810 / 0x00351818, between T069's g_00351808 and T071's g_00351820), where only -G8 puts them; the static initialiser addresses the table with lui / addiu either way (its header's extern is unsized), so the code is the same under -G0 and -G8 (EXACT); -ffast-math as the default (no float code)"
+  },
+  {
+   "glob": "src/game/menu/memorycard/T071_memorycard_slots.cpp",
+   "flags": [
+    "-O2",
+    "-G8"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/menu/memorycard/T073_memorycard_menu.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/menu/memorycard/T074_memorycard_operation_menu.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/menu/memorycard/T075_memorycard_game_slots.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/menu/memorycard/T076_memorycard_dialogs.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/menu/memorycard/T077_memorycard_icon.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/menu/memorycard/T078_memorycard_warning.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/app/T079_demo_file_manager.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/menu/car_settings/T080_setting_control.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/menu/car_settings/T081_setting_hooks.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "evidence": "T081 merged (u033 + u034, one object in retail). Its short strings and the entry count are in .sdata 0x00351900..0x00351970 ('%.1t%s' .. '%d %%', '%d %s', g_00351950, 'aero_f', 'aero_r', 'blink'), between T080's ('root' 0x003518F8) and T082's count (0x00351970): -G8 gives that .sdata byte for byte, -G0 puts them in .rodata. Measured on the merged file (tuneflags' six candidates): -G8 160/160 exact, 160 with data; -G0 160 exact, 156 with data (203 wrong data references); with or without -ffast-math the same (no float code; kept, as both parts had it); -fno-exceptions 94 exact (retail has T081's frame block, 160 FDEs, 0x002A9F98, which the merged object reproduces byte for byte). ref/matching/u033/notes.md, Merge (T081)"
+  },
+  {
+   "glob": "src/game/menu/car_settings/T082_setting_sliders.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "evidence": "T082's only small datum, the slider table's count g_00351970 (const int 40, defined in the C as u022's T065 count), is in .sdata at 0x00351970, between u034's T081 strings ('blink' 0x00351968) and T083's count (0x00351978); -G8 puts it there, -G0 in .rodata. The code has no $gp use and is 84/84 exact with data under either flag (ref/matching/u035/notes.md)"
+  },
+  {
+   "glob": "src/game/menu/car_settings/T083_setting_actions.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/menu/car_settings/T084_setting_checks.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/menu/options/T085_play_list.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/debug/T086_logger_top.cpp",
+   "flags": [
+    "-O2",
+    "-G8"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/debug/T087_logger_windows.cpp",
+   "flags": [
+    "-O2",
+    "-G8"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/debug/T088_logger_course_map.cpp",
+   "flags": [
+    "-O2",
+    "-G8"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/menu/records/T089_records_menu_args.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/menu/records/T090_records_control.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/menu/records/T091_records_items.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "evidence": "T091 keeps create_menu_records' \"\" (0x00351C80) and the initialiser's \"delete\" (0x00351CA8) in .sdata around its tables, where only -G8 puts them (the strings are addressed with lui/addiu, and the tables, declared unsized, too); under -G0 the strings go to .rodata. 7/7 exact with data (ref/matching/u040/notes.md)"
+  },
+  {
+   "glob": "src/game/menu/records/T092_records_button_list.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/data/messages/T093_msg_setting.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/data/messages/T094_msg_prize_rt.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/data/messages/T095_msg_memorycard.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/data/messages/T114_msg_shortmenu.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/menu/records/T116_race_result_base.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/menu/records/T117_result_arcade.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/menu/records/T118_result_championship.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/menu/records/T119_result_implement_records.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/menu/records/T120_result_machine_test.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/menu/records/T190_result_free_run.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/menu/records/T191_result_link_battle.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/menu/records/T192_result_2p_battle.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/menu/race_menu/T193_race_color_select.cpp",
+   "flags": [
+    "-O2",
+    "-G8"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/race/core/T121_race_entry.cpp",
+   "flags": [
+    "-O2",
+    "-G8"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/race/core/T122_race_event_queue.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "evidence": "T122 / T124 address their __user_type_info nodes and T124 its generator g_00351DE0 through $gp (__tf14RaceEventQueue lw -0x4680($gp), __tf15RaceInformation -0x4678($gp), setRandomSeed / race_info_static_ctor sw -0x5C10($gp)): -G8 (the files fell to the default -G0 rule while egcs emitted no __tf function). -ffast-math as the default: no function of the three changes with it. T123 has no small data; -G8 / -G0 give the same object (ref/matching/u042/notes.md)"
+  },
+  {
+   "glob": "src/game/race/core/T123_race_setup.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "evidence": "T122 / T124 address their __user_type_info nodes and T124 its generator g_00351DE0 through $gp (__tf14RaceEventQueue lw -0x4680($gp), __tf15RaceInformation -0x4678($gp), setRandomSeed / race_info_static_ctor sw -0x5C10($gp)): -G8 (the files fell to the default -G0 rule while egcs emitted no __tf function). -ffast-math as the default: no function of the three changes with it. T123 has no small data; -G8 / -G0 give the same object (ref/matching/u042/notes.md)"
+  },
+  {
+   "glob": "src/game/race/core/T124_race_information.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "evidence": "T122 / T124 address their __user_type_info nodes and T124 its generator g_00351DE0 through $gp (__tf14RaceEventQueue lw -0x4680($gp), __tf15RaceInformation -0x4678($gp), setRandomSeed / race_info_static_ctor sw -0x5C10($gp)): -G8 (the files fell to the default -G0 rule while egcs emitted no __tf function). -ffast-math as the default: no function of the three changes with it. T123 has no small data; -G8 / -G0 give the same object (ref/matching/u042/notes.md)"
+  },
+  {
+   "glob": "src/game/race/core/T125_race_organization.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": [
+    "div_nops",
+    "label_frags"
+   ],
+   "evidence": "__tf16RaceOrganization 0x0017B458 loads its __user_type_info (8 bytes, a common) $gp-relative (lw -0x4670($gp)), which only -G8 gives; the code is otherwise the same under -G0 and -G8 (g_003521D0 is declared with an incomplete type, so it stays lui / addiu as retail).  label_frags: the bundled assembler padded setupGhost's 32-byte struct-copy loop (0x0017AAD8) with five bogus short-loop nops that retail lacks; no other function of the file changes (ref/matching/u043/notes.md)"
+  },
+  {
+   "glob": "src/game/race/core/T126_race_lap_time.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "evidence": "__tf11RaceLapTime 0x0017B678 loads __ti11RaceLapTime $gp-relative (lw -0x4668($gp)): -G8 (ref/matching/u043/notes.md)"
+  },
+  {
+   "glob": "src/game/race/core/T127_race_records.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/race/core/T129_race_base.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/race/core/T130_race_ps2_base.cpp",
+   "flags": [
+    "-O2",
+    "-G8"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/race/core/T131_race_ps2_render.cpp",
+   "flags": [
+    "-O2",
+    "-G8"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true,
+   "evidence": "u045 matching: no -ffast-math. drawReflections 0x0017FB68 keeps off + 0.0f as add.s with a zero register (fast-math folds x + 0) and drawMirror / drawSubView multiply (h / w * aspect) * zoom unreassociated; the max.s / min.s of captureAfterimage / drawView are egcs's >? / <? operators (MAXF / MINF in the file), which need no flag"
+  },
+  {
+   "glob": "src/game/race/core/T132_race_basic.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/race/modes/T133_race_single_player.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/race/modes/T134_race_arcade.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/race/modes/T135_race_arcade_demo.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/race/modes/T136_race_free_practice.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/race/modes/T137_race_split_battle.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/race/modes/T138_race_link_battle.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/race/modes/T139_race_solitaire.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/race/modes/T140_race_time_trial.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/race/display/T141_race_time_trial_display.cpp",
+   "flags": [
+    "-O2",
+    "-G8"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/race/modes/T142_race_free_run.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/race/display/T143_race_free_run_display.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "evidence": "T143 reads the race display headers, so it writes the \"\" of T157's inline RaceMessageDisplay::clear: retail has it in .sdata 0x00351EC8 (the 8-byte zero slot between T142's node 0x00351EC0 and T144's \"\" 0x00351ED0), and T143's .rodata 0x0032BDC8 has the vtable right after \"bad_alloc\" (0x0032BDD8), with no \"\". Under the default -G0 the \"\" goes to .rodata and moves the vtable and the type names 8 bytes; the code is the same under both (5/5 exact). ref/data/u048/notes.md"
+  },
+  {
+   "glob": "src/game/race/modes/T144_race_license.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/race/modes/T145_mini_prize.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/race/display/T146_license_examination_messages.cpp",
+   "flags": [
+    "-O2",
+    "-G8"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/race/display/T147_race_license_display.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "evidence": "u049 data pass: retail T147's .rodata has no \"\" (T157's inline RaceMessageDisplay::clear, which every file reading the race display writes) between \"bad_alloc\" 0x0032C9C0 and virtual_2's jump table 0x0032C9D0, where -G0 puts it (and the table 16 bytes later); under -G8 it is T147's .sdata, the 8 zero bytes 0x00351F20 between T146's \"sw_20\" and T148's \"\" (0x00351F28). The code references no small data: -G8 and -G0 give the same code (score identical); -ffast-math kept from the default rule (ref/data/u049/notes.md)"
+  },
+  {
+   "glob": "src/game/race/modes/T148_race_machine_test.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/race/core/T149_race_replay_information.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/race/core/T150_serialize_replay_data.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/race/modes/T151_race_championship.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/race/core/T152_race_gtmode_information.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/race/core/T153_race_course.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/race/display/T194_race_display_event.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/race/display/T154_race_display.cpp",
+   "flags": [
+    "-O2",
+    "-G8"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true,
+   "evidence": "T154 merged (u051 + u052 halves, one object): -O2 -G8 gives 83 of 92 exact, all 83 with data (T154's .sdata variables and strings gp-relative; -G0 loses them); -ffast-math changes only virtual_2 0x00192A58 (89.1 -> 87.4%: its boost min.s is egcs's <? either way), so none; -fno-exceptions breaks the constructors (frame blocks). The u052 half's old -ffast-math changed nothing there (ref/matching/u051/notes.md, Merge (T154))"
+  },
+  {
+   "glob": "src/game/race/display/T155_race_split_display.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "evidence": "T155's own __tf15RaceDisplayBase copy (0x00196450) loads __ti15RaceDisplayBase gp-relative (lw -0x4708($gp)) and __tf16RaceSplitDisplay passes it as addiu $a2,$gp,-0x4708: -G8, as T154 (both exact under -G8, 81/84% under -G0; the other 21 functions are the same code either way; ref/matching/u052/notes.md)"
+  },
+  {
+   "glob": "src/game/race/display/T156_race_display_object.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/race/display/T157_race_display_parts.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": [
+    "eh_regions",
+    "div_nops"
+   ],
+   "eh_drop": [
+    "__12RaceOdometer:1"
+   ],
+   "measured": true,
+   "evidence": "-O2 -G8 -ffast-math measured (tuneflags). eh_regions / eh_drop: retail's .gcc_except_table (0x0034DF80, 140 bytes, 11 entries) lacks the entry of RaceOdometer::RaceOdometer's first cleanup region (0x001971FC..0x00197218, handler 0x00197230), whose code and handler retail has (the constructor is EXACT): egcs 991111's remove_handler compares handler label rtx pointers across the whole file and a later function's deleted label reused that label's memory. Which entry egcs loses depends on the heap layout (header bytes, line-marker and output path lengths): our compiles gave 12 entries or 11 without RaceEventDisplay's first region. The pass writes every region's entry, less RaceOdometer's first: retail's table word for word. ref/data/u054/notes.md"
+  },
+  {
+   "glob": "src/game/race/display/T158_race_display_draw.cpp",
+   "flags": [
+    "-O2",
+    "-G8"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/effects/T159_flare.cpp",
+   "flags": [
+    "-O2",
+    "-G8"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/race/display/T160_race_meters.cpp",
+   "flags": [
+    "-O2",
+    "-G8"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/race/display/T161_race_tachometer.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/race/display/T162_race_onboard_speedmeter.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/race/display/T163_race_boostmeter.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/race/display/T164_race_minimap.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/effects/T165_particle_manager.cpp",
+   "flags": [
+    "-O2",
+    "-G8"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/effects/T166_particle_params.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/car/physics/T167_rigid_body.cpp",
+   "flags": [
+    "-O2",
+    "-G8"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/race/pause/T168_pause_base.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/race/pause/T169_race_pause.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/race/pause/T170_replay_pause.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/race/pause/T171_race_pause_with_retry.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/camera/T172_course_camera.cpp",
+   "flags": [
+    "-O2",
+    "-G0"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/effects/T173_race_smoke.cpp",
+   "flags": [
+    "-O2",
+    "-G8"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/race/core/T174_race_mem_pool.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/sound/T175_race_bgm_base.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "evidence": "__tf11RaceBGMBase 0x001A6448 loads its 8-byte __ti11RaceBGMBase common $gp-relative (lw -0x4628($gp)), which only -G8 gives (-G0: lui/lw, 84.4%); with -G8 all 16 functions exact with data (ref/matching/u058/notes.md)"
+  },
+  {
+   "glob": "src/game/sound/T176_car_sound.cpp",
+   "flags": [
+    "-O2",
+    "-G8"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/sound/T177_race_ambient_sound.cpp",
+   "flags": [
+    "-O2",
+    "-G8"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/course/T178_course_env.cpp",
+   "flags": [
+    "-O2",
+    "-G8"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/course/T179_course_data.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/car/model/T180_race_car_model.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/car/model/T181_car_lighting.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true,
+   "evidence": "CarRenderCtx::setup 0x001AB7D0 has max.s for the spot cone's (dot > 0) ? dot : 0, which egcs folds to MAX_EXPR only under -ffast-math (99.7% with it, 94.7% without); the other five T181 functions and its .rodata / .lit4 are the same under both (ref/matching/u060/notes.md)"
+  },
+  {
+   "glob": "src/game/effects/T182_replay_blur.cpp",
+   "flags": [
+    "-O2",
+    "-G8"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/effects/T183_race_vignette.cpp",
+   "flags": [
+    "-O2",
+    "-G8"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/car/model/T184_car_icon_maker.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/race/display/T185_error_event_view.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/data/messages/T186_msg_race_display.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/data/messages/T187_msg_race_msg.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/race/pause/T196_replay_option.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/menu/race_menu/T197_race_menu_page.cpp",
+   "flags": [
+    "-O2",
+    "-G8"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/menu/race_menu/T198_race_menu_button.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/menu/race_menu/T199_race_menu_layer.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/menu/records/T200_result_board.cpp",
+   "flags": [
+    "-O2",
+    "-G8"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/data/messages/T201_msg_racemenutext.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/common/T266_smart_index_double_range.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/data/T203_part_names.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/menu/framework/T204_menu_heap.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/menu/framework/T206_button.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/menu/framework/T207_map_button_list.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/menu/gtmode/T208_wheel_shop_button_list.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/menu/framework/T211_page_manager.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/menu/framework/T212_menu_car.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/menu/framework/T213_menu_item.cpp",
+   "flags": [
+    "-O2",
+    "-G8"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/menu/framework/T214_menu_control.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/menu/gtmode/T215_showroom_data.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/menu/framework/T216_menu_transitive.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/menu/framework/T217_operator.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/menu/framework/T218_color.cpp",
+   "flags": [
+    "-O2",
+    "-G8"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/menu/gtmode/T219_garage_button_list.cpp",
+   "flags": [
+    "-O2",
+    "-G8"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/menu/framework/T220_object.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/menu/framework/T222_decide_effect.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/menu/framework/T223_pointer.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/menu/gtmode/T224_wheel_button_list.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/menu/framework/T225_menu_item_array.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "evidence": "MenuItemArray::setEntry copies \"(null)\" (7 bytes) from retail's .sdata 0x00352600, between T224's and T267's .sdata (lui/addiu, no $gp use): only -G8 puts it there. Same code under -G0, where the string lands in .rodata (ref/data/u067/notes.md)"
+  },
+  {
+   "glob": "src/game/menu/framework/T228_slider_item.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/menu/framework/T267_concurrent_button.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/menu/framework/T229_page_layout.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/menu/framework/T230_scroll_bar.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/menu/framework/T231_text_box.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/menu/gtmode/T232_menu_car_spec.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/menu/framework/T233_menu_sound.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/menu/framework/T268_free_button.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/menu/framework/T269_multi_button.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/menu/framework/T235_color_box.cpp",
+   "flags": [
+    "-O2",
+    "-G8"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/menu/framework/T236_free_agent.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/menu/car_settings/T237_gear_chart.cpp",
+   "flags": [
+    "-O2",
+    "-G8"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/menu/framework/T238_slider.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/menu/framework/T240_page_history.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/menu/framework/T241_link_manager.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/menu/framework/T244_button_list.cpp",
+   "flags": [
+    "-O2",
+    "-G8"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/car/model/T245_car_render.cpp",
+   "flags": [
+    "-O2",
+    "-G8"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/menu/framework/T246_render_base.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/menu/framework/T247_control_base.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/menu/framework/T248_menu_signal.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/menu/framework/T250_ipic.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/menu/framework/T252_timer.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/menu/framework/T253_menu_bg_movie.cpp",
+   "flags": [
+    "-O2",
+    "-G0"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/effects/T254_blur2d.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/menu/framework/T258_menu_string.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/menu/framework/T259_menu_drawable.cpp",
+   "flags": [
+    "-O2",
+    "-G8"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/menu/framework/T260_motion_value.cpp",
+   "flags": [
+    "-O2",
+    "-G8"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/menu/framework/T261_menu_draw_state.cpp",
+   "flags": [
+    "-O2",
+    "-G8"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/menu/framework/T262_menu_bgm.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/menu/framework/T270_raw_animation.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/menu/framework/T272_raw_window_classes.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/menu/framework/T263_raw_list.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/menu/framework/T264_raw_window.cpp",
+   "flags": [
+    "-O2",
+    "-G8"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/menu/framework/T265_raw_window_register.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/effects/T276_envmap_render.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/effects/T277_dynamic_envmap_camera.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/common/T319_angle_math.cpp",
+   "flags": [
+    "-O2",
+    "-G8"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/common/T354_response_curve.cpp",
+   "flags": [
+    "-O2",
+    "-G8"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/car/model/T278_showroom_car.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/race/display/T279_meter_scale.cpp",
+   "flags": [
+    "-O2",
+    "-G8"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/car/physics/T280_car_condition.cpp",
+   "flags": [
+    "-O2",
+    "-G8"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/car/physics/T282_car_spec.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/car/physics/T283_condition_model.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/car/physics/T327_wear_curve.cpp",
+   "flags": [
+    "-O2",
+    "-G8"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/car/physics/T328_surface_tables.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/car/physics/T329_slipstream.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/car/physics/T284_car_param.cpp",
+   "flags": [
+    "-O2",
+    "-G8"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/car/physics/T330_dyn_car_init.cpp",
+   "flags": [
+    "-O2",
+    "-G8"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/car/physics/T332_surface_params.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/sound/T288_car_sound.cpp",
+   "flags": [
+    "-O2",
+    "-G8"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/car/physics/T289_car_mode.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "evidence": "u078's data pass: retail T289's .sdata is the \"\" of T157's inline RaceMessageDisplay::clear at 0x00352950 (unreferenced, 8-aligned, between T336's gains 0x00352934..0x00352950 and T337's floats 0x00352958); its .rodata (bad_alloc, the race display type names) has no \"\", which -G0 would put there. The code is the same under -G0 and -G8 (no small data; 1.0f is lui / mtc1): 2/2 exact either way (ref/data/u078/notes.md)"
+  },
+  {
+   "glob": "src/game/car/physics/T291_engine.cpp",
+   "flags": [
+    "-O2",
+    "-G8"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/sound/T333_tyre_squeal.cpp",
+   "flags": [
+    "-O2",
+    "-G8"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/effects/T334_tyre_smoke.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/car/physics/T335_pad_vibration.cpp",
+   "flags": [
+    "-O2",
+    "-G8"
+   ],
+   "asm_pass": "div_nops",
+   "evidence": "pad_vibration_update 0x001DF2B0 loads its float literals through $gp (lwc1 $f4,-0x7744($gp): .lit4): -G8. Under -G0 the literals are lui/lwc1 pairs (the measured -G0 rule fitted the first-pass source better); with the matched source it is exact with data under -G8 (ref/matching/u078/notes.md)"
+  },
+  {
+   "glob": "src/game/car/physics/T336_steer_force.cpp",
+   "flags": [
+    "-O2",
+    "-G8"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/car/physics/T337_attitude_lag.cpp",
+   "flags": [
+    "-O2",
+    "-G8"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/car/physics/T338_engine_output.cpp",
+   "flags": [
+    "-O2",
+    "-G8"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/car/physics/T292_gear_calc.cpp",
+   "flags": [
+    "-O2",
+    "-G8"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/car/physics/T293_drivetrain_spec.cpp",
+   "flags": [
+    "-O2",
+    "-G8"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/car/physics/T294_gear_auto.cpp",
+   "flags": [
+    "-O2",
+    "-G8"
+   ],
+   "asm_pass": "div_nops",
+   "evidence": "gear_auto_ratios 0x001E28A8 loads its float constants 0.2777778 and 0.10471976 from the object's .lit4 through $gp (lwc1 -0x7628($gp) / -0x7624($gp)): -G8; -G0 builds them with lui/ori. With the matched source -G8 gives 3/3 exact, -G0 2/3 (gear_auto_ratios 96.4%, 166 insns; ref/matching/u079/notes.md)"
+  },
+  {
+   "glob": "src/game/car/physics/T340_assist_control.cpp",
+   "flags": [
+    "-O2",
+    "-G8"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/car/physics/T342_car_input.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/car/physics/T356_brake_assist.cpp",
+   "flags": [
+    "-O2",
+    "-G8"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/car/physics/T295_tyre_heat.cpp",
+   "flags": [
+    "-O2",
+    "-G8"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/car/physics/T343_gear_select.cpp",
+   "flags": [
+    "-O2",
+    "-G8"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/car/physics/T344_drivetrain.cpp",
+   "flags": [
+    "-O2",
+    "-G8"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/car/physics/T345_wheel_shake.cpp",
+   "flags": [
+    "-O2",
+    "-G8"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/car/physics/T296_car_drivetrain.cpp",
+   "flags": [
+    "-O2",
+    "-G8"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/car/physics/T297_wheel_steer.cpp",
+   "flags": [
+    "-O2",
+    "-G0"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/car/physics/T298_suspension_body.cpp",
+   "flags": [
+    "-O2",
+    "-G8"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/car/physics/T299_wheel_offsets.cpp",
+   "flags": [
+    "-O2",
+    "-G0"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/car/physics/T348_wheel_speed_factor.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/car/physics/T300_car_tyre_grip.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/car/physics/T301_car_motion.cpp",
+   "flags": [
+    "-O2",
+    "-G8"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/car/physics/T302_car_state.cpp",
+   "flags": [
+    "-O2",
+    "-G8"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/race/dynamics/T304_slow_car_boost.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/race/dynamics/T349_car_pairs.cpp",
+   "flags": [
+    "-O2",
+    "-G8"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true,
+   "evidence": "u082 matching: no -ffast-math. car_near_code 0x001EBF68 tests the last zone as c.le.s -rearGap*4, fwd; bc1t with zone = 2 in the delay slot: the negated test !(x <= fwd) stays a reversed branch only without -ffast-math (fold turns it into fwd < x under it, c.lt.s; bc1f). car_pair_info's sqrt.s is boot_sqrtf_v (asm), so the file needs no flag for it; all 11 functions exact or as before without the flag (ref/matching/u082/notes.md)"
+  },
+  {
+   "glob": "src/game/race/dynamics/T305_dynamics_conductor.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/race/dynamics/T307_lap_counter.cpp",
+   "flags": [
+    "-O2",
+    "-G8"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/race/dynamics/T309_dynamics_conductor_battle2p.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "evidence": "the typeinfo function egcs generates (__tf25DynamicsConductorBattle2P 0x001F0358 / __tf25DynamicsConductorBattleMP 0x001F05A8) passes the base __ti17DynamicsConductor as addiu a2,$gp,-0x45E0: -G8 (-G0 builds it with lui/addiu); the file scores 11 exact under -G8, 10 under -G0, no other function changes (ref/matching/u083/notes.md)"
+  },
+  {
+   "glob": "src/game/race/dynamics/T310_dynamics_conductor_battlemp.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "evidence": "the typeinfo function egcs generates (__tf25DynamicsConductorBattle2P 0x001F0358 / __tf25DynamicsConductorBattleMP 0x001F05A8) passes the base __ti17DynamicsConductor as addiu a2,$gp,-0x45E0: -G8 (-G0 builds it with lui/addiu); the file scores 11 exact under -G8, 10 under -G0, no other function changes (ref/matching/u083/notes.md)"
+  },
+  {
+   "glob": "src/game/race/dynamics/T350_pit_lane.cpp",
+   "flags": [
+    "-O2",
+    "-G8"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/race/dynamics/T359_stop_in_box.cpp",
+   "flags": [
+    "-O2",
+    "-G8"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/race/dynamics/T311_dc_machine_test.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "evidence": "the typeinfo function egcs generates (__tf28DynamicsConductorMachineTest 0x001F0A88, __tf24DynamicsConductorLicense 0x001F1140, __tf24DynamicsConductorFreeRun 0x001F1A88, __tf26DynamicsConductorTimeTrial 0x001F1FC0, __tf29DynamicsConductorFreePractice 0x001F26A0, __tf29DynamicsConductorSinglePlayer 0x001F29C0) passes the base __ti17DynamicsConductor as addiu a2,$gp,-0x45E0: -G8 (-G0 builds it with lui/addiu), as T309 / T310; each becomes exact, no other function changes (ref/matching/u084/notes.md)"
+  },
+  {
+   "glob": "src/game/race/dynamics/T312_dc_license.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "evidence": "the typeinfo function egcs generates (__tf28DynamicsConductorMachineTest 0x001F0A88, __tf24DynamicsConductorLicense 0x001F1140, __tf24DynamicsConductorFreeRun 0x001F1A88, __tf26DynamicsConductorTimeTrial 0x001F1FC0, __tf29DynamicsConductorFreePractice 0x001F26A0, __tf29DynamicsConductorSinglePlayer 0x001F29C0) passes the base __ti17DynamicsConductor as addiu a2,$gp,-0x45E0: -G8 (-G0 builds it with lui/addiu), as T309 / T310; each becomes exact, no other function changes (ref/matching/u084/notes.md)"
+  },
+  {
+   "glob": "src/game/race/dynamics/T313_dc_free_run.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "evidence": "the typeinfo function egcs generates (__tf28DynamicsConductorMachineTest 0x001F0A88, __tf24DynamicsConductorLicense 0x001F1140, __tf24DynamicsConductorFreeRun 0x001F1A88, __tf26DynamicsConductorTimeTrial 0x001F1FC0, __tf29DynamicsConductorFreePractice 0x001F26A0, __tf29DynamicsConductorSinglePlayer 0x001F29C0) passes the base __ti17DynamicsConductor as addiu a2,$gp,-0x45E0: -G8 (-G0 builds it with lui/addiu), as T309 / T310; each becomes exact, no other function changes (ref/matching/u084/notes.md)"
+  },
+  {
+   "glob": "src/game/race/dynamics/T314_dc_time_trial.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "evidence": "the typeinfo function egcs generates (__tf28DynamicsConductorMachineTest 0x001F0A88, __tf24DynamicsConductorLicense 0x001F1140, __tf24DynamicsConductorFreeRun 0x001F1A88, __tf26DynamicsConductorTimeTrial 0x001F1FC0, __tf29DynamicsConductorFreePractice 0x001F26A0, __tf29DynamicsConductorSinglePlayer 0x001F29C0) passes the base __ti17DynamicsConductor as addiu a2,$gp,-0x45E0: -G8 (-G0 builds it with lui/addiu), as T309 / T310; each becomes exact, no other function changes (ref/matching/u084/notes.md)"
+  },
+  {
+   "glob": "src/game/race/dynamics/T315_dc_free_practice.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "evidence": "the typeinfo function egcs generates (__tf28DynamicsConductorMachineTest 0x001F0A88, __tf24DynamicsConductorLicense 0x001F1140, __tf24DynamicsConductorFreeRun 0x001F1A88, __tf26DynamicsConductorTimeTrial 0x001F1FC0, __tf29DynamicsConductorFreePractice 0x001F26A0, __tf29DynamicsConductorSinglePlayer 0x001F29C0) passes the base __ti17DynamicsConductor as addiu a2,$gp,-0x45E0: -G8 (-G0 builds it with lui/addiu), as T309 / T310; each becomes exact, no other function changes (ref/matching/u084/notes.md)"
+  },
+  {
+   "glob": "src/game/race/dynamics/T316_dc_single_player.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "evidence": "the typeinfo function egcs generates (__tf28DynamicsConductorMachineTest 0x001F0A88, __tf24DynamicsConductorLicense 0x001F1140, __tf24DynamicsConductorFreeRun 0x001F1A88, __tf26DynamicsConductorTimeTrial 0x001F1FC0, __tf29DynamicsConductorFreePractice 0x001F26A0, __tf29DynamicsConductorSinglePlayer 0x001F29C0) passes the base __ti17DynamicsConductor as addiu a2,$gp,-0x45E0: -G8 (-G0 builds it with lui/addiu), as T309 / T310; each becomes exact, no other function changes (ref/matching/u084/notes.md)"
+  },
+  {
+   "glob": "src/game/race/dynamics/T318_control_record.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/race/ai/T362_ai_params.cpp",
+   "flags": [
+    "-O2",
+    "-G8"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/race/ai/T363_ai_gear.cpp",
+   "flags": [
+    "-O2",
+    "-G0"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/race/ai/T364_ai_corner_speed.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/race/ai/T365_ai_traffic.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/race/ai/T366_ai_drive.cpp",
+   "flags": [
+    "-O2",
+    "-G8"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/race/ai/T367_ai_line.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/race/ai/T368_enemy_lines.cpp",
+   "flags": [
+    "-O2",
+    "-G8"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/race/ai/T371_line_segment.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/car/physics/T373_car_box_list.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/car/physics/T374_car_box.cpp",
+   "flags": [
+    "-O2",
+    "-G8"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/car/physics/T375_car_box_cars.cpp",
+   "flags": [
+    "-O2",
+    "-G8"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/car/physics/T376_car_box_walls.cpp",
+   "flags": [
+    "-O2",
+    "-G8"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/camera/T397_variable_camera_base.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/camera/T378_onboard_camera.cpp",
+   "flags": [
+    "-O2",
+    "-G8"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/camera/T398_designer_camera.cpp",
+   "flags": [
+    "-O2",
+    "-G8"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/camera/T399_passline_camera.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/camera/T400_starting_camera.cpp",
+   "flags": [
+    "-O2",
+    "-G8"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/camera/T401_automatic_camera.cpp",
+   "flags": [
+    "-O2",
+    "-G8"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/camera/T402_automount_camera.cpp",
+   "flags": [
+    "-O2",
+    "-G8"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/camera/T403_logger_camera.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/camera/T379_camera_rot_damper.cpp",
+   "flags": [
+    "-O2",
+    "-G8"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/camera/T380_camera_spring.cpp",
+   "flags": [
+    "-O2",
+    "-G0"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/camera/T381_camera_shake.cpp",
+   "flags": [
+    "-O2",
+    "-G8"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/camera/T382_camera_select.cpp",
+   "flags": [
+    "-O2",
+    "-G8"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/camera/T405_matrix_camera.cpp",
+   "flags": [
+    "-O2",
+    "-G8"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/camera/T406_zoomup_camera.cpp",
+   "flags": [
+    "-O2",
+    "-G8"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/camera/T407_camera_follow.cpp",
+   "flags": [
+    "-O2",
+    "-G0"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/camera/T408_car_progress.cpp",
+   "flags": [
+    "-O2",
+    "-G0"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/camera/T383_camera_manager.cpp",
+   "flags": [
+    "-O2",
+    "-G8"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/camera/T384_camera_groove_meter.cpp",
+   "flags": [
+    "-O2",
+    "-G8"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/camera/T386_camera_bgm_markers.cpp",
+   "flags": [
+    "-O2",
+    "-G0"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/camera/T389_camera_mode2.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/camera/T390_camera_mode1.cpp",
+   "flags": [
+    "-O2",
+    "-G8"
+   ],
+   "asm_pass": "div_nops",
+   "evidence": "no -ffast-math: updateMode1 0x0020C580 divides the frame-effect level by 100.0 with div.s; -ffast-math turns the division into a multiplication by a .lit4 0.01, one literal retail does not have, which also shifts every later .lit4 reference (data-refs 4 differ); without it the .lit4 references are retail's (0x00350894..). No max.s / min.s / sqrt.s in T390. -G8: $gp-relative .lit4 and g_003521E4. Exceptions on (was -fno-exceptions, measured on code alone): retail T390 has frame info (collect2's frame table, block 0x002DEDB4, FDEs of pickAutoCamera and updateMode1); the .text is the same with and without (ref/data/u093/notes.md)"
+  },
+  {
+   "glob": "src/game/camera/T391_camera_logger.cpp",
+   "flags": [
+    "-O2",
+    "-G0",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "evidence": "measured (tuneflags). Exceptions on (was -fno-exceptions, measured on code alone): retail T391 has frame info (collect2's frame table, block 0x002DEE58, the FDE of updateLogger 0x0020D208); the .text is the same with and without (ref/data/u093/notes.md)"
+  },
+  {
+   "glob": "src/game/camera/T409_camera_change.cpp",
+   "flags": [
+    "-O2",
+    "-G8"
+   ],
+   "asm_pass": "div_nops",
+   "evidence": "no -ffast-math: canCut 0x0020ABF0 tests the marker time with c.lt.s and cuts on false (bc1t over the cut); egcs keeps !(t < 1.3f) so only without -ffast-math, which folds it into t >= 1.3f (c.le.s); no max.s / min.s / sqrt.s in T409; the other two functions are the same under both (ref/matching/u093/notes.md). -G8: the 1.3f literals are $gp-relative"
+  },
+  {
+   "glob": "src/game/camera/T393_target_chooser.cpp",
+   "flags": [
+    "-O2",
+    "-G8"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/camera/T394_replay_view_mode.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/camera/T395_step_pair.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/camera/T410_camera_base.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/camera/T411_menu_car_camera.cpp",
+   "flags": [
+    "-O2",
+    "-G8"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/camera/T412_simple_camera_base.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/race/core/T413_race_input.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/race/core/T414_race_random.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/save/T415_machine_test_records.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/save/T417_time_trial_records.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "evidence": "u096's data pass: T417's preset-name table g_002E1080 (.data 0x002E1080) points at its four names of 8 bytes or less (\"T.Izumi\", \"M.Goto\", \"S.Ikiuo\", \"Y.Aoki\") in .sdata 0x00352A10..0x00352A30 (between T378's short names and T419's \"???\") and at the longer ones in .rodata 0x0033F9B8..: a table's strings split by size only under -G8. The code references no small data (its tables are 120 / 40 bytes): -G0 and -G8 give the same code (36/36 exact either way, score identical); -ffast-math as the default (ref/data/u096/notes.md)"
+  },
+  {
+   "glob": "src/game/save/T419_prize_cars.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/save/T427_menu_status.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/save/T428_game_options.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/save/T429_game_status.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/data/T435_product_config.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/car/model/T446_car_model.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/car/model/T447_tire_model_base.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/car/model/T448_strip_builder.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/car/model/T462_tire_packet.cpp",
+   "flags": [
+    "-O2",
+    "-G8"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/car/model/T449_race_tire_model.cpp",
+   "flags": [
+    "-O2",
+    "-G8"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/car/model/T450_menu_tire_model.cpp",
+   "flags": [
+    "-O2",
+    "-G8"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/engine/gfx/T451_model_set.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/course/T453_vision_list.cpp",
+   "flags": [
+    "-O2",
+    "-G8"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true,
+   "evidence": "vision_nearest's FLT_MAX (0x7F7FFFFF, outside li.s's range) is in retail's constant pool in .sdata at 0x00352AF4, addressed with lui / %lo: only -G8 puts it there (-G0: .rodata); the code is the same under both (asm diff: section directives only) (ref/data/u102/notes.md)"
+  },
+  {
+   "glob": "src/game/course/T457_runway.cpp",
+   "flags": [
+    "-O2",
+    "-G8"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/sound/T458_course_sound.cpp",
+   "flags": [
+    "-O2",
+    "-G8"
+   ],
+   "asm_pass": "div_nops",
+   "evidence": "sound_source_mix 0x00228E08 loads its float constants (0.8, 1/60 twice, 5.524167, pi/2) from .lit4 through $gp (lwc1 -0x7028($gp) ..), which only -G8 gives (li.s): -G0 builds them with lui/ori/mtc1. With the matched source all 11 functions are exact with data under -G8 (u103 notes; the measured -G0 predated the matching pass)"
+  },
+  {
+   "glob": "src/game/menu/gtmode/T459_prize_model.cpp",
+   "flags": [
+    "-O2",
+    "-G8"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/menu/gtmode/T460_prize_base.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/common/T461_matrix_interpolate.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/sound/T463_music_seq.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/sound/T464_bgm.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/sound/T465_clock.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/sound/T466_bgm_ads.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/sound/T468_gtsound.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/sound/T469_sound_effects.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/engine/pdistd/T471_unit_arena.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/engine/system/T473_link_session.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/engine/input/T474_control.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/engine/input/T476_port_base.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/engine/input/T477_ps_port.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/engine/input/T478_steering_ps_port.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/engine/input/T479_usb_steering_port.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/engine/input/T480_ieee1394_port.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/data/T481_car_data_base.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/data/T482_car_equipments.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true,
+   "evidence": "T482 merged (u106 + u107 + u108, one object in retail). Measured on the merged file (tuneflags' six candidates): -G8 376/376 exact, 376 with data, with or without -ffast-math (kept, as the u106 / u107 parts and T481 have it); -G0 362 exact, 354 with data (u107's .sdata strings 'FR' .. 'no text', 17 wrong data references); -fno-exceptions 364 exact (retail has T482's frame block, 376 FDEs, 0x002EC6AC). ref/matching/u106/notes.md, Merge (T482)"
+  },
+  {
+   "glob": "src/game/data/T483_car_information.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/data/T484_race_database.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/data/T485_car_color.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/data/T486_maker_names.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "evidence": "T486, a data-only object (no functions; frame block 0x002F00A8): its two maker name tables (.data 0x002EFF20 / 0x002EFFD8) point at names of 8 bytes or less in .sdata (0x00352DA0..0x00352ED4, 'acura' .. 'trd') and at the longer ones in .rodata (0x00342428..0x003424F3), the split only -G8 gives; the flags of the unit's other files (ref/data/u108/notes.md)"
+  },
+  {
+   "glob": "src/game/data/T487_race_mode_database.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/save/T488_setting_serialize.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/data/T489_car_database.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/save/T490_garage_car.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/save/T491_garage_wheel.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/data/messages/T492_msg_database_parts.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/data/messages/T493_msg_database_race_category.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/common/T494_text_utils.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/menu/framework/T495_menu_list.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/engine/text/T496_font.cpp",
+   "flags": [
+    "-O2",
+    "-G8"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/engine/io/T500_vol_toc.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "evidence": "T500 defines the empty TOC g_00352F50 (8 bytes, a VolToc with a constructor), which retail has in .sdata at 0x00352F50 (T500's .sdata range, between T494's \"%s%s\" and T510's g_00352F58): only -G8 puts it there. Its code reaches it with lui / addiu (0x0023DA50, 0x0023DC94) because its first declaration (game/T500_vol_toc.h) has an incomplete type; T500 has no other small data, so its code is the same as under -G0 (8 / 8 exact). ref/data/u110/notes.md"
+  },
+  {
+   "glob": "src/engine/io/T501_memorycard_manager.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/engine/io/T510_vol_device.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/engine/io/T511_inflate_loader.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "evidence": "__tfQ24GZIP13InflateLoader 0x0023E218 reads __tiQ24GZIP11InflateBase (an 8-byte __user_type_info, .sbss 0x00353508) gp-relative (addiu a2,gp,-0x44E8); only -G8 does that (with InflateBase's egcs layout without a base struct, T537_gzip_inflate.h; ref/matching/u110/notes.md)"
+  },
+  {
+   "glob": "src/engine/io/T502_file_resolve.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/engine/io/T503_vol_thread.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/engine/io/T504_file_queue.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/engine/io/T505_host_files.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "evidence": "host_read_file / host_write_file / host_file_size / host_file_exists copy their 'host:' (6 bytes) from .sdata 0x00352FA0 (lui/addiu, no $gp use), between T504's g_00352F9C and T507's g_00352FA8: only -G8 puts a string of 8 bytes or less there; -G0 gives the same code (4/4 exact) with the string in .rodata (ref/data/u111/notes.md)"
+  },
+  {
+   "glob": "src/engine/io/T507_async_loader.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/engine/io/T508_loader_thread.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/engine/io/T509_serialize.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/engine/gfx/T514_gs_buffer.cpp",
+   "flags": [
+    "-O2",
+    "-G0"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/data/T516_country.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/engine/text/T517_realtime_text.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/game/data/T518_unit_settings.cpp",
+   "flags": [
+    "-O2",
+    "-G8"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/engine/pgl/flare.c",
+   "flags": [
+    "-O2",
+    "-G8"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/engine/pgl/particles.c",
+   "flags": [
+    "-O2",
+    "-G8"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/engine/pgl/tex1.cpp",
+   "flags": [
+    "-O2",
+    "-G0",
+    "-ffast-math",
+    "-fno-exceptions"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/engine/pgl/vu0_math.c",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/engine/pgl/font.c",
+   "flags": [
+    "-O2",
+    "-G0"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/engine/pgl/render.c",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/engine/pgl/vecmath.c",
+   "flags": [
+    "-O2",
+    "-G0"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/engine/pgl/gs_driver_core.c",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/engine/pgl/vu1_lighting.c",
+   "flags": [
+    "-O2",
+    "-G8"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/engine/pgl/gs_display_driver.c",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/engine/pgl/pgl.c",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/engine/pgl/color_filter.c",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/engine/pgl/gs_driver.c",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/engine/pdi/T519_pdicdvd.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/engine/pdi/T520_pdispu2.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/engine/pdi/T521_pdibgm.cpp",
+   "flags": [
+    "-O2",
+    "-G8"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/engine/pdi/T522_pdimpeg.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/engine/pdi/T523_pdipipe.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/engine/pdi/T524_iop_load_module_base.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/engine/io/T526_iso9660.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/engine/pdi/T527_pdi_client_rpc.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/engine/media/T529_mpegif.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/engine/media/mpeg_player.c",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true,
+   "evidence": "G002's MPEG player merged (u121's six files + u122's G002_mpeg_mc_u122.c, one object in retail, 0x0025F390..0x00263368). The parts' rules were this one (-O2 -G8 -ffast-math, div_nops; mc_u121 and pes had the default -G0 rule: no data of their own). Its .sdata words (0x00353124..0x00353170) and .sbss statics are $gp-relative: -G8. Measured on the merged file (tuneflags' four C candidates): -G8 58/68 exact, 58 with data, with or without -ffast-math (no float code; kept, as the parts had it); -G0 30/68 exact, 28 with data. ref/matching/u121/notes.md, Merge (G002 mpeg)"
+  },
+  {
+   "glob": "src/engine/media/ipu_image.c",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true,
+   "evidence": "G002's IPU still-image decoder merged with its two interrupt handlers (u123's G002_ipu_intr_u123.c, which had this same rule), one object in retail (0x00264E58..0x00265530). Measured on the merged file: -G8 4/4 exact, 4 with data, with or without -ffast-math; -G0 1/4 exact, 1 with data (its .sbss statics are $gp-relative). ref/matching/u122/notes.md, Merge (G002 ipu image)"
+  },
+  {
+   "glob": "src/engine/media/ipu.c",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/engine/io/mcard_io.c",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/engine/input/pjoy.c",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/engine/system/scf_lock.c",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/engine/sound/sound_driver.c",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/engine/input/usbd.c",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/engine/sound/sound_seq.c",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/engine/pdistd/T530_allocator.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/engine/pdistd/T531_random.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/engine/pdistd/T532_heap.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/engine/pdistd/T533_printf.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "evidence": "the typeinfo function __tfQ233_GLOBAL_$N$.._.._printf.cxxQakP7f11PrintTarget 0x0026C6C8 re-addresses the base's __user_type_info (8 bytes, .sbss 0x003534F8) $gp-relative (addiu a2,gp,-0x44F8): -G8 (81.2% under -G0, exact under -G8); exceptions on: vprintf has EH cleanups. As the bootstrap's printf.cpp (-O2, default -G8). ref/matching/u125/notes.md"
+  },
+  {
+   "glob": "src/engine/pdistd/T535_vsprintf.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "evidence": "exceptions on: vsprintf 0x0026C7D8 has EH landing pads (~PrintTarget(2), __throw, terminate) and ~PrintTarget 0x0026C798 calls the base destructor with jal and a frame, not a tail jump; -G8: the typeinfo function 0x0026C868 reads the base's __user_type_info $gp-relative (addiu a2,gp,-0x44F8). With the namespace anchor all 5 functions exact (were 2/5 under -G0 -fno-exceptions, measured without the anchor). ref/matching/u125/notes.md"
+  },
+  {
+   "glob": "src/engine/pdistd/T536_bit_stream_buffer.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/engine/pdistd/T539_print_format.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/engine/pdistd/T537_gzip_inflate.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/engine/pdi/pdistd_misc.c",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/engine/pdi/pdi1394_rpc.c",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "evidence": "pdi1394_vblank_handler 0x0026EF38 reads and writes its vblank count s_pdiVblankCount through $gp (lw/sw -0x470C($gp), .sbss 0x003532E4): -G8, as the object's first part G003_pdistd_misc.c (its s_globalLockSema at gp-0x4818). Under the default -G0 the handler cannot match; no other function of the file changes (ref/matching/u127/notes.md)"
+  },
+  {
+   "glob": "src/engine/pdi/T541_pdi1394.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "measured": true
+  },
+  {
+   "glob": "src/sdk/libcdvd/libcdvd.c",
+   "flags": [
+    "-O2",
+    "-G0"
+   ],
+   "asm_pass": [
+    "label_frags",
+    "gas_swap"
+   ],
+   "evidence": "Sony's libcdvd 2240 / libpad 2200, the same code as the bootstrap's sdk/libcdvd and sdk/libpad: the bootstrap's sdk/* rule (-O2 -G0, gas_swap). Retail swaps unfilled delay slots as standard GAS does (_sceCdCallbackThread: jal ExitDeleteThread; sw / jalr; lw / b; sw) and reaches libpad's data with lui/sw (s_padInitialized, s_padWarning: no $gp, so -G0, not the measured -G8); ref/matching/u129/notes.md"
+  },
+  {
+   "glob": "src/sdk/libpad/libpad_part1.c",
+   "flags": [
+    "-O2",
+    "-G0"
+   ],
+   "asm_pass": [
+    "label_frags",
+    "gas_swap"
+   ],
+   "evidence": "Sony's libcdvd 2240 / libpad 2200, the same code as the bootstrap's sdk/libcdvd and sdk/libpad: the bootstrap's sdk/* rule (-O2 -G0, gas_swap). Retail swaps unfilled delay slots as standard GAS does (_sceCdCallbackThread: jal ExitDeleteThread; sw / jalr; lw / b; sw) and reaches libpad's data with lui/sw (s_padInitialized, s_padWarning: no $gp, so -G0, not the measured -G8); ref/matching/u129/notes.md"
+  },
+  {
+   "glob": "src/sdk/libmc/libmc.c",
+   "flags": [
+    "-O2",
+    "-G0"
+   ],
+   "asm_pass": [
+    "label_frags",
+    "gas_swap"
+   ],
+   "evidence": "Sony's libpad 2200 / libmc 2240 / libscf, libpad and libmc the same code as the bootstrap's sdk/libpad and sdk/libmc: the bootstrap's sdk/* rule (-O2 -G0, gas_swap), as u129. Retail swaps an unfilled delay slot as standard GAS does: sceScfSetT10kConfig 0x00274700 ends `sdl; jr ra; sdr` (the bundled assembler: `sdl; sdr; jr; nop`); ref/matching/u130/notes.md. Covers the whole libscf object since the merge (G004_libscf_u130.c, 0x002745C0..0x00274F70, u131's half included), measured on the merged file: -O2 -G0 with gas_swap 21 / 21 exact with data, with or without label_frags / div_nops / -ffast-math / -fno-builtin; without gas_swap 20 / 21; -G8 13 / 21 (11 with data); ref/matching/u130/notes.md, Merge (libscf)"
+  },
+  {
+   "glob": "src/sdk/libpad/libpad_part2.c",
+   "flags": [
+    "-O2",
+    "-G0"
+   ],
+   "asm_pass": [
+    "label_frags",
+    "gas_swap"
+   ],
+   "evidence": "Sony's libpad 2200 / libmc 2240 / libscf, libpad and libmc the same code as the bootstrap's sdk/libpad and sdk/libmc: the bootstrap's sdk/* rule (-O2 -G0, gas_swap), as u129. Retail swaps an unfilled delay slot as standard GAS does: sceScfSetT10kConfig 0x00274700 ends `sdl; jr ra; sdr` (the bundled assembler: `sdl; sdr; jr; nop`); ref/matching/u130/notes.md. Covers the whole libscf object since the merge (G004_libscf_u130.c, 0x002745C0..0x00274F70, u131's half included), measured on the merged file: -O2 -G0 with gas_swap 21 / 21 exact with data, with or without label_frags / div_nops / -ffast-math / -fno-builtin; without gas_swap 20 / 21; -G8 13 / 21 (11 with data); ref/matching/u130/notes.md, Merge (libscf)"
+  },
+  {
+   "glob": "src/sdk/libscf/libscf.c",
+   "flags": [
+    "-O2",
+    "-G0"
+   ],
+   "asm_pass": [
+    "label_frags",
+    "gas_swap"
+   ],
+   "evidence": "Sony's libpad 2200 / libmc 2240 / libscf, libpad and libmc the same code as the bootstrap's sdk/libpad and sdk/libmc: the bootstrap's sdk/* rule (-O2 -G0, gas_swap), as u129. Retail swaps an unfilled delay slot as standard GAS does: sceScfSetT10kConfig 0x00274700 ends `sdl; jr ra; sdr` (the bundled assembler: `sdl; sdr; jr; nop`); ref/matching/u130/notes.md. Covers the whole libscf object since the merge (G004_libscf_u130.c, 0x002745C0..0x00274F70, u131's half included), measured on the merged file: -O2 -G0 with gas_swap 21 / 21 exact with data, with or without label_frags / div_nops / -ffast-math / -fno-builtin; without gas_swap 20 / 21; -G8 13 / 21 (11 with data); ref/matching/u130/notes.md, Merge (libscf)"
+  },
+  {
+   "glob": "src/runtime/libm/libm.c",
+   "flags": [
+    "-O2",
+    "-G0",
+    "-fno-builtin"
+   ],
+   "asm_pass": "div_nops",
+   "evidence": "newlib libm's own build flags. -G0: retail reaches _LIB_VERSION (lui $s4,0x35; lw -0x7FA0($s4), 0x00348060) and every fdlibm constant with lui-based loads, never $gp (-G8 made _LIB_VERSION and the 8-byte literals gp-relative). -fno-builtin: __ieee754_rem_pio2 calls fabs (jal 0x00276A38); egcs's builtin fabs expands inline (a dpcmp plus a negate). No -ffast-math: with it cos, sin, sqrt and __ieee754_sqrt no longer match (86-94%). 10/14 exact with data under 991111b, 14/14 under the reference 991111-01 (ref/matching/u131/notes.md)"
+  },
+  {
+   "glob": "src/runtime/libgcc/T542_eh.c",
+   "flags": [
+    "-O2",
+    "-G0",
+    "-fexceptions"
+   ],
+   "asm_pass": "div_nops",
+   "evidence": "libgcc2.c's L_eh block, built with -fexceptions as GCC builds it (the object has a frame block like the C++ units). In C, -fexceptions keeps a final call as jal with a frame: retail __default_terminate 0x002776C0 is `jal abort` with a frame (C without the flag: `j abort`), __sjpopnthrow 0x00277A08 ends in `jal __sjthrow`; __rethrow's store before its label compiles only with it. -G0: __terminate_func / get_eh_context (4-byte .data) are reached through lui/lw (-G8: 14 exact). -O2 -G0 -ffast-math: 17/24 exact; with -fexceptions 24/24 exact with data; the same objects as the reference compiler 991111-01 gives (ref/matching/u132/notes.md)"
+  },
+  {
+   "glob": "src/sdk/libkernl/fileio_part1.c",
+   "flags": [
+    "-O2",
+    "-G0"
+   ],
+   "asm_pass": [
+    "label_frags",
+    "gas_swap"
+   ],
+   "evidence": "Sony's libkernl (the same code as the bootstrap's sdk/libkernl): the bootstrap's sdk/* rule (-O2 -G0, gas_swap), as u129 / u130. Retail swaps an unfilled delay slot as standard GAS does: sio_putchar 0x00287268 ends `ori; jr ra; sb` and _dtoi 0x00287388 `dsll32; jr ra; dsra32` (the bundled assembler: `...; jr; nop`). No $gp use, so -G0; -ffast-math costs _print_double / sce_doprnt one data reference each (the double constants' .rodata). 70 -> 72/75 exact with data, no function worse (ref/matching/u140/notes.md)"
+  },
+  {
+   "glob": "src/sdk/libkernl/kprintf.c",
+   "flags": [
+    "-O2",
+    "-G0"
+   ],
+   "asm_pass": [
+    "label_frags",
+    "gas_swap"
+   ],
+   "evidence": "Sony's libkernl (the same code as the bootstrap's sdk/libkernl): the bootstrap's sdk/* rule (-O2 -G0, gas_swap), as u129 / u130. Retail swaps an unfilled delay slot as standard GAS does: sio_putchar 0x00287268 ends `ori; jr ra; sb` and _dtoi 0x00287388 `dsll32; jr ra; dsra32` (the bundled assembler: `...; jr; nop`). No $gp use, so -G0; -ffast-math costs _print_double / sce_doprnt one data reference each (the double constants' .rodata). 70 -> 72/75 exact with data, no function worse (ref/matching/u140/notes.md)"
+  },
+  {
+   "glob": "src/sdk/libkernl/sifcmd.c",
+   "flags": [
+    "-O2",
+    "-G0"
+   ],
+   "asm_pass": [
+    "label_frags",
+    "gas_swap"
+   ],
+   "evidence": "Sony's libkernl (the same code as the bootstrap's sdk/libkernl): the bootstrap's sdk/* rule (-O2 -G0, gas_swap), as u129 / u130. Retail swaps an unfilled delay slot as standard GAS does: sio_putchar 0x00287268 ends `ori; jr ra; sb` and _dtoi 0x00287388 `dsll32; jr ra; dsra32` (the bundled assembler: `...; jr; nop`). No $gp use, so -G0; -ffast-math costs _print_double / sce_doprnt one data reference each (the double constants' .rodata). 70 -> 72/75 exact with data, no function worse (ref/matching/u140/notes.md)"
+  },
+  {
+   "glob": "src/sdk/libkernl/sifrpc.c",
+   "flags": [
+    "-O2",
+    "-G0"
+   ],
+   "asm_pass": [
+    "label_frags",
+    "gas_swap"
+   ],
+   "evidence": "Sony's libkernl (the same code as the bootstrap's sdk/libkernl): the bootstrap's sdk/* rule (-O2 -G0, gas_swap), as u129 / u130. Retail swaps an unfilled delay slot as standard GAS does: sio_putchar 0x00287268 ends `ori; jr ra; sb` and _dtoi 0x00287388 `dsll32; jr ra; dsra32` (the bundled assembler: `...; jr; nop`). No $gp use, so -G0; -ffast-math costs _print_double / sce_doprnt one data reference each (the double constants' .rodata). 70 -> 72/75 exact with data, no function worse (ref/matching/u140/notes.md)"
+  },
+  {
+   "glob": "src/sdk/libkernl/thread.c",
+   "flags": [
+    "-O2",
+    "-G0"
+   ],
+   "asm_pass": [
+    "label_frags",
+    "gas_swap"
+   ],
+   "evidence": "Sony's libkernl (the same code as the bootstrap's sdk/libkernl): the bootstrap's sdk/* rule (-O2 -G0, gas_swap), as u129 / u130. Retail swaps an unfilled delay slot as standard GAS does: sio_putchar 0x00287268 ends `ori; jr ra; sb` and _dtoi 0x00287388 `dsll32; jr ra; dsra32` (the bundled assembler: `...; jr; nop`). No $gp use, so -G0; -ffast-math costs _print_double / sce_doprnt one data reference each (the double constants' .rodata). 70 -> 72/75 exact with data, no function worse (ref/matching/u140/notes.md)"
+  },
+  {
+   "glob": "src/sdk/libkernl/tty.c",
+   "flags": [
+    "-O2",
+    "-G0"
+   ],
+   "asm_pass": [
+    "label_frags",
+    "gas_swap"
+   ],
+   "evidence": "Sony's libkernl (the same code as the bootstrap's sdk/libkernl): the bootstrap's sdk/* rule (-O2 -G0, gas_swap), as u129 / u130. Retail swaps an unfilled delay slot as standard GAS does: sio_putchar 0x00287268 ends `ori; jr ra; sb` and _dtoi 0x00287388 `dsll32; jr ra; dsra32` (the bundled assembler: `...; jr; nop`). No $gp use, so -G0; -ffast-math costs _print_double / sce_doprnt one data reference each (the double constants' .rodata). 70 -> 72/75 exact with data, no function worse (ref/matching/u140/notes.md)"
+  },
+  {
+   "glob": "src/sdk/libkernl/initsys_glue.c",
+   "flags": [
+    "-O2",
+    "-G0"
+   ],
+   "asm_pass": [
+    "label_frags",
+    "gas_swap"
+   ],
+   "evidence": "Sony's libkernl initsys/glue (the same code as the bootstrap's sdk/libkernl/initsys.c): the bootstrap's sdk/* rule (-O2 -G0, gas_swap), as u140. Retail swaps an unfilled delay slot as standard GAS does: wait_vblank_start 0x002860E0 ends `lui $at; jr ra; sw` (the bundled assembler: `lui $at; sw; jr; nop`), the bootstrap's own evidence for the swap of an absolute store. No $gp use (s_tty_opened / s_heap_break through lui), so -G0; no float code, so -ffast-math changes nothing. 13 -> 14/15 exact with data, no function worse (the 15th, close 0x002862A0, is a funcs.json entry that spans two stubs; ref/matching/u139/notes.md)"
+  },
+  {
+   "glob": "src/sdk/libkernl/kernel.c",
+   "flags": [
+    "-O2",
+    "-G0"
+   ],
+   "asm_pass": [
+    "label_frags",
+    "gas_swap"
+   ],
+   "evidence": "Sony's libkernl cache.o / intr.o / alarm.o (the bootstrap's sdk/libkernl kernel.c): the bootstrap's sdk/* rule (-O2 -G0, gas_swap), as u140 and initsys above. Every function was already exact under src/*; the rule keeps the library's flags in one place, no function changes (ref/matching/u139/notes.md)"
+  },
+  {
+   "glob": "src/sdk/libkernl/deci2_part1.c",
+   "flags": [
+    "-O2",
+    "-G0"
+   ],
+   "asm_pass": [
+    "label_frags",
+    "gas_swap"
+   ],
+   "evidence": "Sony's libkernl 2240 fileio.o (second half) / iopheap.o / loadfile.o / iopreboot.o / diei.o / initsys.o / deci2.o (the bootstrap's sdk/libkernl): the bootstrap's sdk/* rule (-O2 -G0, gas_swap), as u139 / u140. Retail swaps an unfilled delay slot as standard GAS does: DIntr 0x0028D6A0 ends `jr ra; daddu v0,a0,zero` (the bundled assembler: `daddu; jr; nop`), as the bootstrap's DIntr 0x01022B68. No $gp use, so -G0; no float code, so -ffast-math changes nothing. 47 -> 48/50 exact with data from the rule alone (50/50 with the source edits), no function worse (ref/matching/u141/notes.md)"
+  },
+  {
+   "glob": "src/sdk/libkernl/fileio_part2.c",
+   "flags": [
+    "-O2",
+    "-G0"
+   ],
+   "asm_pass": [
+    "label_frags",
+    "gas_swap"
+   ],
+   "evidence": "Sony's libkernl 2240 fileio.o (second half) / iopheap.o / loadfile.o / iopreboot.o / diei.o / initsys.o / deci2.o (the bootstrap's sdk/libkernl): the bootstrap's sdk/* rule (-O2 -G0, gas_swap), as u139 / u140. Retail swaps an unfilled delay slot as standard GAS does: DIntr 0x0028D6A0 ends `jr ra; daddu v0,a0,zero` (the bundled assembler: `daddu; jr; nop`), as the bootstrap's DIntr 0x01022B68. No $gp use, so -G0; no float code, so -ffast-math changes nothing. 47 -> 48/50 exact with data from the rule alone (50/50 with the source edits), no function worse (ref/matching/u141/notes.md)"
+  },
+  {
+   "glob": "src/sdk/libkernl/initsys.c",
+   "flags": [
+    "-O2",
+    "-G0"
+   ],
+   "asm_pass": [
+    "label_frags",
+    "gas_swap"
+   ],
+   "evidence": "Sony's libkernl 2240 fileio.o (second half) / iopheap.o / loadfile.o / iopreboot.o / diei.o / initsys.o / deci2.o (the bootstrap's sdk/libkernl): the bootstrap's sdk/* rule (-O2 -G0, gas_swap), as u139 / u140. Retail swaps an unfilled delay slot as standard GAS does: DIntr 0x0028D6A0 ends `jr ra; daddu v0,a0,zero` (the bundled assembler: `daddu; jr; nop`), as the bootstrap's DIntr 0x01022B68. No $gp use, so -G0; no float code, so -ffast-math changes nothing. 47 -> 48/50 exact with data from the rule alone (50/50 with the source edits), no function worse (ref/matching/u141/notes.md)"
+  },
+  {
+   "glob": "src/sdk/libkernl/iopheap.c",
+   "flags": [
+    "-O2",
+    "-G0"
+   ],
+   "asm_pass": [
+    "label_frags",
+    "gas_swap"
+   ],
+   "evidence": "Sony's libkernl 2240 fileio.o (second half) / iopheap.o / loadfile.o / iopreboot.o / diei.o / initsys.o / deci2.o (the bootstrap's sdk/libkernl): the bootstrap's sdk/* rule (-O2 -G0, gas_swap), as u139 / u140. Retail swaps an unfilled delay slot as standard GAS does: DIntr 0x0028D6A0 ends `jr ra; daddu v0,a0,zero` (the bundled assembler: `daddu; jr; nop`), as the bootstrap's DIntr 0x01022B68. No $gp use, so -G0; no float code, so -ffast-math changes nothing. 47 -> 48/50 exact with data from the rule alone (50/50 with the source edits), no function worse (ref/matching/u141/notes.md)"
+  },
+  {
+   "glob": "src/sdk/libkernl/iopreboot.c",
+   "flags": [
+    "-O2",
+    "-G0"
+   ],
+   "asm_pass": [
+    "label_frags",
+    "gas_swap"
+   ],
+   "evidence": "Sony's libkernl 2240 fileio.o (second half) / iopheap.o / loadfile.o / iopreboot.o / diei.o / initsys.o / deci2.o (the bootstrap's sdk/libkernl): the bootstrap's sdk/* rule (-O2 -G0, gas_swap), as u139 / u140. Retail swaps an unfilled delay slot as standard GAS does: DIntr 0x0028D6A0 ends `jr ra; daddu v0,a0,zero` (the bundled assembler: `daddu; jr; nop`), as the bootstrap's DIntr 0x01022B68. No $gp use, so -G0; no float code, so -ffast-math changes nothing. 47 -> 48/50 exact with data from the rule alone (50/50 with the source edits), no function worse (ref/matching/u141/notes.md)"
+  },
+  {
+   "glob": "src/sdk/libkernl/loadfile.c",
+   "flags": [
+    "-O2",
+    "-G0"
+   ],
+   "asm_pass": [
+    "label_frags",
+    "gas_swap"
+   ],
+   "evidence": "Sony's libkernl 2240 fileio.o (second half) / iopheap.o / loadfile.o / iopreboot.o / diei.o / initsys.o / deci2.o (the bootstrap's sdk/libkernl): the bootstrap's sdk/* rule (-O2 -G0, gas_swap), as u139 / u140. Retail swaps an unfilled delay slot as standard GAS does: DIntr 0x0028D6A0 ends `jr ra; daddu v0,a0,zero` (the bundled assembler: `daddu; jr; nop`), as the bootstrap's DIntr 0x01022B68. No $gp use, so -G0; no float code, so -ffast-math changes nothing. 47 -> 48/50 exact with data from the rule alone (50/50 with the source edits), no function worse (ref/matching/u141/notes.md)"
+  },
+  {
+   "glob": "src/game/app/T052_arcade_race_modes.cpp",
+   "flags": [
+    "-O2",
+    "-G8",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops",
+   "evidence": "T052 keeps the 5-byte string \"root\" (the three ShortMenuParams' page) in .sdata at 0x00351500, where only -G8 puts it (no $gp access in the unit, so the code is the same as under -G0); under -G0 it lands in .rodata in front of the three menu file names (0x003158E0) and shifts the jump tables (ref/matching/u016/notes.md)"
+  },
+  {
+   "glob": "src/runtime/newlib/strtod.c",
+   "flags": [
+    "-O2",
+    "-G0",
+    "-ffast-math"
+   ],
+   "asm_pass": [
+    "div_nops",
+    "label_frags"
+   ],
+   "evidence": "newlib strtod.o: the src/* flags plus label_frags. The bundled assembler padded _strtod_r's two backward `goto ovfl' branches (0x31 and 0x141 instructions back, misread as R5900 short loops after cc1's .p2align label frags) with 4 and 3 bogus nops that retail lacks; with the pass _strtod_r has retail's 953 instructions and is exact under the reference compiler 991111-01 (991111b: 99.1%, three spill slots 0x1C lower). strtod / strtodf unchanged. Without -ffast-math _strtod_r drops to 97.6% (ref/matching/u138/notes.md)"
+  },
+  {
+   "glob": "src/*",
+   "flags": [
+    "-O2",
+    "-G0",
+    "-ffast-math"
+   ],
+   "asm_pass": "div_nops"
+  }
+ ]
+}

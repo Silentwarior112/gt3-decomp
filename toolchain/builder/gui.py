@@ -402,7 +402,9 @@ class App:
         for note in (settings_note, profiles_note):
             if note:
                 self.log(note, "warn")
-        if not os.path.exists(PROFILES_FILE):
+        if self.profiles.added:
+            self.log("New executable: added the profiles %s" % ", ".join(self.profiles.added), "note")
+        if self.profiles.added or not os.path.exists(PROFILES_FILE):
             self.save_profiles()
         self.refresh_list()
         names = self.profiles.names()

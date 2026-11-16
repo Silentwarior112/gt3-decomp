@@ -69,6 +69,50 @@ def ee_tool(name, bin_dir=None):
     return os.path.join(b, EE_PREFIX + name + EXE)
 
 
+EGCS_HEADERS = ("new", "new.h", "typeinfo", "exception")   # gcc-2.95.2's gcc/cp/inc, in <egcs>/include
+_EGCS_ENV = {}
+
+
+def egcs_env(cc):
+    """The environment for SCE ee-gcc 2.9's driver `cc` (<egcs>/bin/ee-gcc.exe),
+    run with cwd=ROOT.  The driver starts cpp / cc1 / cc1plus / as by its own
+    absolute path and names its temporary files after TMP, both unquoted, so
+    a space in either ("gt3-decomp (1)", a user name with a space) splits its
+    command lines.  GCC_EXEC_PREFIX relative to ROOT and a temporary folder
+    under build/ keep them free of both; the output does not change.  A
+    patched copy (-divs) made from a compiler without the C++ headers gets
+    them from the pristine one, at its own path (the output depends on it)."""
+    egcs = os.path.dirname(os.path.dirname(os.path.abspath(cc)))
+    if egcs in _EGCS_ENV:
+        return _EGCS_ENV[egcs]
+    for h in EGCS_HEADERS if os.path.basename(egcs) == "ee-gcc-2.9-991111b-divs" else ():
+        mine, pristine = os.path.join(egcs, "include", h), sdk("ee-gcc-2.9-991111b", "include", h)
+        if not os.path.isfile(mine) and os.path.isfile(pristine):
+            import shutil
+            shutil.copyfile(pristine, mine)
+    lib = os.path.join(egcs, "lib", "gcc-lib")
+    try:
+        lib = os.path.relpath(lib, ROOT)
+    except ValueError:                  # the SDK on another drive: its short (8.3) name
+        lib = _short_path(lib)
+    tmp = os.path.join(ROOT, "build", "egcs-tmp")
+    os.makedirs(tmp, exist_ok=True)
+    env = dict(os.environ)
+    env["GCC_EXEC_PREFIX"] = lib.replace("\\", "/") + "/"
+    env["TMP"] = env["TEMP"] = env["TMPDIR"] = os.path.relpath(tmp, ROOT)
+    _EGCS_ENV[egcs] = env
+    return env
+
+
+def _short_path(p):
+    if os.name != "nt":
+        return p
+    import ctypes
+    buf = ctypes.create_unicode_buffer(32768)
+    n = ctypes.windll.kernel32.GetShortPathNameW(p, buf, len(buf))
+    return buf.value if 0 < n < len(buf) else p
+
+
 def local(key, default=None):
     """This PC's setting `key` from <repo>/local_paths.json, or default."""
     try:
