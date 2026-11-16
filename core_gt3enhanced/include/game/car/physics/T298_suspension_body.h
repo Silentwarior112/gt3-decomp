@@ -54,4 +54,16 @@ void car_ground_penetration(RaceCarDynamics *car);                      /* 0x001
 int  sl_active_suspension_on();
 void sl_active_suspension_init();
 
+/* The enhanced engine (from the PC port, its ROADMAP 76; with
+ * ENH_PHYSICS_REAR_RIDE_HEIGHT only): a car whose two axle heights differ
+ * rests pitched, and that rest pitch (its rake) must not lean the
+ * suspension's lift, or it is pushed as on a hill (T298 car_body_motion).
+ * car_rake_angle: the rest pitch on level ground, radians (nose up
+ * positive): atan2(axleHeight[0] - axleHeight[1], wheelbase), 0 with equal
+ * heights.  car_rake_axes: for such a car the body's axes without it
+ * (forward, lateral, up, as eulerToAxes gives st->rot[0..2]) and 1; 0 for
+ * every other car (the arrays untouched: the caller uses st->rot). */
+f32  car_rake_angle(RaceCarDynamics *car);
+int  car_rake_axes(RaceCarDynamics *car, f32 *forward, f32 *lateral, f32 *up);
+
 #endif /* GAME_T298_SUSPENSION_BODY_H */

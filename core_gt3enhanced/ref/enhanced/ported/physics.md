@@ -66,7 +66,7 @@ T285 table the sound area asked for).
 | 3 pitch inertia x1.35 | **ported** | T282 `SetupCarSpec` | `ENH_PHYSICS_PITCH_INERTIA` |
 | 4 rear ABS brakeK 50 | **ported** | T282 `SetupCarSpec` | `ENH_PHYSICS_REAR_ABS` |
 | 5 DynParams retune | **ported** (six values) | T325 `g_002D28B0` (`DYNP`) | `ENH_PHYSICS_DYNPARAMS` |
-| 6 rear ride height | **ported** | T284 `CarDynamics_init` | `ENH_PHYSICS_REAR_RIDE_HEIGHT` |
+| 6 rear ride height | **ported**; two follow-up fixes from the PC port (2026-11-15) | T284 `CarDynamics_init`; T298 `car_body_motion`, `car_rake_axes`, T330 `DynCar_setInitialSpeed` (the rake); T278 `ShowRoomCar::restLift`, T245 / T107 / T184 (the menu cars) | `ENH_PHYSICS_REAR_RIDE_HEIGHT` |
 | 7 tyre reference grip | **ported** | T284 `CarDynamics_init` (moved after the mass) | `ENH_PHYSICS_TYRE_REF_GRIP` |
 | 8 compound flags A / B / C | **ported (data)** | T482 `specTire`, T284, T296 `tyre_slip_ratio` (A), `car_tyre_lat_forces` (B, C, latUse, frontSlip), `car_long_accel` (C), T356 `car_brake_aids` (A's ABS blend) | - |
 | 9 automatic 2->1 point | **ported** | T292 `gear_calc` | `ENH_PHYSICS_AUTO_DOWNSHIFT` |
@@ -127,6 +127,28 @@ T285 table the sound area asked for).
 - **6 rear ride height.** The rear axle sits at its own ride height
   (`axleHeight[1] = rideHeight[1]`): body pitch at rest and the rear's
   geometry follow the spec. GT3 put both axles at the front's height.
+  Two consequences fixed later (2026-11-15, brought over from the PC port,
+  its ROADMAP 68 and 76; same switch):
+  - **The rake on a level road.** A car whose axle heights differ rests
+    pitched by `atan2(axleHeight[0] - axleHeight[1], wheelbase)`. The
+    physics have no slope term (a hill pushes a car only because the
+    suspension's lift acts along the body's up axis while gravity points
+    down), so that rest pitch pushed the car as a slope of the same angle
+    would, for the whole race: 30 mm over a 2.6 m wheelbase is a 1.15 %
+    grade, 0.11 m/s^2. Such a car now takes the lift along the body's up
+    axis without its rest pitch (T298 `car_rake_axes`); dive, squat and
+    roll still lean it as before, and a car with equal heights computes
+    what it did. A rolling start's velocity takes the same axes (T330), or
+    it began with a vertical speed of v x sin of the rake. In the PC port's
+    offline check: off, a level road pushed the four US cars whose data has
+    unequal heights (996 GT3, R_GT, the two Elise 190) by 0.042 m/s^2; on,
+    0 for every car and set-up.
+  - **The menu cars.** The menus lifted the body until the front tyre
+    touched the floor and drew it level, so a rear set lower floated its
+    tyres over the floor and one set higher sank them into it. The body is
+    now pitched by the same rest pitch and lifted so both tyres touch
+    (T278 `ShowRoomCar::restLift`: the showroom / garage / dealer cars of
+    T245, the prize car of T107, the race's car icons of T184).
 - **7 reference grip.** The tyres' reference grip (`TyreData.grip`) is read
   off the load curve at the real static load per tyre, after the mass and
   the suspension are set. GT3 read it before, at a load of 0 (a fresh

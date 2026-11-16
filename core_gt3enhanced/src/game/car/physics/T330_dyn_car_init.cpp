@@ -356,8 +356,21 @@ void DynCar_setInitialSpeed(RaceCarState *car, f32 v)
     int i;
 
     st->yawRate = 0.0f;
+#if ENH_PHYSICS_REAR_RIDE_HEIGHT
+    {
+        /* The enhanced engine (from the PC port, its ROADMAP 76): along the
+         * body's forward axis without its rest pitch (T298 car_rake_axes: a
+         * car whose axle heights differ would start with a vertical speed
+         * of v x sin of it); every other car the body's own, as before */
+        f32 level[3][3];
+        const f32 *forward = car_rake_axes(car, level[0], level[1], level[2]) ? level[0] : st->rot[0];
+        for (i = 0; i < 3; i++)
+            st->vel[i] = forward[i] * v;
+    }
+#else
     for (i = 0; i < 3; i++)
         st->vel[i] = st->rot[0][i] * v;
+#endif
     DynCar_setSpeed(car, v);
     car_set_gear(st, car_gear_for_speed(car, v));
     idleSpeed = (f32)p->engine.idle * RPM_TO_RADS;

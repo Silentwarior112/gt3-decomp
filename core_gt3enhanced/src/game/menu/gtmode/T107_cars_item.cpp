@@ -179,7 +179,16 @@ void TheCar::drawBody()
 {
     selectSpec();                           /* implicit: setCar (TheCar::selectSpec, inline) */
     f32 radius = menu_car_spec()->car.dyn.gear.tyreRadius[0];
+#if ENH_PHYSICS_REAR_RIDE_HEIGHT
+    /* The enhanced engine (from the PC port, its ROADMAP 68): pitched for
+     * the rear axle's own height; drawTires follows in this matrix
+     * (ShowRoomCar::restLift) */
+    f32 pitch;
+    pgl_translate(0.0f, menu_car_spec()->car.restLift(radius, &pitch), 0.0f);
+    vu0_rotate_x(pitch);
+#else
     pgl_translate(0.0f, radius - menu_car_spec()->car.wheelHeight(0, 0.0f, 0.0f), 0.0f);
+#endif
     body.draw();
 }
 

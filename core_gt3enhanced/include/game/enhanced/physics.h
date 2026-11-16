@@ -13,7 +13,10 @@
 #define ENH_PHYSICS_REAR_ABS             0   /* rear brakeK default 50: the rear ABS slip limit halved (physics.md 4) */
 #define ENH_PHYSICS_DYNPARAMS            0   /* DynParams retune: -50 kg, pitch moment x2, rolling resistance x3 on
                                                 surface 0, wear floor 110, oversteer 7 deg / gain 60 (physics.md 5) */
-#define ENH_PHYSICS_REAR_RIDE_HEIGHT     1   /* the rear axle uses rideHeight[1] (GT3 bug: [0] for both) (physics.md 6) */
+#define ENH_PHYSICS_REAR_RIDE_HEIGHT     1   /* the rear axle uses rideHeight[1] (GT3 bug: [0] for both) (physics.md 6).
+                                                With it the menus pitch the cars (T278 restLift) and the body's
+                                                rest pitch stays out of the lift's direction (T298 car_rake_axes:
+                                                else a raked car is pushed as on a hill) */
 #define ENH_PHYSICS_TYRE_REF_GRIP        0   /* TyreData.grip at the real static load, after the mass (GT3 bug) (physics.md 7) */
 #define ENH_PHYSICS_AUTO_DOWNSHIFT       0   /* the automatic's 2->1 point averaged with the idle rpm (physics.md 9) */
 #define ENH_PHYSICS_FIRST_GEAR_THRESHOLD 0   /* car_gear_for_speed: 1st up to the shift limit - 2000 rpm (GT3 - 500)

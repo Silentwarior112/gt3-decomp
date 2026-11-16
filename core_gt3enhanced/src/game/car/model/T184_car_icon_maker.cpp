@@ -170,7 +170,15 @@ void CarIconMaker::drawIcon(int car, GSBuffer *out)
     entry->info.getLength();                            /* result unused */
     f32 carHeight = (f32)entry->info.getHeight() * mm;  /* mm -> m */
     f32 tyre = state->params.gear.tyreRadius[0];
+#if ENH_PHYSICS_REAR_RIDE_HEIGHT
+    /* The enhanced engine (from the PC port, its ROADMAP 68): pitched for
+     * the rear axle's own height (ShowRoomCar::restLift; turned below, in
+     * the car's frame after its lights) */
+    f32 pitch;
+    f32 lift = spec.restLift(tyre, &pitch);
+#else
     f32 lift = tyre - spec.wheelHeight(0, 0.0f, 0.0f);
+#endif
 
     /* the reflection: a cleared 128 x 128 buffer */
     GSBuffer env(SCE_GS_PSMCT32, ICON_ENV_SIZE, ICON_ENV_SIZE);    /* sp+0x1370 */
@@ -212,6 +220,9 @@ void CarIconMaker::drawIcon(int car, GSBuffer *out)
     gfx_set_fog_params(0.0f, 1.0f);
     entry->setModelLod(0);                              /* a fixed LOD (u061 CarDrawParam mode) */
     /* implicit: getCarModel, F_00179460 (setModelLod's inline body: the call to F_00179460 stays) */
+#if ENH_PHYSICS_REAR_RIDE_HEIGHT
+    vu0_rotate_x(pitch);                                /* the enhanced engine: the rest pitch (above) */
+#endif
     model->drawBody(0.0f, 0);                           /* in the current matrix */
     model->drawMenuTires(&spec);
 

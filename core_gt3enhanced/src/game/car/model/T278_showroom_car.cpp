@@ -5,6 +5,7 @@
 #include "game/car/physics/car_spec_internal.h"
 #include "game/car/model/T278_show_room_car.h"
 #include "game/enhanced.h"                  /* ENH_RENDER_SHOWROOM_TABLES */
+#include "engine/media/G002_mpeg_frameq.h"  /* the enhanced engine: atan2f, sinf, cosf (restLift) */
 
 #if defined(__GNUC__) && __GNUC__ >= 3
 #pragma GCC diagnostic ignored "-Wmultichar"    /* driveName()'s 'FR' .. 'RR' */
@@ -126,6 +127,24 @@ f32 ShowRoomCar::wheelCamber(int wheel, f32 steer, f32 stroke)
 {
     return wheel_camber(&dyn, wheel, steer, stroke);
 }
+
+#if ENH_PHYSICS_REAR_RIDE_HEIGHT
+/* The enhanced engine: the header says what.  vu0_rotate_x turns the car's
+ * rows so that a point at height y and length z ends at y c - z s: the front
+ * axle (z = -wheelbase / 2) rises and the rear one drops by wheelbase / 2 x
+ * sin a each, which with tan a = (axleHeight[0] - axleHeight[1]) / wheelbase
+ * brings both tyres to the floor (with unequal tyre radii the rear is off
+ * by their difference x (1 - cos a): a few micrometres). */
+f32 ShowRoomCar::restLift(f32 radius, f32 *pitch)
+{
+    f32 a = atan2f(dyn.axleHeight[0] - dyn.axleHeight[1], dyn.wheelbase);
+    f32 front;
+
+    *pitch = a * (180.0f / 3.14159265f);
+    front = wheelHeight(0, 0.0f, 0.0f) * cosf(a) - wheelAxleX(0, 0.0f, 0.0f) * sinf(a);
+    return radius - front;
+}
+#endif
 
 /* The table is a local array initialised from .rodata 0x0033C2F0. */
 // FUNC 0x001D9630 ShowRoomCar::driveName

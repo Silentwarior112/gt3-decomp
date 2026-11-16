@@ -507,13 +507,55 @@ void car_body_motion(RaceCarDynamics *car)
                    + st->wheel[0].damperForce + st->wheel[1].damperForce
                    + st->wheel[2].damperForce + st->wheel[3].damperForce + drive[1])
                 * p->invSprungMass;
+#if ENH_PHYSICS_REAR_RIDE_HEIGHT
+    /* The enhanced engine (from the PC port, its ROADMAP 76): the lift acts
+     * along the body's up axis - that is what a hill is to these physics,
+     * there is no slope term - so a body that rests pitched, the two axles
+     * at their own heights, was pushed as on a slope of that pitch (30 mm
+     * over a 2.6 m wheelbase: 0.11 m/s^2 for the whole race).  Such a car
+     * takes the up axis without its rest pitch; dive, squat and roll still
+     * lean it as in GT3, and every car with equal heights takes the body's
+     * own (the same arithmetic as before) */
+    f32 level[3][3];
+    const f32 *up = car_rake_axes(car, level[0], level[1], level[2]) ? level[2] : st->rot[2];
+    st->heaveAccel = upAccel - up[2] * U081_G;
+    f32 dv = upAccel * dt;
+    int axis;
+    for (axis = 0; axis < 3; axis++)
+        st->vel[axis] += up[axis] * dv;
+#else
     st->heaveAccel = upAccel - st->rot[2][2] * U081_G;
     f32 dv = upAccel * dt;
     int axis;
     for (axis = 0; axis < 3; axis++)
         st->vel[axis] += st->rot[2][axis] * dv;
+#endif
     st->vel[2] = st->vel[2] - dt * U081_G;
 }
+
+#if ENH_PHYSICS_REAR_RIDE_HEIGHT
+/* The enhanced engine: the header says what.  The rest pitch is DynCar_place's
+ * (T330), with which a race car starts and which its springs then hold. */
+f32 car_rake_angle(RaceCarDynamics *car)
+{
+    CarParams *p = &car->params;
+
+    if (p->axleHeight[0] == p->axleHeight[1])
+        return 0.0f;
+    return atan2f(p->axleHeight[0] - p->axleHeight[1], p->wheelbase);
+}
+
+int car_rake_axes(RaceCarDynamics *car, f32 *forward, f32 *lateral, f32 *up)
+{
+    CarParams *p = &car->params;
+    CarDynState *st = &car->st;
+
+    if (p->axleHeight[0] == p->axleHeight[1])
+        return 0;
+    eulerToAxes(forward, lateral, up, st->pitch - car_rake_angle(car), st->roll, st->yaw);
+    return 1;
+}
+#endif
 
 // FUNC 0x001E9998 car_ground_penetration
 /* When wheels were pressed into the ground: re-runs the gaps with the

@@ -24,6 +24,7 @@
 #include "game/data/T482_car_equipments.h"       /* CarSpec (held by value), CarEquipments */
 #include "game/race/display/T279_meter_scale.h"          /* CarDynamics (held by value) */
 #include "game/car/physics/T291_engine.h"               /* EngineSpecSheet (held by value) */
+#include "game/enhanced.h"                              /* ENH_PHYSICS_REAR_RIDE_HEIGHT (restLift) */
 
 class CarCondition;                         /* T280_car_condition.h (pointers only) */
 
@@ -55,6 +56,18 @@ public:
     f32  wheelAxleX(int wheel, f32 steer, f32 stroke);                  /* 0x001D95C8 (F_001D95C8; u076 axlePosition) */
     f32  wheelSteerAngle(int wheel, f32 steer, f32 unused);             /* 0x001D95F0 wheel_steer_angle (F_001D95F0) */
     f32  wheelCamber(int wheel, f32 steer, f32 stroke);                 /* 0x001D9610 wheel_camber (F_001D9610) */
+#if ENH_PHYSICS_REAR_RIDE_HEIGHT
+    /* The enhanced engine (from the PC port, its ROADMAP 68): the menu cars'
+     * pose with each axle at its own ride height.  The menus lift the body
+     * until the front tyre touches the floor and draw it level, which fits
+     * only when the two axle heights are equal (GT3: rideHeight[0] for
+     * both); with the rear's own the rear tyres sank into the floor or
+     * floated over it.  *pitch: the body's pitch in degrees for vu0_rotate_x
+     * in the car's frame, atan2(axleHeight[0] - axleHeight[1], wheelbase)
+     * as DynCar_place (T330) starts a race car; returned: the lift that
+     * keeps the front tyre (radius) on the floor once pitched. */
+    f32  restLift(f32 radius, f32 *pitch);
+#endif
     /* The drive train's name as a multi-character constant: 'FR', 'FF',
      * '4WD', 'MR', 'RR' by spec.layout (the bytes "RF\0\0" .. in memory). */
     int  driveName();                                                   /* 0x001D9630 */
