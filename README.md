@@ -1,4 +1,9 @@
 # Gran Turismo 3 Decompilation
+<p align="center">
+  <img src="https://github.com/Silentwarior112/gt3-decomp/blob/main/logo.png">
+</p>
+
+
 
 Decompiled source code of the Gran Turismo 3 family of executables, and the **GT3
 Decomp Builder**, which streamlines the process of compiling the source code. Choose what to build and with which
@@ -8,12 +13,31 @@ wherever you want it, such as your extracted disc.
 | Executable | Source Code Folder | State |
 |---|---|---|
 | GT3 US bootstrap, `SCUS_971.02` | [bootstrap/](bootstrap/README.md) | All 881 functions in C/C++. 851 are byte-exact when built with Sony's compiler (99.4% of the code bytes). Builds and boots to the game. |
-| GT3 US main executable, `CORE.GT3` | [core/](core/README.md) | All 11,411 functions in C/C++. Compiles with modern GCC and with the original compiler. Built with the original compiler, the C is linked over the original data into a signed `CORE.GT3` that boots to the game's intro; the modern-GCC build checks the C and outputs the original code. |
+| GT3 US core, `core.gt3` | [core/](core/README.md) | 10,959 of 11,415 functions exact, Builds and runs. |
 | GT3 US (Enhanced Engine), `CORE.GT3` | [core_gt3enhanced/](core_gt3enhanced/README.md) | GT3 + GTC engine features: The frontier engine for modding purposes |
 
+# Gran Turismo 3 core executable status
+| Group | What it is | Functions | How it differs from the original | Severity |
+|---|---|---|---|---|
+| Menus, game flow, save data 									              | Game | 61 (41 same size) | Register numbering and instruction order. In 20, a few extra or missing instructions (spills, a reload, branch layout) | None |
+| Car physics and dynamics 										                | Game | 42 (25 same size) | Registers and scheduling; 17 with spill or reload differences. Same float operations in the same order | Low: a few cycles; no known effect on results |
+| Rendering and effects (cars, smoke, flares, tyres, track) 	| Game | 36 (24 same size) | Registers and scheduling; some loops with different hoisting or spills | None to low |
+| Race HUD and displays 										                  | Game | 29 (22 same size) | Mostly registers; a few branch-layout differences | None |
+| Race logic, AI, organisation 									              | Game | 17 (11 same size) | Registers and spills; one sound function lacks the original's dead address code and larger stack frame | None to low |
+| Cameras 														                        | Game | 9 (6 same size) | Registers and scheduling | None |
+| Debug logger 													                      | Game | 8 | Registers and scheduling | None |
+| Utilities 													                        | Game support, not PS2-specific | 7 | SAFER's code has the original's shape but a different round schedule (36–41% of bytes) | None: same output |
+| Sound logic 													                      | Game | 4 | Registers and scheduling; one with different loads | Low |
+| Graphics library 												                    | PS2 | 57 (43 same size) | Registers and scheduling; some originals were hand-written assembly | None to low: same results, at most a few cycles |
+| PlayStation 2 I/O 											                    | PS2 | 14 | Registers, spills, block layout | Low: same calls, same order |
+| Media drivers: (MPEG/IPU player, SPU2 sound) 					      | PS2 | 14 | Registers; the stream parser's block layout | Low: the intro movie plays the same |
+| Sony SDK and i.LINK RPC 										                | PS2 | 5 | Registers and spills | Low |
+| C runtime: libm, libgcc, newlib, printf 						        | PS2 toolchain runtime | 12 (10 same size) | Registers. Several are exact with the other Sony compiler build (2.9-ee-991111-01) | None |
+| Hand-written assembly: crt0, syscall stubs, `strlen` 			  | PS2 | 141 | Not scored, because the scorer only compares C; the bytes are the original's | None |
+
 **No game data is included.** Building needs your own copy of Gran Turismo 3
-A-Spec (US, SCUS-97102). The builder asks once for its `SCUS_971.02` and
-`CORE.GT3`, or for the disc image they are on.
+A-Spec (US, SCUS-97102). The builder asks once for its `SCUS_971.02`, or for
+the disc image it is on.
 
 ## Quick start
 
@@ -87,7 +111,6 @@ which pip installs into your Python.
 | Sony ee-gcc 2.9-ee-991111-01, with the glibc 2.3.6 it runs on | period-accurate | 7 MB | [decomp.me's compiler archive](https://github.com/decompme/compilers/releases/tag/compilers) | GPL; glibc LGPL |
 | SCE ee-gcc 2.9-ee-991111b: driver, preprocessor, assembler, `libgcc.a` | period-accurate | 16 MB | decomp.me's compiler archive; three C headers from [gcc-2.95.2](https://ftp.gnu.org/gnu/gcc/) | GPL |
 | Unicorn, the CPU emulator that runs Sony's Linux compiler on Windows | period-accurate | 16 MB | PyPI, with pip | GPL 2 |
-| splat, spimdisasm and rabbitizer, which split the main executable into assembly for its relink | the main executable | 8 MB | PyPI, with pip | MIT |
 
 Sony's compilers are GCC, and decomp.me redistributes them under its licence.
 Nothing from them is stored in this repository.
@@ -104,8 +127,7 @@ You must provide your own PlayStation 2 ELF. <br>
 In **Set up**:
 - **Choose file or disc image...** takes the file itself, or a `.iso` (the
   builder reads the file out of it).
-- It is checked against the retail SHA-256 and kept in `bootstrap/baserom/`
-  (`SCUS_971.02`) or `core/baserom/` (`CORE.GT3`).
+- It is checked against the retail SHA-256 and kept in `bootstrap/baserom/`.
 - The build extracts its three data blobs from it, and the decomp's analysis
   tools read it there.
 
@@ -131,8 +153,7 @@ downloads (`--yes` answers for you) and asks for a game file it needs
 | `backups/` | originals a build replaced |
 | `toolchain/profiles.json`, `toolchain/settings.json` | your profiles; this PC's choices (a chosen toolchain folder, the window size) |
 | `bootstrap/baserom/`, `bootstrap/data/` | your game file, and the data extracted from it |
-| `core/baserom/`, `core/ref/splat/` | your `CORE.GT3`, the program made from it, and its split into assembly |
-| `bootstrap/build/`, `core/build/` | build files |
+| `bootstrap/build/` | build files |
 
 ## Repository layout
 
@@ -143,7 +164,6 @@ downloads (`--yes` answers for you) and asks for a game file it needs
 | `toolchain/targets/` | One plug-in per executable |
 | `toolchain/sdks/` | One plug-in per compiler or toolchain |
 | `bootstrap/` | The bootstrap decomp. [README](bootstrap/README.md): what the bootstrap does and how it was decompiled. [MATCHING.md](bootstrap/MATCHING.md): the byte-matching work, its tools and compiler notes. |
-| `core/` | The main executable's decomp. [README](core/README.md): how it is cut up, its passes and tools. |
 
 ## Adding an executable or a compiler
 
