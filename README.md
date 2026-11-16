@@ -9,6 +9,7 @@ wherever you want it, such as your extracted disc.
 |---|---|---|
 | GT3 US bootstrap, `SCUS_971.02` | [bootstrap/](bootstrap/README.md) | All 881 functions in C/C++. 851 are byte-exact when built with Sony's compiler (99.4% of the code bytes). Builds and boots to the game. |
 | GT3 US main executable, `CORE.GT3` | [core/](core/README.md) | All 11,411 functions in C/C++. Compiles with modern GCC and with the original compiler. Built with the original compiler, the C is linked over the original data into a signed `CORE.GT3` that boots to the game's intro; the modern-GCC build checks the C and outputs the original code. |
+| GT3 US (Enhanced Engine), `CORE.GT3` | [core_gt3enhanced/](core_gt3enhanced/README.md) | GT3 + GTC engine features: The frontier engine for modding purposes |
 
 **No game data is included.** Building needs your own copy of Gran Turismo 3
 A-Spec (US, SCUS-97102). The builder asks once for its `SCUS_971.02` and
